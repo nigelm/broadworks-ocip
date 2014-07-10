@@ -11,3 +11,6 @@ except_modes = editor
 
 [Perl::AlignMooseAttributes]
 select = **/*.{pl,pm,t}
+
+[Perl::IgnoreMethodSignaturesSimple]
+select = **/*.{pl,pm,t}
