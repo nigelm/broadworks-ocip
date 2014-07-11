@@ -26,9 +26,21 @@ extends 'Broadworks::OCIP::Methods';
 # AUTHORITY
 
 # ------------------------------------------------------------------------
-has version => ( is => 'ro', isa => 'Str', default => '17sp4', );
-has character_set => ( is => 'ro', isa => 'Str', default => 'ISO-8859-1', );
-has encoder => ( is => 'ro', isa => 'Object', builder => '_build_encoder', );
+has version => (
+    is      => 'ro',
+    isa     => 'Str',
+    default => '17sp4',
+);
+has character_set => (
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'ISO-8859-1',
+);
+has encoder => (
+    is      => 'ro',
+    isa     => 'Object',
+    builder => '_build_encoder',
+);
 
 method _build_encoder () {
     my $character_set = $self->character_set;
@@ -40,19 +52,53 @@ method _build_encoder () {
         );
 }
 
-has protocol => ( is => 'ro', isa => 'Str', default => 'OCI', );
-has port => ( is => 'ro', isa => 'Int', default => 2208, );
-has host => ( is => 'ro', isa => 'Str', required => 1, );
-has target => ( is => 'ro', isa => 'Str', builder => '_build_target',  lazy=>1  );
+has protocol => (
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'OCI',
+);
+has port => (
+    is      => 'ro',
+    isa     => 'Int',
+    default => 2208,
+);
+has host => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+has target => (
+    is      => 'ro',
+    isa     => 'Str',
+    builder => '_build_target',
+    lazy    => 1
+);
 
 method _build_target () {
     return join( ':', $self->host, $self->port );
 }
 
-has username => ( is => 'ro', isa => 'Str', required => 1, );
-has authhash => ( is => 'ro', isa => 'Str', required => 1,);
-has timeout => ( is => 'rw', isa => 'Int', default => 8, );
-has socket => ( is => 'ro', isa => 'Object', builder => '_build_socket', lazy => 1, );
+has username => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+has authhash => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+has timeout => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 8,
+);
+has socket => (
+    is      => 'ro',
+    isa     => 'Object',
+    builder => '_build_socket',
+    lazy    => 1,
+);
 
 method _build_socket () {
     return IO::Socket::INET->new( $self->target )
@@ -63,7 +109,12 @@ method _build_socket () {
         );
 }
 
-has select => ( is => 'ro', isa => 'Object', builder => '_build_select', lazy => 1, );
+has select => (
+    is      => 'ro',
+    isa     => 'Object',
+    builder => '_build_select',
+    lazy    => 1,
+);
 
 method _build_select () {
     return IO::Select->new( $self->socket )
@@ -74,11 +125,21 @@ method _build_select () {
         );
 }
 
-has session => ( is => 'ro', isa => 'Str', builder => '_build_session', lazy => 1, );
+has session => (
+    is      => 'ro',
+    isa     => 'Str',
+    builder => '_build_session',
+    lazy    => 1,
+);
 
 method _build_session () { return Data::UUID->new->create_str; }
 
-has is_authenticated => ( is => 'ro', isa => 'Bool', builder => '_build_is_authenticated', lazy => 1, );
+has is_authenticated => (
+    is      => 'ro',
+    isa     => 'Bool',
+    builder => '_build_is_authenticated',
+    lazy    => 1,
+);
 
 method _build_is_authenticated () {
 
@@ -98,8 +159,15 @@ method _build_is_authenticated () {
     return 1;
 }
 
-has last_sent => ( is => 'rw', isa => 'Str', );
-has trace => ( is => 'rw', isa => 'Bool',default=>0 );
+has last_sent => (
+    is  => 'rw',
+    isa => 'Str',
+);
+has trace => (
+    is      => 'rw',
+    isa     => 'Bool',
+    default => 0
+);
 
 # ----------------------------------------------------------------------
 around 'BUILDARGS' => sub {

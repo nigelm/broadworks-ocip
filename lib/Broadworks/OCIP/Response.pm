@@ -19,10 +19,28 @@ use XML::BareX;
 
 # ------------------------------------------------------------------------
 
-has xml => ( is => 'ro', isa => 'Str', required => 1, );
-has expected => ( is => 'ro', isa => 'Str', required => 1, );
-has die_on_error => ( is => 'ro', isa => 'Bool', required => 1, default=>1,);
-has hash => (is => 'ro', isa => 'HashRef', lazy => 1, builder => '_build_hash');
+has xml => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+has expected => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+has die_on_error => (
+    is       => 'ro',
+    isa      => 'Bool',
+    required => 1,
+    default  => 1,
+);
+has hash => (
+    is      => 'ro',
+    isa     => 'HashRef',
+    lazy    => 1,
+    builder => '_build_hash'
+);
 
 method _build_hash () {
     my $hash;
@@ -42,16 +60,37 @@ method _build_hash () {
     return $hash;
 }
 
-has type => (is => 'ro',isa => 'Str',lazy => 1,builder => '_build_type');
+has type => (
+    is      => 'ro',
+    isa     => 'Str',
+    lazy    => 1,
+    builder => '_build_type'
+);
 method _build_type () { return ( $self->command->{'xsi:type'} ); }
 
-has status_ok => (is => 'ro',isa => 'Bool',lazy => 1,builder => '_build_status_ok');
+has status_ok => (
+    is      => 'ro',
+    isa     => 'Bool',
+    lazy    => 1,
+    builder => '_build_status_ok'
+);
 method _build_status_ok () { return ( ( $self->type eq $self->expected ) ? 1 : 0 ); }
 
-has command => (is => 'ro', isa => 'HashRef', lazy => 1, builder => '_build_command');
+has command => (
+    is      => 'ro',
+    isa     => 'HashRef',
+    lazy    => 1,
+    builder => '_build_command'
+);
 method _build_command () { return $self->hash->{command}; }
 
-has tables => (is => 'ro', isa => 'HashRef', lazy => 1, builder => '_build_hash');
+has tables => (
+    is      => 'ro',
+    isa     => 'HashRef',
+    lazy    => 1,
+    builder => '_build_hash'
+);
+
 method _build_tables () {
     my $tables = {};
     while ( my ( $k, $v ) = each %{ $self->command } ) {
