@@ -6,6 +6,7 @@ use strict;
 use warnings;
 use utf8;
 use feature 'unicode_strings';
+use namespace::autoclean;
 use Broadworks::OCIP::Response;
 use Carp;
 use Data::UUID;
@@ -66,15 +67,16 @@ has is_authenticated => ( is => 'ro', isa => 'Bool', builder => '_build_is_authe
 method _build_is_authenticated () {
 
     # send authentication request to get nonce
-    $self->send_command_xml( 'AuthenticationRequest', userId => $self->username );
+    $self->send_command_xml( 'AuthenticationRequest', [ userId => $self->username ] );
     my $res = $self->receive('AuthenticationResponse');
     croak('AuthenticationRequest failed') unless ( $res->status_ok );
 
     # send login request
     $self->send_command_xml(
         'LoginRequest14sp4',
-        userId         => $self->username,
-        signedPassword => lc( md5_hex( join( ':', $res->command->{nonce}, $self->authhash ) ) )
+        [   userId         => $self->username,
+            signedPassword => lc( md5_hex( join( ':', $res->command->{nonce}, $self->authhash ) ) )
+        ]
     );
     my $res2 = $self->receive('LoginResponse14sp4');
     croak('LoginRequest14sp4 failed') unless ( $res2->status_ok );
@@ -132,13 +134,13 @@ method receive ($expected) {
 
 # ----------------------------------------------------------------------
 sub _command_xml_parameters {
-    my ( $xw, @parampairs ) = @_;
+    my ( $xw, $parampairs ) = @_;
 
-    while ( scalar(@parampairs) ) {
-        my ( $key, $val ) = splice( @parampairs, 0, 2 );
+    while ( scalar( @{$parampairs} ) ) {
+        my ( $key, $val ) = splice( @{$parampairs}, 0, 2 );
         if ( ref($val) eq 'ARRAY' ) {
             $xw->startTag($key);
-            _command_xml_parameters( $xw, @{$val} );
+            _command_xml_parameters( $xw, $val );
             $xw->endTag($key);
         }
         else {
@@ -151,7 +153,7 @@ sub _command_xml_parameters {
 }
 
 # ----------------------------------------------------------------------
-method send_command_xml ($cmd, @parampairs) {
+method send_command_xml ($cmd, $parampairs) {
 
     # start XML build
     my $xw = XML::Writer->new( OUTPUT => 'self' ) or croak("Cannot build XML object - $!");
@@ -170,7 +172,7 @@ method send_command_xml ($cmd, @parampairs) {
     $xw->startTag( 'command', xmlns => '', 'xsi:type' => $cmd );
 
     # inject command parameters
-    _command_xml_parameters( $xw, @parampairs );
+    _command_xml_parameters( $xw, $parampairs );
 
     # close up tags
     $xw->endTag('command');
@@ -184,17 +186,26 @@ method send_command_xml ($cmd, @parampairs) {
 }
 
 # ------------------------------------------------------------------------
-method _send_query ($cmd, @parampairs) {
+method send_query ($cmd, @parampairs) {
 
     croak "Not authenticated" unless ( $self->is_authenticated );
     my $response = $cmd;
     $response =~ s/Request/Response/;
-    $self->send_command_xml( $cmd, @parampairs );
+    $self->send_command_xml( $cmd, \@parampairs );
+    return $self->receive($response);
+}
+
+# ------------------------------------------------------------------------
+method send_command ($cmd, @parampairs) {
+
+    croak "Not authenticated" unless ( $self->is_authenticated );
+    my $response = $cmd;
+    $response =~ s/Request/Response/;
+    $self->send_command_xml( $cmd, \@parampairs );
     return $self->receive($response);
 }
 
 # ------------------------------------------------------------------------
 
-no Moose;
 __PACKAGE__->meta->make_immutable;
 1;
