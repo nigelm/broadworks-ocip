@@ -7,6 +7,9 @@ use warnings;
 use utf8;
 use feature 'unicode_strings';
 
+# VERSION
+# AUTHORITY
+
 use Broadworks::OCIP::Throwable;
 use Moose;
 use Method::Signatures;
@@ -14,27 +17,29 @@ use MooseX::StrictConstructor;
 use Try::Tiny;
 use XML::BareX;
 
-# VERSION
-# AUTHORITY
-
 # ------------------------------------------------------------------------
-
 has xml => (
     is       => 'ro',
     isa      => 'Str',
     required => 1,
 );
+
+# ------------------------------------------------------------------------
 has expected => (
     is       => 'ro',
     isa      => 'Str',
     required => 1,
 );
+
+# ------------------------------------------------------------------------
 has die_on_error => (
     is       => 'ro',
     isa      => 'Bool',
     required => 1,
     default  => 1,
 );
+
+# ------------------------------------------------------------------------
 has hash => (
     is      => 'ro',
     isa     => 'HashRef',
@@ -60,14 +65,16 @@ method _build_hash () {
     return $hash;
 }
 
+# ------------------------------------------------------------------------
 has type => (
     is      => 'ro',
     isa     => 'Str',
     lazy    => 1,
     builder => '_build_type'
 );
-method _build_type () { return ( $self->command->{'xsi:type'} ); }
+method _build_type () { return ( $self->payload->{'xsi:type'} ); }
 
+# ------------------------------------------------------------------------
 has status_ok => (
     is      => 'ro',
     isa     => 'Bool',
@@ -76,14 +83,16 @@ has status_ok => (
 );
 method _build_status_ok () { return ( ( $self->type eq $self->expected ) ? 1 : 0 ); }
 
-has command => (
+# ------------------------------------------------------------------------
+has payload => (
     is      => 'ro',
     isa     => 'HashRef',
     lazy    => 1,
-    builder => '_build_command'
+    builder => '_build_payload'
 );
-method _build_command () { return $self->hash->{command}; }
+method _build_payload () { return $self->hash->{command}; }
 
+# ------------------------------------------------------------------------
 has tables => (
     is      => 'ro',
     isa     => 'HashRef',
@@ -93,7 +102,7 @@ has tables => (
 
 method _build_tables () {
     my $tables = {};
-    while ( my ( $k, $v ) = each %{ $self->command } ) {
+    while ( my ( $k, $v ) = each %{ $self->payload } ) {
         if ( $k =~ /Table$/ ) {
             my $table = [];
             $tables->{$k} = $table;
