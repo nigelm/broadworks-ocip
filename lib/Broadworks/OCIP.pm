@@ -595,7 +595,10 @@ C<LogoutRequest> command and then tears down the socket connection.
 
 method DEMOLISH ($flag) {
     if ( $self->is_set_is_authenticated ) {
-        $self->send_command( 'LogoutRequest', userId => $self->username, reason => 'Object destruction' );
+
+        # Logout request still does not return despite documentation saying it does,
+        # so we fiddle things in a way to prevent us waiting for no response...
+        $self->send_command_xml( 'LogoutRequest', [ userId => $self->username, reason => 'Object destruction' ] );
         $self->socket->close;
     }
 }
