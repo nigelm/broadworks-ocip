@@ -15,7 +15,7 @@ use Moose;
 use Method::Signatures;
 use MooseX::StrictConstructor;
 use Try::Tiny;
-use XML::BareX;
+use XML::Fast;
 
 =begin :prelude
 
@@ -115,20 +115,22 @@ has hash => (
 
 method _build_hash () {
     my $hash;
-    try { $hash = XML::BareX::xmlin( $self->xml ); }
+    try { $hash = XML::Fast::xml2hash( $self->xml ); }
     catch {
         Broadworks::OCIP::Throwable->throw(
             message         => sprintf( "Error on XML unpack %s with %s", $_, $self->xml ),
             execution_phase => 'response',
             error_code      => 'xml_unpack'
-        ) if ( $self->die_on_error and not $self->status_ok );
+        );
     };
+
     Broadworks::OCIP::Throwable->throw(
         message         => sprintf( "Nothing returned from parse - received XML was [%s]", $self->xml ),
         execution_phase => 'response',
         error_code      => 'xml_null'
-    ) unless ($hash);
-    return $hash;
+    ) unless ( $hash and $hash->{BroadsoftDocument} and ( $hash->{BroadsoftDocument}{-protocol} eq 'OCI' ) );
+
+    return $hash->{BroadsoftDocument};
 }
 
 # ------------------------------------------------------------------------
@@ -145,7 +147,7 @@ has type => (
     lazy    => 1,
     builder => '_build_type'
 );
-method _build_type () { return ( $self->payload->{'xsi:type'} ); }
+method _build_type () { return ( $self->payload->{'-xsi:type'} ); }
 
 # ------------------------------------------------------------------------
 
