@@ -119,7 +119,8 @@ in its place.  This means dumping the object will not reveal the password.
 
 =head3 send
 
-Sends an XML document to the Broadworks remote over the socket.
+Sends an XML document to the Broadworks remote over the socket. Convert the
+passed string to the correct character set.
 
 =head3 send_command_xml
 

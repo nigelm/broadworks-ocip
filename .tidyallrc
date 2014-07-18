@@ -3,7 +3,7 @@ argv =  --profile=$ROOT/.perltidyrc
 select = **/*.{pl,pm,t}
 
 [PodTidy]
-select = **/*.{pl,pm,pod}
+select = */**/*.{pl,pm,pod}
 
 [PerlCritic]
 select = **/*.{pl,pm}
