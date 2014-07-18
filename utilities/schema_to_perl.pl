@@ -1,0 +1,267 @@
+#!/usr/bin/env perl
+#
+#
+use strict;
+use warnings;
+use feature 'unicode_strings';
+use open ':encoding(utf8)';
+
+use Encode;
+use File::Basename;
+use File::Glob;
+use File::Slurp;
+use File::Spec;
+use IO::File;
+use XML::Fast;
+
+# ------------------------------------------------------------------------
+sub list {
+    return () unless ( defined( $_[0] ) );
+    return @{ $_[0] } if ( ref( $_[0] ) eq 'ARRAY' );
+    return $_[0];
+}
+
+# ----------------------------------------------------------------------
+sub build_pod_entry {
+    my $chunk = shift;
+    my $out   = shift;
+    my $info  = shift;
+
+    $out->printf( "\n=head3 %s\n\n", $info->{name} );
+
+    # extract documentation and output
+    my $doc = $chunk->{'xs:annotation'}{'xs:documentation'};
+    $doc =~ tr/\001-\176/ /cs;
+    $doc =~ s/^\s{6,}//mg;
+    $doc =~ s/\s+$//mg;
+    $doc =~ s/^\s{,2}(?=\w)//mg;
+    $doc =~ s/\s+(?=The\s+response\s+is)/\n\n/mg;
+    $doc =~ s/\b(\w+[A-Z][a-z]\w+)\b/C<$1>/g;
+    $out->print($doc);
+
+    # output fixed parameter info
+    if ( scalar( @{ $info->{fixed_parameters} } ) ) {
+        $out->print("\nFixed parameters are:-\n");
+        $out->print("\n=over 4\n");
+        $out->print("\n=item $_\n") foreach ( @{ $info->{fixed_parameters} } );
+        $out->print("\n=back\n");
+    }
+
+    # and any additionals
+    $out->print("\nAdditionally there are generic tagged parameters.\n");
+
+    # end
+}
+
+# ----------------------------------------------------------------------
+sub build_sub_entry {
+    my $chunk = shift;
+    my $out   = shift;
+    my $info  = shift;
+
+    # build fixed parameters
+    my $count = 0;
+    my @param_set = map { '$x' . $count++ } @{ $info->{fixed_parameters} };
+
+    # add generics if needed
+    push( @param_set, '@params' ) if ( $info->{need_generic_params} );
+
+    # output method header with parameters
+    $out->printf( "method %s\n(%s)\n{\n", $info->{name}, join( ', ', @param_set ) );
+
+    # output command call
+    $out->printf( "return \$self->send_%s('%s'", ( $info->{is_command} ? 'command' : 'query' ), $info->{name} );
+
+    # output fixed parameters
+    $count = 0;
+    map { $out->printf( ", %s => \$x%d", $_, $count++ ); } @{ $info->{fixed_parameters} };
+
+    # output generics if needed
+    $out->print(", \@params") if ( $info->{need_generic_params} );
+
+    # output tail
+    $out->print(");\n}\n");
+    $out->print("# ----------------------------------------------------------------------\n");
+}
+
+# ----------------------------------------------------------------------
+sub parse_params {
+    my $chunk = shift;
+
+    my $is_command = ( $chunk->{'xs:annotation'}{'xs:documentation'} =~ /SuccessResponse/ ) ? 1 : 0;
+
+    # see if there are any mandatory parameters
+    my $need_generic_params = 1;
+    my @fixed_params;
+    my $content = $chunk->{'xs:complexContent'}{'xs:extension'}{'xs:sequence'};
+    if (defined($content)
+        and ( ref($content) eq 'HASH' )
+        ## and ( scalar( keys( %{$content} ) ) == 1 )
+        and defined( $content->{'xs:element'} )
+        ) {
+        my @elements = list( $content->{'xs:element'} );
+        if ( scalar(@elements) > 0 ) {
+            $need_generic_params = 0;
+            while ( my $ele = shift @elements ) {
+                if ( exists( $ele->{-minOccurs} ) ) { $need_generic_params = 1; last; }
+                else {
+                    push( @fixed_params, $ele->{-name} );
+                }
+            }
+        }
+    }
+
+    return {
+        name                => $chunk->{-name},
+        is_command          => $is_command,
+        fixed_parameters    => \@fixed_params,
+        need_generic_params => $need_generic_params
+    };
+}
+
+# ----------------------------------------------------------------------
+sub process_schema_chunk {
+    my $chunk = shift;
+    my $code  = shift;
+    my $pod   = shift;
+
+    # we only care about requests
+    my $whatami = $chunk->{'xs:complexContent'}{'xs:extension'}{'-base'};
+    return 0 unless ( $whatami and ( $whatami eq 'core:OCIRequest' ) );
+    my $info = parse_params($chunk);
+    build_pod_entry( $chunk, $pod, $info );
+    build_sub_entry( $chunk, $code, $info );
+    return 1;
+}
+
+# ----------------------------------------------------------------------
+sub process_schema_set {
+    my $tree = shift;
+    my $code = shift;
+    my $pod  = shift;
+
+    my $count  = 0;
+    my @chunks = list( $tree->{'xs:schema'}{'xs:complexType'} );
+    while ( my $chunk = shift @chunks ) {
+        process_schema_chunk( $chunk, $code, $pod ) and $count++;
+    }
+    return $count;
+}
+
+# ----------------------------------------------------------------------
+sub generate_code_header {
+    my $fh         = shift;
+    my $set_name   = shift;
+    my $deprecated = shift;
+
+    $fh->printf( "package Broadworks::OCIP::%s;\n", $set_name );
+    $fh->print("\n");
+    $fh->printf( "# ABSTRACT: Broadworks OCI-P %s autogenerated from XML Schema\n", $set_name );
+    $fh->print("\n");
+    $fh->print("use strict;\n");
+    $fh->print("use warnings;\n");
+    $fh->print("use utf8;\n");
+    $fh->print("use namespace::autoclean;\n");
+    $fh->print("use Method::Signatures;\n");
+
+    if ($deprecated) {
+        $fh->print("use Moose::Role;\n");
+    }
+    else {
+        $fh->print("use Moose;\n");
+    }
+    ##$fh->print("#  This file will be too big for perl critic to work well\n");
+    ##$fh->print("## no critic\n");
+    $fh->print("\n");
+    $fh->print("# VERSION\n");
+    $fh->print("# AUTHORITY\n");
+    $fh->print("\n");
+    $fh->print("# ----------------------------------------------------------------------\n");
+    $fh->print("\n");
+}
+
+# ----------------------------------------------------------------------
+sub generate_code_trailer {
+    my $fh         = shift;
+    my $set_name   = shift;
+    my $deprecated = shift;
+
+    $fh->print("\n");
+    $fh->print("__PACKAGE__->meta->make_immutable;\n") unless ($deprecated);
+    $fh->print("1;\n");
+}
+
+# ----------------------------------------------------------------------
+sub generate_pod_header {
+    my $fh         = shift;
+    my $set_name   = shift;
+    my $deprecated = shift;
+
+    $fh->printf( "# PODNAME: Broadworks::OCIP::OCIP::%s\n",                         $set_name );
+    $fh->printf( "# ABSTRACT: Broadworks OCI-P %s autogenerated from XML Schema\n", $set_name );
+    $fh->print("\n");
+}
+
+# ----------------------------------------------------------------------
+sub generate_pod_trailer {
+    my $fh         = shift;
+    my $set_name   = shift;
+    my $deprecated = shift;
+
+    $fh->print("\n");
+}
+
+# ----------------------------------------------------------------------
+sub get_class_name {
+    my $fn = shift;
+
+    my ( $volume, $directories, $file ) = File::Spec->splitpath($fn);
+    my $class = $file;
+    $class =~ s/\..*$//;        # remove extension
+    $class =~ s/OCISchema//;    # remove basename
+
+    return $class;
+}
+
+# ----------------------------------------------------------------------
+sub process_file {
+    my $fn   = shift;
+    my $code = shift;
+    my $pod  = shift;
+
+    my $class_base_name = get_class_name($fn);
+    warn("- $class_base_name\n");
+    $code->printf("##\n## $class_base_name\n##\n");
+    $pod->printf("\n=head2 $class_base_name\n\n");
+
+    my $xml = read_file( $fn, { binmode => ':encoding(ISO-8859-1)' } );
+    my $tree = xml2hash($xml);
+
+    process_schema_set( $tree, $code, $pod ) or return;
+}
+
+# ----------------------------------------------------------------------
+
+# open files and generate headers
+my $fhset = {};
+foreach my $set (qw[Methods Deprecated]) {
+    my $fhs = {};
+    $fhset->{$set} = $fhs;
+    $fhs->{code} = IO::File->new( $set . '.pm',  'w' ) || die "Cannot open code $set - $!";
+    $fhs->{pod}  = IO::File->new( $set . '.pod', 'w' ) || die "Cannot open pod $set - $!";
+    generate_code_header( $fhs->{code}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    generate_pod_header( $fhs->{pod}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+}
+
+while ( my $fn = shift ) {
+    my $set = ( $fn =~ /Deprecated/ ) ? 'Deprecated' : 'Methods';
+    process_file( $fn, $fhset->{$set}{code}, $fhset->{$set}{pod} );
+}
+
+# generate trailers and close files
+foreach my $set (qw[Methods Deprecated]) {
+    generate_code_trailer( $fhset->{$set}{code}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    generate_pod_trailer( $fhset->{$set}{pod}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    $fhset->{$set}{code}->close;
+    $fhset->{$set}{pod}->close;
+}
