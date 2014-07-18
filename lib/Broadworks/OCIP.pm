@@ -424,14 +424,15 @@ around 'BUILDARGS' => sub {
 
 =head3 send
 
-Sends an XML document to the Broadworks remote over the socket.
+Sends an XML document to the Broadworks remote over the socket. Convert the
+passed string to the correct character set.
 
 =cut
 
 method send ($string) {
 
     $self->last_sent($string);
-    $self->socket->print($string);
+    $self->socket->print( $self->encoder->encode($string) );
     warn( '>>> ', $string, "\n" ) if ( $self->trace );
 }
 
@@ -466,6 +467,7 @@ method receive ($expected,$die_on_error) {
     }
     warn( '<<< ', $str, "\n" ) if ( $self->trace );
 
+    # we rely on the XML decoder handling any character set issues correctly!
     return ( Broadworks::OCIP::Response->new( xml => $str, expected => $expected, die_on_error => $die_on_error ) );
 }
 
