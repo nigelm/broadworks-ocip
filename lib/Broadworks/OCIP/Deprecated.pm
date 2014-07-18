@@ -117,8 +117,11 @@ method GroupCallCenterModifyAnnouncementRequest ($x0, @params) {
 
 # ----------------------------------------------------------------------
 method GroupCallCenterModifyInstanceStatisticsReportingRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyInstanceStatisticsReportingRequest', serviceUserId => $x0,
-        @params );
+    return $self->send_command(
+        'GroupCallCenterModifyInstanceStatisticsReportingRequest',
+        serviceUserId => $x0,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -207,8 +210,12 @@ method GroupMusicOnHoldAddInstanceRequest14sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x
 
 # ----------------------------------------------------------------------
 method GroupMusicOnHoldGetInstanceRequest14 ($x0, $x1, @params) {
-    return $self->send_query( 'GroupMusicOnHoldGetInstanceRequest14', serviceProviderId => $x0, groupId => $x1,
-        @params );
+    return $self->send_query(
+        'GroupMusicOnHoldGetInstanceRequest14',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -454,8 +461,11 @@ method ServiceProviderAccessDeviceGetRequest14 ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderAccessDeviceGetRequest14sp3 ($x0, $x1) {
-    return $self->send_query( 'ServiceProviderAccessDeviceGetRequest14sp3', serviceProviderId => $x0,
-        deviceName => $x1 );
+    return $self->send_query(
+        'ServiceProviderAccessDeviceGetRequest14sp3',
+        serviceProviderId => $x0,
+        deviceName        => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -475,8 +485,11 @@ method ServiceProviderCallProcessingGetPolicyRequest14sp4 ($x0) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderCallProcessingModifyPolicyRequest14 ($x0, @params) {
-    return $self->send_command( 'ServiceProviderCallProcessingModifyPolicyRequest14', serviceProviderId => $x0,
-        @params );
+    return $self->send_command(
+        'ServiceProviderCallProcessingModifyPolicyRequest14',
+        serviceProviderId => $x0,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1034,8 +1047,11 @@ method UserHotelingHostGetRequest14 ($x0) {
 
 # ----------------------------------------------------------------------
 method UserInstantConferencingGetConferenceRecordingRequest ($x0, $x1) {
-    return $self->send_query( 'UserInstantConferencingGetConferenceRecordingRequest', userId => $x0,
-        recordingKey => $x1 );
+    return $self->send_query(
+        'UserInstantConferencingGetConferenceRecordingRequest',
+        userId       => $x0,
+        recordingKey => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1523,8 +1539,11 @@ method GroupVoiceMessagingGroupModifyVoicePortalBrandingRequest ($x0, $x1, @para
 
 # ----------------------------------------------------------------------
 method ServiceProviderAccessDeviceGetRequest14sp6 ($x0, $x1) {
-    return $self->send_query( 'ServiceProviderAccessDeviceGetRequest14sp6', serviceProviderId => $x0,
-        deviceName => $x1 );
+    return $self->send_query(
+        'ServiceProviderAccessDeviceGetRequest14sp6',
+        serviceProviderId => $x0,
+        deviceName        => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1773,8 +1792,12 @@ method UserCallProcessingGetPolicyRequest14sp7 ($x0) {
 
 # ----------------------------------------------------------------------
 method UserCustomRingbackUserAddCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserCustomRingbackUserAddCriteriaRequest', userId => $x0, criteriaName => $x1,
-        @params );
+    return $self->send_command(
+        'UserCustomRingbackUserAddCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2268,8 +2291,11 @@ method ServiceProviderInCallServiceActivationGetRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderInCallServiceActivationModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderInCallServiceActivationModifyRequest', serviceProviderId => $x0,
-        @params );
+    return $self->send_command(
+        'ServiceProviderInCallServiceActivationModifyRequest',
+        serviceProviderId => $x0,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2486,8 +2512,12 @@ method GroupExtensionLengthGetRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method GroupExtensionLengthModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupExtensionLengthModifyRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+    return $self->send_command(
+        'GroupExtensionLengthModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2647,8 +2677,12 @@ method UserHolidayScheduleGetRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method UserHolidayScheduleModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserHolidayScheduleModifyRequest', userId => $x0, holidayScheduleName => $x1,
-        @params );
+    return $self->send_command(
+        'UserHolidayScheduleModifyRequest',
+        userId              => $x0,
+        holidayScheduleName => $x1,
+        @params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2673,8 +2707,11 @@ method UserThirdPartyVoiceMailSupportGetRequest13mp16 ($x0) {
 
 # ----------------------------------------------------------------------
 method UserSimultaneousRingFamilyDeletePhoneNumberRequest ($x0, $x1) {
-    return $self->send_command( 'UserSimultaneousRingFamilyDeletePhoneNumberRequest', userId => $x0,
-        phoneNumber => $x1 );
+    return $self->send_command(
+        'UserSimultaneousRingFamilyDeletePhoneNumberRequest',
+        userId      => $x0,
+        phoneNumber => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2946,8 +2983,12 @@ method GroupCallParkAddInstanceRequest ($x0, $x1, $x2, @params) {
 
 # ----------------------------------------------------------------------
 method GroupCallParkGetInstanceRequest ($x0, $x1, $x2) {
-    return $self->send_query( 'GroupCallParkGetInstanceRequest', serviceProviderId => $x0, groupId => $x1,
-        name => $x2 );
+    return $self->send_query(
+        'GroupCallParkGetInstanceRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        name              => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3368,5 +3409,4 @@ method UserSpeedDial100GetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 
-__PACKAGE__->meta->make_immutable;
 1;

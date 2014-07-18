@@ -187,7 +187,7 @@ sub generate_code_trailer {
     my $deprecated = shift;
 
     $fh->print("\n");
-    $fh->print("__PACKAGE__->meta->make_immutable;\n");
+    $fh->print("__PACKAGE__->meta->make_immutable;\n") unless ($deprecated);
     $fh->print("1;\n");
 }
 
