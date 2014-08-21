@@ -3,8 +3,9 @@
 #
 use strict;
 use warnings;
-use feature 'unicode_strings';
+use feature qw[unicode_strings switch];
 use open ':encoding(utf8)';
+no if $] >= 5.018, 'warnings', "experimental::smartmatch";
 
 use Encode;
 use File::Basename;
@@ -12,7 +13,13 @@ use File::Glob;
 use File::Slurp;
 use File::Spec;
 use IO::File;
-use XML::Fast;
+use IO::String;
+use XML::Twig;
+use Data::Dump;
+
+my $request_info = {};
+my $type_info    = {};
+my $current_set;
 
 # ------------------------------------------------------------------------
 sub list {
@@ -22,22 +29,27 @@ sub list {
 }
 
 # ----------------------------------------------------------------------
-sub build_pod_entry {
-    my $chunk = shift;
-    my $out   = shift;
-    my $info  = shift;
+sub build_pod {
+    my $info = shift;
+    my $twg  = shift;
 
+    my $pod = '';
+    my $out = IO::String->new($pod);
     $out->printf( "\n=head3 %s\n\n", $info->{name} );
 
     # extract documentation and output
-    my $doc = $chunk->{'xs:annotation'}{'xs:documentation'};
-    $doc =~ tr/\001-\176/ /cs;
-    $doc =~ s/^\s{6,}//mg;
-    $doc =~ s/\s+$//mg;
-    $doc =~ s/^\s{,2}(?=\w)//mg;
-    $doc =~ s/\s+(?=The\s+response\s+is)/\n\n/mg;
-    $doc =~ s/\b(\w+[A-Z][a-z]\w+)\b/C<$1>/g;
-    $out->print($doc);
+    my $docelt = $twg->first_elt('xs:documentation');
+    if ($docelt) {
+        my $doc = $docelt->text;
+        $info->{is_command} = 1 if ( $doc =~ /SuccessResponse/ );
+        $doc =~ tr/\001-\176/ /cs;
+        $doc =~ s/^\s{6,}//mg;
+        $doc =~ s/\s+$//mg;
+        $doc =~ s/^\s{,2}(?=\w)//mg;
+        $doc =~ s/\s+(?=The\s+response\s+is)/\n\n/mg;
+        $doc =~ s/\b(\w+[A-Z][a-z]\w+)\b/C<$1>/g;
+        $out->print($doc);
+    }
 
     # output fixed parameter info
     if ( scalar( @{ $info->{fixed_parameters} } ) ) {
@@ -50,14 +62,15 @@ sub build_pod_entry {
     # and any additionals
     $out->print("\nAdditionally there are generic tagged parameters.\n");
 
+    $info->{pod} = $pod;
+
     # end
 }
 
 # ----------------------------------------------------------------------
 sub build_sub_entry {
-    my $chunk = shift;
-    my $out   = shift;
-    my $info  = shift;
+    my $out  = shift;
+    my $info = shift;
 
     # build fixed parameters
     my $count = 0;
@@ -82,70 +95,6 @@ sub build_sub_entry {
     # output tail
     $out->print(");\n}\n");
     $out->print("# ----------------------------------------------------------------------\n");
-}
-
-# ----------------------------------------------------------------------
-sub parse_params {
-    my $chunk = shift;
-
-    my $is_command = ( $chunk->{'xs:annotation'}{'xs:documentation'} =~ /SuccessResponse/ ) ? 1 : 0;
-
-    # see if there are any mandatory parameters
-    my $need_generic_params = 1;
-    my @fixed_params;
-    my $content = $chunk->{'xs:complexContent'}{'xs:extension'}{'xs:sequence'};
-    if (defined($content)
-        and ( ref($content) eq 'HASH' )
-        ## and ( scalar( keys( %{$content} ) ) == 1 )
-        and defined( $content->{'xs:element'} )
-        ) {
-        my @elements = list( $content->{'xs:element'} );
-        if ( scalar(@elements) > 0 ) {
-            $need_generic_params = 0;
-            while ( my $ele = shift @elements ) {
-                if ( exists( $ele->{-minOccurs} ) ) { $need_generic_params = 1; last; }
-                else {
-                    push( @fixed_params, $ele->{-name} );
-                }
-            }
-        }
-    }
-
-    return {
-        name                => $chunk->{-name},
-        is_command          => $is_command,
-        fixed_parameters    => \@fixed_params,
-        need_generic_params => $need_generic_params
-    };
-}
-
-# ----------------------------------------------------------------------
-sub process_schema_chunk {
-    my $chunk = shift;
-    my $code  = shift;
-    my $pod   = shift;
-
-    # we only care about requests
-    my $whatami = $chunk->{'xs:complexContent'}{'xs:extension'}{'-base'};
-    return 0 unless ( $whatami and ( $whatami eq 'core:OCIRequest' ) );
-    my $info = parse_params($chunk);
-    build_pod_entry( $chunk, $pod, $info );
-    build_sub_entry( $chunk, $code, $info );
-    return 1;
-}
-
-# ----------------------------------------------------------------------
-sub process_schema_set {
-    my $tree = shift;
-    my $code = shift;
-    my $pod  = shift;
-
-    my $count  = 0;
-    my @chunks = list( $tree->{'xs:schema'}{'xs:complexType'} );
-    while ( my $chunk = shift @chunks ) {
-        process_schema_chunk( $chunk, $code, $pod ) and $count++;
-    }
-    return $count;
 }
 
 # ----------------------------------------------------------------------
@@ -224,44 +173,143 @@ sub get_class_name {
 }
 
 # ----------------------------------------------------------------------
+sub parse_request_info {
+    my $name = shift;
+    my $twg  = shift;
+    my $elt  = shift;
+
+    my $ptypes = {};
+    my @fixed_parameters;
+    my $res = {
+        name                => $name,
+        fixed_parameters    => \@fixed_parameters,
+        parameter_types     => $ptypes,
+        is_command          => 0,
+        need_generic_params => 0
+    };
+    $request_info->{$name} = $res;
+    $current_set->{classes}{ $current_set->{current_class} } ||= [];
+    push( @{ $current_set->{classes}{ $current_set->{current_class} } }, $name );
+
+    # parse through the parameter sets
+    my $seq = $elt->first_child;    # This should be a sequence
+    unless ( defined($seq) ) {
+        ## no parameters at all...
+    }
+    elsif ( $seq->tag eq 'xs:sequence' ) {
+        my @elements = $seq->children;
+        while ( my $elem = shift @elements ) {
+            if ( $elem->tag eq 'xs:element' ) {
+                my $ename = $elem->att('name');
+                my $etype = $elem->att('type');
+
+                # deal with optional/multi params
+                if ( $elem->att_exists('minOccurs') ) {
+                    my $minoc = $elem->att('minOccurs');
+                    $res->{need_generic_params} = 1;
+                    last if ( $minoc == 0 );
+                }
+                push( @fixed_parameters, $ename );
+                $ptypes->{$ename} = $etype;
+                $ptypes->{$ename} = $etype;
+                last if ( $res->{need_generic_params} );
+            }
+            else {
+                $res->{need_generic_params} = 1;
+                last;
+            }
+        }
+    }
+    elsif ( $seq->tag eq 'xs:choice' ) {
+        $res->{need_generic_params} = 1;
+    }
+    else {
+        die "Expected sequence or choice in $name\n";
+    }
+    build_pod( $res, $twg );
+}
+
+# ----------------------------------------------------------------------
+sub complex_type_parser {
+    my ( $t, $type ) = @_;
+
+    my $name = $type->att('name');
+    if ( defined($name) ) {
+        my $base_elt = $t->first_elt('xs:extension[@base]');
+        if ($base_elt) {
+            my $base = $base_elt->att('base');
+            my $i;
+            given ($base) {
+                when ('core:OCIRequest') { $i = 'Q'; parse_request_info( $name, $t, $base_elt ); }
+                when ('core:OCIDataResponse') { $i = 'D' }
+                when ('core:OCIResponse')     { $i = 'R' }
+                default                       { $i = '?' }
+            }
+            ### print "#    $i $name\n";
+        }
+        else {
+            ### print "#    - $name\n";
+        }
+    }
+    $type->purge;
+}
+
+# ----------------------------------------------------------------------
 sub process_file {
-    my $fn   = shift;
-    my $code = shift;
-    my $pod  = shift;
+    my $fn      = shift;
+    my $twig    = shift;
+    my $dataset = shift;
 
     my $class_base_name = get_class_name($fn);
     warn("- $class_base_name\n");
-    $code->printf("##\n## $class_base_name\n##\n");
-    $pod->printf("\n=head2 $class_base_name\n\n");
+    $dataset->{classlist} ||= [];
+    push( @{ $dataset->{classlist} }, $class_base_name );
+    $dataset->{current_class} = $class_base_name;
 
     my $xml = read_file( $fn, { binmode => ':encoding(ISO-8859-1)' } );
-    my $tree = xml2hash($xml);
+    $twig->parse($xml);
+}
 
-    process_schema_set( $tree, $code, $pod ) or return;
+# ----------------------------------------------------------------------
+sub build_twig {
+    my $twig = XML::Twig->new( twig_handlers => { 'xs:complexType' => \&complex_type_parser, }, );
+
+    return $twig;
 }
 
 # ----------------------------------------------------------------------
 
-# open files and generate headers
-my $fhset = {};
-foreach my $set (qw[Methods Deprecated]) {
-    my $fhs = {};
-    $fhset->{$set} = $fhs;
-    $fhs->{code} = IO::File->new( $set . '.pm',  'w' ) || die "Cannot open code $set - $!";
-    $fhs->{pod}  = IO::File->new( $set . '.pod', 'w' ) || die "Cannot open pod $set - $!";
-    generate_code_header( $fhs->{code}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
-    generate_pod_header( $fhs->{pod}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
-}
-
+my $twig     = build_twig();
+my $datasets = {};
 while ( my $fn = shift ) {
     my $set = ( $fn =~ /Deprecated/ ) ? 'Deprecated' : 'Methods';
-    process_file( $fn, $fhset->{$set}{code}, $fhset->{$set}{pod} );
+    $datasets->{$set} ||= {};
+    $current_set = $datasets->{$set};
+    process_file( $fn, $twig, $current_set );
 }
 
-# generate trailers and close files
+# generate files
 foreach my $set (qw[Methods Deprecated]) {
-    generate_code_trailer( $fhset->{$set}{code}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
-    generate_pod_trailer( $fhset->{$set}{pod}, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
-    $fhset->{$set}{code}->close;
-    $fhset->{$set}{pod}->close;
+    my $thisset = $datasets->{$set};
+
+    my $code = IO::File->new( $set . '.pm',  'w' ) || die "Cannot open code $set - $!";
+    my $pod  = IO::File->new( $set . '.pod', 'w' ) || die "Cannot open pod $set - $!";
+    generate_code_header( $code, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    generate_pod_header( $pod, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    foreach my $class ( @{ $thisset->{classlist} } ) {
+        $code->printf("##\n## $class\n##\n");
+        $pod->printf("\n=head2 $class\n\n");
+        foreach my $func ( @{ $thisset->{classes}{$class} } ) {
+            build_sub_entry( $code, $request_info->{$func} );
+            $pod->print( $request_info->{$func}{pod} );
+
+        }
+    }
+
+    # generate trailers and close files
+    generate_code_trailer( $code, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    generate_pod_trailer( $pod, $set, ( $set eq 'Deprecated' ) ? 1 : 0 );
+    $code->close;
+    $pod->close;
 }
+

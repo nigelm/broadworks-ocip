@@ -459,6 +459,8 @@ parameters are:-
 
 =item name
 
+=item devices
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -496,6 +498,8 @@ parameters are:-
 
 =item name
 
+=item devices
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -511,6 +515,8 @@ parameters are:-
 =over 4
 
 =item serviceProviderId
+
+=item name
 
 =back
 
@@ -759,6 +765,8 @@ parameters are:-
 =item groupId
 
 =item deviceName
+
+=item tagName
 
 =back
 
@@ -1760,6 +1768,8 @@ parameters are:-
 
 =item groupId
 
+=item code
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -1776,6 +1786,8 @@ parameters are:-
 =item serviceProviderId
 
 =item groupId
+
+=item code
 
 =back
 
@@ -1887,6 +1899,8 @@ parameters are:-
 =item groupId
 
 =item deviceName
+
+=item orderedLinePortList
 
 =back
 
@@ -2302,6 +2316,8 @@ parameters are:-
 =item groupId
 
 =item deviceType
+
+=item tagName
 
 =back
 
@@ -3701,8 +3717,6 @@ parameters are:-
 
 =item startDate
 
-=item endDate
-
 =back
 
 Additionally there are generic tagged parameters.
@@ -3990,6 +4004,8 @@ parameters are:-
 
 =item name
 
+=item devices
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4031,6 +4047,8 @@ parameters are:-
 
 =item name
 
+=item devices
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4047,6 +4065,8 @@ parameters are:-
 =item serviceProviderId
 
 =item groupId
+
+=item name
 
 =back
 
@@ -4404,6 +4424,8 @@ parameters are:-
 
 =item deviceName
 
+=item tagName
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4626,17 +4648,7 @@ Additionally there are generic tagged parameters.
 
 Add a service provider or enterprise.
 
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item defaultDomain
-
-=back
-
+The response is either a C<SuccessResponse> or an C<ErrorResponse>.
 Additionally there are generic tagged parameters.
 
 =head3 ServiceProviderAdminAddRequest14
@@ -5178,6 +5190,8 @@ parameters are:-
 =item serviceProviderId
 
 =item deviceName
+
+=item orderedLinePortList
 
 =back
 
@@ -5803,6 +5817,8 @@ parameters are:-
 
 =item serviceProviderId
 
+=item networkClassOfService
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -6125,8 +6141,6 @@ parameters are:-
 =item eventName
 
 =item startDate
-
-=item endDate
 
 =back
 
@@ -6572,19 +6586,6 @@ Additionally there are generic tagged parameters.
 
 =head3 ServiceProviderServicePackMigrationTaskModifyGroupListRequest
 
-Replace the list of groups to be migrated for a specified service pack
-migration task. Modification is only allowed prior to task execution.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. Fixed parameters
-are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item taskName
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -6794,11 +6795,8 @@ Additionally there are generic tagged parameters.
 
 =head3 ServiceProviderApplicationServerSetModifyRequest
 
-Modify the Application Server set assigned to the service provider or
-enterprise.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
+The service pack migration task will be aborted if this many errors occurs.
+Fixed parameters are:-
 
 =over 4
 
@@ -6870,6 +6868,8 @@ parameters are:-
 =over 4
 
 =item deviceName
+
+=item tagName
 
 =back
 
@@ -7242,7 +7242,15 @@ addresses, only re-ordering the list is allowed. The ordered list of addresses
 can be obtained with the
 C<SystemAccountingGetChargingFunctionElementServerListRequest> command.
 
-The response is either a C<SuccessResponse> or an C<ErrorResponse>.
+The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
+parameters are:-
+
+=over 4
+
+=item orderedAddressList
+
+=back
+
 Additionally there are generic tagged parameters.
 
 =head3 SystemAdminAddRequest
@@ -8220,10 +8228,8 @@ C<ErrorResponse>. Additionally there are generic tagged parameters.
 
 =head3 SystemConfigurableFileSystemModifyRequest
 
-Request to modify File System parameters.
 
-The response is either C<SuccessResponse> or C<ErrorResponse>. Additionally
-there are generic tagged parameters.
+Additionally there are generic tagged parameters.
 
 =head3 SystemConfigurableTreatmentAddRequest
 
@@ -8802,10 +8808,8 @@ C<ErrorResponse>. Additionally there are generic tagged parameters.
 
 =head3 SystemCPEConfigParametersModifyRequest
 
-Request to modify CPE Config system parameters.
 
-The response is either C<SuccessResponse> or C<ErrorResponse>. Additionally
-there are generic tagged parameters.
+Additionally there are generic tagged parameters.
 
 =head3 SystemCPEConfigRebuildConfigFileRequest
 
@@ -8867,6 +8871,8 @@ parameters are:-
 
 =item deviceName
 
+=item orderedLinePortList
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -8892,15 +8898,7 @@ Additionally there are generic tagged parameters.
 
 Request to add a static configuration tag.
 
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item tagName
-
-=back
-
+The response is either a C<SuccessResponse> or an C<ErrorResponse>.
 Additionally there are generic tagged parameters.
 
 =head3 SystemDeviceManagementTagDeleteListRequest
@@ -8922,15 +8920,7 @@ C<ErrorResponse>. Additionally there are generic tagged parameters.
 
 Request to modify a static configuration tag.
 
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item tagName
-
-=back
-
+The response is either a C<SuccessResponse> or an C<ErrorResponse>.
 Additionally there are generic tagged parameters.
 
 =head3 SystemDeviceManagementTagSetAddRequest
@@ -9996,6 +9986,8 @@ parameters are:-
 =over 4
 
 =item setName
+
+=item mediaName
 
 =back
 
@@ -11385,8 +11377,6 @@ parameters are:-
 
 =item startDate
 
-=item endDate
-
 =back
 
 Additionally there are generic tagged parameters.
@@ -12312,10 +12302,8 @@ Additionally there are generic tagged parameters.
 
 =head3 SystemSelectiveServicesGetRequest
 
-Request the system level data associated with Selective Services.
-
-The response is either a C<SystemSelectiveServicesGetResponse> or an
-C<ErrorResponse>. Additionally there are generic tagged parameters.
+Identifies the roaming criteria to be matched. Additionally there are generic
+tagged parameters.
 
 =head3 SystemSelectiveServicesModifyRequest
 
@@ -12516,38 +12504,11 @@ Additionally there are generic tagged parameters.
 
 =head3 UserModifyRequest17sp4
 
-Request to modify a user. When C<oldPassword> is specified, all password rule
-applies. If C<oldPassword> in not specified, any password rule related to old
-password does not apply. The request will fail if C<officeZoneName> or
-C<primaryZoneName> is present but the Location-Based Calling Restrictions
-service is not assigned to the user.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. The following
-data elements are only used in AS data mode: contact[2]-contact[5] Fixed
-parameters are:-
-
-=over 4
-
-=item userId
-
-=back
 
 Additionally there are generic tagged parameters.
 
 =head3 UserCallLogsClearRequest14sp4
 
-Clear a user's call logs associated with Basic Call Logs and Enhanced Call Logs
-features. The calls logs are deleted from both Basic Call Logs and Enhanced
-Call Logs if both features are assigned.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item userId
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -12638,6 +12599,8 @@ parameters are:-
 
 =item userId
 
+=item code
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -12652,6 +12615,8 @@ parameters are:-
 =over 4
 
 =item userId
+
+=item code
 
 =back
 
@@ -13050,8 +13015,6 @@ parameters are:-
 =item eventName
 
 =item startDate
-
-=item endDate
 
 =back
 
@@ -13586,6 +13549,8 @@ parameters are:-
 
 =item userId
 
+=item monitoredUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -13600,6 +13565,8 @@ parameters are:-
 =over 4
 
 =item userId
+
+=item monitoredUserId
 
 =back
 
@@ -13670,16 +13637,6 @@ Additionally there are generic tagged parameters.
 
 =head3 UserAuthenticationModifyRequest
 
-Modify the user's authentication service information.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item userId
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -14246,8 +14203,16 @@ there are generic tagged parameters.
 
 Removes a C<BroadWorks> Mobility IMRN number from the system.
 
-The response is either C<SuccessResponse> or C<ErrorResponse>. Additionally
-there are generic tagged parameters.
+The response is either C<SuccessResponse> or C<ErrorResponse>. Fixed parameters
+are:-
+
+=over 4
+
+=item imrnNumber
+
+=back
+
+Additionally there are generic tagged parameters.
 
 =head3 SystemBroadWorksMobilityGetIMRNListRequest
 
@@ -14523,6 +14488,8 @@ are:-
 
 =item groupId
 
+=item name
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -14618,6 +14585,8 @@ are:-
 
 =item name
 
+=item userId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -14636,6 +14605,8 @@ are:-
 =item groupId
 
 =item name
+
+=item userId
 
 =back
 
@@ -15305,6 +15276,8 @@ are:-
 
 =item serviceUserId
 
+=item agentUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -15364,6 +15337,8 @@ are:-
 =over 4
 
 =item serviceUserId
+
+=item supervisorUserId
 
 =back
 
@@ -15757,6 +15732,8 @@ are:-
 
 =item serviceUserId
 
+=item agentUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -15801,6 +15778,8 @@ are:-
 =over 4
 
 =item serviceUserId
+
+=item supervisorUserId
 
 =back
 
@@ -17229,6 +17208,8 @@ parameters are:-
 
 =item serviceUserId
 
+=item agentUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -17301,6 +17282,8 @@ parameters are:-
 =item supervisorUserId
 
 =item serviceUserId
+
+=item agentUserId
 
 =back
 
@@ -17535,8 +17518,7 @@ Additionally there are generic tagged parameters.
 
 =head3 CallCenterAgentAvailability
 
-Specifies an agent's login state (availability) for a particular Call Center.
-Fixed parameters are:-
+Timer to alert ACD calls on hold Fixed parameters are:-
 
 =over 4
 
@@ -18926,6 +18908,8 @@ parameters are:-
 
 =item groupId
 
+=item name
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -19758,18 +19742,6 @@ Additionally there are generic tagged parameters.
 
 =head3 GroupEmergencyZonesModifyHomeZoneListRequest
 
-Modify a list of home zones and/or home zone ranges.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item groupId
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -20096,6 +20068,8 @@ are:-
 
 =item serviceUserId
 
+=item originatorUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -20110,6 +20084,8 @@ are:-
 =over 4
 
 =item serviceUserId
+
+=item targetUserId
 
 =back
 
@@ -20141,6 +20117,8 @@ are:-
 
 =item serviceUserId
 
+=item originatorUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -20155,6 +20133,8 @@ are:-
 =over 4
 
 =item serviceUserId
+
+=item targetUserId
 
 =back
 
@@ -21257,6 +21237,8 @@ are:-
 
 =item conferenceCallId
 
+=item documentId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -21273,6 +21255,8 @@ are:-
 
 =item userId
 
+=item conferenceKey
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -21288,6 +21272,8 @@ are:-
 =over 4
 
 =item userId
+
+=item recordingKey
 
 =back
 
@@ -22028,14 +22014,30 @@ Additionally there are generic tagged parameters.
 
 Request to add an Intercept User number(s) to the system.
 
-The response is either a C<SuccessResponse> or an C<ErrorResponse>.
+The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
+parameters are:-
+
+=over 4
+
+=item interceptDNList
+
+=back
+
 Additionally there are generic tagged parameters.
 
 =head3 SystemInterceptUserDeleteDnListRequest
 
 Request to delete an Intercept User number(s) from the system.
 
-The response is either a C<SuccessResponse> or an C<ErrorResponse>.
+The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
+parameters are:-
+
+=over 4
+
+=item phoneNumbers
+
+=back
+
 Additionally there are generic tagged parameters.
 
 =head3 SystemInterceptUserGetDnListRequest
@@ -22755,6 +22757,8 @@ are:-
 
 =item userId
 
+=item conferenceKey
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -22769,6 +22773,8 @@ are:-
 =over 4
 
 =item userId
+
+=item recordingKey
 
 =back
 
@@ -23322,6 +23328,8 @@ parameters are:-
 =item serviceProviderId
 
 =item groupId
+
+=item name
 
 =back
 
@@ -25042,6 +25050,8 @@ parameters are:-
 
 =item userId
 
+=item monitoredUserId
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -25057,6 +25067,8 @@ parameters are:-
 =over 4
 
 =item userId
+
+=item monitoredUserId
 
 =back
 
@@ -25998,17 +26010,6 @@ an C<ErrorResponse>. Additionally there are generic tagged parameters.
 
 =head3 SystemSMDIMessageDeskModifyServerRouteRequest
 
-Replace the list of devices associated with a SMDI server route destination.
-There must be at least one device in the list.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item routeDestination
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -26043,6 +26044,8 @@ parameters are:-
 =over 4
 
 =item userId
+
+=item deviceName
 
 =back
 
@@ -26697,6 +26700,8 @@ parameters are:-
 
 =item userId
 
+=item accessDeviceEndpoint
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -27031,6 +27036,8 @@ parameters are:-
 
 =item userId
 
+=item speedDialEntry
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -27201,10 +27208,8 @@ Additionally there are generic tagged parameters.
 
 =head3 SystemThirdPartyVoiceMailSupportGetRequest
 
-Request the system level data associated with Third-party Voice Mail Support.
-
-The response is either a C<SystemThirdPartyVoiceMailSupportGetResponse> or an
-C<ErrorResponse>. Additionally there are generic tagged parameters.
+Third Party Voice Mail user-level voice mail server choices. Additionally there
+are generic tagged parameters.
 
 =head3 SystemThirdPartyVoiceMailSupportModifyRequest
 
@@ -27218,22 +27223,6 @@ Additionally there are generic tagged parameters.
 
 =head3 EnterpriseEnterpriseTrunkAddRequest
 
-Request to add an enterprise trunk in an enterprise.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item enterpriseTrunkName
-
-=item maximumRerouteAttempts
-
-=item routeExhaustionAction
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -27249,6 +27238,8 @@ parameters are:-
 =item serviceProviderId
 
 =item enterpriseTrunkName
+
+=item userId
 
 =back
 
@@ -27283,6 +27274,8 @@ parameters are:-
 =item serviceProviderId
 
 =item enterpriseTrunkName
+
+=item userId
 
 =back
 
@@ -27379,41 +27372,11 @@ Additionally there are generic tagged parameters.
 
 =head3 EnterpriseEnterpriseTrunkModifyRequest
 
-Request to modify an enterprise trunk in an enterprise.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item enterpriseTrunkName
-
-=back
 
 Additionally there are generic tagged parameters.
 
 =head3 GroupEnterpriseTrunkAddRequest
 
-Request to add an enterprise trunk in a group.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item groupId
-
-=item enterpriseTrunkName
-
-=item maximumRerouteAttempts
-
-=item routeExhaustionAction
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -27431,6 +27394,8 @@ parameters are:-
 =item groupId
 
 =item enterpriseTrunkName
+
+=item userId
 
 =back
 
@@ -27469,6 +27434,8 @@ parameters are:-
 =item groupId
 
 =item enterpriseTrunkName
+
+=item userId
 
 =back
 
@@ -27574,20 +27541,6 @@ Additionally there are generic tagged parameters.
 
 =head3 GroupEnterpriseTrunkModifyRequest
 
-Request to modify an enterprise trunk in a group.
-
-The response is either a C<SuccessResponse> or an C<ErrorResponse>. Fixed
-parameters are:-
-
-=over 4
-
-=item serviceProviderId
-
-=item groupId
-
-=item enterpriseTrunkName
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -27745,30 +27698,6 @@ Additionally there are generic tagged parameters.
 
 =head3 GroupTrunkGroupUserCreationTaskAddRequest14sp4
 
-Add a user creation task for a trunk group.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. Fixed parameters
-are:-
-
-=over 4
-
-=item trunkGroupKey
-
-=item taskName
-
-=item userIdFormat
-
-=item userIdDomain
-
-=item populateExtension
-
-=item linePortFormat
-
-=item linePortDomain
-
-=item populateContact
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -28397,10 +28326,8 @@ Additionally there are generic tagged parameters.
 
 =head3 SystemVoiceMessagingGroupModifyVoicePortalMenusRequest
 
-Request to modify the system voice portal menus setting.
 
-The response is either C<SuccessResponse> or C<ErrorResponse>. Additionally
-there are generic tagged parameters.
+Additionally there are generic tagged parameters.
 
 =head3 UserVoiceMessagingUserAddAliasListRequest
 
@@ -28412,6 +28339,8 @@ parameters are:-
 =over 4
 
 =item userId
+
+=item phoneNumber
 
 =back
 
@@ -28427,6 +28356,8 @@ parameters are:-
 =over 4
 
 =item userId
+
+=item phoneNumber
 
 =back
 

@@ -932,30 +932,6 @@ Additionally there are generic tagged parameters.
 
 =head3 GroupTrunkGroupUserCreationTaskAddRequest
 
-Add a user creation task for a trunk group.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. Fixed parameters
-are:-
-
-=over 4
-
-=item serviceUserId
-
-=item taskName
-
-=item userIdFormat
-
-=item userIdDomain
-
-=item populateExtension
-
-=item linePortFormat
-
-=item linePortDomain
-
-=item populateContact
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -2500,16 +2476,6 @@ Additionally there are generic tagged parameters.
 
 =head3 UserModifyRequest14
 
-Request to modify a user.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. Fixed parameters
-are:-
-
-=over 4
-
-=item userId
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -4472,16 +4438,6 @@ Additionally there are generic tagged parameters.
 
 =head3 UserModifyRequest14sp9
 
-Request to modify a user.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. Replaced by:
-C<UserModifyRequest16> Fixed parameters are:-
-
-=over 4
-
-=item userId
-
-=back
 
 Additionally there are generic tagged parameters.
 
@@ -4738,11 +4694,8 @@ Additionally there are generic tagged parameters.
 
 =head3 DeviceManagementFileAuthLocationGetRequest
 
-Get the address and credentials of the File Repository hosting the requested
-access device file. Also get the file name and path on the File Repository.
-
-The response is either a C<DeviceManagementFileAuthLocationGetResponse> or an
-C<ErrorResponse>. Fixed parameters are:-
+The limit for the number of calls the system will keep in queue, waiting for an
+available agent. Fixed parameters are:-
 
 =over 4
 
@@ -8287,20 +8240,6 @@ Additionally there are generic tagged parameters.
 
 =head3 UserModifyRequest16
 
-Replaced by: C<UserModifyRequest17sp4> Request to modify a user. When
-C<oldPassword> is specified, all password rule applies. If C<oldPassword> in
-not specified, any password rule related to old password does not apply. The
-request will fail if C<officeZoneName> or C<primaryZoneName> is present but the
-Location-Based Calling Restrictions service is not assigned to the user.
-
-The response is either C<SuccessResponse> or C<ErrorResponse>. Fixed parameters
-are:-
-
-=over 4
-
-=item userId
-
-=back
 
 Additionally there are generic tagged parameters.
 

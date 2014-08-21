@@ -222,14 +222,15 @@ Returns the content of a single named table, as a list
 
 =cut
 
-method table ($table_name) { return (@{$self->tables->{$table_name}||[]});}
+method table ($table_name) { return ( @{ $self->tables->{$table_name} || [] } ); }
 
 # ------------------------------------------------------------------------
 method BUILD ($args) {
 
     # check this object is valid and the right type
     Broadworks::OCIP::Throwable->throw(
-        message         => sprintf( "Expecting a response of type %s but got %s\n%s\n", $self->expected, $self->type,$self->xml ),
+        message =>
+            sprintf( "Expecting a response of type %s but got %s\n%s\n", $self->expected, $self->type, $self->xml ),
         execution_phase => 'response',
         error_code      => 'ocip_unexpected'
     ) if ( $self->die_on_error and not $self->status_ok );
