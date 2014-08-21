@@ -183,7 +183,7 @@ method _build_payload () { return $self->hash->{command}; }
 
 # ------------------------------------------------------------------------
 
-=head3 payload
+=head3 tables
 
 Any tables that are in the returned data.  This returns a hash of tables named
 by the table name.
@@ -215,14 +215,32 @@ method _build_tables () {
 }
 
 # ------------------------------------------------------------------------
+
+=head3 table
+
+Returns the content of a single named table, as a list
+
+=cut
+
+method table ($table_name) { return (@{$self->tables->{$table_name}||[]});}
+
+# ------------------------------------------------------------------------
 method BUILD ($args) {
 
     # check this object is valid and the right type
     Broadworks::OCIP::Throwable->throw(
-        message         => sprintf( "Expecting a response of type %s but got %s", $self->expected, $self->type ),
+        message         => sprintf( "Expecting a response of type %s but got %s\n%s\n", $self->expected, $self->type,$self->xml ),
         execution_phase => 'response',
         error_code      => 'ocip_unexpected'
     ) if ( $self->die_on_error and not $self->status_ok );
+}
+
+# ------------------------------------------------------------------------
+method list ($key) {
+    my $val = $self->payload->{$key};
+    return () unless ( defined($val) );
+    return @{$val} if ( ref($val) eq 'ARRAY' );
+    return $val;
 }
 
 # ------------------------------------------------------------------------

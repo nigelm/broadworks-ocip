@@ -165,7 +165,7 @@ method _build_encoder () {
 
 # ------------------------------------------------------------------------
 
-=head3 encoder
+=head3 protocol
 
 The protocol to implement - always C<OCI>.
 
