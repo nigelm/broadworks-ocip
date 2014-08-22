@@ -52,7 +52,7 @@ method GroupAdminGetPolicyRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method GroupCallCenterAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest14',
         serviceProviderId      => $x0,
@@ -64,12 +64,12 @@ method GroupCallCenterAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $
         noAnswerNumberOfRings  => $x6,
         forwardAfterTimeout    => $x7,
         forwardTimeoutSeconds  => $x8,
-        @params
+        @params, allowCallWaitingForAgents => $x9
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest14sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method GroupCallCenterAddInstanceRequest14sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, @params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest14sp3',
         serviceProviderId      => $x0,
@@ -81,7 +81,10 @@ method GroupCallCenterAddInstanceRequest14sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6
         noAnswerNumberOfRings  => $x6,
         forwardAfterTimeout    => $x7,
         forwardTimeoutSeconds  => $x8,
-        @params
+        @params,
+        allowCallWaitingForAgents            => $x9,
+        allowCallsToAgentsInWrapUp           => $x10,
+        enableCallQueueWhenNoAgentsAvailable => $x11
     );
 }
 
@@ -754,7 +757,7 @@ method SystemSIPDeviceTypeAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest14sp1 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method SystemSIPDeviceTypeAddRequest14sp1 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest14sp1',
         deviceType             => $x0,
@@ -770,12 +773,12 @@ method SystemSIPDeviceTypeAddRequest14sp1 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
         routeAdvance           => $x10,
         forwardingOverride     => $x11,
         wirelessIntegration    => $x12,
-        @params
+        @params, earlyMediaSupport => $x13
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest14sp2 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, @params) {
+method SystemSIPDeviceTypeAddRequest14sp2 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest14sp2',
         deviceType          => $x0,
@@ -790,12 +793,16 @@ method SystemSIPDeviceTypeAddRequest14sp2 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
         routeAdvance        => $x9,
         forwardingOverride  => $x10,
         wirelessIntegration => $x11,
-        @params
+        @params,
+        earlyMediaSupport    => $x12,
+        authenticateRefer    => $x13,
+        autoConfigSoftClient => $x14,
+        authenticationMode   => $x15
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest14sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method SystemSIPDeviceTypeAddRequest14sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, $x16, $x17, $x18, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest14sp3',
         deviceType              => $x0,
@@ -811,12 +818,18 @@ method SystemSIPDeviceTypeAddRequest14sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
         routeAdvance            => $x10,
         forwardingOverride      => $x11,
         wirelessIntegration     => $x12,
-        @params
+        @params,
+        earlyMediaSupport                    => $x13,
+        authenticateRefer                    => $x14,
+        autoConfigSoftClient                 => $x15,
+        authenticationMode                   => $x16,
+        tdmOverlay                           => $x17,
+        supportsBroadWorksINFOForCallWaiting => $x18
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest14sp6 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method SystemSIPDeviceTypeAddRequest14sp6 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, $x16, $x17, $x18, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest14sp6',
         deviceType              => $x0,
@@ -832,7 +845,13 @@ method SystemSIPDeviceTypeAddRequest14sp6 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
         routeAdvance            => $x10,
         forwardingOverride      => $x11,
         wirelessIntegration     => $x12,
-        @params
+        @params,
+        earlyMediaSupport                    => $x13,
+        authenticateRefer                    => $x14,
+        autoConfigSoftClient                 => $x15,
+        authenticationMode                   => $x16,
+        tdmOverlay                           => $x17,
+        supportsBroadWorksINFOForCallWaiting => $x18
     );
 }
 
@@ -997,8 +1016,14 @@ method UserDirectedCallPickupWithBargeInGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserEnhancedCallLogsGetListRequest ($x0, @params) {
-    return $self->send_query( 'UserEnhancedCallLogsGetListRequest', userId => $x0, @params );
+method UserEnhancedCallLogsGetListRequest ($x0, $x1, $x2, @params) {
+    return $self->send_query(
+        'UserEnhancedCallLogsGetListRequest',
+        userId => $x0,
+        @params,
+        startingOffset => $x1,
+        numCalls       => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1106,8 +1131,12 @@ method UserVoiceMessagingUserGetVoicePortalPasswordInfoRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyVoicePortalPasswordRequest ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserModifyVoicePortalPasswordRequest', userId => $x0, @params );
+method UserVoiceMessagingUserModifyVoicePortalPasswordRequest ($x0, $x1, @params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserModifyVoicePortalPasswordRequest',
+        userId => $x0,
+        @params, newPassword => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1293,7 +1322,7 @@ method GroupAutoAttendantModifyInstanceRequest ($x0, @params) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest14sp9 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method GroupCallCenterAddInstanceRequest14sp9 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest14sp9',
         serviceProviderId      => $x0,
@@ -1305,7 +1334,11 @@ method GroupCallCenterAddInstanceRequest14sp9 ($x0, $x1, $x2, $x3, $x4, $x5, $x6
         noAnswerNumberOfRings  => $x6,
         forwardAfterTimeout    => $x7,
         forwardTimeoutSeconds  => $x8,
-        @params
+        @params,
+        allowCallWaitingForAgents            => $x9,
+        allowCallsToAgentsInWrapUp           => $x10,
+        enableCallQueueWhenNoAgentsAvailable => $x11,
+        statisticsSource                     => $x12
     );
 }
 
@@ -1644,7 +1677,7 @@ method SystemPasswordRulesGetRequest13mp2 () {
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest15 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method SystemSIPDeviceTypeAddRequest15 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, $x16, $x17, $x18, $x19, $x20, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest15',
         deviceType              => $x0,
@@ -1660,7 +1693,15 @@ method SystemSIPDeviceTypeAddRequest15 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, 
         routeAdvance            => $x10,
         forwardingOverride      => $x11,
         wirelessIntegration     => $x12,
-        @params
+        @params,
+        earlyMediaSupport                 => $x13,
+        authenticateRefer                 => $x14,
+        autoConfigSoftClient              => $x15,
+        authenticationMode                => $x16,
+        tdmOverlay                        => $x17,
+        requiresBroadWorksCallWaitingTone => $x18,
+        requiresMWISubscription           => $x19,
+        useHistoryInfoHeaderOnAccessSide  => $x20
     );
 }
 
@@ -1695,13 +1736,13 @@ method SystemVoiceMessagingGroupModifyRequest (@params) {
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksAnywhereAddSelectiveCriteriaRequest ($x0, $x1, $x2, @params) {
+method UserBroadWorksAnywhereAddSelectiveCriteriaRequest ($x0, $x1, $x2, $x3, @params) {
     return $self->send_command(
         'UserBroadWorksAnywhereAddSelectiveCriteriaRequest',
         userId       => $x0,
         phoneNumber  => $x1,
         criteriaName => $x2,
-        @params
+        @params, fromDnCriteria => $x3
     );
 }
 
@@ -1721,12 +1762,12 @@ method UserCallCenterGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingSelectiveAddCriteriaRequest ($x0, $x1, @params) {
+method UserCallForwardingSelectiveAddCriteriaRequest ($x0, $x1, $x2, @params) {
     return $self->send_command(
         'UserCallForwardingSelectiveAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @params, fromDnCriteria => $x2
     );
 }
 
@@ -1751,8 +1792,13 @@ method UserCallingPartyCategoryModifyRequest ($x0, @params) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallNotifyAddCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserCallNotifyAddCriteriaRequest', userId => $x0, criteriaName => $x1, @params );
+method UserCallNotifyAddCriteriaRequest ($x0, $x1, $x2, @params) {
+    return $self->send_command(
+        'UserCallNotifyAddCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @params, fromDnCriteria => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1792,8 +1838,14 @@ method UserCustomRingbackUserModifyCriteriaRequest ($x0, $x1, @params) {
 }
 
 # ----------------------------------------------------------------------
-method UserEnhancedCallLogsGetListRequest14sp4 ($x0, @params) {
-    return $self->send_query( 'UserEnhancedCallLogsGetListRequest14sp4', userId => $x0, @params );
+method UserEnhancedCallLogsGetListRequest14sp4 ($x0, $x1, $x2, @params) {
+    return $self->send_query(
+        'UserEnhancedCallLogsGetListRequest14sp4',
+        userId => $x0,
+        @params,
+        startingOffset => $x1,
+        numCalls       => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1832,8 +1884,13 @@ method UserMusicOnHoldUserModifyRequest ($x0, @params) {
 }
 
 # ----------------------------------------------------------------------
-method UserPriorityAlertAddCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserPriorityAlertAddCriteriaRequest', userId => $x0, criteriaName => $x1, @params );
+method UserPriorityAlertAddCriteriaRequest ($x0, $x1, $x2, @params) {
+    return $self->send_command(
+        'UserPriorityAlertAddCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @params, fromDnCriteria => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1842,12 +1899,12 @@ method UserPriorityAlertGetCriteriaRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method UserSelectiveCallAcceptanceAddCriteriaRequest ($x0, $x1, @params) {
+method UserSelectiveCallAcceptanceAddCriteriaRequest ($x0, $x1, $x2, @params) {
     return $self->send_command(
         'UserSelectiveCallAcceptanceAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @params, fromDnCriteria => $x2
     );
 }
 
@@ -1857,12 +1914,12 @@ method UserSelectiveCallAcceptanceGetCriteriaRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method UserSelectiveCallRejectionAddCriteriaRequest ($x0, $x1, @params) {
+method UserSelectiveCallRejectionAddCriteriaRequest ($x0, $x1, $x2, @params) {
     return $self->send_command(
         'UserSelectiveCallRejectionAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @params, fromDnCriteria => $x2
     );
 }
 
@@ -1882,8 +1939,13 @@ method UserSelectiveCallRejectionModifyCriteriaRequest ($x0, $x1, @params) {
 }
 
 # ----------------------------------------------------------------------
-method UserSequentialRingAddCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserSequentialRingAddCriteriaRequest', userId => $x0, criteriaName => $x1, @params );
+method UserSequentialRingAddCriteriaRequest ($x0, $x1, $x2, @params) {
+    return $self->send_command(
+        'UserSequentialRingAddCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @params, fromDnCriteria => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1941,7 +2003,7 @@ method GroupAdminGetPolicyRequest14sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, @params) {
+method GroupCallCenterAddInstanceRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest16',
         serviceProviderId      => $x0,
@@ -1952,7 +2014,10 @@ method GroupCallCenterAddInstanceRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $
         policy                 => $x5,
         enableVideo            => $x6,
         queueLength            => $x7,
-        @params
+        @params,
+        externalPreferredAudioCodec => $x8,
+        internalPreferredAudioCodec => $x9,
+        playRingingWhenOfferingCall => $x10
     );
 }
 
@@ -2302,7 +2367,7 @@ method SystemMaliciousCallTraceGetUserListRequest () {
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method SystemSIPDeviceTypeAddRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, $x16, $x17, $x18, $x19, $x20, $x21, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest16',
         deviceType              => $x0,
@@ -2318,7 +2383,16 @@ method SystemSIPDeviceTypeAddRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, 
         routeAdvance            => $x10,
         forwardingOverride      => $x11,
         wirelessIntegration     => $x12,
-        @params
+        @params,
+        earlyMediaSupport                 => $x13,
+        authenticateRefer                 => $x14,
+        autoConfigSoftClient              => $x15,
+        authenticationMode                => $x16,
+        requiresBroadWorksDigitCollection => $x17,
+        requiresBroadWorksCallWaitingTone => $x18,
+        requiresMWISubscription           => $x19,
+        useHistoryInfoHeaderOnAccessSide  => $x20,
+        adviceOfChargeCapable             => $x21
     );
 }
 
@@ -2847,7 +2921,7 @@ method GroupAutoAttendantModifyInstanceRequest16 ($x0, @params) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest17 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, @params) {
+method GroupCallCenterAddInstanceRequest17 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest17',
         serviceProviderId      => $x0,
@@ -2858,12 +2932,15 @@ method GroupCallCenterAddInstanceRequest17 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $
         policy                 => $x5,
         enableVideo            => $x6,
         queueLength            => $x7,
-        @params
+        @params,
+        externalPreferredAudioCodec => $x8,
+        internalPreferredAudioCodec => $x9,
+        playRingingWhenOfferingCall => $x10
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest17sp1 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, @params) {
+method GroupCallCenterAddInstanceRequest17sp1 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest17sp1',
         serviceProviderId      => $x0,
@@ -2874,7 +2951,10 @@ method GroupCallCenterAddInstanceRequest17sp1 ($x0, $x1, $x2, $x3, $x4, $x5, $x6
         policy                 => $x5,
         enableVideo            => $x6,
         queueLength            => $x7,
-        @params
+        @params,
+        externalPreferredAudioCodec => $x8,
+        internalPreferredAudioCodec => $x9,
+        playRingingWhenOfferingCall => $x10
     );
 }
 
@@ -2970,7 +3050,7 @@ method GroupGroupPagingGetInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method GroupHuntGroupAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @params) {
     return $self->send_command(
         'GroupHuntGroupAddInstanceRequest14',
         serviceProviderId      => $x0,
@@ -2982,12 +3062,12 @@ method GroupHuntGroupAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
         noAnswerNumberOfRings  => $x6,
         forwardAfterTimeout    => $x7,
         forwardTimeoutSeconds  => $x8,
-        @params
+        @params, allowCallWaitingForAgents => $x9
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method GroupHuntGroupAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, @params) {
     return $self->send_command(
         'GroupHuntGroupAddInstanceRequest17sp3',
         serviceProviderId      => $x0,
@@ -2999,7 +3079,10 @@ method GroupHuntGroupAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6,
         noAnswerNumberOfRings  => $x6,
         forwardAfterTimeout    => $x7,
         forwardTimeoutSeconds  => $x8,
-        @params
+        @params,
+        allowCallWaitingForAgents     => $x9,
+        useSystemHuntGroupCLIDSetting => $x10,
+        includeHuntGroupNameInCLID    => $x11
     );
 }
 
@@ -3054,24 +3137,32 @@ method GroupSpeedDial100GetRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupAddInstanceRequest17 ($x0, $x1, $x2, @params) {
+method GroupTrunkGroupAddInstanceRequest17 ($x0, $x1, $x2, $x3, @params) {
     return $self->send_command(
         'GroupTrunkGroupAddInstanceRequest17',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @params, routeToPeeringDomain => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupAddInstanceRequest17sp3 ($x0, $x1, $x2, @params) {
+method GroupTrunkGroupAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
     return $self->send_command(
         'GroupTrunkGroupAddInstanceRequest17sp3',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @params,
+        statefulReroutingEnabled                => $x3,
+        sendContinuousOptionsMessage            => $x4,
+        continuousOptionsSendingIntervalSeconds => $x5,
+        failureOptionsSendingIntervalSeconds    => $x6,
+        failureThresholdCounter                 => $x7,
+        successThresholdCounter                 => $x8,
+        inviteFailureThresholdCounter           => $x9,
+        inviteFailureThresholdWindowSeconds     => $x10
     );
 }
 
@@ -3101,12 +3192,12 @@ method ServiceProviderAdminGetPolicyRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringProfileAddRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringProfileAddRequest ($x0, $x1, $x2, @params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringProfileAddRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @params, becomeDefault => $x2
     );
 }
 
@@ -3255,7 +3346,7 @@ method SystemSessionAuditGetRequest14sp3 () {
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest17 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method SystemSIPDeviceTypeAddRequest17 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, @params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest17',
         deviceType              => $x0,
@@ -3271,7 +3362,10 @@ method SystemSIPDeviceTypeAddRequest17 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, 
         routeAdvance            => $x10,
         forwardingOverride      => $x11,
         wirelessIntegration     => $x12,
-        @params
+        @params,
+        supportCallCenterMIMEType => $x13,
+        trunkMode                 => $x14,
+        addPCalledPartyId         => $x15
     );
 }
 

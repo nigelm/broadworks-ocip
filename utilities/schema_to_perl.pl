@@ -55,7 +55,7 @@ sub build_pod {
     if ( scalar( @{ $info->{fixed_parameters} } ) ) {
         $out->print("\nFixed parameters are:-\n");
         $out->print("\n=over 4\n");
-        $out->print("\n=item $_\n") foreach ( @{ $info->{fixed_parameters} } );
+        $out->print("\n=item $_\n") foreach ( @{ $info->{fixed_parameters} }, @{ $info->{end_fixed_parameters} } );
         $out->print("\n=back\n");
     }
 
@@ -74,7 +74,7 @@ sub build_sub_entry {
 
     # build fixed parameters
     my $count = 0;
-    my @param_set = map { '$x' . $count++ } @{ $info->{fixed_parameters} };
+    my @param_set = map { '$x' . $count++ } ( @{ $info->{fixed_parameters} }, @{ $info->{end_fixed_parameters} } );
 
     # add generics if needed
     push( @param_set, '@params' ) if ( $info->{need_generic_params} );
@@ -91,6 +91,9 @@ sub build_sub_entry {
 
     # output generics if needed
     $out->print(", \@params") if ( $info->{need_generic_params} );
+
+    # output end fixed parameters
+    map { $out->printf( ", %s => \$x%d", $_, $count++ ); } @{ $info->{end_fixed_parameters} };
 
     # output tail
     $out->print(");\n}\n");
@@ -180,12 +183,14 @@ sub parse_request_info {
 
     my $ptypes = {};
     my @fixed_parameters;
+    my @end_fixed_parameters;
     my $res = {
-        name                => $name,
-        fixed_parameters    => \@fixed_parameters,
-        parameter_types     => $ptypes,
-        is_command          => 0,
-        need_generic_params => 0
+        name                 => $name,
+        fixed_parameters     => \@fixed_parameters,
+        end_fixed_parameters => \@end_fixed_parameters,
+        parameter_types      => $ptypes,
+        is_command           => 0,
+        need_generic_params  => 0
     };
     $request_info->{$name} = $res;
     $current_set->{classes}{ $current_set->{current_class} } ||= [];
@@ -202,21 +207,28 @@ sub parse_request_info {
             if ( $elem->tag eq 'xs:element' ) {
                 my $ename = $elem->att('name');
                 my $etype = $elem->att('type');
+                $ptypes->{$ename} = $etype;
 
                 # deal with optional/multi params
+                my $minoc = -1;
                 if ( $elem->att_exists('minOccurs') ) {
-                    my $minoc = $elem->att('minOccurs');
+                    $minoc                      = $elem->att('minOccurs');
                     $res->{need_generic_params} = 1;
-                    last if ( $minoc == 0 );
+                    @end_fixed_parameters       = ();
+                    next if ( $minoc == 0 );
                 }
-                push( @fixed_parameters, $ename );
-                $ptypes->{$ename} = $etype;
-                $ptypes->{$ename} = $etype;
-                last if ( $res->{need_generic_params} );
+
+                # if there are generics, see if there are fixed ends
+                if ( $res->{need_generic_params} ) {
+                    push( @end_fixed_parameters, $ename ) if ( $minoc == -1 );
+                }
+                else {
+                    push( @fixed_parameters, $ename );
+                }
             }
             else {
                 $res->{need_generic_params} = 1;
-                last;
+                @end_fixed_parameters = ();
             }
         }
     }

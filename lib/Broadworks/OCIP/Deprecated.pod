@@ -121,6 +121,8 @@ C<GroupCallCenterAddInstanceRequest14sp3> Fixed parameters are:-
 
 =item forwardTimeoutSeconds
 
+=item allowCallWaitingForAgents
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -152,6 +154,12 @@ C<GroupCallCenterAddInstanceRequest14sp9> Fixed parameters are:-
 =item forwardAfterTimeout
 
 =item forwardTimeoutSeconds
+
+=item allowCallWaitingForAgents
+
+=item allowCallsToAgentsInWrapUp
+
+=item enableCallQueueWhenNoAgentsAvailable
 
 =back
 
@@ -1777,6 +1785,8 @@ C<SystemSIPDeviceTypeAddRequest14sp2> Fixed parameters are:-
 
 =item wirelessIntegration
 
+=item earlyMediaSupport
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -1813,6 +1823,14 @@ C<SystemSIPDeviceTypeAddRequest14sp3> Fixed parameters are:-
 =item forwardingOverride
 
 =item wirelessIntegration
+
+=item earlyMediaSupport
+
+=item authenticateRefer
+
+=item autoConfigSoftClient
+
+=item authenticationMode
 
 =back
 
@@ -1853,6 +1871,18 @@ C<SystemSIPDeviceTypeAddRequest14sp6> Fixed parameters are:-
 
 =item wirelessIntegration
 
+=item earlyMediaSupport
+
+=item authenticateRefer
+
+=item autoConfigSoftClient
+
+=item authenticationMode
+
+=item tdmOverlay
+
+=item supportsBroadWorksINFOForCallWaiting
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -1891,6 +1921,18 @@ C<SystemSIPDeviceTypeAddRequest15> Fixed parameters are:-
 =item forwardingOverride
 
 =item wirelessIntegration
+
+=item earlyMediaSupport
+
+=item authenticateRefer
+
+=item autoConfigSoftClient
+
+=item authenticationMode
+
+=item tdmOverlay
+
+=item supportsBroadWorksINFOForCallWaiting
 
 =back
 
@@ -2337,6 +2379,10 @@ parameters are:-
 
 =item userId
 
+=item startingOffset
+
+=item numCalls
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -2651,6 +2697,8 @@ C<UserPortalPasscodeModifyRequest> Fixed parameters are:-
 =over 4
 
 =item userId
+
+=item newPassword
 
 =back
 
@@ -3095,6 +3143,14 @@ C<GroupCallCenterModifyAnnouncementRequest16> Fixed parameters are:-
 =item forwardAfterTimeout
 
 =item forwardTimeoutSeconds
+
+=item allowCallWaitingForAgents
+
+=item allowCallsToAgentsInWrapUp
+
+=item enableCallQueueWhenNoAgentsAvailable
+
+=item statisticsSource
 
 =back
 
@@ -4034,6 +4090,22 @@ C<SystemSIPDeviceTypeAddRequest16> Fixed parameters are:-
 
 =item wirelessIntegration
 
+=item earlyMediaSupport
+
+=item authenticateRefer
+
+=item autoConfigSoftClient
+
+=item authenticationMode
+
+=item tdmOverlay
+
+=item requiresBroadWorksCallWaitingTone
+
+=item requiresMWISubscription
+
+=item useHistoryInfoHeaderOnAccessSide
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4119,6 +4191,8 @@ parameters are:-
 
 =item criteriaName
 
+=item fromDnCriteria
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4170,6 +4244,8 @@ parameters are:-
 =item userId
 
 =item criteriaName
+
+=item fromDnCriteria
 
 =back
 
@@ -4249,6 +4325,8 @@ parameters are:-
 =item userId
 
 =item criteriaName
+
+=item fromDnCriteria
 
 =back
 
@@ -4370,6 +4448,10 @@ parameters are:-
 
 =item userId
 
+=item startingOffset
+
+=item numCalls
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4485,6 +4567,8 @@ parameters are:-
 
 =item criteriaName
 
+=item fromDnCriteria
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4519,6 +4603,8 @@ parameters are:-
 
 =item criteriaName
 
+=item fromDnCriteria
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -4552,6 +4638,8 @@ parameters are:-
 =item userId
 
 =item criteriaName
+
+=item fromDnCriteria
 
 =back
 
@@ -4603,6 +4691,8 @@ parameters are:-
 =item userId
 
 =item criteriaName
+
+=item fromDnCriteria
 
 =back
 
@@ -4770,6 +4860,12 @@ C<GroupCallCenterAddInstanceRequest17> Fixed parameters are:-
 =item enableVideo
 
 =item queueLength
+
+=item externalPreferredAudioCodec
+
+=item internalPreferredAudioCodec
+
+=item playRingingWhenOfferingCall
 
 =back
 
@@ -5633,6 +5729,24 @@ C<SystemSIPDeviceTypeAddRequest16sp1> Fixed parameters are:-
 =item forwardingOverride
 
 =item wirelessIntegration
+
+=item earlyMediaSupport
+
+=item authenticateRefer
+
+=item autoConfigSoftClient
+
+=item authenticationMode
+
+=item requiresBroadWorksDigitCollection
+
+=item requiresBroadWorksCallWaitingTone
+
+=item requiresMWISubscription
+
+=item useHistoryInfoHeaderOnAccessSide
+
+=item adviceOfChargeCapable
 
 =back
 
@@ -7022,6 +7136,12 @@ are:-
 
 =item queueLength
 
+=item externalPreferredAudioCodec
+
+=item internalPreferredAudioCodec
+
+=item playRingingWhenOfferingCall
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -7051,6 +7171,12 @@ C<GroupCallCenterAddInstanceRequest17sp3> Fixed parameters are:-
 =item enableVideo
 
 =item queueLength
+
+=item externalPreferredAudioCodec
+
+=item internalPreferredAudioCodec
+
+=item playRingingWhenOfferingCall
 
 =back
 
@@ -7405,6 +7531,8 @@ are:-
 
 =item forwardTimeoutSeconds
 
+=item allowCallWaitingForAgents
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -7438,6 +7566,12 @@ in HSS data mode Fixed parameters are:-
 =item forwardAfterTimeout
 
 =item forwardTimeoutSeconds
+
+=item allowCallWaitingForAgents
+
+=item useSystemHuntGroupCLIDSetting
+
+=item includeHuntGroupNameInCLID
 
 =back
 
@@ -7613,6 +7747,8 @@ parameters are:-
 
 =item name
 
+=item routeToPeeringDomain
+
 =back
 
 Additionally there are generic tagged parameters.
@@ -7631,6 +7767,22 @@ by: C<GroupTrunkGroupAddInstanceRequest17sp4> Fixed parameters are:-
 =item groupId
 
 =item name
+
+=item statefulReroutingEnabled
+
+=item sendContinuousOptionsMessage
+
+=item continuousOptionsSendingIntervalSeconds
+
+=item failureOptionsSendingIntervalSeconds
+
+=item failureThresholdCounter
+
+=item successThresholdCounter
+
+=item inviteFailureThresholdCounter
+
+=item inviteFailureThresholdWindowSeconds
 
 =back
 
@@ -7730,6 +7882,8 @@ parameters are:-
 =item serviceProviderId
 
 =item name
+
+=item becomeDefault
 
 =back
 
@@ -8057,6 +8211,12 @@ are:-
 =item forwardingOverride
 
 =item wirelessIntegration
+
+=item supportCallCenterMIMEType
+
+=item trunkMode
+
+=item addPCalledPartyId
 
 =back
 
