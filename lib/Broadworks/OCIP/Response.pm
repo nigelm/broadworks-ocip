@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use feature 'unicode_strings';
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Throwable;
@@ -142,14 +142,28 @@ method _build_tables () {
 }
 
 # ------------------------------------------------------------------------
+
+
+method table ($table_name) { return ( @{ $self->tables->{$table_name} || [] } ); }
+
+# ------------------------------------------------------------------------
 method BUILD ($args) {
 
     # check this object is valid and the right type
     Broadworks::OCIP::Throwable->throw(
-        message         => sprintf( "Expecting a response of type %s but got %s", $self->expected, $self->type ),
+        message =>
+            sprintf( "Expecting a response of type %s but got %s\n%s\n", $self->expected, $self->type, $self->xml ),
         execution_phase => 'response',
         error_code      => 'ocip_unexpected'
     ) if ( $self->die_on_error and not $self->status_ok );
+}
+
+# ------------------------------------------------------------------------
+method list ($key) {
+    my $val = $self->payload->{$key};
+    return () unless ( defined($val) );
+    return @{$val} if ( ref($val) eq 'ARRAY' );
+    return $val;
 }
 
 # ------------------------------------------------------------------------
@@ -175,7 +189,7 @@ Broadworks::OCIP::Response - A Broadworks OCI-P Response Message
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -222,12 +236,16 @@ Is this the expected return type.
 
 The hash payload of the XML document.
 
-=head3 payload
+=head3 tables
 
 Any tables that are in the returned data.  This returns a hash of tables named
 by the table name.
 
 Each table is an array of rows, each of which is a hash.
+
+=head3 table
+
+Returns the content of a single named table, as a list
 
 =head1 AUTHOR
 

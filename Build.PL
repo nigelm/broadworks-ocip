@@ -18,7 +18,7 @@ my %module_build_args = (
     "Nigel Metheringham <nigelm\@cpan.org>"
   ],
   "dist_name" => "Broadworks-OCIP",
-  "dist_version" => "0.01",
+  "dist_version" => "0.02",
   "license" => "perl",
   "module_name" => "Broadworks::OCIP",
   "recommends" => {},

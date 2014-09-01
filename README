@@ -5,7 +5,7 @@ NAME
 
 VERSION
 
-    version 0.01
+    version 0.02
 
 SYNOPSIS
 
@@ -53,7 +53,7 @@ DESCRIPTION
     A character set encoder - uses an instance of Encode returned by
     "find_encoding" in Encode.
 
-  encoder
+  protocol
 
     The protocol to implement - always OCI.
 

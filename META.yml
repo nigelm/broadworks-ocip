@@ -23,19 +23,19 @@ name: Broadworks-OCIP
 provides:
   Broadworks::OCIP:
     file: lib/Broadworks/OCIP.pm
-    version: '0.01'
+    version: '0.02'
   Broadworks::OCIP::Deprecated:
     file: lib/Broadworks/OCIP/Deprecated.pm
-    version: '0.01'
+    version: '0.02'
   Broadworks::OCIP::Methods:
     file: lib/Broadworks/OCIP/Methods.pm
-    version: '0.01'
+    version: '0.02'
   Broadworks::OCIP::Response:
     file: lib/Broadworks/OCIP/Response.pm
-    version: '0.01'
+    version: '0.02'
   Broadworks::OCIP::Throwable:
     file: lib/Broadworks/OCIP/Throwable.pm
-    version: '0.01'
+    version: '0.02'
 requires:
   Config::Any: '0'
   Data::UUID: '0'
@@ -62,7 +62,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Broadworks-OCIP
   homepage: https://metacpan.org/release/Broadworks-OCIP
   repository: https://gitlab.dev.localnet/broadworks-api/broadworks-ocip.git
-version: '0.01'
+version: '0.02'
 x_Dist_Zilla:
   perl:
     version: '5.020000'
@@ -375,7 +375,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: release/0.01
+          tag: release/0.02
           tag_format: release/%v%t
           tag_message: 'Release of %v%t'
           time_zone: local

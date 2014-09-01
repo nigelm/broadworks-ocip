@@ -31,3 +31,4 @@ t/release-portability.t
 t/release-synopsis.t
 t/release-unused-vars.t
 utilities/schema_to_perl.pl
+x.bak

@@ -8,7 +8,7 @@ use utf8;
 use feature 'unicode_strings';
 use namespace::autoclean;
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Response;
@@ -458,7 +458,7 @@ Broadworks::OCIP - API for communication with Broadworks OCI-P Interface
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -505,7 +505,7 @@ The character set to use - currently defaults to C<ISO-8859-1>.
 A character set encoder - uses an instance of L<Encode> returned by
 L<Encode/find_encoding>.
 
-=head3 encoder
+=head3 protocol
 
 The protocol to implement - always C<OCI>.
 
