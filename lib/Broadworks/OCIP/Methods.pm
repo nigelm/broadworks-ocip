@@ -26,7 +26,7 @@ use Moose;
 ##
 ## Enterprise
 ##
-method EnterpriseBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @params) {
+method EnterpriseBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @generic_params) {
     return $self->send_command(
         'EnterpriseBroadWorksMobileManagerAddRequest',
         serviceProviderId     => $x0,
@@ -35,7 +35,7 @@ method EnterpriseBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5
         isActive              => $x3,
         localToCarrier        => $x4,
         maxTxPerSecondEnabled => $x5,
-        @params,
+        @generic_params,
         tldnEnabled                  => $x6,
         genericNumberEnabled         => $x7,
         mobileStateCheckEnabled      => $x8,
@@ -59,17 +59,21 @@ method EnterpriseBroadWorksMobileManagerDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseBroadWorksMobileManagerModifyRequest ($x0, @params) {
-    return $self->send_command( 'EnterpriseBroadWorksMobileManagerModifyRequest', serviceProviderId => $x0, @params );
+method EnterpriseBroadWorksMobileManagerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'EnterpriseBroadWorksMobileManagerModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseBroadWorksMobileManagerActivationRequest ($x0, $x1, @params) {
+method EnterpriseBroadWorksMobileManagerActivationRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseBroadWorksMobileManagerActivationRequest',
         serviceProviderId => $x0,
         isActive          => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -128,49 +132,69 @@ method EnterpriseBroadWorksMobileManagerDeleteHomeZoneListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseBroadWorksMobileManagerModifyHomeZoneRequest ($x0, $x1, @params) {
+method EnterpriseBroadWorksMobileManagerModifyHomeZoneRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseBroadWorksMobileManagerModifyHomeZoneRequest',
         serviceProviderId => $x0,
         homeZoneId        => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCommonPhoneListAddListRequest ($x0, $x1) {
-    return $self->send_command( 'EnterpriseCommonPhoneListAddListRequest', serviceProviderId => $x0, entry => $x1 );
+method EnterpriseCommonPhoneListAddListRequest ($x0, $x1, $x2) {
+    return $self->send_command(
+        'EnterpriseCommonPhoneListAddListRequest',
+        serviceProviderId => $x0,
+        entry             => [ entryName => $x1, phoneNumber => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
 method EnterpriseCommonPhoneListDeleteListRequest ($x0, $x1) {
-    return $self->send_command( 'EnterpriseCommonPhoneListDeleteListRequest', serviceProviderId => $x0,
-        entryName => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method EnterpriseCommonPhoneListGetListRequest ($x0, @params) {
-    return $self->send_query( 'EnterpriseCommonPhoneListGetListRequest', serviceProviderId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method EnterpriseCommonPhoneListModifyRequest ($x0, $x1, @params) {
     return $self->send_command(
-        'EnterpriseCommonPhoneListModifyRequest',
+        'EnterpriseCommonPhoneListDeleteListRequest',
         serviceProviderId => $x0,
-        entryName         => $x1,
-        @params
+        entryName         => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseDepartmentAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'EnterpriseDepartmentAddRequest', enterpriseId => $x0, departmentName => $x1, @params );
+method EnterpriseCommonPhoneListGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'EnterpriseCommonPhoneListGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method EnterpriseCommonPhoneListModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'EnterpriseCommonPhoneListModifyRequest',
+        serviceProviderId => $x0,
+        entryName         => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method EnterpriseDepartmentAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'EnterpriseDepartmentAddRequest',
+        enterpriseId   => $x0,
+        departmentName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method EnterpriseDepartmentDeleteRequest ($x0, $x1) {
-    return $self->send_command( 'EnterpriseDepartmentDeleteRequest', enterpriseId => $x0, departmentName => $x1 );
+    return $self->send_command(
+        'EnterpriseDepartmentDeleteRequest',
+        enterpriseId   => $x0,
+        departmentName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -184,72 +208,79 @@ method EnterpriseDepartmentGetAvailableParentListRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method EnterpriseDepartmentGetListRequest ($x0, $x1) {
-    return $self->send_query( 'EnterpriseDepartmentGetListRequest', enterpriseId => $x0,
-        includeGroupDepartments => $x1 );
+    return $self->send_query(
+        'EnterpriseDepartmentGetListRequest',
+        enterpriseId            => $x0,
+        includeGroupDepartments => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseDepartmentModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'EnterpriseDepartmentModifyRequest', enterpriseId => $x0, departmentName => $x1,
-        @params );
+method EnterpriseDepartmentModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'EnterpriseDepartmentModifyRequest',
+        enterpriseId   => $x0,
+        departmentName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method EnterprisePhoneDirectoryGetListRequest17 ($x0, $x1, @params) {
+method EnterprisePhoneDirectoryGetListRequest17 ($x0, $x1, @generic_params) {
     return $self->send_query(
         'EnterprisePhoneDirectoryGetListRequest17',
         enterpriseId            => $x0,
         isExtendedInfoRequested => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseSessionAdmissionControlGetAvailableDeviceListRequest ($x0, @params) {
+method EnterpriseSessionAdmissionControlGetAvailableDeviceListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseSessionAdmissionControlGetAvailableDeviceListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseSessionAdmissionControlGroupAddDeviceListRequest ($x0, $x1, @params) {
+method EnterpriseSessionAdmissionControlGroupAddDeviceListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseSessionAdmissionControlGroupAddDeviceListRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseSessionAdmissionControlGroupAddRequest ($x0, $x1, $x2, @params) {
+method EnterpriseSessionAdmissionControlGroupAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'EnterpriseSessionAdmissionControlGroupAddRequest',
         serviceProviderId => $x0,
         name              => $x1,
         maxSession        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseSessionAdmissionControlGroupDeleteDeviceListRequest ($x0, $x1, @params) {
+method EnterpriseSessionAdmissionControlGroupDeleteDeviceListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseSessionAdmissionControlGroupDeleteDeviceListRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseSessionAdmissionControlGroupDeleteListRequest ($x0, @params) {
+method EnterpriseSessionAdmissionControlGroupDeleteListRequest ($x0, @generic_params) {
     return $self->send_command(
         'EnterpriseSessionAdmissionControlGroupDeleteListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -260,29 +291,32 @@ method EnterpriseSessionAdmissionControlGroupGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method EnterpriseSessionAdmissionControlGroupGetRequest ($x0, $x1) {
-    return $self->send_query( 'EnterpriseSessionAdmissionControlGroupGetRequest', serviceProviderId => $x0,
-        name => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method EnterpriseSessionAdmissionControlGroupModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'EnterpriseSessionAdmissionControlGroupModifyRequest',
+    return $self->send_query(
+        'EnterpriseSessionAdmissionControlGroupGetRequest',
         serviceProviderId => $x0,
-        name              => $x1,
-        @params
+        name              => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseVoiceVPNAddPolicyRequest ($x0, $x1, $x2, $x3, @params) {
+method EnterpriseSessionAdmissionControlGroupModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'EnterpriseSessionAdmissionControlGroupModifyRequest',
+        serviceProviderId => $x0,
+        name              => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method EnterpriseVoiceVPNAddPolicyRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'EnterpriseVoiceVPNAddPolicyRequest',
         serviceProviderId   => $x0,
         locationDialingCode => $x1,
         minExtensionLength  => $x2,
         maxExtensionLength  => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -302,8 +336,11 @@ method EnterpriseVoiceVPNGetDefaultRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method EnterpriseVoiceVPNGetPolicyRequest ($x0, $x1) {
-    return $self->send_query( 'EnterpriseVoiceVPNGetPolicyRequest', serviceProviderId => $x0,
-        locationDialingCode => $x1 );
+    return $self->send_query(
+        'EnterpriseVoiceVPNGetPolicyRequest',
+        serviceProviderId   => $x0,
+        locationDialingCode => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -312,60 +349,68 @@ method EnterpriseVoiceVPNGetRequest14sp3 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseVoiceVPNGetPolicyListRequest ($x0, @params) {
-    return $self->send_query( 'EnterpriseVoiceVPNGetPolicyListRequest', serviceProviderId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method EnterpriseVoiceVPNModifyPolicyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'EnterpriseVoiceVPNModifyPolicyRequest',
-        serviceProviderId   => $x0,
-        locationDialingCode => $x1,
-        @params
+method EnterpriseVoiceVPNGetPolicyListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'EnterpriseVoiceVPNGetPolicyListRequest',
+        serviceProviderId => $x0,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseVoiceVPNModifyRequest ($x0, @params) {
-    return $self->send_command( 'EnterpriseVoiceVPNModifyRequest', serviceProviderId => $x0, @params );
+method EnterpriseVoiceVPNModifyPolicyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'EnterpriseVoiceVPNModifyPolicyRequest',
+        serviceProviderId   => $x0,
+        locationDialingCode => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method EnterpriseVoiceVPNModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'EnterpriseVoiceVPNModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## Group
 ##
-method GroupAccessDeviceAddRequest14 ($x0, $x1, $x2, $x3, @params) {
+method GroupAccessDeviceAddRequest14 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceAddRequest14',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
         deviceType        => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceCustomTagAddRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupAccessDeviceCustomTagAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceCustomTagAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
         tagName           => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceCustomTagDeleteListRequest ($x0, $x1, $x2, @params) {
+method GroupAccessDeviceCustomTagDeleteListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceCustomTagDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -380,14 +425,14 @@ method GroupAccessDeviceCustomTagGetListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceCustomTagModifyRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupAccessDeviceCustomTagModifyRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceCustomTagModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
         tagName           => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -423,14 +468,14 @@ method GroupAccessDeviceFileGetRequest16sp1 ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceFileModifyRequest14sp8 ($x0, $x1, $x2, $x3, @params) {
+method GroupAccessDeviceFileModifyRequest14sp8 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceFileModifyRequest14sp8',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
         fileFormat        => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -465,8 +510,13 @@ method GroupAccessDeviceGetAvailableDetailListRequest14 ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceGetListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupAccessDeviceGetListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupAccessDeviceGetListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupAccessDeviceGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -480,36 +530,36 @@ method GroupAccessDeviceGetRequest16 ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceGetUserListRequest ($x0, $x1, $x2, @params) {
+method GroupAccessDeviceGetUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupAccessDeviceGetUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceModifyRequest14 ($x0, $x1, $x2, @params) {
+method GroupAccessDeviceModifyRequest14 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceModifyRequest14',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupAccessDeviceModifyUserRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupAccessDeviceModifyUserRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupAccessDeviceModifyUserRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
         linePort          => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -525,26 +575,31 @@ method GroupAccessDeviceResetRequest ($x0, $x1, $x2) {
 
 # ----------------------------------------------------------------------
 method GroupApplicationServerSetGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupApplicationServerSetGetRequest', groupId => $x0, serviceProviderId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupApplicationServerSetModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupApplicationServerSetModifyRequest', @params,
+    return $self->send_query(
+        'GroupApplicationServerSetGetRequest',
         groupId           => $x0,
         serviceProviderId => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupDialableCallerIDCriteriaAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
+method GroupApplicationServerSetModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupApplicationServerSetModifyRequest',
+        @generic_params,
+        groupId           => $x0,
+        serviceProviderId => $x1
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupDialableCallerIDCriteriaAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @generic_params) {
     return $self->send_command(
         'GroupDialableCallerIDCriteriaAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params,
+        @generic_params,
         matchLocalCategory         => $x3,
         matchNationalCategory      => $x4,
         matchInterlataCategory     => $x5,
@@ -577,43 +632,56 @@ method GroupDialableCallerIDCriteriaGetRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDialableCallerIDCriteriaModifyRequest ($x0, $x1, $x2, @params) {
+method GroupDialableCallerIDCriteriaModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupDialableCallerIDCriteriaModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupDialableCallerIDGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDialableCallerIDGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDialableCallerIDGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDialableCallerIDModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDialableCallerIDModifyRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupDialableCallerIDModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDialableCallerIDModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupAddRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         defaultDomain     => $x2,
         userLimit         => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupAdminAddRequest ($x0, $x1, $x2, @params) {
-    return $self->send_command( 'GroupAdminAddRequest', serviceProviderId => $x0, groupId => $x1, userId => $x2,
-        @params );
+method GroupAdminAddRequest ($x0, $x1, $x2, @generic_params) {
+    return $self->send_command(
+        'GroupAdminAddRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        userId            => $x2,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -623,7 +691,11 @@ method GroupAdminDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method GroupAdminGetListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupAdminGetListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupAdminGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -637,17 +709,25 @@ method GroupAdminGetPolicyRequest17sp3 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAdminModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupAdminModifyRequest', userId => $x0, @params );
+method GroupAdminModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupAdminModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupAdminModifyPolicyRequest ($x0, @params) {
-    return $self->send_command( 'GroupAdminModifyPolicyRequest', userId => $x0, @params );
+method GroupAdminModifyPolicyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupAdminModifyPolicyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
+method GroupBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @generic_params) {
     return $self->send_command(
         'GroupBroadWorksMobileManagerAddRequest',
         serviceProviderId     => $x0,
@@ -657,7 +737,7 @@ method GroupBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6
         isActive              => $x4,
         localToCarrier        => $x5,
         maxTxPerSecondEnabled => $x6,
-        @params,
+        @generic_params,
         tldnEnabled                  => $x7,
         genericNumberEnabled         => $x8,
         mobileStateCheckEnabled      => $x9,
@@ -667,7 +747,11 @@ method GroupBroadWorksMobileManagerAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6
 
 # ----------------------------------------------------------------------
 method GroupBroadWorksMobileManagerGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupBroadWorksMobileManagerGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupBroadWorksMobileManagerGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -681,27 +765,31 @@ method GroupBroadWorksMobileManagerGetDomainListRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method GroupBroadWorksMobileManagerDeleteRequest ($x0, $x1) {
-    return $self->send_command( 'GroupBroadWorksMobileManagerDeleteRequest', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupBroadWorksMobileManagerModifyRequest ($x0, $x1, @params) {
     return $self->send_command(
-        'GroupBroadWorksMobileManagerModifyRequest',
+        'GroupBroadWorksMobileManagerDeleteRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksMobileManagerActivationRequest ($x0, $x1, $x2, @params) {
+method GroupBroadWorksMobileManagerModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupBroadWorksMobileManagerModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupBroadWorksMobileManagerActivationRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupBroadWorksMobileManagerActivationRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         isActive          => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -769,38 +857,42 @@ method GroupBroadWorksMobileManagerDeleteHomeZoneListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksMobileManagerModifyHomeZoneRequest ($x0, $x1, $x2, @params) {
+method GroupBroadWorksMobileManagerModifyHomeZoneRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupBroadWorksMobileManagerModifyHomeZoneRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         homeZoneId        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupCallProcessingGetPolicyRequest17sp4 ($x0, $x1) {
-    return $self->send_query( 'GroupCallProcessingGetPolicyRequest17sp4', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupCallProcessingModifyPolicyRequest15sp2 ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupCallProcessingModifyPolicyRequest15sp2',
+    return $self->send_query(
+        'GroupCallProcessingGetPolicyRequest17sp4',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCommonPhoneListAddListRequest ($x0, $x1, $x2) {
+method GroupCallProcessingModifyPolicyRequest15sp2 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallProcessingModifyPolicyRequest15sp2',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupCommonPhoneListAddListRequest ($x0, $x1, $x2, $x3) {
     return $self->send_command(
         'GroupCommonPhoneListAddListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        entry             => $x2
+        entry             => [ entryName => $x2, phoneNumber => $x3 ]
     );
 }
 
@@ -815,38 +907,43 @@ method GroupCommonPhoneListDeleteListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCommonPhoneListGetListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupCommonPhoneListGetListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupCommonPhoneListGetListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupCommonPhoneListGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCommonPhoneListModifyRequest ($x0, $x1, $x2, @params) {
+method GroupCommonPhoneListModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCommonPhoneListModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         entryName         => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCommunicationBarringAuthorizationCodeAddListRequest ($x0, $x1, @params) {
+method GroupCommunicationBarringAuthorizationCodeAddListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCommunicationBarringAuthorizationCodeAddListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCommunicationBarringAuthorizationCodeDeleteListRequest ($x0, $x1, @params) {
+method GroupCommunicationBarringAuthorizationCodeDeleteListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCommunicationBarringAuthorizationCodeDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -861,16 +958,20 @@ method GroupCommunicationBarringAuthorizationCodeGetListRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method GroupCommunicationBarringGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCommunicationBarringGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCommunicationBarringGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCommunicationBarringModifyRequest ($x0, $x1, @params) {
+method GroupCommunicationBarringModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCommunicationBarringModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -895,13 +996,13 @@ method GroupCPEConfigRebuildDeviceConfigFileRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCPEConfigReorderDeviceLinePortsRequest ($x0, $x1, $x2, @params) {
+method GroupCPEConfigReorderDeviceLinePortsRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCPEConfigReorderDeviceLinePortsRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceName        => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -937,13 +1038,13 @@ method GroupCPEConfigSetConfigFileRequest ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCustomContactDirectoryAddRequest17 ($x0, $x1, $x2, @params) {
+method GroupCustomContactDirectoryAddRequest17 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCustomContactDirectoryAddRequest17',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -958,61 +1059,74 @@ method GroupCustomContactDirectoryDeleteRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCustomContactDirectoryGetAvailableUserListRequest17 ($x0, $x1, @params) {
+method GroupCustomContactDirectoryGetAvailableUserListRequest17 ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCustomContactDirectoryGetAvailableUserListRequest17',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupCustomContactDirectoryGetListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCustomContactDirectoryGetListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCustomContactDirectoryGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCustomContactDirectoryGetRequest17 ($x0, $x1, $x2, @params) {
+method GroupCustomContactDirectoryGetRequest17 ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupCustomContactDirectoryGetRequest17',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCustomContactDirectoryModifyRequest17 ($x0, $x1, $x2, @params) {
+method GroupCustomContactDirectoryModifyRequest17 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCustomContactDirectoryModifyRequest17',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupDeleteRequest ($x0, $x1) {
-    return $self->send_command( 'GroupDeleteRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_command(
+        'GroupDeleteRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDepartmentAddRequest ($x0, $x1, $x2, @params) {
+method GroupDepartmentAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupDepartmentAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         departmentName    => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupDepartmentAdminAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDepartmentAdminAddRequest', departmentKey => $x0, userId => $x1, @params );
+method GroupDepartmentAdminAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDepartmentAdminAddRequest',
+        departmentKey => $x0,
+        userId        => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1031,8 +1145,12 @@ method GroupDepartmentAdminGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDepartmentAdminModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupDepartmentAdminModifyRequest', userId => $x0, @params );
+method GroupDepartmentAdminModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupDepartmentAdminModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1066,48 +1184,48 @@ method GroupDepartmentGetListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDepartmentModifyRequest ($x0, $x1, $x2, @params) {
+method GroupDepartmentModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupDepartmentModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         departmentName    => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupDeviceTypeCustomTagAddRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupDeviceTypeCustomTagAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupDeviceTypeCustomTagAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceType        => $x2,
         tagName           => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupDeviceTypeCustomTagDeleteListRequest ($x0, $x1, $x2, @params) {
+method GroupDeviceTypeCustomTagDeleteListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupDeviceTypeCustomTagDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceType        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupDeviceTypeCustomTagModifyRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupDeviceTypeCustomTagModifyRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupDeviceTypeCustomTagModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceType        => $x2,
         tagName           => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -1122,14 +1240,14 @@ method GroupDeviceTypeCustomTagGetListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDeviceTypeFileModifyRequest14sp8 ($x0, $x1, $x2, $x3, @params) {
+method GroupDeviceTypeFileModifyRequest14sp8 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupDeviceTypeFileModifyRequest14sp8',
         serviceProviderId => $x0,
         groupId           => $x1,
         deviceType        => $x2,
         fileFormat        => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -1156,17 +1274,30 @@ method GroupDeviceTypeFileGetRequest16sp1 ($x0, $x1, $x2, $x3) {
 
 # ----------------------------------------------------------------------
 method GroupDialPlanPolicyGetRequest17 ($x0, $x1) {
-    return $self->send_query( 'GroupDialPlanPolicyGetRequest17', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDialPlanPolicyGetRequest17',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDialPlanPolicyModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDialPlanPolicyModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupDialPlanPolicyModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDialPlanPolicyModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDialPlanPolicyGetAccessCodeListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDialPlanPolicyGetAccessCodeListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDialPlanPolicyGetAccessCodeListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1180,7 +1311,7 @@ method GroupDialPlanPolicyGetAccessCodeRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, $x4, $x5, @params) {
+method GroupDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, $x4, $x5, @generic_params) {
     return $self->send_command(
         'GroupDialPlanPolicyAddAccessCodeRequest',
         serviceProviderId                           => $x0,
@@ -1189,7 +1320,7 @@ method GroupDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, $x4, $x5, @p
         includeCodeForNetworkTranslationsAndRouting => $x3,
         includeCodeForScreeningServices             => $x4,
         enableSecondaryDialTone                     => $x5,
-        @params
+        @generic_params
     );
 }
 
@@ -1204,103 +1335,168 @@ method GroupDialPlanPolicyDeleteAccessCodeRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDialPlanPolicyModifyAccessCodeRequest ($x0, $x1, $x2, @params) {
+method GroupDialPlanPolicyModifyAccessCodeRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupDialPlanPolicyModifyAccessCodeRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         accessCode        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupDigitCollectionGetRequest13mp4 ($x0, $x1) {
-    return $self->send_query( 'GroupDigitCollectionGetRequest13mp4', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDigitCollectionGetRequest13mp4',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDigitCollectionModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDigitCollectionModifyRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupDigitCollectionModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDigitCollectionModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDnActivateListRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDnActivateListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupDnActivateListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDnActivateListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDnAssignListRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDnAssignListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupDnAssignListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDnAssignListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDnDeactivateListRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDnDeactivateListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupDnDeactivateListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDnDeactivateListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDnGetActivationListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDnGetActivationListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDnGetActivationListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDnGetAssignmentListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupDnGetAssignmentListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupDnGetAssignmentListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupDnGetAssignmentListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDnGetDetailedAvailableListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDnGetDetailedAvailableListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDnGetDetailedAvailableListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDnGetAvailableListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDnGetAvailableListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDnGetAvailableListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDnGetListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDnGetListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDnGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDnGetSummaryListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDnGetSummaryListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDnGetSummaryListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDnListAssignDepartmentRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDnListAssignDepartmentRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupDnListAssignDepartmentRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDnListAssignDepartmentRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDnUnassignListRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupDnUnassignListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupDnUnassignListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupDnUnassignListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupDomainAssignListRequest ($x0, $x1, $x2) {
-    return $self->send_command( 'GroupDomainAssignListRequest', serviceProviderId => $x0, groupId => $x1,
-        domain => $x2 );
+    return $self->send_command(
+        'GroupDomainAssignListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        domain            => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupDomainGetAssignedUserListRequest ($x0, $x1, $x2, @params) {
+method GroupDomainGetAssignedUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupDomainGetAssignedUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         domain            => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupDomainGetAssignedListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupDomainGetAssignedListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupDomainGetAssignedListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1314,50 +1510,71 @@ method GroupDomainUnassignListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupEndpointGetListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupEndpointGetListRequest', serviceProviderId => $x0, groupId => $x1, @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupExistingUsersAssignUserServiceListRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupExistingUsersAssignUserServiceListRequest',
+method GroupEndpointGetListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupEndpointGetListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupExistingUsersUnassignUserServiceListRequest ($x0, $x1, @params) {
+method GroupExistingUsersAssignUserServiceListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupExistingUsersAssignUserServiceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupExistingUsersUnassignUserServiceListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupExistingUsersUnassignUserServiceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupExtensionLengthGetRequest17 ($x0, $x1) {
-    return $self->send_query( 'GroupExtensionLengthGetRequest17', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupExtensionLengthGetRequest17',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupExtensionLengthModifyRequest17 ($x0, $x1, @params) {
-    return $self->send_command( 'GroupExtensionLengthModifyRequest17', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupExtensionLengthModifyRequest17 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupExtensionLengthModifyRequest17',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupFeatureAccessCodeGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupFeatureAccessCodeGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupFeatureAccessCodeGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupFeatureAccessCodeModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupFeatureAccessCodeModifyRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupFeatureAccessCodeModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupFeatureAccessCodeModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1387,14 +1604,14 @@ method GroupFileRepositoryDeviceUserDeleteRequest ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method GroupFileRepositoryDeviceUserModifyRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupFileRepositoryDeviceUserModifyRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupFileRepositoryDeviceUserModifyRequest',
         serviceProviderId  => $x0,
         groupId            => $x1,
         fileRepositoryName => $x2,
         userName           => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -1414,42 +1631,55 @@ method GroupGetDefaultRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupGetListInServiceProviderRequest ($x0, @params) {
-    return $self->send_query( 'GroupGetListInServiceProviderRequest', serviceProviderId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupGetListInSystemRequest (@params) {
-    return $self->send_query( 'GroupGetListInSystemRequest', @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupGetRequest14sp7 ($x0, $x1) {
-    return $self->send_query( 'GroupGetRequest14sp7', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupGetUserServiceAssignedUserListRequest ($x0, $x1, @params) {
+method GroupGetListInServiceProviderRequest ($x0, @generic_params) {
     return $self->send_query(
-        'GroupGetUserServiceAssignedUserListRequest',
+        'GroupGetListInServiceProviderRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupGetListInSystemRequest (@generic_params) {
+    return $self->send_query( 'GroupGetListInSystemRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupNetworkClassOfServiceAssignListRequest ($x0, $x1, @params) {
+method GroupGetRequest14sp7 ($x0, $x1) {
+    return $self->send_query(
+        'GroupGetRequest14sp7',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupGetUserServiceAssignedUserListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupGetUserServiceAssignedUserListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupNetworkClassOfServiceAssignListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupNetworkClassOfServiceAssignListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -1473,13 +1703,13 @@ method GroupNetworkClassOfServiceGetAssignedListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupNetworkClassOfServiceGetAssignedUserListRequest ($x0, $x1, $x2, @params) {
+method GroupNetworkClassOfServiceGetAssignedUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupNetworkClassOfServiceGetAssignedUserListRequest',
         serviceProviderId     => $x0,
         groupId               => $x1,
         networkClassOfService => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -1494,135 +1724,178 @@ method GroupNetworkClassOfServiceModifyDefaultRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupNetworkClassOfServiceUnassignListRequest ($x0, $x1, @params) {
+method GroupNetworkClassOfServiceUnassignListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupNetworkClassOfServiceUnassignListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupNewUserTemplateAssignUserServiceListRequest ($x0, $x1, @params) {
+method GroupNewUserTemplateAssignUserServiceListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupNewUserTemplateAssignUserServiceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupNewUserTemplateUnassignUserServiceListRequest ($x0, $x1, @params) {
+method GroupNewUserTemplateUnassignUserServiceListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupNewUserTemplateUnassignUserServiceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupOfficeZoneAssignListRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupOfficeZoneAssignListRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupOfficeZoneAssignListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupOfficeZoneAssignListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupOfficeZoneGetAssignedListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupOfficeZoneGetAssignedListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupOfficeZoneGetAssignedListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupOfficeZoneGetAssignedUserListRequest ($x0, $x1, $x2, @params) {
+method GroupOfficeZoneGetAssignedUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupOfficeZoneGetAssignedUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         officeZoneName    => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupOfficeZoneUnassignListRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupOfficeZoneUnassignListRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupOfficeZoneUnassignListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupOfficeZoneUnassignListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupPasswordRulesGetRequest16 ($x0, $x1) {
-    return $self->send_query( 'GroupPasswordRulesGetRequest16', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupPasswordRulesGetRequest16',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupPasswordRulesModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupPasswordRulesModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupPasswordRulesModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupPasswordRulesModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupPhoneDirectoryGetListRequest17 ($x0, $x1, $x2, @params) {
+method GroupPhoneDirectoryGetListRequest17 ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupPhoneDirectoryGetListRequest17',
         serviceProviderId       => $x0,
         groupId                 => $x1,
         isExtendedInfoRequested => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupPolicyGetRequest17 ($x0, $x1) {
-    return $self->send_query( 'GroupPolicyGetRequest17', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupPolicyGetRequest17',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupPolicyModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupPolicyModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupPolicyModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupPolicyModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupServiceGetAuthorizationListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupServiceGetAuthorizationListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupServiceGetAuthorizationListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupServiceGetAuthorizedListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupServiceGetAuthorizedListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupServiceGetAuthorizedListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupServiceModifyAuthorizationListRequest ($x0, $x1, @params) {
+method GroupServiceModifyAuthorizationListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupServiceModifyAuthorizationListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupPortalPasscodeRulesGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupPortalPasscodeRulesGetRequest', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupPortalPasscodeRulesModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupPortalPasscodeRulesModifyRequest',
+    return $self->send_query(
+        'GroupPortalPasscodeRulesGetRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointExternalSystemAssignListRequest ($x0, $x1, @params) {
+method GroupPortalPasscodeRulesModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupPortalPasscodeRulesModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupRoutePointExternalSystemAssignListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupRoutePointExternalSystemAssignListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -1636,46 +1909,55 @@ method GroupRoutePointExternalSystemGetAssignedListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointExternalSystemGetAssignedRoutePointListRequest ($x0, $x1, $x2, @params) {
+method GroupRoutePointExternalSystemGetAssignedRoutePointListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupRoutePointExternalSystemGetAssignedRoutePointListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         externalSystem    => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointExternalSystemUnassignListRequest ($x0, $x1, @params) {
+method GroupRoutePointExternalSystemUnassignListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupRoutePointExternalSystemUnassignListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupRoutingProfileGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupRoutingProfileGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupRoutingProfileGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutingProfileModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupRoutingProfileModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupRoutingProfileModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupRoutingProfileModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleAddEventRequest ($x0, $x1, $x2, $x3, $x4, @params) {
+method GroupScheduleAddEventRequest ($x0, $x1, $x2, $x3, $x4, $x5, @generic_params) {
     return $self->send_command(
         'GroupScheduleAddEventRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2,
-        eventName         => $x3,
-        startDate         => $x4,
-        @params
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ],
+        eventName         => $x4,
+        startDate         => $x5,
+        @generic_params
     );
 }
 
@@ -1691,72 +1973,77 @@ method GroupScheduleAddRequest ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleDeleteEventListRequest ($x0, $x1, $x2, $x3) {
+method GroupScheduleDeleteEventListRequest ($x0, $x1, $x2, $x3, $x4) {
     return $self->send_command(
         'GroupScheduleDeleteEventListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2,
-        eventName         => $x3
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ],
+        eventName         => $x4
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleDeleteListRequest ($x0, $x1, $x2) {
+method GroupScheduleDeleteListRequest ($x0, $x1, $x2, $x3) {
     return $self->send_command(
         'GroupScheduleDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleGetEventListRequest ($x0, $x1, $x2) {
+method GroupScheduleGetEventListRequest ($x0, $x1, $x2, $x3) {
     return $self->send_query(
         'GroupScheduleGetEventListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleGetEventRequest ($x0, $x1, $x2, $x3) {
+method GroupScheduleGetEventRequest ($x0, $x1, $x2, $x3, $x4) {
     return $self->send_query(
         'GroupScheduleGetEventRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2,
-        eventName         => $x3
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ],
+        eventName         => $x4
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleGetListRequest17sp1 ($x0, $x1, @params) {
-    return $self->send_query( 'GroupScheduleGetListRequest17sp1', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupScheduleGetListRequest17sp1 ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupScheduleGetListRequest17sp1',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleModifyEventRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupScheduleModifyEventRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'GroupScheduleModifyEventRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2,
-        eventName         => $x3,
-        @params
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ],
+        eventName         => $x4,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupScheduleModifyRequest ($x0, $x1, $x2, @params) {
+method GroupScheduleModifyRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupScheduleModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        scheduleKey       => $x2,
-        @params
+        scheduleKey       => [ scheduleName => $x2, scheduleType => $x3 ],
+        @generic_params
     );
 }
 
@@ -1791,71 +2078,75 @@ method GroupServiceUnassignListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupSessionAdmissionControlGetAvailableDeviceListRequest ($x0, $x1, @params) {
+method GroupSessionAdmissionControlGetAvailableDeviceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupSessionAdmissionControlGetAvailableDeviceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupSessionAdmissionControlGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupSessionAdmissionControlGetRequest', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupSessionAdmissionControlModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupSessionAdmissionControlModifyRequest',
+    return $self->send_query(
+        'GroupSessionAdmissionControlGetRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupSessionAdmissionControlGroupAddDeviceListRequest ($x0, $x1, $x2, @params) {
+method GroupSessionAdmissionControlModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupSessionAdmissionControlModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupSessionAdmissionControlGroupAddDeviceListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupSessionAdmissionControlGroupAddDeviceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupSessionAdmissionControlGroupAddRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupSessionAdmissionControlGroupAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupSessionAdmissionControlGroupAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
         maxSession        => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupSessionAdmissionControlGroupDeleteDeviceListRequest ($x0, $x1, $x2, @params) {
+method GroupSessionAdmissionControlGroupDeleteDeviceListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupSessionAdmissionControlGroupDeleteDeviceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupSessionAdmissionControlGroupDeleteListRequest ($x0, $x1, @params) {
+method GroupSessionAdmissionControlGroupDeleteListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupSessionAdmissionControlGroupDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -1879,25 +2170,32 @@ method GroupSessionAdmissionControlGroupGetRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupSessionAdmissionControlGroupModifyRequest ($x0, $x1, $x2, @params) {
+method GroupSessionAdmissionControlGroupModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupSessionAdmissionControlGroupModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupShInterfaceGetUserListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupShInterfaceGetUserListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupShInterfaceGetUserListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupTrunkGroupGetAvailableDetailListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupTrunkGroupGetAvailableDetailListRequest', serviceProviderId => $x0,
-        groupId => $x1 );
+    return $self->send_query(
+        'GroupTrunkGroupGetAvailableDetailListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1909,60 +2207,89 @@ method AuthenticationRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method AuthenticationVerifyRequest14sp8 (@params) {
-    return $self->send_query( 'AuthenticationVerifyRequest14sp8', @params );
+method AuthenticationVerifyRequest14sp8 (@generic_params) {
+    return $self->send_query( 'AuthenticationVerifyRequest14sp8', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method AvailabilityTestRequest () {
-    return $self->send_command('AvailabilityTestRequest');
+    return $self->send_command(
+        'AvailabilityTestRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method DeviceManagementFileAuthLocationGetRequest17 ($x0, $x1, $x2, @params) {
+method DeviceManagementFileAuthLocationGetRequest17 ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'DeviceManagementFileAuthLocationGetRequest17',
         deviceAccessProtocol => $x0,
         deviceAccessMethod   => $x1,
         deviceAccessURI      => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method DeviceManagementPutFileRequest ($x0, $x1) {
-    return $self->send_command( 'DeviceManagementPutFileRequest', deviceAccessURI => $x0, ipAddress => $x1 );
+    return $self->send_command(
+        'DeviceManagementPutFileRequest',
+        deviceAccessURI => $x0,
+        ipAddress       => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ExternalAuthenticationAuthorizeTokenRequest ($x0, $x1, @params) {
-    return $self->send_command( 'ExternalAuthenticationAuthorizeTokenRequest', userId => $x0, @params,
-        loginToken => $x1 );
+method ExternalAuthenticationAuthorizeTokenRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'ExternalAuthenticationAuthorizeTokenRequest',
+        userId => $x0,
+        @generic_params, loginToken => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method LoginRequest14sp4 ($x0, @params) {
-    return $self->send_query( 'LoginRequest14sp4', userId => $x0, @params );
+method LoginRequest14sp4 ($x0, @generic_params) {
+    return $self->send_query(
+        'LoginRequest14sp4',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method LogoutRequest ($x0, @params) {
-    return $self->send_command( 'LogoutRequest', userId => $x0, @params );
+method LogoutRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'LogoutRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method PasswordModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'PasswordModifyRequest', userId => $x0, @params, newPassword => $x1 );
+method PasswordModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'PasswordModifyRequest',
+        userId => $x0,
+        @generic_params, newPassword => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method PrimaryInfoGetRequest ($x0, $x1) {
-    return $self->send_query( 'PrimaryInfoGetRequest', isPrivate => $x0, isAddressInfoRequested => $x1 );
+    return $self->send_query(
+        'PrimaryInfoGetRequest',
+        isPrivate              => $x0,
+        isAddressInfoRequested => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method PublicClusterGetFullyQualifiedDomainNameRequest () {
-    return $self->send_query('PublicClusterGetFullyQualifiedDomainNameRequest');
+    return $self->send_query(
+        'PublicClusterGetFullyQualifiedDomainNameRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1971,18 +2298,25 @@ method TutorialFlagGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method TutorialFlagModifyRequest ($x0, @params) {
-    return $self->send_command( 'TutorialFlagModifyRequest', userId => $x0, @params );
+method TutorialFlagModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'TutorialFlagModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserGetLoginInfoRequest (@params) {
-    return $self->send_query( 'UserGetLoginInfoRequest', @params );
+method UserGetLoginInfoRequest (@generic_params) {
+    return $self->send_query( 'UserGetLoginInfoRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method VerifySessionIsValidRequest () {
-    return $self->send_command('VerifySessionIsValidRequest');
+    return $self->send_command(
+        'VerifySessionIsValidRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -1992,34 +2326,34 @@ method VerifySessionIsValidRequest () {
 ##
 ## ServiceProvider
 ##
-method ServiceProviderAccessDeviceAddRequest14 ($x0, $x1, $x2, @params) {
+method ServiceProviderAccessDeviceAddRequest14 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceAddRequest14',
         serviceProviderId => $x0,
         deviceName        => $x1,
         deviceType        => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceCustomTagAddRequest ($x0, $x1, $x2, @params) {
+method ServiceProviderAccessDeviceCustomTagAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceCustomTagAddRequest',
         serviceProviderId => $x0,
         deviceName        => $x1,
         tagName           => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceCustomTagDeleteListRequest ($x0, $x1, @params) {
+method ServiceProviderAccessDeviceCustomTagDeleteListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceCustomTagDeleteListRequest',
         serviceProviderId => $x0,
         deviceName        => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2033,30 +2367,33 @@ method ServiceProviderAccessDeviceCustomTagGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceCustomTagModifyRequest ($x0, $x1, $x2, @params) {
+method ServiceProviderAccessDeviceCustomTagModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceCustomTagModifyRequest',
         serviceProviderId => $x0,
         deviceName        => $x1,
         tagName           => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method ServiceProviderAccessDeviceDeleteRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderAccessDeviceDeleteRequest', serviceProviderId => $x0,
-        deviceName => $x1 );
+    return $self->send_command(
+        'ServiceProviderAccessDeviceDeleteRequest',
+        serviceProviderId => $x0,
+        deviceName        => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceFileModifyRequest14sp8 ($x0, $x1, $x2, @params) {
+method ServiceProviderAccessDeviceFileModifyRequest14sp8 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceFileModifyRequest14sp8',
         serviceProviderId => $x0,
         deviceName        => $x1,
         fileFormat        => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -2080,64 +2417,75 @@ method ServiceProviderAccessDeviceFileGetRequest16sp1 ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceGetListRequest ($x0, @params) {
-    return $self->send_query( 'ServiceProviderAccessDeviceGetListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderAccessDeviceGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'ServiceProviderAccessDeviceGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method ServiceProviderAccessDeviceGetRequest16 ($x0, $x1) {
-    return $self->send_query( 'ServiceProviderAccessDeviceGetRequest16', serviceProviderId => $x0, deviceName => $x1 );
+    return $self->send_query(
+        'ServiceProviderAccessDeviceGetRequest16',
+        serviceProviderId => $x0,
+        deviceName        => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceGetUserListRequest ($x0, $x1, @params) {
+method ServiceProviderAccessDeviceGetUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderAccessDeviceGetUserListRequest',
         serviceProviderId => $x0,
         deviceName        => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceModifyRequest14 ($x0, $x1, @params) {
+method ServiceProviderAccessDeviceModifyRequest14 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceModifyRequest14',
         serviceProviderId => $x0,
         deviceName        => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAccessDeviceModifyUserRequest ($x0, $x1, $x2, @params) {
+method ServiceProviderAccessDeviceModifyUserRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderAccessDeviceModifyUserRequest',
         serviceProviderId => $x0,
         deviceName        => $x1,
         linePort          => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method ServiceProviderAccessDeviceResetRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderAccessDeviceResetRequest', serviceProviderId => $x0,
-        deviceName => $x1 );
+    return $self->send_command(
+        'ServiceProviderAccessDeviceResetRequest',
+        serviceProviderId => $x0,
+        deviceName        => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAddRequest13mp2 (@params) {
-    return $self->send_command( 'ServiceProviderAddRequest13mp2', @params );
+method ServiceProviderAddRequest13mp2 (@generic_params) {
+    return $self->send_command( 'ServiceProviderAddRequest13mp2', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAdminAddRequest14 ($x0, $x1, $x2, @params) {
+method ServiceProviderAdminAddRequest14 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderAdminAddRequest14',
         serviceProviderId => $x0,
         userId            => $x1,
-        @params, administratorType => $x2
+        @generic_params, administratorType => $x2
     );
 }
 
@@ -2162,13 +2510,21 @@ method ServiceProviderAdminGetRequest14 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAdminModifyPolicyRequest14 ($x0, @params) {
-    return $self->send_command( 'ServiceProviderAdminModifyPolicyRequest14', userId => $x0, @params );
+method ServiceProviderAdminModifyPolicyRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderAdminModifyPolicyRequest14',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAdminModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderAdminModifyRequest', userId => $x0, @params );
+method ServiceProviderAdminModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderAdminModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2177,8 +2533,12 @@ method ServiceProviderAnswerConfirmationGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderAnswerConfirmationModifyRequest16 ($x0, @params) {
-    return $self->send_command( 'ServiceProviderAnswerConfirmationModifyRequest16', serviceProviderId => $x0, @params );
+method ServiceProviderAnswerConfirmationModifyRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderAnswerConfirmationModifyRequest16',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2187,17 +2547,20 @@ method ServiceProviderCallProcessingGetPolicyRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCallProcessingModifyPolicyRequest15 ($x0, @params) {
-    return $self->send_command( 'ServiceProviderCallProcessingModifyPolicyRequest15', serviceProviderId => $x0,
-        @params );
+method ServiceProviderCallProcessingModifyPolicyRequest15 ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderCallProcessingModifyPolicyRequest15',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringCriteriaAssignListRequest ($x0, @params) {
+method ServiceProviderCommunicationBarringCriteriaAssignListRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringCriteriaAssignListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -2208,21 +2571,21 @@ method ServiceProviderCommunicationBarringCriteriaGetAssignedListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringCriteriaUnassignListRequest ($x0, @params) {
+method ServiceProviderCommunicationBarringCriteriaUnassignListRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringCriteriaUnassignListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringDigitPatternCriteriaAddRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringDigitPatternCriteriaAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringDigitPatternCriteriaAddRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2242,12 +2605,12 @@ method ServiceProviderCommunicationBarringDigitPatternCriteriaGetListRequest ($x
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringDigitPatternCriteriaGetPatternListRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringDigitPatternCriteriaGetPatternListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderCommunicationBarringDigitPatternCriteriaGetPatternListRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2261,42 +2624,42 @@ method ServiceProviderCommunicationBarringDigitPatternCriteriaGetRequest ($x0, $
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringDigitPatternCriteriaModifyRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringDigitPatternCriteriaModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringDigitPatternCriteriaModifyRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringProfileAddRequest17sp3 ($x0, $x1, $x2, @params) {
+method ServiceProviderCommunicationBarringProfileAddRequest17sp3 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringProfileAddRequest17sp3',
         serviceProviderId => $x0,
         name              => $x1,
-        @params, becomeDefault => $x2
+        @generic_params, becomeDefault => $x2
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringProfileDeleteRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringProfileDeleteRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringProfileDeleteRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringProfileGetAssignedGroupListRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringProfileGetAssignedGroupListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderCommunicationBarringProfileGetAssignedGroupListRequest',
         serviceProviderId => $x0,
         profile           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2342,12 +2705,12 @@ method ServiceProviderCommunicationBarringProfileModifyDefaultRequest ($x0, $x1)
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCommunicationBarringProfileModifyRequest ($x0, $x1, @params) {
+method ServiceProviderCommunicationBarringProfileModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderCommunicationBarringProfileModifyRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2370,12 +2733,12 @@ method ServiceProviderCPEConfigResetDeviceRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderCPEConfigReorderDeviceLinePortsRequest ($x0, $x1, @params) {
+method ServiceProviderCPEConfigReorderDeviceLinePortsRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderCPEConfigReorderDeviceLinePortsRequest',
         serviceProviderId => $x0,
         deviceName        => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2385,12 +2748,12 @@ method ServiceProviderDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDialableCallerIDCriteriaAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @params) {
+method ServiceProviderDialableCallerIDCriteriaAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @generic_params) {
     return $self->send_command(
         'ServiceProviderDialableCallerIDCriteriaAddRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params,
+        @generic_params,
         matchLocalCategory         => $x2,
         matchNationalCategory      => $x3,
         matchInterlataCategory     => $x4,
@@ -2413,17 +2776,20 @@ method ServiceProviderDialableCallerIDCriteriaDeleteRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderDialableCallerIDCriteriaGetRequest ($x0, $x1) {
-    return $self->send_query( 'ServiceProviderDialableCallerIDCriteriaGetRequest', serviceProviderId => $x0,
-        name => $x1 );
+    return $self->send_query(
+        'ServiceProviderDialableCallerIDCriteriaGetRequest',
+        serviceProviderId => $x0,
+        name              => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDialableCallerIDCriteriaModifyRequest ($x0, $x1, @params) {
+method ServiceProviderDialableCallerIDCriteriaModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderDialableCallerIDCriteriaModifyRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2433,8 +2799,12 @@ method ServiceProviderDialableCallerIDGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDialableCallerIDModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderDialableCallerIDModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderDialableCallerIDModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderDialableCallerIDModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2443,8 +2813,12 @@ method ServiceProviderDialPlanPolicyGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDialPlanPolicyModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderDialPlanPolicyModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderDialPlanPolicyModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderDialPlanPolicyModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2462,7 +2836,7 @@ method ServiceProviderDialPlanPolicyGetAccessCodeRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, $x4, @params) {
+method ServiceProviderDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'ServiceProviderDialPlanPolicyAddAccessCodeRequest',
         serviceProviderId                           => $x0,
@@ -2470,7 +2844,7 @@ method ServiceProviderDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, $x
         includeCodeForNetworkTranslationsAndRouting => $x2,
         includeCodeForScreeningServices             => $x3,
         enableSecondaryDialTone                     => $x4,
-        @params
+        @generic_params
     );
 }
 
@@ -2484,12 +2858,12 @@ method ServiceProviderDialPlanPolicyDeleteAccessCodeRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDialPlanPolicyModifyAccessCodeRequest ($x0, $x1, @params) {
+method ServiceProviderDialPlanPolicyModifyAccessCodeRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderDialPlanPolicyModifyAccessCodeRequest',
         serviceProviderId => $x0,
         accessCode        => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2499,18 +2873,30 @@ method ServiceProviderDigitCollectionGetRequest13mp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDigitCollectionModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderDigitCollectionModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderDigitCollectionModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderDigitCollectionModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDnAddListRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderDnAddListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderDnAddListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderDnAddListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDnDeleteListRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderDnDeleteListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderDnDeleteListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderDnDeleteListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2525,16 +2911,20 @@ method ServiceProviderDnGetSummaryListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderDomainAssignListRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderDomainAssignListRequest', serviceProviderId => $x0, domain => $x1 );
+    return $self->send_command(
+        'ServiceProviderDomainAssignListRequest',
+        serviceProviderId => $x0,
+        domain            => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderDomainGetAssignedGroupListRequest ($x0, $x1, @params) {
+method ServiceProviderDomainGetAssignedGroupListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderDomainGetAssignedGroupListRequest',
         serviceProviderId => $x0,
         domain            => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2545,12 +2935,20 @@ method ServiceProviderDomainGetAssignedListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderDomainUnassignListRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderDomainUnassignListRequest', serviceProviderId => $x0, domain => $x1 );
+    return $self->send_command(
+        'ServiceProviderDomainUnassignListRequest',
+        serviceProviderId => $x0,
+        domain            => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderEndpointGetListRequest ($x0, @params) {
-    return $self->send_query( 'ServiceProviderEndpointGetListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderEndpointGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'ServiceProviderEndpointGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2559,9 +2957,12 @@ method ServiceProviderFeatureAccessCodeGetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderFeatureAccessCodeModifyListRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderFeatureAccessCodeModifyListRequest', serviceProviderId => $x0,
-        @params );
+method ServiceProviderFeatureAccessCodeModifyListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderFeatureAccessCodeModifyListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2589,13 +2990,13 @@ method ServiceProviderFileRepositoryDeviceUserDeleteRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderFileRepositoryDeviceUserModifyRequest ($x0, $x1, $x2, @params) {
+method ServiceProviderFileRepositoryDeviceUserModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderFileRepositoryDeviceUserModifyRequest',
         serviceProviderId  => $x0,
         fileRepositoryName => $x1,
         userName           => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -2610,12 +3011,15 @@ method ServiceProviderFileRepositoryDeviceUserGetListRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderGetDefaultRequest () {
-    return $self->send_query('ServiceProviderGetDefaultRequest');
+    return $self->send_query(
+        'ServiceProviderGetDefaultRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderGetListRequest (@params) {
-    return $self->send_query( 'ServiceProviderGetListRequest', @params );
+method ServiceProviderGetListRequest (@generic_params) {
+    return $self->send_query( 'ServiceProviderGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -2624,8 +3028,12 @@ method ServiceProviderGetRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2638,20 +3046,20 @@ method ServiceProviderNetworkClassOfServiceModifyDefaultRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderNetworkClassOfServiceAssignListRequest ($x0, @params) {
+method ServiceProviderNetworkClassOfServiceAssignListRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderNetworkClassOfServiceAssignListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderNetworkClassOfServiceAssignListToAllGroupsRequest ($x0, @params) {
+method ServiceProviderNetworkClassOfServiceAssignListToAllGroupsRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderNetworkClassOfServiceAssignListToAllGroupsRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -2670,27 +3078,31 @@ method ServiceProviderNetworkClassOfServiceGetAssignedListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderNetworkClassOfServiceGetAssignedGroupListRequest ($x0, $x1, @params) {
+method ServiceProviderNetworkClassOfServiceGetAssignedGroupListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderNetworkClassOfServiceGetAssignedGroupListRequest',
         serviceProviderId     => $x0,
         networkClassOfService => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderNetworkClassOfServiceUnassignListRequest ($x0, @params) {
+method ServiceProviderNetworkClassOfServiceUnassignListRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderNetworkClassOfServiceUnassignListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderOfficeZoneAssignListRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderOfficeZoneAssignListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderOfficeZoneAssignListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderOfficeZoneAssignListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2699,18 +3111,22 @@ method ServiceProviderOfficeZoneGetAssignedListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderOfficeZoneGetAssignedGroupListRequest ($x0, $x1, @params) {
+method ServiceProviderOfficeZoneGetAssignedGroupListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderOfficeZoneGetAssignedGroupListRequest',
         serviceProviderId => $x0,
         officeZoneName    => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderOfficeZoneUnassignListRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderOfficeZoneUnassignListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderOfficeZoneUnassignListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderOfficeZoneUnassignListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2719,8 +3135,12 @@ method ServiceProviderPortalPasscodeRulesGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderPortalPasscodeRulesModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderPortalPasscodeRulesModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderPortalPasscodeRulesModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderPortalPasscodeRulesModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -2729,26 +3149,30 @@ method ServiceProviderPasswordRulesGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderPasswordRulesModifyRequest14sp3 ($x0, @params) {
-    return $self->send_command( 'ServiceProviderPasswordRulesModifyRequest14sp3', serviceProviderId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method ServiceProviderRoutePointExternalSystemAssignListRequest ($x0, @params) {
+method ServiceProviderPasswordRulesModifyRequest14sp3 ($x0, @generic_params) {
     return $self->send_command(
-        'ServiceProviderRoutePointExternalSystemAssignListRequest',
+        'ServiceProviderPasswordRulesModifyRequest14sp3',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderRoutePointExternalSystemGetAssignedGroupListRequest ($x0, $x1, @params) {
+method ServiceProviderRoutePointExternalSystemAssignListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderRoutePointExternalSystemAssignListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method ServiceProviderRoutePointExternalSystemGetAssignedGroupListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'ServiceProviderRoutePointExternalSystemGetAssignedGroupListRequest',
         serviceProviderId => $x0,
         externalSystem    => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2759,11 +3183,11 @@ method ServiceProviderRoutePointExternalSystemGetAssignedListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderRoutePointExternalSystemUnassignListRequest ($x0, @params) {
+method ServiceProviderRoutePointExternalSystemUnassignListRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderRoutePointExternalSystemUnassignListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -2773,19 +3197,23 @@ method ServiceProviderRoutingProfileGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderRoutingProfileModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderRoutingProfileModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderRoutingProfileModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderRoutingProfileModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleAddEventRequest ($x0, $x1, $x2, $x3, @params) {
+method ServiceProviderScheduleAddEventRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'ServiceProviderScheduleAddEventRequest',
         serviceProviderId => $x0,
-        scheduleKey       => $x1,
-        eventName         => $x2,
-        startDate         => $x3,
-        @params
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName         => $x3,
+        startDate         => $x4,
+        @generic_params
     );
 }
 
@@ -2800,60 +3228,70 @@ method ServiceProviderScheduleAddRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleDeleteEventListRequest ($x0, $x1, $x2) {
+method ServiceProviderScheduleDeleteEventListRequest ($x0, $x1, $x2, $x3) {
     return $self->send_command(
         'ServiceProviderScheduleDeleteEventListRequest',
         serviceProviderId => $x0,
-        scheduleKey       => $x1,
-        eventName         => $x2
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName         => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleDeleteListRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderScheduleDeleteListRequest', serviceProviderId => $x0,
-        scheduleKey => $x1 );
+method ServiceProviderScheduleDeleteListRequest ($x0, $x1, $x2) {
+    return $self->send_command(
+        'ServiceProviderScheduleDeleteListRequest',
+        serviceProviderId => $x0,
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleGetEventListRequest ($x0, $x1) {
-    return $self->send_query( 'ServiceProviderScheduleGetEventListRequest', serviceProviderId => $x0,
-        scheduleKey => $x1 );
+method ServiceProviderScheduleGetEventListRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'ServiceProviderScheduleGetEventListRequest',
+        serviceProviderId => $x0,
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleGetEventRequest ($x0, $x1, $x2) {
+method ServiceProviderScheduleGetEventRequest ($x0, $x1, $x2, $x3) {
     return $self->send_query(
         'ServiceProviderScheduleGetEventRequest',
         serviceProviderId => $x0,
-        scheduleKey       => $x1,
-        eventName         => $x2
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName         => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleGetListRequest ($x0, @params) {
-    return $self->send_query( 'ServiceProviderScheduleGetListRequest', serviceProviderId => $x0, @params );
+method ServiceProviderScheduleGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'ServiceProviderScheduleGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleModifyEventRequest ($x0, $x1, $x2, @params) {
+method ServiceProviderScheduleModifyEventRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'ServiceProviderScheduleModifyEventRequest',
         serviceProviderId => $x0,
-        scheduleKey       => $x1,
-        eventName         => $x2,
-        @params
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName         => $x3,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderScheduleModifyRequest ($x0, $x1, @params) {
+method ServiceProviderScheduleModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'ServiceProviderScheduleModifyRequest',
         serviceProviderId => $x0,
-        scheduleKey       => $x1,
-        @params
+        scheduleKey       => [ scheduleName => $x1, scheduleType => $x2 ],
+        @generic_params
     );
 }
 
@@ -2868,21 +3306,21 @@ method ServiceProviderServiceGetUserAssignableListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServiceModifyAuthorizationListRequest ($x0, @params) {
+method ServiceProviderServiceModifyAuthorizationListRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderServiceModifyAuthorizationListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackAddRequest ($x0, $x1, @params) {
+method ServiceProviderServicePackAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackAddRequest',
         serviceProviderId => $x0,
         servicePackName   => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -2934,7 +3372,7 @@ method ServiceProviderServicePackGetUtilizationListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @params) {
+method ServiceProviderServicePackMigrationTaskAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackMigrationTaskAddRequest',
         serviceProviderId => $x0,
@@ -2942,7 +3380,7 @@ method ServiceProviderServicePackMigrationTaskAddRequest ($x0, $x1, $x2, $x3, $x
         startTimestamp    => $x2,
         maxDurationHours  => $x3,
         sendReportEmail   => $x4,
-        @params,
+        @generic_params,
         reportAllUsers                        => $x5,
         automaticallyIncrementServiceQuantity => $x6
     );
@@ -2967,11 +3405,11 @@ method ServiceProviderServicePackMigrationTaskDeleteRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskGetAvailableGroupListRequest ($x0, @params) {
+method ServiceProviderServicePackMigrationTaskGetAvailableGroupListRequest ($x0, @generic_params) {
     return $self->send_query(
         'ServiceProviderServicePackMigrationTaskGetAvailableGroupListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -2990,47 +3428,47 @@ method ServiceProviderServicePackMigrationTaskGetRequest14sp4 ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskModifyAssignmentListRequest ($x0, $x1, @params) {
+method ServiceProviderServicePackMigrationTaskModifyAssignmentListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackMigrationTaskModifyAssignmentListRequest',
         serviceProviderId => $x0,
         taskName          => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskModifyGroupListRequest (@params) {
-    return $self->send_query( 'ServiceProviderServicePackMigrationTaskModifyGroupListRequest', @params );
+method ServiceProviderServicePackMigrationTaskModifyGroupListRequest (@generic_params) {
+    return $self->send_query( 'ServiceProviderServicePackMigrationTaskModifyGroupListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskModifyRemovalListRequest ($x0, $x1, @params) {
+method ServiceProviderServicePackMigrationTaskModifyRemovalListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackMigrationTaskModifyRemovalListRequest',
         serviceProviderId => $x0,
         taskName          => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskModifyRequest ($x0, $x1, @params) {
+method ServiceProviderServicePackMigrationTaskModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackMigrationTaskModifyRequest',
         serviceProviderId => $x0,
         taskName          => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackMigrationTaskModifyUserSelectionRequest ($x0, $x1, @params) {
+method ServiceProviderServicePackMigrationTaskModifyUserSelectionRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackMigrationTaskModifyUserSelectionRequest',
         serviceProviderId => $x0,
         taskName          => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -3044,12 +3482,12 @@ method ServiceProviderServicePackMigrationTaskTerminateRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderServicePackModifyRequest ($x0, $x1, @params) {
+method ServiceProviderServicePackModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderServicePackModifyRequest',
         serviceProviderId => $x0,
         servicePackName   => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -3059,29 +3497,40 @@ method ServiceProviderSessionAdmissionControlGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderSessionAdmissionControlModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderSessionAdmissionControlModifyRequest', serviceProviderId => $x0,
-        @params );
+method ServiceProviderSessionAdmissionControlModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderSessionAdmissionControlModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method ServiceProviderLanguageAddRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderLanguageAddRequest', serviceProviderId => $x0, language => $x1 );
+    return $self->send_command(
+        'ServiceProviderLanguageAddRequest',
+        serviceProviderId => $x0,
+        language          => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderLanguageModifyRequest ($x0, $x1, @params) {
+method ServiceProviderLanguageModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderLanguageModifyRequest',
         serviceProviderId => $x0,
         language          => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method ServiceProviderLanguageDeleteRequest ($x0, $x1) {
-    return $self->send_command( 'ServiceProviderLanguageDeleteRequest', serviceProviderId => $x0, language => $x1 );
+    return $self->send_command(
+        'ServiceProviderLanguageDeleteRequest',
+        serviceProviderId => $x0,
+        language          => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3095,8 +3544,12 @@ method ServiceProviderLanguageGetAvailableListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderApplicationServerSetModifyRequest ($x0, @params) {
-    return $self->send_query( 'ServiceProviderApplicationServerSetModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderApplicationServerSetModifyRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'ServiceProviderApplicationServerSetModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3108,18 +3561,32 @@ method ServiceProviderApplicationServerSetGetRequest ($x0) {
 ##
 ## System
 ##
-method SystemAccessDeviceAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemAccessDeviceAddRequest', deviceName => $x0, deviceType => $x1, @params );
+method SystemAccessDeviceAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemAccessDeviceAddRequest',
+        deviceName => $x0,
+        deviceType => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceCustomTagAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemAccessDeviceCustomTagAddRequest', deviceName => $x0, tagName => $x1, @params );
+method SystemAccessDeviceCustomTagAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemAccessDeviceCustomTagAddRequest',
+        deviceName => $x0,
+        tagName    => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceCustomTagDeleteListRequest ($x0, @params) {
-    return $self->send_command( 'SystemAccessDeviceCustomTagDeleteListRequest', deviceName => $x0, @params );
+method SystemAccessDeviceCustomTagDeleteListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemAccessDeviceCustomTagDeleteListRequest',
+        deviceName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3128,9 +3595,13 @@ method SystemAccessDeviceCustomTagGetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceCustomTagModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemAccessDeviceCustomTagModifyRequest', deviceName => $x0, tagName => $x1,
-        @params );
+method SystemAccessDeviceCustomTagModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemAccessDeviceCustomTagModifyRequest',
+        deviceName => $x0,
+        tagName    => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3139,12 +3610,12 @@ method SystemAccessDeviceDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceFileModifyRequest14sp8 ($x0, $x1, @params) {
+method SystemAccessDeviceFileModifyRequest14sp8 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemAccessDeviceFileModifyRequest14sp8',
         deviceName => $x0,
         fileFormat => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -3155,17 +3626,21 @@ method SystemAccessDeviceFileGetListRequest14sp8 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemAccessDeviceFileGetRequest16sp1 ($x0, $x1) {
-    return $self->send_query( 'SystemAccessDeviceFileGetRequest16sp1', deviceName => $x0, fileFormat => $x1 );
+    return $self->send_query(
+        'SystemAccessDeviceFileGetRequest16sp1',
+        deviceName => $x0,
+        fileFormat => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceGetAllRequest (@params) {
-    return $self->send_query( 'SystemAccessDeviceGetAllRequest', @params );
+method SystemAccessDeviceGetAllRequest (@generic_params) {
+    return $self->send_query( 'SystemAccessDeviceGetAllRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceGetListRequest14 (@params) {
-    return $self->send_query( 'SystemAccessDeviceGetListRequest14', @params );
+method SystemAccessDeviceGetListRequest14 (@generic_params) {
+    return $self->send_query( 'SystemAccessDeviceGetListRequest14', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -3174,43 +3649,62 @@ method SystemAccessDeviceGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceGetUserListRequest ($x0, @params) {
-    return $self->send_query( 'SystemAccessDeviceGetUserListRequest', deviceName => $x0, @params );
+method SystemAccessDeviceGetUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'SystemAccessDeviceGetUserListRequest',
+        deviceName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemAccessDeviceModifyRequest', deviceName => $x0, @params );
+method SystemAccessDeviceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemAccessDeviceModifyRequest',
+        deviceName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceModifyUserRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemAccessDeviceModifyUserRequest', deviceName => $x0, linePort => $x1, @params );
+method SystemAccessDeviceModifyUserRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemAccessDeviceModifyUserRequest',
+        deviceName => $x0,
+        linePort   => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceMonitorAddDeviceTypeRequest (@params) {
-    return $self->send_command( 'SystemAccessDeviceMonitorAddDeviceTypeRequest', @params );
+method SystemAccessDeviceMonitorAddDeviceTypeRequest (@generic_params) {
+    return $self->send_command( 'SystemAccessDeviceMonitorAddDeviceTypeRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceMonitorDeleteDeviceTypeRequest (@params) {
-    return $self->send_command( 'SystemAccessDeviceMonitorDeleteDeviceTypeRequest', @params );
+method SystemAccessDeviceMonitorDeleteDeviceTypeRequest (@generic_params) {
+    return $self->send_command( 'SystemAccessDeviceMonitorDeleteDeviceTypeRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemAccessDeviceMonitorGetDeviceTypeListRequest () {
-    return $self->send_query('SystemAccessDeviceMonitorGetDeviceTypeListRequest');
+    return $self->send_query(
+        'SystemAccessDeviceMonitorGetDeviceTypeListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemAccessDeviceMonitorParametersGetRequest () {
-    return $self->send_query('SystemAccessDeviceMonitorParametersGetRequest');
+    return $self->send_query(
+        'SystemAccessDeviceMonitorParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccessDeviceMonitorParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemAccessDeviceMonitorParametersModifyRequest', @params );
+method SystemAccessDeviceMonitorParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemAccessDeviceMonitorParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -3220,28 +3714,39 @@ method SystemAccessDeviceResetRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemAccessDeviceTypeGetEnhancedConfigurableListRequest () {
-    return $self->send_query('SystemAccessDeviceTypeGetEnhancedConfigurableListRequest');
+    return $self->send_query(
+        'SystemAccessDeviceTypeGetEnhancedConfigurableListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemAccessDeviceTypeGetListRequest () {
-    return $self->send_query('SystemAccessDeviceTypeGetListRequest');
+    return $self->send_query(
+        'SystemAccessDeviceTypeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccountingAddChargingFunctionElementServerRequest ($x0, $x1, $x2, @params) {
+method SystemAccountingAddChargingFunctionElementServerRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'SystemAccountingAddChargingFunctionElementServerRequest',
         address              => $x0,
         isNetAddressExtended => $x1,
         type                 => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccountingAddRadiusServerRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemAccountingAddRadiusServerRequest', netAddress => $x0, port => $x1, @params );
+method SystemAccountingAddRadiusServerRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemAccountingAddRadiusServerRequest',
+        netAddress => $x0,
+        port       => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3251,37 +3756,62 @@ method SystemAccountingDeleteChargingFunctionElementServerRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemAccountingDeleteRadiusServerRequest ($x0, $x1) {
-    return $self->send_command( 'SystemAccountingDeleteRadiusServerRequest', netAddress => $x0, port => $x1 );
+    return $self->send_command(
+        'SystemAccountingDeleteRadiusServerRequest',
+        netAddress => $x0,
+        port       => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemAccountingGetChargingFunctionElementServerListRequest () {
-    return $self->send_query('SystemAccountingGetChargingFunctionElementServerListRequest');
+    return $self->send_query(
+        'SystemAccountingGetChargingFunctionElementServerListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemAccountingGetRadiusServerListRequest () {
-    return $self->send_query('SystemAccountingGetRadiusServerListRequest');
+    return $self->send_query(
+        'SystemAccountingGetRadiusServerListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccountingModifyChargingFunctionElementServerRequest ($x0, @params) {
-    return $self->send_command( 'SystemAccountingModifyChargingFunctionElementServerRequest', address => $x0, @params );
+method SystemAccountingModifyChargingFunctionElementServerRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemAccountingModifyChargingFunctionElementServerRequest',
+        address => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccountingModifyRadiusServerRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemAccountingModifyRadiusServerRequest', netAddress => $x0, port => $x1, @params );
+method SystemAccountingModifyRadiusServerRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemAccountingModifyRadiusServerRequest',
+        netAddress => $x0,
+        port       => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAccountingReorderChargingFunctionElementServerRequest (@params) {
-    return $self->send_command( 'SystemAccountingReorderChargingFunctionElementServerRequest', @params );
+method SystemAccountingReorderChargingFunctionElementServerRequest (@generic_params) {
+    return $self->send_command( 'SystemAccountingReorderChargingFunctionElementServerRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemAdminAddRequest ($x0, $x1, $x2, @params) {
-    return $self->send_command( 'SystemAdminAddRequest', userId => $x0, @params, adminType => $x1, readOnly => $x2 );
+method SystemAdminAddRequest ($x0, $x1, $x2, @generic_params) {
+    return $self->send_command(
+        'SystemAdminAddRequest',
+        userId => $x0,
+        @generic_params,
+        adminType => $x1,
+        readOnly  => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3291,7 +3821,10 @@ method SystemAdminDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemAdminGetListRequest () {
-    return $self->send_query('SystemAdminGetListRequest');
+    return $self->send_query(
+        'SystemAdminGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3300,8 +3833,12 @@ method SystemAdminGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemAdminModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemAdminModifyRequest', userId => $x0, @params );
+method SystemAdminModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemAdminModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3316,7 +3853,10 @@ method SystemAliasDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemAliasGetListRequest () {
-    return $self->send_query('SystemAliasGetListRequest');
+    return $self->send_query(
+        'SystemAliasGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3336,7 +3876,10 @@ method SystemApplicationControllerDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemApplicationControllerGetListRequest () {
-    return $self->send_query('SystemApplicationControllerGetListRequest');
+    return $self->send_query(
+        'SystemApplicationControllerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3346,7 +3889,10 @@ method SystemApplicationServerSetDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemApplicationServerSetGetListRequest () {
-    return $self->send_query('SystemApplicationServerSetGetListRequest');
+    return $self->send_query(
+        'SystemApplicationServerSetGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3356,41 +3902,50 @@ method SystemApplicationServerSetGetUsageRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemASRParametersGetRequest14sp7 () {
-    return $self->send_query('SystemASRParametersGetRequest14sp7');
+    return $self->send_query(
+        'SystemASRParametersGetRequest14sp7',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemASRParametersModifyRequest14sp7 (@params) {
-    return $self->send_command( 'SystemASRParametersModifyRequest14sp7', @params );
+method SystemASRParametersModifyRequest14sp7 (@generic_params) {
+    return $self->send_command( 'SystemASRParametersModifyRequest14sp7', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemBroadWorksMobileManagerGetRequest () {
-    return $self->send_query('SystemBroadWorksMobileManagerGetRequest');
+    return $self->send_query(
+        'SystemBroadWorksMobileManagerGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksMobileManagerModifyRequest (@params) {
-    return $self->send_command( 'SystemBroadWorksMobileManagerModifyRequest', @params );
+method SystemBroadWorksMobileManagerModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemBroadWorksMobileManagerModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemBwDiameterBaseDataGetRequest17sp3 () {
-    return $self->send_query('SystemBwDiameterBaseDataGetRequest17sp3');
+    return $self->send_query(
+        'SystemBwDiameterBaseDataGetRequest17sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBwDiameterBaseDataModifyRequest (@params) {
-    return $self->send_command( 'SystemBwDiameterBaseDataModifyRequest', @params );
+method SystemBwDiameterBaseDataModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemBwDiameterBaseDataModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemBwDiameterPeerAddRequest ($x0, $x1, $x2, $x3, @params) {
+method SystemBwDiameterPeerAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'SystemBwDiameterPeerAddRequest',
         instance => $x0,
         identity => $x1,
-        @params,
+        @generic_params,
         port    => $x2,
         enabled => $x3
     );
@@ -3398,17 +3953,29 @@ method SystemBwDiameterPeerAddRequest ($x0, $x1, $x2, $x3, @params) {
 
 # ----------------------------------------------------------------------
 method SystemBwDiameterPeerDeleteRequest ($x0, $x1) {
-    return $self->send_command( 'SystemBwDiameterPeerDeleteRequest', instance => $x0, identity => $x1 );
+    return $self->send_command(
+        'SystemBwDiameterPeerDeleteRequest',
+        instance => $x0,
+        identity => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemBwDiameterPeerGetListRequest () {
-    return $self->send_query('SystemBwDiameterPeerGetListRequest');
+    return $self->send_query(
+        'SystemBwDiameterPeerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBwDiameterPeerModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemBwDiameterPeerModifyRequest', instance => $x0, identity => $x1, @params );
+method SystemBwDiameterPeerModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemBwDiameterPeerModifyRequest',
+        instance => $x0,
+        identity => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3434,17 +4001,20 @@ method SystemBwDiameterRoutingRealmDeleteRequest ($x0, $x1, $x2) {
 
 # ----------------------------------------------------------------------
 method SystemBwDiameterRoutingRealmGetListRequest () {
-    return $self->send_query('SystemBwDiameterRoutingRealmGetListRequest');
+    return $self->send_query(
+        'SystemBwDiameterRoutingRealmGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBwDiameterRoutingRealmModifyRequest ($x0, $x1, $x2, @params) {
+method SystemBwDiameterRoutingRealmModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'SystemBwDiameterRoutingRealmModifyRequest',
         instance      => $x0,
         realm         => $x1,
         applicationId => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -3474,34 +4044,44 @@ method SystemBwDiameterRoutingPeerDeleteRequest ($x0, $x1, $x2, $x3) {
 
 # ----------------------------------------------------------------------
 method SystemBwDiameterRoutingPeerGetListRequest () {
-    return $self->send_query('SystemBwDiameterRoutingPeerGetListRequest');
+    return $self->send_query(
+        'SystemBwDiameterRoutingPeerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBwDiameterRoutingPeerModifyRequest ($x0, $x1, $x2, $x3, @params) {
+method SystemBwDiameterRoutingPeerModifyRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'SystemBwDiameterRoutingPeerModifyRequest',
         instance      => $x0,
         realm         => $x1,
         applicationId => $x2,
         identity      => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallProcessingGetPolicyRequest17sp4 () {
-    return $self->send_query('SystemCallProcessingGetPolicyRequest17sp4');
+    return $self->send_query(
+        'SystemCallProcessingGetPolicyRequest17sp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallProcessingModifyPolicyRequest15 (@params) {
-    return $self->send_command( 'SystemCallProcessingModifyPolicyRequest15', @params );
+method SystemCallProcessingModifyPolicyRequest15 (@generic_params) {
+    return $self->send_command( 'SystemCallProcessingModifyPolicyRequest15', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCAPAddACLEntryRequest14 ($x0, @params) {
-    return $self->send_command( 'SystemCAPAddACLEntryRequest14', netAddress => $x0, @params );
+method SystemCAPAddACLEntryRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCAPAddACLEntryRequest14',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3511,32 +4091,45 @@ method SystemCAPDeleteACLEntryRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCAPGetACLListRequest14 () {
-    return $self->send_query('SystemCAPGetACLListRequest14');
+    return $self->send_query(
+        'SystemCAPGetACLListRequest14',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCAPModifyACLEntryRequest14 ($x0, @params) {
-    return $self->send_command( 'SystemCAPModifyACLEntryRequest14', netAddress => $x0, @params );
+method SystemCAPModifyACLEntryRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCAPModifyACLEntryRequest14',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCAPParametersGetRequest14sp3 () {
-    return $self->send_query('SystemCAPParametersGetRequest14sp3');
+    return $self->send_query(
+        'SystemCAPParametersGetRequest14sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCAPParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemCAPParametersModifyRequest', @params );
+method SystemCAPParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCAPParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemClientSessionParametersGetRequest () {
-    return $self->send_query('SystemClientSessionParametersGetRequest');
+    return $self->send_query(
+        'SystemClientSessionParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemClientSessionParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemClientSessionParametersModifyRequest', @params );
+method SystemClientSessionParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemClientSessionParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -3551,7 +4144,10 @@ method SystemCodecDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCodecGetListRequest () {
-    return $self->send_query('SystemCodecGetListRequest');
+    return $self->send_query(
+        'SystemCodecGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3571,15 +4167,18 @@ method SystemCommunicationBarringAlternateCallIndicatorDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCommunicationBarringAlternateCallIndicatorGetListRequest () {
-    return $self->send_query('SystemCommunicationBarringAlternateCallIndicatorGetListRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringAlternateCallIndicatorGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringAlternateCallIndicatorModifyRequest ($x0, @params) {
+method SystemCommunicationBarringAlternateCallIndicatorModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'SystemCommunicationBarringAlternateCallIndicatorModifyRequest',
         alternateCallIndicator => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -3599,17 +4198,28 @@ method SystemCommunicationBarringCallTypeDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCommunicationBarringCallTypeGetListRequest () {
-    return $self->send_query('SystemCommunicationBarringCallTypeGetListRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringCallTypeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringCallTypeModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringCallTypeModifyRequest', callType => $x0, @params );
+method SystemCommunicationBarringCallTypeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringCallTypeModifyRequest',
+        callType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringCriteriaAddRequest17 ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringCriteriaAddRequest17', name => $x0, @params );
+method SystemCommunicationBarringCriteriaAddRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringCriteriaAddRequest17',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3624,17 +4234,28 @@ method SystemCommunicationBarringCriteriaGetRequest17 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCommunicationBarringCriteriaGetListRequest () {
-    return $self->send_query('SystemCommunicationBarringCriteriaGetListRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringCriteriaGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringCriteriaModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringCriteriaModifyRequest', name => $x0, @params );
+method SystemCommunicationBarringCriteriaModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringCriteriaModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringDigitPatternCriteriaAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringDigitPatternCriteriaAddRequest', name => $x0, @params );
+method SystemCommunicationBarringDigitPatternCriteriaAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringDigitPatternCriteriaAddRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3644,15 +4265,18 @@ method SystemCommunicationBarringDigitPatternCriteriaDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCommunicationBarringDigitPatternCriteriaGetListRequest () {
-    return $self->send_query('SystemCommunicationBarringDigitPatternCriteriaGetListRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringDigitPatternCriteriaGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringDigitPatternCriteriaGetPatternListRequest ($x0, @params) {
+method SystemCommunicationBarringDigitPatternCriteriaGetPatternListRequest ($x0, @generic_params) {
     return $self->send_query(
         'SystemCommunicationBarringDigitPatternCriteriaGetPatternListRequest',
         name => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -3662,23 +4286,34 @@ method SystemCommunicationBarringDigitPatternCriteriaGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringDigitPatternCriteriaModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringDigitPatternCriteriaModifyRequest', name => $x0, @params );
+method SystemCommunicationBarringDigitPatternCriteriaModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringDigitPatternCriteriaModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCommunicationBarringGetRequest () {
-    return $self->send_query('SystemCommunicationBarringGetRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringModifyRequest (@params) {
-    return $self->send_command( 'SystemCommunicationBarringModifyRequest', @params );
+method SystemCommunicationBarringModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCommunicationBarringModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringProfileAddRequest17sp3 ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringProfileAddRequest17sp3', name => $x0, @params );
+method SystemCommunicationBarringProfileAddRequest17sp3 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringProfileAddRequest17sp3',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3698,7 +4333,10 @@ method SystemCommunicationBarringProfileGetDigitPatternCriteriaUsageListRequest 
 
 # ----------------------------------------------------------------------
 method SystemCommunicationBarringProfileGetListRequest () {
-    return $self->send_query('SystemCommunicationBarringProfileGetListRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringProfileGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3707,8 +4345,12 @@ method SystemCommunicationBarringProfileGetRequest17sp3 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringProfileModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCommunicationBarringProfileModifyRequest', name => $x0, @params );
+method SystemCommunicationBarringProfileModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCommunicationBarringProfileModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3718,21 +4360,24 @@ method SystemCommunicationBarringServiceProviderGetCriteriaUsageListRequest ($x0
 
 # ----------------------------------------------------------------------
 method SystemConfigurableFileSystemGetRequest () {
-    return $self->send_query('SystemConfigurableFileSystemGetRequest');
+    return $self->send_query(
+        'SystemConfigurableFileSystemGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemConfigurableFileSystemModifyRequest (@params) {
-    return $self->send_query( 'SystemConfigurableFileSystemModifyRequest', @params );
+method SystemConfigurableFileSystemModifyRequest (@generic_params) {
+    return $self->send_query( 'SystemConfigurableFileSystemModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemConfigurableTreatmentAddRequest ($x0, $x1, @params) {
+method SystemConfigurableTreatmentAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemConfigurableTreatmentAddRequest',
         treatmentId     => $x0,
         chargeIndicator => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -3743,7 +4388,10 @@ method SystemConfigurableTreatmentDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemConfigurableTreatmentGetListRequest () {
-    return $self->send_query('SystemConfigurableTreatmentGetListRequest');
+    return $self->send_query(
+        'SystemConfigurableTreatmentGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3752,8 +4400,12 @@ method SystemConfigurableTreatmentGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemConfigurableTreatmentModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemConfigurableTreatmentModifyRequest', treatmentId => $x0, @params );
+method SystemConfigurableTreatmentModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemConfigurableTreatmentModifyRequest',
+        treatmentId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3772,12 +4424,19 @@ method SystemTreatmentMappingAccessSIPStatusDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingAccessSIPStatusGetListRequest () {
-    return $self->send_query('SystemTreatmentMappingAccessSIPStatusGetListRequest');
+    return $self->send_query(
+        'SystemTreatmentMappingAccessSIPStatusGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTreatmentMappingAccessSIPStatusModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemTreatmentMappingAccessSIPStatusModifyRequest', sipStatusCode => $x0, @params );
+method SystemTreatmentMappingAccessSIPStatusModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemTreatmentMappingAccessSIPStatusModifyRequest',
+        sipStatusCode => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3796,15 +4455,18 @@ method SystemTreatmentMappingCallBlockingServiceDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingCallBlockingServiceGetListRequest () {
-    return $self->send_query('SystemTreatmentMappingCallBlockingServiceGetListRequest');
+    return $self->send_query(
+        'SystemTreatmentMappingCallBlockingServiceGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTreatmentMappingCallBlockingServiceModifyRequest ($x0, @params) {
+method SystemTreatmentMappingCallBlockingServiceModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'SystemTreatmentMappingCallBlockingServiceModifyRequest',
         callBlockingService => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -3825,15 +4487,18 @@ method SystemTreatmentMappingInternalReleaseCauseDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingInternalReleaseCauseGetListRequest () {
-    return $self->send_query('SystemTreatmentMappingInternalReleaseCauseGetListRequest');
+    return $self->send_query(
+        'SystemTreatmentMappingInternalReleaseCauseGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTreatmentMappingInternalReleaseCauseModifyRequest ($x0, @params) {
+method SystemTreatmentMappingInternalReleaseCauseModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'SystemTreatmentMappingInternalReleaseCauseModifyRequest',
         internalReleaseCause => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -3853,13 +4518,19 @@ method SystemTreatmentMappingNetworkServerTreatmentDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingNetworkServerTreatmentGetListRequest () {
-    return $self->send_query('SystemTreatmentMappingNetworkServerTreatmentGetListRequest');
+    return $self->send_query(
+        'SystemTreatmentMappingNetworkServerTreatmentGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTreatmentMappingNetworkServerTreatmentModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemTreatmentMappingNetworkServerTreatmentModifyRequest', nsTreatment => $x0,
-        @params );
+method SystemTreatmentMappingNetworkServerTreatmentModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemTreatmentMappingNetworkServerTreatmentModifyRequest',
+        nsTreatment => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3878,18 +4549,28 @@ method SystemTreatmentMappingNetworkSIPStatusDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingNetworkSIPStatusGetListRequest () {
-    return $self->send_query('SystemTreatmentMappingNetworkSIPStatusGetListRequest');
+    return $self->send_query(
+        'SystemTreatmentMappingNetworkSIPStatusGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTreatmentMappingNetworkSIPStatusModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemTreatmentMappingNetworkSIPStatusModifyRequest', sipStatusCode => $x0, @params );
+method SystemTreatmentMappingNetworkSIPStatusModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemTreatmentMappingNetworkSIPStatusModifyRequest',
+        sipStatusCode => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingQ850CauseAddRequest ($x0, $x1) {
-    return $self->send_command( 'SystemTreatmentMappingQ850CauseAddRequest', q850CauseValue => $x0,
-        treatmentId => $x1 );
+    return $self->send_command(
+        'SystemTreatmentMappingQ850CauseAddRequest',
+        q850CauseValue => $x0,
+        treatmentId    => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3899,17 +4580,29 @@ method SystemTreatmentMappingQ850CauseDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemTreatmentMappingQ850CauseGetListRequest () {
-    return $self->send_query('SystemTreatmentMappingQ850CauseGetListRequest');
+    return $self->send_query(
+        'SystemTreatmentMappingQ850CauseGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTreatmentMappingQ850CauseModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemTreatmentMappingQ850CauseModifyRequest', q850CauseValue => $x0, @params );
+method SystemTreatmentMappingQ850CauseModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemTreatmentMappingQ850CauseModifyRequest',
+        q850CauseValue => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCountryCodeAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemCountryCodeAddRequest', countryCode => $x0, countryName => $x1, @params );
+method SystemCountryCodeAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemCountryCodeAddRequest',
+        countryCode => $x0,
+        countryName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -3919,42 +4612,60 @@ method SystemCountryCodeDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCountryCodeGetListRequest () {
-    return $self->send_query('SystemCountryCodeGetListRequest');
+    return $self->send_query(
+        'SystemCountryCodeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCountryCodeModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCountryCodeModifyRequest', countryCode => $x0, @params );
+method SystemCountryCodeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCountryCodeModifyRequest',
+        countryCode => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallTypeAddMappingRequest ($x0, $x1, $x2) {
-    return $self->send_command( 'SystemCallTypeAddMappingRequest', countryCode => $x0, digitMap => $x1,
-        callType => $x2 );
+    return $self->send_command(
+        'SystemCallTypeAddMappingRequest',
+        countryCode => $x0,
+        digitMap    => $x1,
+        callType    => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallTypeDeleteMappingRequest ($x0, $x1) {
-    return $self->send_command( 'SystemCallTypeDeleteMappingRequest', countryCode => $x0, digitMap => $x1 );
+    return $self->send_command(
+        'SystemCallTypeDeleteMappingRequest',
+        countryCode => $x0,
+        digitMap    => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallTypeGetListRequest () {
-    return $self->send_query('SystemCallTypeGetListRequest');
+    return $self->send_query(
+        'SystemCallTypeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallTypeGetMappingListRequest (@params) {
-    return $self->send_query( 'SystemCallTypeGetMappingListRequest', @params );
+method SystemCallTypeGetMappingListRequest (@generic_params) {
+    return $self->send_query( 'SystemCallTypeGetMappingListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCPEConfigAddFileServerRequest14sp6 ($x0, $x1, @params) {
+method SystemCPEConfigAddFileServerRequest14sp6 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemCPEConfigAddFileServerRequest14sp6',
         deviceType         => $x0,
         fileRepositoryName => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -3965,27 +4676,37 @@ method SystemCPEConfigDeleteFileServerRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCPEConfigGetFileServerListRequest14sp6 () {
-    return $self->send_query('SystemCPEConfigGetFileServerListRequest14sp6');
+    return $self->send_query(
+        'SystemCPEConfigGetFileServerListRequest14sp6',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCPEConfigModifyFileServerRequest14sp6 ($x0, @params) {
-    return $self->send_command( 'SystemCPEConfigModifyFileServerRequest14sp6', deviceType => $x0, @params );
+method SystemCPEConfigModifyFileServerRequest14sp6 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCPEConfigModifyFileServerRequest14sp6',
+        deviceType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCPEConfigParametersGetRequest14sp6 () {
-    return $self->send_query('SystemCPEConfigParametersGetRequest14sp6');
+    return $self->send_query(
+        'SystemCPEConfigParametersGetRequest14sp6',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCPEConfigParametersModifyRequest (@params) {
-    return $self->send_query( 'SystemCPEConfigParametersModifyRequest', @params );
+method SystemCPEConfigParametersModifyRequest (@generic_params) {
+    return $self->send_query( 'SystemCPEConfigParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCPEConfigRebuildConfigFileRequest (@params) {
-    return $self->send_command( 'SystemCPEConfigRebuildConfigFileRequest', @params );
+method SystemCPEConfigRebuildConfigFileRequest (@generic_params) {
+    return $self->send_command( 'SystemCPEConfigRebuildConfigFileRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -3999,38 +4720,46 @@ method SystemCPEConfigResetDeviceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemCPEConfigResetDeviceTypeRequest (@params) {
-    return $self->send_command( 'SystemCPEConfigResetDeviceTypeRequest', @params );
+method SystemCPEConfigResetDeviceTypeRequest (@generic_params) {
+    return $self->send_command( 'SystemCPEConfigResetDeviceTypeRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCPEConfigReorderDeviceLinePortsRequest ($x0, @params) {
-    return $self->send_command( 'SystemCPEConfigReorderDeviceLinePortsRequest', deviceName => $x0, @params );
+method SystemCPEConfigReorderDeviceLinePortsRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCPEConfigReorderDeviceLinePortsRequest',
+        deviceName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCPEConfigSetConfigFileRequest ($x0, $x1) {
-    return $self->send_command( 'SystemCPEConfigSetConfigFileRequest', deviceType => $x0, configFile => $x1 );
+    return $self->send_command(
+        'SystemCPEConfigSetConfigFileRequest',
+        deviceType => $x0,
+        configFile => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemDeviceManagementTagAddRequest (@params) {
-    return $self->send_command( 'SystemDeviceManagementTagAddRequest', @params );
+method SystemDeviceManagementTagAddRequest (@generic_params) {
+    return $self->send_command( 'SystemDeviceManagementTagAddRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemDeviceManagementTagDeleteListRequest (@params) {
-    return $self->send_command( 'SystemDeviceManagementTagDeleteListRequest', @params );
+method SystemDeviceManagementTagDeleteListRequest (@generic_params) {
+    return $self->send_command( 'SystemDeviceManagementTagDeleteListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemDeviceManagementTagGetListRequest (@params) {
-    return $self->send_query( 'SystemDeviceManagementTagGetListRequest', @params );
+method SystemDeviceManagementTagGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemDeviceManagementTagGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemDeviceManagementTagModifyRequest (@params) {
-    return $self->send_command( 'SystemDeviceManagementTagModifyRequest', @params );
+method SystemDeviceManagementTagModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemDeviceManagementTagModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -4039,8 +4768,12 @@ method SystemDeviceManagementTagSetAddRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemDeviceManagementTagSetModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemDeviceManagementTagSetModifyRequest', tagSetName => $x0, @params );
+method SystemDeviceManagementTagSetModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemDeviceManagementTagSetModifyRequest',
+        tagSetName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4050,7 +4783,10 @@ method SystemDeviceManagementTagSetDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemDeviceManagementTagSetGetListRequest () {
-    return $self->send_query('SystemDeviceManagementTagSetGetListRequest');
+    return $self->send_query(
+        'SystemDeviceManagementTagSetGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4081,11 +4817,11 @@ method SystemDeviceTypeGetRequest16sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemDialableCallerIDCriteriaAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method SystemDialableCallerIDCriteriaAddRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @generic_params) {
     return $self->send_command(
         'SystemDialableCallerIDCriteriaAddRequest',
         name => $x0,
-        @params,
+        @generic_params,
         matchLocalCategory         => $x1,
         matchNationalCategory      => $x2,
         matchInterlataCategory     => $x3,
@@ -4108,33 +4844,46 @@ method SystemDialableCallerIDCriteriaGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemDialableCallerIDCriteriaModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemDialableCallerIDCriteriaModifyRequest', name => $x0, @params );
+method SystemDialableCallerIDCriteriaModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemDialableCallerIDCriteriaModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemDialableCallerIDGetRequest () {
-    return $self->send_query('SystemDialableCallerIDGetRequest');
+    return $self->send_query(
+        'SystemDialableCallerIDGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemDialableCallerIDModifyRequest (@params) {
-    return $self->send_command( 'SystemDialableCallerIDModifyRequest', @params );
+method SystemDialableCallerIDModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemDialableCallerIDModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemDialPlanPolicyGetRequest17 () {
-    return $self->send_query('SystemDialPlanPolicyGetRequest17');
+    return $self->send_query(
+        'SystemDialPlanPolicyGetRequest17',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemDialPlanPolicyModifyRequest (@params) {
-    return $self->send_command( 'SystemDialPlanPolicyModifyRequest', @params );
+method SystemDialPlanPolicyModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemDialPlanPolicyModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemDialPlanPolicyGetAccessCodeListRequest () {
-    return $self->send_query('SystemDialPlanPolicyGetAccessCodeListRequest');
+    return $self->send_query(
+        'SystemDialPlanPolicyGetAccessCodeListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4143,14 +4892,14 @@ method SystemDialPlanPolicyGetAccessCodeRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, @params) {
+method SystemDialPlanPolicyAddAccessCodeRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'SystemDialPlanPolicyAddAccessCodeRequest',
         accessCode                                  => $x0,
         includeCodeForNetworkTranslationsAndRouting => $x1,
         includeCodeForScreeningServices             => $x2,
         enableSecondaryDialTone                     => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -4160,28 +4909,41 @@ method SystemDialPlanPolicyDeleteAccessCodeRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemDialPlanPolicyModifyAccessCodeRequest ($x0, @params) {
-    return $self->send_command( 'SystemDialPlanPolicyModifyAccessCodeRequest', accessCode => $x0, @params );
+method SystemDialPlanPolicyModifyAccessCodeRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemDialPlanPolicyModifyAccessCodeRequest',
+        accessCode => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemDigitCollectionGetRequest13mp4 () {
-    return $self->send_query('SystemDigitCollectionGetRequest13mp4');
+    return $self->send_query(
+        'SystemDigitCollectionGetRequest13mp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemDigitCollectionModifyRequest (@params) {
-    return $self->send_command( 'SystemDigitCollectionModifyRequest', @params );
+method SystemDigitCollectionModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemDigitCollectionModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemDnGetSummaryListRequest () {
-    return $self->send_query('SystemDnGetSummaryListRequest');
+    return $self->send_query(
+        'SystemDnGetSummaryListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemDnGetUtilizationListRequest () {
-    return $self->send_query('SystemDnGetUtilizationListRequest');
+    return $self->send_query(
+        'SystemDnGetUtilizationListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4206,47 +4968,63 @@ method SystemDomainGetAssignedServiceProviderListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemDomainGetListRequest () {
-    return $self->send_query('SystemDomainGetListRequest');
+    return $self->send_query(
+        'SystemDomainGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemDomainParametersGetRequest () {
-    return $self->send_query('SystemDomainParametersGetRequest');
+    return $self->send_query(
+        'SystemDomainParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemDomainParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemDomainParametersModifyRequest', @params );
+method SystemDomainParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemDomainParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemDTMFTransmissionGetRequest () {
-    return $self->send_query('SystemDTMFTransmissionGetRequest');
+    return $self->send_query(
+        'SystemDTMFTransmissionGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemDTMFTransmissionModifyRequest (@params) {
-    return $self->send_command( 'SystemDTMFTransmissionModifyRequest', @params );
+method SystemDTMFTransmissionModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemDTMFTransmissionModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemEndpointGetListRequest (@params) {
-    return $self->send_query( 'SystemEndpointGetListRequest', @params );
+method SystemEndpointGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemEndpointGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemExpensiveCallNotificationGetRequest () {
-    return $self->send_query('SystemExpensiveCallNotificationGetRequest');
+    return $self->send_query(
+        'SystemExpensiveCallNotificationGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemExpensiveCallNotificationModifyRequest (@params) {
-    return $self->send_command( 'SystemExpensiveCallNotificationModifyRequest', @params );
+method SystemExpensiveCallNotificationModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemExpensiveCallNotificationModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemExpensiveCallTypeAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemExpensiveCallTypeAddRequest', alternateCallIndicator => $x0, @params );
+method SystemExpensiveCallTypeAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemExpensiveCallTypeAddRequest',
+        alternateCallIndicator => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4256,12 +5034,19 @@ method SystemExpensiveCallTypeDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemExpensiveCallTypeGetListRequest16sp1 () {
-    return $self->send_query('SystemExpensiveCallTypeGetListRequest16sp1');
+    return $self->send_query(
+        'SystemExpensiveCallTypeGetListRequest16sp1',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemExpensiveCallTypeModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemExpensiveCallTypeModifyRequest', alternateCallIndicator => $x0, @params );
+method SystemExpensiveCallTypeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemExpensiveCallTypeModifyRequest',
+        alternateCallIndicator => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4271,17 +5056,24 @@ method SystemExportAddressingDataRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemExtensionLengthGetRequest () {
-    return $self->send_query('SystemExtensionLengthGetRequest');
+    return $self->send_query(
+        'SystemExtensionLengthGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemExtensionLengthModifyRequest (@params) {
-    return $self->send_command( 'SystemExtensionLengthModifyRequest', @params );
+method SystemExtensionLengthModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemExtensionLengthModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemExternalAuthenticationAddACLEntryRequest14sp2 ($x0, @params) {
-    return $self->send_command( 'SystemExternalAuthenticationAddACLEntryRequest14sp2', netAddress => $x0, @params );
+method SystemExternalAuthenticationAddACLEntryRequest14sp2 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemExternalAuthenticationAddACLEntryRequest14sp2',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4291,32 +5083,45 @@ method SystemExternalAuthenticationDeleteACLEntryRequest14sp2 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemExternalAuthenticationGetACLListRequest () {
-    return $self->send_query('SystemExternalAuthenticationGetACLListRequest');
+    return $self->send_query(
+        'SystemExternalAuthenticationGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemExternalAuthenticationModifyACLEntryRequest14sp2 ($x0, @params) {
-    return $self->send_command( 'SystemExternalAuthenticationModifyACLEntryRequest14sp2', netAddress => $x0, @params );
+method SystemExternalAuthenticationModifyACLEntryRequest14sp2 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemExternalAuthenticationModifyACLEntryRequest14sp2',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemExternalEmergencyRoutingParametersGetRequest13mp13 () {
-    return $self->send_query('SystemExternalEmergencyRoutingParametersGetRequest13mp13');
+    return $self->send_query(
+        'SystemExternalEmergencyRoutingParametersGetRequest13mp13',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemExternalEmergencyRoutingParametersModifyRequest13mp13 (@params) {
-    return $self->send_command( 'SystemExternalEmergencyRoutingParametersModifyRequest13mp13', @params );
+method SystemExternalEmergencyRoutingParametersModifyRequest13mp13 (@generic_params) {
+    return $self->send_command( 'SystemExternalEmergencyRoutingParametersModifyRequest13mp13', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemFeatureAccessCodeGetListRequest () {
-    return $self->send_query('SystemFeatureAccessCodeGetListRequest');
+    return $self->send_query(
+        'SystemFeatureAccessCodeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemFeatureAccessCodeModifyListRequest (@params) {
-    return $self->send_command( 'SystemFeatureAccessCodeModifyListRequest', @params );
+method SystemFeatureAccessCodeModifyListRequest (@generic_params) {
+    return $self->send_command( 'SystemFeatureAccessCodeModifyListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -4325,8 +5130,12 @@ method SystemFileGetContentRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemFileRepositoryDeviceAddRequest16 ($x0, @params) {
-    return $self->send_command( 'SystemFileRepositoryDeviceAddRequest16', name => $x0, @params );
+method SystemFileRepositoryDeviceAddRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemFileRepositoryDeviceAddRequest16',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4335,8 +5144,12 @@ method SystemFileRepositoryDeviceDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemFileRepositoryDeviceModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemFileRepositoryDeviceModifyRequest', name => $x0, @params );
+method SystemFileRepositoryDeviceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemFileRepositoryDeviceModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4346,7 +5159,10 @@ method SystemFileRepositoryDeviceGetRequest16 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemFileRepositoryDeviceGetListRequest () {
-    return $self->send_query('SystemFileRepositoryDeviceGetListRequest');
+    return $self->send_query(
+        'SystemFileRepositoryDeviceGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4372,18 +5188,22 @@ method SystemFileRepositoryDeviceUserDeleteRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method SystemFileRepositoryDeviceUserModifyRequest ($x0, $x1, @params) {
+method SystemFileRepositoryDeviceUserModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemFileRepositoryDeviceUserModifyRequest',
         fileRepositoryName => $x0,
         userName           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemFileRepositoryDeviceUserGetRequest ($x0, $x1) {
-    return $self->send_query( 'SystemFileRepositoryDeviceUserGetRequest', fileRepositoryName => $x0, userName => $x1 );
+    return $self->send_query(
+        'SystemFileRepositoryDeviceUserGetRequest',
+        fileRepositoryName => $x0,
+        userName           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4392,8 +5212,8 @@ method SystemFileRepositoryDeviceUserGetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemGetRegistrationContactListRequest (@params) {
-    return $self->send_query( 'SystemGetRegistrationContactListRequest', @params );
+method SystemGetRegistrationContactListRequest (@generic_params) {
+    return $self->send_query( 'SystemGetRegistrationContactListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -4407,13 +5227,18 @@ method SystemHomeNetworkDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemHomeNetworkGetListRequest (@params) {
-    return $self->send_query( 'SystemHomeNetworkGetListRequest', @params );
+method SystemHomeNetworkGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemHomeNetworkGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemLanguageAddRequest ($x0, $x1, $x2) {
-    return $self->send_command( 'SystemLanguageAddRequest', language => $x0, locale => $x1, encoding => $x2 );
+    return $self->send_command(
+        'SystemLanguageAddRequest',
+        language => $x0,
+        locale   => $x1,
+        encoding => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4423,53 +5248,72 @@ method SystemLanguageDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemLanguageGetListRequest () {
-    return $self->send_query('SystemLanguageGetListRequest');
+    return $self->send_query(
+        'SystemLanguageGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemLanguageModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemLanguageModifyRequest', language => $x0, @params );
+method SystemLanguageModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemLanguageModifyRequest',
+        language => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemLicensingGetRequest14sp3 () {
-    return $self->send_query('SystemLicensingGetRequest14sp3');
+    return $self->send_query(
+        'SystemLicensingGetRequest14sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemLicensingGetSystemLicenseListRequest () {
-    return $self->send_query('SystemLicensingGetSystemLicenseListRequest');
+    return $self->send_query(
+        'SystemLicensingGetSystemLicenseListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemLicensingReloadRequest () {
-    return $self->send_command('SystemLicensingReloadRequest');
+    return $self->send_command(
+        'SystemLicensingReloadRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemLogConfigModifyRequest (@params) {
-    return $self->send_command( 'SystemLogConfigModifyRequest', @params );
+method SystemLogConfigModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemLogConfigModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemMailParametersGetRequest () {
-    return $self->send_query('SystemMailParametersGetRequest');
+    return $self->send_query(
+        'SystemMailParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMailParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemMailParametersModifyRequest', @params );
+method SystemMailParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemMailParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaAddRequest16 ($x0, $x1, $x2, $x3, @params) {
+method SystemMediaAddRequest16 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'SystemMediaAddRequest16',
         mediaName                => $x0,
         codecName                => $x1,
         mediaType                => $x2,
         bandwidthEnforcementType => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -4480,17 +5324,28 @@ method SystemMediaDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemMediaGetListRequest () {
-    return $self->send_query('SystemMediaGetListRequest');
+    return $self->send_query(
+        'SystemMediaGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemMediaModifyRequest', mediaName => $x0, @params );
+method SystemMediaModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemMediaModifyRequest',
+        mediaName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaServerAddRequest14 ($x0, @params) {
-    return $self->send_command( 'SystemMediaServerAddRequest14', netAddress => $x0, @params );
+method SystemMediaServerAddRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemMediaServerAddRequest14',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4500,27 +5355,41 @@ method SystemMediaServerDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemMediaServerGetListRequest () {
-    return $self->send_query('SystemMediaServerGetListRequest');
+    return $self->send_query(
+        'SystemMediaServerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaServerModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemMediaServerModifyRequest', netAddress => $x0, @params );
+method SystemMediaServerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemMediaServerModifyRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemMediaServerParametersGetRequest () {
-    return $self->send_query('SystemMediaServerParametersGetRequest');
+    return $self->send_query(
+        'SystemMediaServerParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaServerParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemMediaServerParametersModifyRequest', @params );
+method SystemMediaServerParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemMediaServerParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaSetAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemMediaSetAddRequest', setName => $x0, @params );
+method SystemMediaSetAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemMediaSetAddRequest',
+        setName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4530,7 +5399,10 @@ method SystemMediaSetDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemMediaSetGetListRequest () {
-    return $self->send_query('SystemMediaSetGetListRequest');
+    return $self->send_query(
+        'SystemMediaSetGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4539,13 +5411,20 @@ method SystemMediaSetGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemMediaSetModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemMediaSetModifyRequest', setName => $x0, @params );
+method SystemMediaSetModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemMediaSetModifyRequest',
+        setName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemMGCPDeviceTypeGetListRequest () {
-    return $self->send_query('SystemMGCPDeviceTypeGetListRequest');
+    return $self->send_query(
+        'SystemMGCPDeviceTypeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4554,28 +5433,42 @@ method SystemMGCPDeviceTypeGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemMGCPDeviceTypeModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemMGCPDeviceTypeModifyRequest', deviceType => $x0, @params );
+method SystemMGCPDeviceTypeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemMGCPDeviceTypeModifyRequest',
+        deviceType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemMigratedUsersGetListRequest () {
-    return $self->send_query('SystemMigratedUsersGetListRequest');
+    return $self->send_query(
+        'SystemMigratedUsersGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemMultimediaPolicyGetRequest () {
-    return $self->send_query('SystemMultimediaPolicyGetRequest');
+    return $self->send_query(
+        'SystemMultimediaPolicyGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMultimediaPolicyModifyRequest (@params) {
-    return $self->send_command( 'SystemMultimediaPolicyModifyRequest', @params );
+method SystemMultimediaPolicyModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemMultimediaPolicyModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkClassOfServiceAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemNetworkClassOfServiceAddRequest', name => $x0, @params );
+method SystemNetworkClassOfServiceAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemNetworkClassOfServiceAddRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4601,37 +5494,54 @@ method SystemNetworkClassOfServiceGetCommunicationBarringProfileUsageListRequest
 
 # ----------------------------------------------------------------------
 method SystemNetworkClassOfServiceGetListRequest () {
-    return $self->send_query('SystemNetworkClassOfServiceGetListRequest');
+    return $self->send_query(
+        'SystemNetworkClassOfServiceGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkClassOfServiceModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemNetworkClassOfServiceModifyRequest', name => $x0, @params );
+method SystemNetworkClassOfServiceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemNetworkClassOfServiceModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemNetworkDeviceMonitorParametersGetRequest () {
-    return $self->send_query('SystemNetworkDeviceMonitorParametersGetRequest');
+    return $self->send_query(
+        'SystemNetworkDeviceMonitorParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkDeviceMonitorParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemNetworkDeviceMonitorParametersModifyRequest', @params );
+method SystemNetworkDeviceMonitorParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemNetworkDeviceMonitorParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemNetworkProgressionGetRequest () {
-    return $self->send_query('SystemNetworkProgressionGetRequest');
+    return $self->send_query(
+        'SystemNetworkProgressionGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkProgressionModifyRequest (@params) {
-    return $self->send_command( 'SystemNetworkProgressionModifyRequest', @params );
+method SystemNetworkProgressionModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemNetworkProgressionModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkRoutingServerAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemNetworkRoutingServerAddRequest', netAddress => $x0, @params );
+method SystemNetworkRoutingServerAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemNetworkRoutingServerAddRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4641,27 +5551,41 @@ method SystemNetworkRoutingServerDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemNetworkRoutingServerGetListRequest () {
-    return $self->send_query('SystemNetworkRoutingServerGetListRequest');
+    return $self->send_query(
+        'SystemNetworkRoutingServerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkRoutingServerModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemNetworkRoutingServerModifyRequest', netAddress => $x0, @params );
+method SystemNetworkRoutingServerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemNetworkRoutingServerModifyRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemNetworkServerSyncParametersGetRequest17sp4 () {
-    return $self->send_query('SystemNetworkServerSyncParametersGetRequest17sp4');
+    return $self->send_query(
+        'SystemNetworkServerSyncParametersGetRequest17sp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkServerSyncParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemNetworkServerSyncParametersModifyRequest', @params );
+method SystemNetworkServerSyncParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemNetworkServerSyncParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkSynchingServerAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemNetworkSynchingServerAddRequest', netAddress => $x0, @params );
+method SystemNetworkSynchingServerAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemNetworkSynchingServerAddRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4671,27 +5595,41 @@ method SystemNetworkSynchingServerDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemNetworkSynchingServerGetListRequest () {
-    return $self->send_query('SystemNetworkSynchingServerGetListRequest');
+    return $self->send_query(
+        'SystemNetworkSynchingServerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNetworkSynchingServerModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemNetworkSynchingServerModifyRequest', netAddress => $x0, @params );
+method SystemNetworkSynchingServerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemNetworkSynchingServerModifyRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemNumberActivationGetRequest () {
-    return $self->send_query('SystemNumberActivationGetRequest');
+    return $self->send_query(
+        'SystemNumberActivationGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemNumberActivationModifyRequest (@params) {
-    return $self->send_command( 'SystemNumberActivationModifyRequest', @params );
+method SystemNumberActivationModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemNumberActivationModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCIAddACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCIAddACLEntryRequest', netAddress => $x0, @params );
+method SystemOCIAddACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCIAddACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4701,17 +5639,28 @@ method SystemOCIDeleteACLEntryRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemOCIGetACLListRequest () {
-    return $self->send_query('SystemOCIGetACLListRequest');
+    return $self->send_query(
+        'SystemOCIGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCIModifyACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCIModifyACLEntryRequest', netAddress => $x0, @params );
+method SystemOCIModifyACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCIModifyACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCICallControlAddACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCICallControlAddACLEntryRequest', netAddress => $x0, @params );
+method SystemOCICallControlAddACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCICallControlAddACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4721,22 +5670,29 @@ method SystemOCICallControlDeleteACLEntryRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemOCICallControlGetACLListRequest () {
-    return $self->send_query('SystemOCICallControlGetACLListRequest');
+    return $self->send_query(
+        'SystemOCICallControlGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCICallControlModifyACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCICallControlModifyACLEntryRequest', netAddress => $x0, @params );
+method SystemOCICallControlModifyACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCICallControlModifyACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCICallControlApplicationAddRequest17 ($x0, $x1, $x2, $x3, @params) {
+method SystemOCICallControlApplicationAddRequest17 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'SystemOCICallControlApplicationAddRequest17',
         applicationId              => $x0,
         enableSystemWide           => $x1,
         notificationTimeoutSeconds => $x2,
-        @params, maxEventChannelsPerSet => $x3
+        @generic_params, maxEventChannelsPerSet => $x3
     );
 }
 
@@ -4747,21 +5703,28 @@ method SystemOCICallControlApplicationDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemOCICallControlApplicationGetListRequest () {
-    return $self->send_query('SystemOCICallControlApplicationGetListRequest');
+    return $self->send_query(
+        'SystemOCICallControlApplicationGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCICallControlApplicationModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCICallControlApplicationModifyRequest', applicationId => $x0, @params );
+method SystemOCICallControlApplicationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCICallControlApplicationModifyRequest',
+        applicationId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCICallControlApplicationAddACLEntryRequest ($x0, $x1, @params) {
+method SystemOCICallControlApplicationAddACLEntryRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemOCICallControlApplicationAddACLEntryRequest',
         applicationId => $x0,
         netAddress    => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -4780,21 +5743,21 @@ method SystemOCICallControlApplicationGetACLListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemOCICallControlApplicationModifyACLEntryRequest ($x0, $x1, @params) {
+method SystemOCICallControlApplicationModifyACLEntryRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemOCICallControlApplicationModifyACLEntryRequest',
         applicationId => $x0,
         netAddress    => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCIReportingAddACLEntryRequest13mp9 ($x0, $x1, @params) {
+method SystemOCIReportingAddACLEntryRequest13mp9 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemOCIReportingAddACLEntryRequest13mp9',
         netAddress => $x0,
-        @params, restrictMessages => $x1
+        @generic_params, restrictMessages => $x1
     );
 }
 
@@ -4813,13 +5776,20 @@ method SystemOCIReportingDeleteACLEntryRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemOCIReportingDeleteMessageNameListRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCIReportingDeleteMessageNameListRequest', netAddress => $x0, @params );
+method SystemOCIReportingDeleteMessageNameListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCIReportingDeleteMessageNameListRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemOCIReportingGetACLListRequest () {
-    return $self->send_query('SystemOCIReportingGetACLListRequest');
+    return $self->send_query(
+        'SystemOCIReportingGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4828,23 +5798,34 @@ method SystemOCIReportingGetMessageNameListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemOCIReportingModifyACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemOCIReportingModifyACLEntryRequest', netAddress => $x0, @params );
+method SystemOCIReportingModifyACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOCIReportingModifyACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemOCIReportingParametersGetRequest14sp1 () {
-    return $self->send_query('SystemOCIReportingParametersGetRequest14sp1');
+    return $self->send_query(
+        'SystemOCIReportingParametersGetRequest14sp1',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOCIReportingParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemOCIReportingParametersModifyRequest', @params );
+method SystemOCIReportingParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemOCIReportingParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemOfficeZoneAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemOfficeZoneAddRequest', officeZoneName => $x0, @params, primaryZoneName => $x1 );
+method SystemOfficeZoneAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemOfficeZoneAddRequest',
+        officeZoneName => $x0,
+        @generic_params, primaryZoneName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4864,7 +5845,10 @@ method SystemOfficeZoneGetAssignedServiceProviderListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemOfficeZoneGetListRequest () {
-    return $self->send_query('SystemOfficeZoneGetListRequest');
+    return $self->send_query(
+        'SystemOfficeZoneGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4873,28 +5857,35 @@ method SystemOfficeZoneGetZoneUsageListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemOfficeZoneModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemOfficeZoneModifyRequest', officeZoneName => $x0, @params );
+method SystemOfficeZoneModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemOfficeZoneModifyRequest',
+        officeZoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemPasswordRulesGetRequest16 () {
-    return $self->send_query('SystemPasswordRulesGetRequest16');
+    return $self->send_query(
+        'SystemPasswordRulesGetRequest16',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemPasswordRulesModifyRequest14sp3 (@params) {
-    return $self->send_command( 'SystemPasswordRulesModifyRequest14sp3', @params );
+method SystemPasswordRulesModifyRequest14sp3 (@generic_params) {
+    return $self->send_command( 'SystemPasswordRulesModifyRequest14sp3', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemPerformanceMeasurementReportingAddFileServerRequest ($x0, $x1, $x2, @params) {
+method SystemPerformanceMeasurementReportingAddFileServerRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'SystemPerformanceMeasurementReportingAddFileServerRequest',
         ftpHostNetAddress => $x0,
         ftpUserId         => $x1,
         ftpUserPassword   => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -4906,46 +5897,62 @@ method SystemPerformanceMeasurementReportingDeleteFileServerRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemPerformanceMeasurementGenerateReportRequest () {
-    return $self->send_command('SystemPerformanceMeasurementGenerateReportRequest');
-}
-
-# ----------------------------------------------------------------------
-method SystemPerformanceMeasurementReportingGetFileServerListRequest () {
-    return $self->send_query('SystemPerformanceMeasurementReportingGetFileServerListRequest');
-}
-
-# ----------------------------------------------------------------------
-method SystemPerformanceMeasurementReportingGetRequest () {
-    return $self->send_query('SystemPerformanceMeasurementReportingGetRequest');
-}
-
-# ----------------------------------------------------------------------
-method SystemPerformanceMeasurementReportingModifyFileServerRequest ($x0, @params) {
     return $self->send_command(
-        'SystemPerformanceMeasurementReportingModifyFileServerRequest',
-        ftpHostNetAddress => $x0,
-        @params
+        'SystemPerformanceMeasurementGenerateReportRequest',
+
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemPerformanceMeasurementReportingModifyRequest (@params) {
-    return $self->send_command( 'SystemPerformanceMeasurementReportingModifyRequest', @params );
+method SystemPerformanceMeasurementReportingGetFileServerListRequest () {
+    return $self->send_query(
+        'SystemPerformanceMeasurementReportingGetFileServerListRequest',
+
+    );
+}
+
+# ----------------------------------------------------------------------
+method SystemPerformanceMeasurementReportingGetRequest () {
+    return $self->send_query(
+        'SystemPerformanceMeasurementReportingGetRequest',
+
+    );
+}
+
+# ----------------------------------------------------------------------
+method SystemPerformanceMeasurementReportingModifyFileServerRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemPerformanceMeasurementReportingModifyFileServerRequest',
+        ftpHostNetAddress => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method SystemPerformanceMeasurementReportingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemPerformanceMeasurementReportingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemPolicyGetDefaultRequest17sp3 () {
-    return $self->send_query('SystemPolicyGetDefaultRequest17sp3');
+    return $self->send_query(
+        'SystemPolicyGetDefaultRequest17sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemPolicyModifyDefaultRequest14 (@params) {
-    return $self->send_command( 'SystemPolicyModifyDefaultRequest14', @params );
+method SystemPolicyModifyDefaultRequest14 (@generic_params) {
+    return $self->send_command( 'SystemPolicyModifyDefaultRequest14', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemPortalAPIAddACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemPortalAPIAddACLEntryRequest', netAddress => $x0, @params );
+method SystemPortalAPIAddACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemPortalAPIAddACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -4955,47 +5962,67 @@ method SystemPortalAPIDeleteACLEntryRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemPortalAPIGetACLListRequest () {
-    return $self->send_query('SystemPortalAPIGetACLListRequest');
+    return $self->send_query(
+        'SystemPortalAPIGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemPortalAPIModifyACLEntryRequest ($x0, @params) {
-    return $self->send_command( 'SystemPortalAPIModifyACLEntryRequest', netAddress => $x0, @params );
+method SystemPortalAPIModifyACLEntryRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemPortalAPIModifyACLEntryRequest',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemPortalPasscodeRulesGetRequest () {
-    return $self->send_query('SystemPortalPasscodeRulesGetRequest');
+    return $self->send_query(
+        'SystemPortalPasscodeRulesGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemPortalPasscodeRulesModifyRequest (@params) {
-    return $self->send_command( 'SystemPortalPasscodeRulesModifyRequest', @params );
+method SystemPortalPasscodeRulesModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemPortalPasscodeRulesModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemProvisioningValidationGetRequest14sp2 () {
-    return $self->send_query('SystemProvisioningValidationGetRequest14sp2');
+    return $self->send_query(
+        'SystemProvisioningValidationGetRequest14sp2',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemProvisioningValidationModifyRequest (@params) {
-    return $self->send_command( 'SystemProvisioningValidationModifyRequest', @params );
+method SystemProvisioningValidationModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemProvisioningValidationModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemRedundancyParametersGetRequest16sp2 () {
-    return $self->send_query('SystemRedundancyParametersGetRequest16sp2');
+    return $self->send_query(
+        'SystemRedundancyParametersGetRequest16sp2',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemRedundancyParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemRedundancyParametersModifyRequest', @params );
+method SystemRedundancyParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemRedundancyParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoamingNetworkAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemRoamingNetworkAddRequest', mscAddress => $x0, @params );
+method SystemRoamingNetworkAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemRoamingNetworkAddRequest',
+        mscAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5004,18 +6031,26 @@ method SystemRoamingNetworkDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemRoamingNetworkGetListRequest (@params) {
-    return $self->send_query( 'SystemRoamingNetworkGetListRequest', @params );
+method SystemRoamingNetworkGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemRoamingNetworkGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoamingNetworkModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemRoamingNetworkModifyRequest', mscAddress => $x0, @params );
+method SystemRoamingNetworkModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemRoamingNetworkModifyRequest',
+        mscAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutePointExternalSystemAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemRoutePointExternalSystemAddRequest', name => $x0, @params );
+method SystemRoutePointExternalSystemAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemRoutePointExternalSystemAddRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5025,12 +6060,19 @@ method SystemRoutePointExternalSystemDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemRoutePointExternalSystemGetListRequest () {
-    return $self->send_query('SystemRoutePointExternalSystemGetListRequest');
+    return $self->send_query(
+        'SystemRoutePointExternalSystemGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutePointExternalSystemModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemRoutePointExternalSystemModifyRequest', name => $x0, @params );
+method SystemRoutePointExternalSystemModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemRoutePointExternalSystemModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5040,20 +6082,20 @@ method SystemRoutePointExternalSystemGetRoutePointListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutePointExternalSystemApplicationControllerAddListRequest ($x0, @params) {
+method SystemRoutePointExternalSystemApplicationControllerAddListRequest ($x0, @generic_params) {
     return $self->send_command(
         'SystemRoutePointExternalSystemApplicationControllerAddListRequest',
         name => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutePointExternalSystemApplicationControllerDeleteListRequest ($x0, @params) {
+method SystemRoutePointExternalSystemApplicationControllerDeleteListRequest ($x0, @generic_params) {
     return $self->send_command(
         'SystemRoutePointExternalSystemApplicationControllerDeleteListRequest',
         name => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -5063,8 +6105,13 @@ method SystemRoutePointExternalSystemApplicationControllerGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutingAddRouteDeviceRequest14 ($x0, $x1, @params) {
-    return $self->send_command( 'SystemRoutingAddRouteDeviceRequest14', routeName => $x0, netAddress => $x1, @params );
+method SystemRoutingAddRouteDeviceRequest14 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemRoutingAddRouteDeviceRequest14',
+        routeName  => $x0,
+        netAddress => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5074,12 +6121,21 @@ method SystemRoutingAddRouteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemRoutingAddTranslationRequest ($x0, $x1) {
-    return $self->send_command( 'SystemRoutingAddTranslationRequest', digits => $x0, routeName => $x1 );
+    return $self->send_command(
+        'SystemRoutingAddTranslationRequest',
+        digits    => $x0,
+        routeName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutingDeleteRouteDeviceRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemRoutingDeleteRouteDeviceRequest', routeName => $x0, netAddress => $x1, @params );
+method SystemRoutingDeleteRouteDeviceRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemRoutingDeleteRouteDeviceRequest',
+        routeName  => $x0,
+        netAddress => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5094,7 +6150,10 @@ method SystemRoutingDeleteTranslationRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemRoutingGetRequest () {
-    return $self->send_query('SystemRoutingGetRequest');
+    return $self->send_query(
+        'SystemRoutingGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5104,108 +6163,159 @@ method SystemRoutingGetRouteDeviceListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemRoutingGetRouteListRequest () {
-    return $self->send_query('SystemRoutingGetRouteListRequest');
+    return $self->send_query(
+        'SystemRoutingGetRouteListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemRoutingGetTranslationListRequest () {
-    return $self->send_query('SystemRoutingGetTranslationListRequest');
+    return $self->send_query(
+        'SystemRoutingGetTranslationListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutingModifyRequest (@params) {
-    return $self->send_command( 'SystemRoutingModifyRequest', @params );
+method SystemRoutingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemRoutingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutingModifyRouteDeviceRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemRoutingModifyRouteDeviceRequest', routeName => $x0, netAddress => $x1, @params );
+method SystemRoutingModifyRouteDeviceRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemRoutingModifyRouteDeviceRequest',
+        routeName  => $x0,
+        netAddress => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemRoutingModifyTranslationRequest ($x0, @params) {
-    return $self->send_command( 'SystemRoutingModifyTranslationRequest', digits => $x0, @params );
+method SystemRoutingModifyTranslationRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemRoutingModifyTranslationRequest',
+        digits => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemRoutingProfileGetListRequest () {
-    return $self->send_query('SystemRoutingProfileGetListRequest');
+    return $self->send_query(
+        'SystemRoutingProfileGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleAddEventRequest ($x0, $x1, $x2, @params) {
+method SystemScheduleAddEventRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'SystemScheduleAddEventRequest',
-        scheduleKey => $x0,
-        eventName   => $x1,
-        startDate   => $x2,
-        @params
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ],
+        eventName   => $x2,
+        startDate   => $x3,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemScheduleAddRequest ($x0, $x1) {
-    return $self->send_command( 'SystemScheduleAddRequest', scheduleName => $x0, scheduleType => $x1 );
+    return $self->send_command(
+        'SystemScheduleAddRequest',
+        scheduleName => $x0,
+        scheduleType => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleDeleteEventListRequest ($x0, $x1) {
-    return $self->send_command( 'SystemScheduleDeleteEventListRequest', scheduleKey => $x0, eventName => $x1 );
+method SystemScheduleDeleteEventListRequest ($x0, $x1, $x2) {
+    return $self->send_command(
+        'SystemScheduleDeleteEventListRequest',
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ],
+        eventName   => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleDeleteListRequest ($x0) {
-    return $self->send_command( 'SystemScheduleDeleteListRequest', scheduleKey => $x0 );
+method SystemScheduleDeleteListRequest ($x0, $x1) {
+    return $self->send_command( 'SystemScheduleDeleteListRequest',
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleGetEventListRequest ($x0) {
-    return $self->send_query( 'SystemScheduleGetEventListRequest', scheduleKey => $x0 );
+method SystemScheduleGetEventListRequest ($x0, $x1) {
+    return $self->send_query( 'SystemScheduleGetEventListRequest',
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleGetEventRequest ($x0, $x1) {
-    return $self->send_query( 'SystemScheduleGetEventRequest', scheduleKey => $x0, eventName => $x1 );
+method SystemScheduleGetEventRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'SystemScheduleGetEventRequest',
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ],
+        eventName   => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleGetListRequest (@params) {
-    return $self->send_query( 'SystemScheduleGetListRequest', @params );
+method SystemScheduleGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemScheduleGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleModifyEventRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemScheduleModifyEventRequest', scheduleKey => $x0, eventName => $x1, @params );
+method SystemScheduleModifyEventRequest ($x0, $x1, $x2, @generic_params) {
+    return $self->send_command(
+        'SystemScheduleModifyEventRequest',
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ],
+        eventName   => $x2,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemScheduleModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemScheduleModifyRequest', scheduleKey => $x0, @params );
+method SystemScheduleModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemScheduleModifyRequest',
+        scheduleKey => [ scheduleName => $x0, scheduleType => $x1 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemServerAddressesGetRequest () {
-    return $self->send_query('SystemServerAddressesGetRequest');
+    return $self->send_query(
+        'SystemServerAddressesGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemServerAddressesModifyRequest (@params) {
-    return $self->send_command( 'SystemServerAddressesModifyRequest', @params );
+method SystemServerAddressesModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemServerAddressesModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemServiceActivationAccessCodeGetRequest () {
-    return $self->send_query('SystemServiceActivationAccessCodeGetRequest');
+    return $self->send_query(
+        'SystemServiceActivationAccessCodeGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemServiceActivationAccessCodeModifyRequest (@params) {
-    return $self->send_command( 'SystemServiceActivationAccessCodeModifyRequest', @params );
+method SystemServiceActivationAccessCodeModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemServiceActivationAccessCodeModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemServiceCodeAddRequest ($x0, $x1) {
-    return $self->send_command( 'SystemServiceCodeAddRequest', serviceCode => $x0, description => $x1 );
+    return $self->send_command(
+        'SystemServiceCodeAddRequest',
+        serviceCode => $x0,
+        description => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5214,69 +6324,99 @@ method SystemServiceCodeDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemServiceCodeGetListRequest (@params) {
-    return $self->send_query( 'SystemServiceCodeGetListRequest', @params );
+method SystemServiceCodeGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemServiceCodeGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemServiceCodeModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemServiceCodeModifyRequest', serviceCode => $x0, @params );
+method SystemServiceCodeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemServiceCodeModifyRequest',
+        serviceCode => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemServiceControlParametersGetRequest () {
-    return $self->send_query('SystemServiceControlParametersGetRequest');
+    return $self->send_query(
+        'SystemServiceControlParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemServiceControlParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemServiceControlParametersModifyRequest', @params );
+method SystemServiceControlParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemServiceControlParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemSessionAuditGetRequest17sp3 () {
-    return $self->send_query('SystemSessionAuditGetRequest17sp3');
+    return $self->send_query(
+        'SystemSessionAuditGetRequest17sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSessionAuditModifyRequest14sp3 (@params) {
-    return $self->send_command( 'SystemSessionAuditModifyRequest14sp3', @params );
+method SystemSessionAuditModifyRequest14sp3 (@generic_params) {
+    return $self->send_command( 'SystemSessionAuditModifyRequest14sp3', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemShInterfaceParametersGetRequest17 () {
-    return $self->send_query('SystemShInterfaceParametersGetRequest17');
+    return $self->send_query(
+        'SystemShInterfaceParametersGetRequest17',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemShInterfaceParametersModifyRequest17 (@params) {
-    return $self->send_command( 'SystemShInterfaceParametersModifyRequest17', @params );
+method SystemShInterfaceParametersModifyRequest17 (@generic_params) {
+    return $self->send_command( 'SystemShInterfaceParametersModifyRequest17', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemShInterfaceRefreshTaskStartRequest () {
-    return $self->send_command('SystemShInterfaceRefreshTaskStartRequest');
+    return $self->send_command(
+        'SystemShInterfaceRefreshTaskStartRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemShInterfaceRefreshTaskGetRequest () {
-    return $self->send_query('SystemShInterfaceRefreshTaskGetRequest');
+    return $self->send_query(
+        'SystemShInterfaceRefreshTaskGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemShInterfaceRefreshTaskTerminateRequest () {
-    return $self->send_command('SystemShInterfaceRefreshTaskTerminateRequest');
+    return $self->send_command(
+        'SystemShInterfaceRefreshTaskTerminateRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPAddACLEntryRequest14sp2 ($x0, $x1, @params) {
-    return $self->send_command( 'SystemSIPAddACLEntryRequest14sp2', netAddress => $x0, transportProtocol => $x1,
-        @params );
+method SystemSIPAddACLEntryRequest14sp2 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemSIPAddACLEntryRequest14sp2',
+        netAddress        => $x0,
+        transportProtocol => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSIPAddContentTypeRequest ($x0, $x1) {
-    return $self->send_command( 'SystemSIPAddContentTypeRequest', contentType => $x0, interface => $x1 );
+    return $self->send_command(
+        'SystemSIPAddContentTypeRequest',
+        contentType => $x0,
+        interface   => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5290,7 +6430,7 @@ method SystemSIPDeleteContentTypeRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, $x16, $x17, @params) {
+method SystemSIPDeviceTypeAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, $x13, $x14, $x15, $x16, $x17, @generic_params) {
     return $self->send_command(
         'SystemSIPDeviceTypeAddRequest17sp4',
         deviceType              => $x0,
@@ -5306,7 +6446,7 @@ method SystemSIPDeviceTypeAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
         routeAdvance            => $x10,
         forwardingOverride      => $x11,
         wirelessIntegration     => $x12,
-        @params,
+        @generic_params,
         supportCallCenterMIMEType            => $x13,
         trunkMode                            => $x14,
         addPCalledPartyId                    => $x15,
@@ -5316,7 +6456,7 @@ method SystemSIPDeviceTypeAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeFileAddRequest16sp1 ($x0, $x1, $x2, $x3, $x4, $x5, @params) {
+method SystemSIPDeviceTypeFileAddRequest16sp1 ($x0, $x1, $x2, $x3, $x4, $x5, @generic_params) {
     return $self->send_command(
         'SystemSIPDeviceTypeFileAddRequest16sp1',
         deviceType        => $x0,
@@ -5325,7 +6465,7 @@ method SystemSIPDeviceTypeFileAddRequest16sp1 ($x0, $x1, $x2, $x3, $x4, $x5, @pa
         fileCategory      => $x3,
         fileCustomization => $x4,
         fileSource        => $x5,
-        @params
+        @generic_params
     );
 }
 
@@ -5335,8 +6475,8 @@ method SystemSIPDeviceTypeDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeGetListRequest (@params) {
-    return $self->send_query( 'SystemSIPDeviceTypeGetListRequest', @params );
+method SystemSIPDeviceTypeGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemSIPDeviceTypeGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -5345,33 +6485,55 @@ method SystemSIPDeviceTypeGetRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'SystemSIPDeviceTypeModifyRequest17', deviceType => $x0, @params );
+method SystemSIPDeviceTypeModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSIPDeviceTypeModifyRequest17',
+        deviceType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSIPGetACLListRequest () {
-    return $self->send_query('SystemSIPGetACLListRequest');
+    return $self->send_query(
+        'SystemSIPGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSIPGetContentTypeListRequest () {
-    return $self->send_query('SystemSIPGetContentTypeListRequest');
+    return $self->send_query(
+        'SystemSIPGetContentTypeListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPModifyACLEntryRequest14sp2 ($x0, @params) {
-    return $self->send_command( 'SystemSIPModifyACLEntryRequest14sp2', netAddress => $x0, @params );
+method SystemSIPModifyACLEntryRequest14sp2 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSIPModifyACLEntryRequest14sp2',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPModifyContentTypeRequest ($x0, @params) {
-    return $self->send_command( 'SystemSIPModifyContentTypeRequest', contentType => $x0, @params );
+method SystemSIPModifyContentTypeRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSIPModifyContentTypeRequest',
+        contentType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSMDIAddACLEntryRequest14sp2 ($x0, @params) {
-    return $self->send_command( 'SystemSMDIAddACLEntryRequest14sp2', netAddress => $x0, @params );
+method SystemSMDIAddACLEntryRequest14sp2 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSMDIAddACLEntryRequest14sp2',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5381,72 +6543,104 @@ method SystemSMDIDeleteACLEntryRequest14sp2 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemSMDIGetACLListRequest () {
-    return $self->send_query('SystemSMDIGetACLListRequest');
+    return $self->send_query(
+        'SystemSMDIGetACLListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSMDIModifyACLEntryRequest14sp2 ($x0, @params) {
-    return $self->send_command( 'SystemSMDIModifyACLEntryRequest14sp2', netAddress => $x0, @params );
+method SystemSMDIModifyACLEntryRequest14sp2 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSMDIModifyACLEntryRequest14sp2',
+        netAddress => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSMDIParametersGetRequest () {
-    return $self->send_query('SystemSMDIParametersGetRequest');
+    return $self->send_query(
+        'SystemSMDIParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSMDIParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemSMDIParametersModifyRequest', @params );
+method SystemSMDIParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemSMDIParametersModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemSMPPGetRequest14sp5 () {
-    return $self->send_query('SystemSMPPGetRequest14sp5');
+    return $self->send_query(
+        'SystemSMPPGetRequest14sp5',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSMPPModifyRequest (@params) {
-    return $self->send_command( 'SystemSMPPModifyRequest', @params );
+method SystemSMPPModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemSMPPModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemSoftwareVersionGetRequest () {
-    return $self->send_query('SystemSoftwareVersionGetRequest');
+    return $self->send_query(
+        'SystemSoftwareVersionGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemStateOrProvinceGetListRequest () {
-    return $self->send_query('SystemStateOrProvinceGetListRequest');
+    return $self->send_query(
+        'SystemStateOrProvinceGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSubscriberGetLoginParametersRequest () {
-    return $self->send_query('SystemSubscriberGetLoginParametersRequest');
+    return $self->send_query(
+        'SystemSubscriberGetLoginParametersRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSubscriberModifyLoginParametersRequest (@params) {
-    return $self->send_command( 'SystemSubscriberModifyLoginParametersRequest', @params );
+method SystemSubscriberModifyLoginParametersRequest (@generic_params) {
+    return $self->send_command( 'SystemSubscriberModifyLoginParametersRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemSubscriberModifyCallProcessingParametersRequest14sp7 (@params) {
-    return $self->send_command( 'SystemSubscriberModifyCallProcessingParametersRequest14sp7', @params );
+method SystemSubscriberModifyCallProcessingParametersRequest14sp7 (@generic_params) {
+    return $self->send_command( 'SystemSubscriberModifyCallProcessingParametersRequest14sp7', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemSubscriberGetCallProcessingParametersRequest17sp4 () {
-    return $self->send_query('SystemSubscriberGetCallProcessingParametersRequest17sp4');
+    return $self->send_query(
+        'SystemSubscriberGetCallProcessingParametersRequest17sp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemTimeZoneGetListRequest () {
-    return $self->send_query('SystemTimeZoneGetListRequest');
+    return $self->send_query(
+        'SystemTimeZoneGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeLanguageMappingModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemSIPDeviceTypeLanguageMappingModifyRequest', deviceType => $x0, @params );
+method SystemSIPDeviceTypeLanguageMappingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSIPDeviceTypeLanguageMappingModifyRequest',
+        deviceType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5456,16 +6650,20 @@ method SystemSIPDeviceTypeLanguageMappingGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemSIPDeviceTypeFileDeleteRequest14sp8 ($x0, $x1) {
-    return $self->send_command( 'SystemSIPDeviceTypeFileDeleteRequest14sp8', deviceType => $x0, fileFormat => $x1 );
+    return $self->send_command(
+        'SystemSIPDeviceTypeFileDeleteRequest14sp8',
+        deviceType => $x0,
+        fileFormat => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeFileModifyRequest16sp1 ($x0, $x1, @params) {
+method SystemSIPDeviceTypeFileModifyRequest16sp1 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemSIPDeviceTypeFileModifyRequest16sp1',
         deviceType => $x0,
         fileFormat => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -5476,12 +6674,20 @@ method SystemSIPDeviceTypeFileGetListRequest14sp8 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemSIPDeviceTypeFileGetRequest16sp1 ($x0, $x1) {
-    return $self->send_query( 'SystemSIPDeviceTypeFileGetRequest16sp1', deviceType => $x0, fileFormat => $x1 );
+    return $self->send_query(
+        'SystemSIPDeviceTypeFileGetRequest16sp1',
+        deviceType => $x0,
+        fileFormat => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSIPDeviceTypeServiceModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemSIPDeviceTypeServiceModifyRequest', deviceType => $x0, @params );
+method SystemSIPDeviceTypeServiceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSIPDeviceTypeServiceModifyRequest',
+        deviceType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5490,8 +6696,12 @@ method SystemSIPDeviceTypeServiceGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemZoneAddRequest', zoneName => $x0, @params );
+method SystemZoneAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemZoneAddRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5501,7 +6711,10 @@ method SystemZoneDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemZoneGetListRequest () {
-    return $self->send_query('SystemZoneGetListRequest');
+    return $self->send_query(
+        'SystemZoneGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5510,86 +6723,134 @@ method SystemZoneCallingZonePhysicalLocationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneCallingZonePhysicalLocationModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemZoneCallingZonePhysicalLocationModifyRequest', zoneName => $x0, @params );
+method SystemZoneCallingZonePhysicalLocationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemZoneCallingZonePhysicalLocationModifyRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneLocationBasedPhysicalLocationAddListRequest ($x0, @params) {
-    return $self->send_command( 'SystemZoneLocationBasedPhysicalLocationAddListRequest', zoneName => $x0, @params );
+method SystemZoneLocationBasedPhysicalLocationAddListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemZoneLocationBasedPhysicalLocationAddListRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneLocationBasedPhysicalLocationDeleteListRequest ($x0, @params) {
-    return $self->send_command( 'SystemZoneLocationBasedPhysicalLocationDeleteListRequest', zoneName => $x0, @params );
+method SystemZoneLocationBasedPhysicalLocationDeleteListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemZoneLocationBasedPhysicalLocationDeleteListRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneLocationBasedPhysicalLocationGetListRequest ($x0, @params) {
-    return $self->send_query( 'SystemZoneLocationBasedPhysicalLocationGetListRequest', zoneName => $x0, @params );
+method SystemZoneLocationBasedPhysicalLocationGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'SystemZoneLocationBasedPhysicalLocationGetListRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneNetAddressAddListRequest ($x0, @params) {
-    return $self->send_command( 'SystemZoneNetAddressAddListRequest', zoneName => $x0, @params );
+method SystemZoneNetAddressAddListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemZoneNetAddressAddListRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneNetAddressDeleteListRequest ($x0, @params) {
-    return $self->send_command( 'SystemZoneNetAddressDeleteListRequest', zoneName => $x0, @params );
+method SystemZoneNetAddressDeleteListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemZoneNetAddressDeleteListRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemZoneNetAddressGetListRequest ($x0, @params) {
-    return $self->send_query( 'SystemZoneNetAddressGetListRequest', zoneName => $x0, @params );
+method SystemZoneNetAddressGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'SystemZoneNetAddressGetListRequest',
+        zoneName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSelectiveServicesGetRequest () {
-    return $self->send_query('SystemSelectiveServicesGetRequest');
+    return $self->send_query(
+        'SystemSelectiveServicesGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSelectiveServicesModifyRequest (@params) {
-    return $self->send_command( 'SystemSelectiveServicesModifyRequest', @params );
+method SystemSelectiveServicesModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemSelectiveServicesModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## User
 ##
-method UserAccessDeviceFileGetListRequest ($x0, $x1) {
-    return $self->send_query( 'UserAccessDeviceFileGetListRequest', userId => $x0, accessDevice => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method UserAccessDeviceFileGetRequest ($x0, $x1, $x2) {
-    return $self->send_query( 'UserAccessDeviceFileGetRequest', userId => $x0, accessDevice => $x1, fileFormat => $x2 );
-}
-
-# ----------------------------------------------------------------------
-method UserAccessDeviceFileModifyRequest ($x0, $x1, $x2, $x3) {
-    return $self->send_command(
-        'UserAccessDeviceFileModifyRequest',
+method UserAccessDeviceFileGetListRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserAccessDeviceFileGetListRequest',
         userId       => $x0,
-        accessDevice => $x1,
-        fileFormat   => $x2,
-        uploadFile   => $x3
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method UserAccessDeviceResetRequest ($x0, $x1) {
-    return $self->send_command( 'UserAccessDeviceResetRequest', userId => $x0, accessDevice => $x1 );
+method UserAccessDeviceFileGetRequest ($x0, $x1, $x2, $x3) {
+    return $self->send_query(
+        'UserAccessDeviceFileGetRequest',
+        userId       => $x0,
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ],
+        fileFormat   => $x3
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserAccessDeviceTagsGetRequest ($x0, $x1) {
-    return $self->send_query( 'UserAccessDeviceTagsGetRequest', userId => $x0, accessDevice => $x1 );
+method UserAccessDeviceFileModifyRequest ($x0, $x1, $x2, $x3, $x4) {
+    return $self->send_command(
+        'UserAccessDeviceFileModifyRequest',
+        userId       => $x0,
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ],
+        fileFormat   => $x3,
+        uploadFile   => $x4
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @params) {
+method UserAccessDeviceResetRequest ($x0, $x1, $x2) {
+    return $self->send_command(
+        'UserAccessDeviceResetRequest',
+        userId       => $x0,
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ]
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserAccessDeviceTagsGetRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserAccessDeviceTagsGetRequest',
+        userId       => $x0,
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ]
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @generic_params) {
     return $self->send_command(
         'UserAddRequest17sp4',
         serviceProviderId      => $x0,
@@ -5599,13 +6860,13 @@ method UserAddRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @params) {
         firstName              => $x4,
         callingLineIdLastName  => $x5,
         callingLineIdFirstName => $x6,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserAssignedServicesGetListRequest (@params) {
-    return $self->send_query( 'UserAssignedServicesGetListRequest', @params );
+method UserAssignedServicesGetListRequest (@generic_params) {
+    return $self->send_query( 'UserAssignedServicesGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -5629,13 +6890,13 @@ method UserGetRegistrationListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserModifyRequest17sp4 (@params) {
-    return $self->send_query( 'UserModifyRequest17sp4', @params );
+method UserModifyRequest17sp4 (@generic_params) {
+    return $self->send_query( 'UserModifyRequest17sp4', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserCallLogsClearRequest14sp4 (@params) {
-    return $self->send_query( 'UserCallLogsClearRequest14sp4', @params );
+method UserCallLogsClearRequest14sp4 (@generic_params) {
+    return $self->send_query( 'UserCallLogsClearRequest14sp4', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -5644,8 +6905,12 @@ method UserCallPoliciesGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallPoliciesModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallPoliciesModifyRequest', userId => $x0, @params );
+method UserCallPoliciesModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallPoliciesModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5654,18 +6919,30 @@ method UserCallProcessingGetPolicyRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallProcessingModifyPolicyRequest14sp7 ($x0, @params) {
-    return $self->send_command( 'UserCallProcessingModifyPolicyRequest14sp7', userId => $x0, @params );
+method UserCallProcessingModifyPolicyRequest14sp7 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallProcessingModifyPolicyRequest14sp7',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCommunicationBarringAuthorizationCodeAddListRequest ($x0, @params) {
-    return $self->send_command( 'UserCommunicationBarringAuthorizationCodeAddListRequest', userId => $x0, @params );
+method UserCommunicationBarringAuthorizationCodeAddListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCommunicationBarringAuthorizationCodeAddListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCommunicationBarringAuthorizationCodeDeleteListRequest ($x0, @params) {
-    return $self->send_command( 'UserCommunicationBarringAuthorizationCodeDeleteListRequest', userId => $x0, @params );
+method UserCommunicationBarringAuthorizationCodeDeleteListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCommunicationBarringAuthorizationCodeDeleteListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5679,28 +6956,41 @@ method UserFeatureAccessCodeGetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserGetListInGroupRequest ($x0, $x1, @params) {
-    return $self->send_query( 'UserGetListInGroupRequest', serviceProviderId => $x0, GroupId => $x1, @params );
+method UserGetListInGroupRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'UserGetListInGroupRequest',
+        serviceProviderId => $x0,
+        GroupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserGetListInServiceProviderRequest ($x0, @params) {
-    return $self->send_query( 'UserGetListInServiceProviderRequest', serviceProviderId => $x0, @params );
+method UserGetListInServiceProviderRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserGetListInServiceProviderRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserGetListInSystemRequest (@params) {
-    return $self->send_query( 'UserGetListInSystemRequest', @params );
+method UserGetListInSystemRequest (@generic_params) {
+    return $self->send_query( 'UserGetListInSystemRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserGetServiceInstanceListInServiceProviderRequest ($x0, @params) {
-    return $self->send_query( 'UserGetServiceInstanceListInServiceProviderRequest', serviceProviderId => $x0, @params );
+method UserGetServiceInstanceListInServiceProviderRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserGetServiceInstanceListInServiceProviderRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserGetServiceInstanceListInSystemRequest (@params) {
-    return $self->send_query( 'UserGetServiceInstanceListInSystemRequest', @params );
+method UserGetServiceInstanceListInSystemRequest (@generic_params) {
+    return $self->send_query( 'UserGetServiceInstanceListInSystemRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -5710,7 +7000,11 @@ method UserLinePortGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserModifyUserIdRequest ($x0, $x1) {
-    return $self->send_command( 'UserModifyUserIdRequest', userId => $x0, newUserId => $x1 );
+    return $self->send_command(
+        'UserModifyUserIdRequest',
+        userId    => $x0,
+        newUserId => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5724,8 +7018,12 @@ method UserOCICallControlApplicationGetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOCICallControlApplicationModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOCICallControlApplicationModifyRequest', userId => $x0, @params );
+method UserOCICallControlApplicationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOCICallControlApplicationModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5734,45 +7032,70 @@ method UserPasswordInfoGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPersonalPhoneListAddListRequest ($x0, $x1) {
-    return $self->send_command( 'UserPersonalPhoneListAddListRequest', userId => $x0, entry => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method UserPersonalPhoneListDeleteListRequest ($x0, $x1) {
-    return $self->send_command( 'UserPersonalPhoneListDeleteListRequest', userId => $x0, entryName => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method UserPersonalPhoneListGetListRequest ($x0, @params) {
-    return $self->send_query( 'UserPersonalPhoneListGetListRequest', userId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method UserPersonalPhoneListModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserPersonalPhoneListModifyRequest', userId => $x0, entryName => $x1, @params );
-}
-
-# ----------------------------------------------------------------------
-method UserPhoneDirectoryGetListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'UserPhoneDirectoryGetListRequest', userId => $x0, includeCommonPhoneList => $x1,
-        @params );
-}
-
-# ----------------------------------------------------------------------
-method UserPhoneDirectoryGetPagedListRequest ($x0, $x1, $x2, @params) {
-    return $self->send_query(
-        'UserPhoneDirectoryGetPagedListRequest',
-        userId                    => $x0,
-        isEnterpriseInfoRequested => $x1,
-        responsePagingControl     => $x2,
-        @params
+method UserPersonalPhoneListAddListRequest ($x0, $x1, $x2) {
+    return $self->send_command(
+        'UserPersonalPhoneListAddListRequest',
+        userId => $x0,
+        entry  => [ entryName => $x1, phoneNumber => $x2 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method UserPhoneDirectoryGetSearchedListRequest ($x0, @params) {
-    return $self->send_query( 'UserPhoneDirectoryGetSearchedListRequest', userId => $x0, @params );
+method UserPersonalPhoneListDeleteListRequest ($x0, $x1) {
+    return $self->send_command(
+        'UserPersonalPhoneListDeleteListRequest',
+        userId    => $x0,
+        entryName => $x1
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserPersonalPhoneListGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserPersonalPhoneListGetListRequest',
+        userId => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserPersonalPhoneListModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserPersonalPhoneListModifyRequest',
+        userId    => $x0,
+        entryName => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserPhoneDirectoryGetListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'UserPhoneDirectoryGetListRequest',
+        userId                 => $x0,
+        includeCommonPhoneList => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserPhoneDirectoryGetPagedListRequest ($x0, $x1, $x2, $x3, @generic_params) {
+    return $self->send_query(
+        'UserPhoneDirectoryGetPagedListRequest',
+        userId                    => $x0,
+        isEnterpriseInfoRequested => $x1,
+        responsePagingControl     => [ responseStartIndex => $x2, responsePageSize => $x3 ],
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserPhoneDirectoryGetSearchedListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserPhoneDirectoryGetSearchedListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5781,76 +7104,111 @@ method UserPortalPasscodeGetInfoRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPortalPasscodeModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserPortalPasscodeModifyRequest', userId => $x0, @params, newPasscode => $x1 );
+method UserPortalPasscodeModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserPortalPasscodeModifyRequest',
+        userId => $x0,
+        @generic_params, newPasscode => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleAddEventRequest ($x0, $x1, $x2, $x3, @params) {
+method UserScheduleAddEventRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'UserScheduleAddEventRequest',
         userId      => $x0,
-        scheduleKey => $x1,
-        eventName   => $x2,
-        startDate   => $x3,
-        @params
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName   => $x3,
+        startDate   => $x4,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method UserScheduleAddRequest ($x0, $x1, $x2) {
-    return $self->send_command( 'UserScheduleAddRequest', userId => $x0, scheduleName => $x1, scheduleType => $x2 );
+    return $self->send_command(
+        'UserScheduleAddRequest',
+        userId       => $x0,
+        scheduleName => $x1,
+        scheduleType => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleDeleteEventListRequest ($x0, $x1, $x2) {
+method UserScheduleDeleteEventListRequest ($x0, $x1, $x2, $x3) {
     return $self->send_command(
         'UserScheduleDeleteEventListRequest',
         userId      => $x0,
-        scheduleKey => $x1,
-        eventName   => $x2
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName   => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleDeleteListRequest ($x0, $x1) {
-    return $self->send_command( 'UserScheduleDeleteListRequest', userId => $x0, scheduleKey => $x1 );
+method UserScheduleDeleteListRequest ($x0, $x1, $x2) {
+    return $self->send_command(
+        'UserScheduleDeleteListRequest',
+        userId      => $x0,
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleGetEventListRequest ($x0, $x1) {
-    return $self->send_query( 'UserScheduleGetEventListRequest', userId => $x0, scheduleKey => $x1 );
+method UserScheduleGetEventListRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserScheduleGetEventListRequest',
+        userId      => $x0,
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleGetEventRequest ($x0, $x1, $x2) {
-    return $self->send_query( 'UserScheduleGetEventRequest', userId => $x0, scheduleKey => $x1, eventName => $x2 );
+method UserScheduleGetEventRequest ($x0, $x1, $x2, $x3) {
+    return $self->send_query(
+        'UserScheduleGetEventRequest',
+        userId      => $x0,
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName   => $x3
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleGetListRequest17sp1 ($x0, @params) {
-    return $self->send_query( 'UserScheduleGetListRequest17sp1', userId => $x0, @params );
+method UserScheduleGetListRequest17sp1 ($x0, @generic_params) {
+    return $self->send_query(
+        'UserScheduleGetListRequest17sp1',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleModifyEventRequest ($x0, $x1, $x2, @params) {
+method UserScheduleModifyEventRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserScheduleModifyEventRequest',
         userId      => $x0,
-        scheduleKey => $x1,
-        eventName   => $x2,
-        @params
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ],
+        eventName   => $x3,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserScheduleModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserScheduleModifyRequest', userId => $x0, scheduleKey => $x1, @params );
+method UserScheduleModifyRequest ($x0, $x1, $x2, @generic_params) {
+    return $self->send_command(
+        'UserScheduleModifyRequest',
+        userId      => $x0,
+        scheduleKey => [ scheduleName => $x1, scheduleType => $x2 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserServiceAssignListRequest ($x0, @params) {
-    return $self->send_command( 'UserServiceAssignListRequest', userId => $x0, @params );
+method UserServiceAssignListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserServiceAssignListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5859,13 +7217,21 @@ method UserServiceGetAssignmentListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserServiceIsAssignedRequest ($x0, @params) {
-    return $self->send_query( 'UserServiceIsAssignedRequest', userId => $x0, @params );
+method UserServiceIsAssignedRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserServiceIsAssignedRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserServiceUnassignListRequest ($x0, @params) {
-    return $self->send_command( 'UserServiceUnassignListRequest', userId => $x0, @params );
+method UserServiceUnassignListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserServiceUnassignListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5879,8 +7245,12 @@ method UserShInterfaceGetUserIdDataRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserShInterfaceModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserShInterfaceModifyRequest', publicUserIdentity => $x0, @params );
+method UserShInterfaceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserShInterfaceModifyRequest',
+        publicUserIdentity => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5912,33 +7282,40 @@ method GroupAccountAuthorizationCodesDeleteListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAccountAuthorizationCodesGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupAccountAuthorizationCodesGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupAccountAuthorizationCodesGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupAccountAuthorizationCodesGetListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupAccountAuthorizationCodesGetListRequest', serviceProviderId => $x0,
-        groupId => $x1 );
+    return $self->send_query(
+        'GroupAccountAuthorizationCodesGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupAccountAuthorizationCodesGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupAccountAuthorizationCodesGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupAccountAuthorizationCodesGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupAccountAuthorizationCodesModifyRequest ($x0, $x1, @params) {
+method GroupAccountAuthorizationCodesModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupAccountAuthorizationCodesModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -5947,12 +7324,15 @@ method GroupAccountAuthorizationCodesModifyRequest ($x0, $x1, @params) {
 ## ServiceAdviceOfCharge
 ##
 method SystemAdviceOfChargeGetRequest () {
-    return $self->send_query('SystemAdviceOfChargeGetRequest');
+    return $self->send_query(
+        'SystemAdviceOfChargeGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAdviceOfChargeModifyRequest (@params) {
-    return $self->send_command( 'SystemAdviceOfChargeModifyRequest', @params );
+method SystemAdviceOfChargeModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemAdviceOfChargeModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -5961,8 +7341,12 @@ method UserAdviceOfChargeGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAdviceOfChargeModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserAdviceOfChargeModifyRequest', userId => $x0, @params );
+method UserAdviceOfChargeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAdviceOfChargeModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5974,8 +7358,12 @@ method UserAlternateNumbersGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAlternateNumbersModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserAlternateNumbersModifyRequest', userId => $x0, @params );
+method UserAlternateNumbersModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAlternateNumbersModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -5987,18 +7375,25 @@ method UserAnonymousCallRejectionGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAnonymousCallRejectionModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserAnonymousCallRejectionModifyRequest', userId => $x0, @params );
+method UserAnonymousCallRejectionModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAnonymousCallRejectionModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemAnonymousCallRejectionGetRequest () {
-    return $self->send_query('SystemAnonymousCallRejectionGetRequest');
+    return $self->send_query(
+        'SystemAnonymousCallRejectionGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAnonymousCallRejectionModifyRequest (@params) {
-    return $self->send_command( 'SystemAnonymousCallRejectionModifyRequest', @params );
+method SystemAnonymousCallRejectionModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemAnonymousCallRejectionModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -6006,27 +7401,42 @@ method SystemAnonymousCallRejectionModifyRequest (@params) {
 ## ServiceAttendantConsole
 ##
 method SystemAttendantConsoleGetRequest () {
-    return $self->send_query('SystemAttendantConsoleGetRequest');
+    return $self->send_query(
+        'SystemAttendantConsoleGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAttendantConsoleModifyRequest (@params) {
-    return $self->send_command( 'SystemAttendantConsoleModifyRequest', @params );
+method SystemAttendantConsoleModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemAttendantConsoleModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserAttendantConsoleAddUserListRequest ($x0, @params) {
-    return $self->send_command( 'UserAttendantConsoleAddUserListRequest', userId => $x0, @params );
+method UserAttendantConsoleAddUserListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAttendantConsoleAddUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserAttendantConsoleDeleteUserListRequest ($x0, @params) {
-    return $self->send_command( 'UserAttendantConsoleDeleteUserListRequest', userId => $x0, @params );
+method UserAttendantConsoleDeleteUserListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAttendantConsoleDeleteUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserAttendantConsoleGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserAttendantConsoleGetAvailableUserListRequest', userId => $x0, @params );
+method UserAttendantConsoleGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserAttendantConsoleGetAvailableUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6035,8 +7445,12 @@ method UserAttendantConsoleGetRequest14sp2 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAttendantConsoleModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserAttendantConsoleModifyRequest', userId => $x0, @params );
+method UserAttendantConsoleModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAttendantConsoleModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6048,15 +7462,15 @@ method UserAuthenticationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAuthenticationModifyRequest (@params) {
-    return $self->send_query( 'UserAuthenticationModifyRequest', @params );
+method UserAuthenticationModifyRequest (@generic_params) {
+    return $self->send_query( 'UserAuthenticationModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceAutoAttendant
 ##
-method GroupAutoAttendantAddInstanceRequest17sp1 ($x0, $x1, $x2, $x3, $x4, @params) {
+method GroupAutoAttendantAddInstanceRequest17sp1 ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'GroupAutoAttendantAddInstanceRequest17sp1',
         serviceProviderId      => $x0,
@@ -6064,7 +7478,7 @@ method GroupAutoAttendantAddInstanceRequest17sp1 ($x0, $x1, $x2, $x3, $x4, @para
         serviceUserId          => $x2,
         serviceInstanceProfile => $x3,
         enableVideo            => $x4,
-        @params
+        @generic_params
     );
 }
 
@@ -6074,12 +7488,12 @@ method GroupAutoAttendantDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAutoAttendantGetInstanceListRequest ($x0, $x1, @params) {
+method GroupAutoAttendantGetInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupAutoAttendantGetInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6089,13 +7503,17 @@ method GroupAutoAttendantGetInstanceRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupAutoAttendantModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupAutoAttendantModifyActiveInstanceListRequest', @params );
+method GroupAutoAttendantModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupAutoAttendantModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupAutoAttendantModifyInstanceRequest17sp1 ($x0, @params) {
-    return $self->send_command( 'GroupAutoAttendantModifyInstanceRequest17sp1', serviceUserId => $x0, @params );
+method GroupAutoAttendantModifyInstanceRequest17sp1 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupAutoAttendantModifyInstanceRequest17sp1',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6103,27 +7521,33 @@ method GroupAutoAttendantModifyInstanceRequest17sp1 ($x0, @params) {
 ## ServiceAutomaticCallback
 ##
 method SystemAutomaticCallbackGetRequest17 () {
-    return $self->send_query('SystemAutomaticCallbackGetRequest17');
+    return $self->send_query(
+        'SystemAutomaticCallbackGetRequest17',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAutomaticCallbackModifyRequest15 (@params) {
-    return $self->send_command( 'SystemAutomaticCallbackModifyRequest15', @params );
+method SystemAutomaticCallbackModifyRequest15 (@generic_params) {
+    return $self->send_command( 'SystemAutomaticCallbackModifyRequest15', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemAutomaticCallbackGetReleaseCauseListRequest () {
-    return $self->send_query('SystemAutomaticCallbackGetReleaseCauseListRequest');
+    return $self->send_query(
+        'SystemAutomaticCallbackGetReleaseCauseListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemAutomaticCallbackAddReleaseCauseListRequest (@params) {
-    return $self->send_command( 'SystemAutomaticCallbackAddReleaseCauseListRequest', @params );
+method SystemAutomaticCallbackAddReleaseCauseListRequest (@generic_params) {
+    return $self->send_command( 'SystemAutomaticCallbackAddReleaseCauseListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemAutomaticCallbackDeleteReleaseCauseListRequest (@params) {
-    return $self->send_command( 'SystemAutomaticCallbackDeleteReleaseCauseListRequest', @params );
+method SystemAutomaticCallbackDeleteReleaseCauseListRequest (@generic_params) {
+    return $self->send_command( 'SystemAutomaticCallbackDeleteReleaseCauseListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -6132,8 +7556,12 @@ method UserAutomaticCallbackGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAutomaticCallbackModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserAutomaticCallbackModifyRequest', userId => $x0, @params );
+method UserAutomaticCallbackModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAutomaticCallbackModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6145,8 +7573,12 @@ method UserAutomaticHoldRetrieveGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserAutomaticHoldRetrieveModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserAutomaticHoldRetrieveModifyRequest', userId => $x0, @params );
+method UserAutomaticHoldRetrieveModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserAutomaticHoldRetrieveModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6158,16 +7590,24 @@ method UserBargeInExemptGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserBargeInExemptModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBargeInExemptModifyRequest', userId => $x0, @params );
+method UserBargeInExemptModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBargeInExemptModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceBasicCallLogs
 ##
-method UserBasicCallLogsGetListRequest14sp4 ($x0, @params) {
-    return $self->send_query( 'UserBasicCallLogsGetListRequest14sp4', userId => $x0, @params );
+method UserBasicCallLogsGetListRequest14sp4 ($x0, @generic_params) {
+    return $self->send_query(
+        'UserBasicCallLogsGetListRequest14sp4',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6194,12 +7634,12 @@ method GroupBroadWorksAnywhereDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksAnywhereGetInstanceListRequest ($x0, $x1, @params) {
+method GroupBroadWorksAnywhereGetInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupBroadWorksAnywhereGetInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6209,22 +7649,26 @@ method GroupBroadWorksAnywhereGetInstanceRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksAnywhereModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupBroadWorksAnywhereModifyActiveInstanceListRequest', @params );
+method GroupBroadWorksAnywhereModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupBroadWorksAnywhereModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksAnywhereModifyInstanceRequest ($x0, @params) {
-    return $self->send_command( 'GroupBroadWorksAnywhereModifyInstanceRequest', serviceUserId => $x0, @params );
+method GroupBroadWorksAnywhereModifyInstanceRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupBroadWorksAnywhereModifyInstanceRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksAnywhereAddPhoneNumberRequest ($x0, $x1, $x2, $x3, $x4, @params) {
+method UserBroadWorksAnywhereAddPhoneNumberRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'UserBroadWorksAnywhereAddPhoneNumberRequest',
         userId      => $x0,
         phoneNumber => $x1,
-        @params,
+        @generic_params,
         broadworksCallControl      => $x2,
         useDiversionInhibitor      => $x3,
         answerConfirmationRequired => $x4
@@ -6232,13 +7676,13 @@ method UserBroadWorksAnywhereAddPhoneNumberRequest ($x0, $x1, $x2, $x3, $x4, @pa
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksAnywhereAddSelectiveCriteriaRequest16 ($x0, $x1, $x2, $x3, $x4, @params) {
+method UserBroadWorksAnywhereAddSelectiveCriteriaRequest16 ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'UserBroadWorksAnywhereAddSelectiveCriteriaRequest16',
         userId       => $x0,
         phoneNumber  => $x1,
         criteriaName => $x2,
-        @params,
+        @generic_params,
         blacklisted    => $x3,
         fromDnCriteria => $x4
     );
@@ -6246,7 +7690,11 @@ method UserBroadWorksAnywhereAddSelectiveCriteriaRequest16 ($x0, $x1, $x2, $x3, 
 
 # ----------------------------------------------------------------------
 method UserBroadWorksAnywhereDeletePhoneNumberRequest ($x0, $x1) {
-    return $self->send_command( 'UserBroadWorksAnywhereDeletePhoneNumberRequest', userId => $x0, phoneNumber => $x1 );
+    return $self->send_command(
+        'UserBroadWorksAnywhereDeletePhoneNumberRequest',
+        userId      => $x0,
+        phoneNumber => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6266,7 +7714,11 @@ method UserBroadWorksAnywhereGetAvailablePortalListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserBroadWorksAnywhereGetPhoneNumberRequest ($x0, $x1) {
-    return $self->send_query( 'UserBroadWorksAnywhereGetPhoneNumberRequest', userId => $x0, phoneNumber => $x1 );
+    return $self->send_query(
+        'UserBroadWorksAnywhereGetPhoneNumberRequest',
+        userId      => $x0,
+        phoneNumber => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6285,28 +7737,32 @@ method UserBroadWorksAnywhereGetSelectiveCriteriaRequest16 ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksAnywhereModifyPhoneNumberRequest ($x0, $x1, @params) {
+method UserBroadWorksAnywhereModifyPhoneNumberRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserBroadWorksAnywhereModifyPhoneNumberRequest',
         userId      => $x0,
         phoneNumber => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksAnywhereModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksAnywhereModifyRequest', userId => $x0, @params );
+method UserBroadWorksAnywhereModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksAnywhereModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksAnywhereModifySelectiveCriteriaRequest ($x0, $x1, $x2, @params) {
+method UserBroadWorksAnywhereModifySelectiveCriteriaRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserBroadWorksAnywhereModifySelectiveCriteriaRequest',
         userId       => $x0,
         phoneNumber  => $x1,
         criteriaName => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -6314,27 +7770,27 @@ method UserBroadWorksAnywhereModifySelectiveCriteriaRequest ($x0, $x1, $x2, @par
 ##
 ## ServiceBroadWorksMobility
 ##
-method SystemBroadWorksMobilityAddIMRNListRequest (@params) {
-    return $self->send_command( 'SystemBroadWorksMobilityAddIMRNListRequest', @params );
+method SystemBroadWorksMobilityAddIMRNListRequest (@generic_params) {
+    return $self->send_command( 'SystemBroadWorksMobilityAddIMRNListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksMobilityDeleteIMRNListRequest (@params) {
-    return $self->send_command( 'SystemBroadWorksMobilityDeleteIMRNListRequest', @params );
+method SystemBroadWorksMobilityDeleteIMRNListRequest (@generic_params) {
+    return $self->send_command( 'SystemBroadWorksMobilityDeleteIMRNListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksMobilityGetIMRNListRequest (@params) {
-    return $self->send_query( 'SystemBroadWorksMobilityGetIMRNListRequest', @params );
+method SystemBroadWorksMobilityGetIMRNListRequest (@generic_params) {
+    return $self->send_query( 'SystemBroadWorksMobilityGetIMRNListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksMobilityServiceAccessCodeAddRequest ($x0, $x1, @params) {
+method SystemBroadWorksMobilityServiceAccessCodeAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemBroadWorksMobilityServiceAccessCodeAddRequest',
         serviceAccessCode => $x0,
         countryCode       => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6349,27 +7805,33 @@ method SystemBroadWorksMobilityServiceAccessCodeDeleteRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method SystemBroadWorksMobilityServiceAccessCodeGetListRequest () {
-    return $self->send_query('SystemBroadWorksMobilityServiceAccessCodeGetListRequest');
+    return $self->send_query(
+        'SystemBroadWorksMobilityServiceAccessCodeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksMobilityServiceAccessCodeModifyRequest ($x0, $x1, @params) {
+method SystemBroadWorksMobilityServiceAccessCodeModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemBroadWorksMobilityServiceAccessCodeModifyRequest',
         countryCode       => $x0,
         serviceAccessCode => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemBroadWorksMobilityGetRequest () {
-    return $self->send_query('SystemBroadWorksMobilityGetRequest');
+    return $self->send_query(
+        'SystemBroadWorksMobilityGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksMobilityModifyRequest (@params) {
-    return $self->send_command( 'SystemBroadWorksMobilityModifyRequest', @params );
+method SystemBroadWorksMobilityModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemBroadWorksMobilityModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -6378,22 +7840,30 @@ method ServiceProviderBroadWorksMobilityGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderBroadWorksMobilityModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderBroadWorksMobilityModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderBroadWorksMobilityModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderBroadWorksMobilityModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupBroadWorksMobilityGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupBroadWorksMobilityGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupBroadWorksMobilityGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupBroadWorksMobilityModifyRequest ($x0, $x1, @params) {
+method GroupBroadWorksMobilityModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupBroadWorksMobilityModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6403,8 +7873,12 @@ method UserBroadWorksMobilityGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksMobilityModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksMobilityModifyRequest', userId => $x0, @params );
+method UserBroadWorksMobilityModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksMobilityModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6412,17 +7886,24 @@ method UserBroadWorksMobilityModifyRequest ($x0, @params) {
 ## ServiceBusyLampField
 ##
 method SystemBusyLampFieldGetRequest () {
-    return $self->send_query('SystemBusyLampFieldGetRequest');
+    return $self->send_query(
+        'SystemBusyLampFieldGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBusyLampFieldModifyRequest (@params) {
-    return $self->send_command( 'SystemBusyLampFieldModifyRequest', @params );
+method SystemBusyLampFieldModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemBusyLampFieldModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserBusyLampFieldGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserBusyLampFieldGetAvailableUserListRequest', userId => $x0, @params );
+method UserBusyLampFieldGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserBusyLampFieldGetAvailableUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6431,42 +7912,46 @@ method UserBusyLampFieldGetRequest16sp2 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserBusyLampFieldModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBusyLampFieldModifyRequest', userId => $x0, @params );
+method UserBusyLampFieldModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBusyLampFieldModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceCallCapacityManagement
 ##
-method GroupCallCapacityManagementAddInstanceRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupCallCapacityManagementAddInstanceRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupCallCapacityManagementAddInstanceRequest',
         serviceProviderId     => $x0,
         groupId               => $x1,
         name                  => $x2,
         maxActiveCallsAllowed => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCapacityManagementDeleteInstanceListRequest ($x0, $x1, @params) {
+method GroupCallCapacityManagementDeleteInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallCapacityManagementDeleteInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCapacityManagementGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupCallCapacityManagementGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallCapacityManagementGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6490,35 +7975,35 @@ method GroupCallCapacityManagementGetInstanceRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCapacityManagementModifyInstanceRequest ($x0, $x1, $x2, @params) {
+method GroupCallCapacityManagementModifyInstanceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCapacityManagementModifyInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCapacityManagementAddUserListRequest ($x0, $x1, $x2, @params) {
+method GroupCallCapacityManagementAddUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCapacityManagementAddUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCapacityManagementDeleteUserListRequest ($x0, $x1, $x2, @params) {
+method GroupCallCapacityManagementDeleteUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCapacityManagementDeleteUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -6526,13 +8011,13 @@ method GroupCallCapacityManagementDeleteUserListRequest ($x0, $x1, $x2, @params)
 ##
 ## ServiceCallCenter
 ##
-method EnterpriseCallCenterAgentUnavailableCodeAddRequest ($x0, $x1, $x2, @params) {
+method EnterpriseCallCenterAgentUnavailableCodeAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterAgentUnavailableCodeAddRequest',
         serviceProviderId => $x0,
         isActive          => $x1,
         code              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -6560,12 +8045,12 @@ method EnterpriseCallCenterAgentUnavailableCodeGetRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterAgentUnavailableCodeModifyRequest ($x0, $x1, @params) {
+method EnterpriseCallCenterAgentUnavailableCodeModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterAgentUnavailableCodeModifyRequest',
         serviceProviderId => $x0,
         code              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6575,22 +8060,22 @@ method EnterpriseCallCenterAgentUnavailableCodeSettingsGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterAgentUnavailableCodeSettingsModifyRequest ($x0, @params) {
+method EnterpriseCallCenterAgentUnavailableCodeSettingsModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterAgentUnavailableCodeSettingsModifyRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterCallDispositionCodeAddRequest ($x0, $x1, $x2, @params) {
+method EnterpriseCallCenterCallDispositionCodeAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterCallDispositionCodeAddRequest',
         serviceProviderId => $x0,
         code              => $x1,
         isActive          => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -6610,8 +8095,11 @@ method EnterpriseCallCenterCallDispositionCodeGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method EnterpriseCallCenterCallDispositionCodeGetRequest ($x0, $x1) {
-    return $self->send_query( 'EnterpriseCallCenterCallDispositionCodeGetRequest', serviceProviderId => $x0,
-        code => $x1 );
+    return $self->send_query(
+        'EnterpriseCallCenterCallDispositionCodeGetRequest',
+        serviceProviderId => $x0,
+        code              => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -6624,36 +8112,39 @@ method EnterpriseCallCenterCallDispositionCodeGetUsageListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterCallDispositionCodeModifyRequest ($x0, $x1, @params) {
+method EnterpriseCallCenterCallDispositionCodeModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterCallDispositionCodeModifyRequest',
         serviceProviderId => $x0,
         code              => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterCallDispositionCodeModifyActiveListRequest ($x0, @params) {
+method EnterpriseCallCenterCallDispositionCodeModifyActiveListRequest ($x0, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterCallDispositionCodeModifyActiveListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterCurrentAndPastAgentGetListRequest ($x0, @params) {
-    return $self->send_query( 'EnterpriseCallCenterCurrentAndPastAgentGetListRequest', serviceProviderId => $x0,
-        @params );
+method EnterpriseCallCenterCurrentAndPastAgentGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'EnterpriseCallCenterCurrentAndPastAgentGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterCurrentAndPastCallCenterGetListRequest ($x0, @params) {
+method EnterpriseCallCenterCurrentAndPastCallCenterGetListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseCallCenterCurrentAndPastCallCenterGetListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -6672,11 +8163,11 @@ method EnterpriseCallCenterEnhancedReportingBrandingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingBrandingModifyRequest ($x0, @params) {
+method EnterpriseCallCenterEnhancedReportingBrandingModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterEnhancedReportingBrandingModifyRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -6692,18 +8183,21 @@ method EnterpriseCallCenterEnhancedReportingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingModifyRequest ($x0, @params) {
-    return $self->send_command( 'EnterpriseCallCenterEnhancedReportingModifyRequest', serviceProviderId => $x0,
-        @params );
+method EnterpriseCallCenterEnhancedReportingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'EnterpriseCallCenterEnhancedReportingModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingReportTemplateAddRequest ($x0, $x1, @params) {
+method EnterpriseCallCenterEnhancedReportingReportTemplateAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterEnhancedReportingReportTemplateAddRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6732,22 +8226,22 @@ method EnterpriseCallCenterEnhancedReportingReportTemplateGetRequest ($x0, $x1) 
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingReportTemplateModifyRequest ($x0, $x1, @params) {
+method EnterpriseCallCenterEnhancedReportingReportTemplateModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterEnhancedReportingReportTemplateModifyRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingScheduledReportAddRequest ($x0, $x1, @params) {
+method EnterpriseCallCenterEnhancedReportingScheduledReportAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterEnhancedReportingScheduledReportAddRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6761,29 +8255,29 @@ method EnterpriseCallCenterEnhancedReportingScheduledReportDeleteRequest ($x0, $
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingScheduledReportGetActiveListRequest ($x0, @params) {
+method EnterpriseCallCenterEnhancedReportingScheduledReportGetActiveListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseCallCenterEnhancedReportingScheduledReportGetActiveListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingScheduledReportGetCompletedListRequest ($x0, @params) {
+method EnterpriseCallCenterEnhancedReportingScheduledReportGetCompletedListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseCallCenterEnhancedReportingScheduledReportGetCompletedListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingScheduledReportGetListRequest ($x0, @params) {
+method EnterpriseCallCenterEnhancedReportingScheduledReportGetListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseCallCenterEnhancedReportingScheduledReportGetListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -6806,12 +8300,12 @@ method EnterpriseCallCenterEnhancedReportingScheduledReportGetReportTemplateUsag
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterEnhancedReportingScheduledReportModifyRequest ($x0, $x1, @params) {
+method EnterpriseCallCenterEnhancedReportingScheduledReportModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseCallCenterEnhancedReportingScheduledReportModifyRequest',
         serviceProviderId => $x0,
         name              => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6826,22 +8320,34 @@ method EnterpriseCallCenterGetRoutingPolicyRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterModifyRequest ($x0, @params) {
-    return $self->send_command( 'EnterpriseCallCenterModifyRequest', serviceProviderId => $x0, @params );
+method EnterpriseCallCenterModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'EnterpriseCallCenterModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseCallCenterModifyRoutingPolicyRequest ($x0, @params) {
-    return $self->send_command( 'EnterpriseCallCenterModifyRoutingPolicyRequest', serviceProviderId => $x0, @params );
+method EnterpriseCallCenterModifyRoutingPolicyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'EnterpriseCallCenterModifyRoutingPolicyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddAgentListRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterAddAgentListRequest', serviceUserId => $x0, @params );
+method GroupCallCenterAddAgentListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterAddAgentListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @params) {
+method GroupCallCenterAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, @generic_params) {
     return $self->send_command(
         'GroupCallCenterAddInstanceRequest17sp3',
         serviceProviderId      => $x0,
@@ -6852,7 +8358,7 @@ method GroupCallCenterAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6
         policy                 => $x5,
         enableVideo            => $x6,
         queueLength            => $x7,
-        @params,
+        @generic_params,
         externalPreferredAudioCodec => $x8,
         internalPreferredAudioCodec => $x9,
         playRingingWhenOfferingCall => $x10
@@ -6860,31 +8366,35 @@ method GroupCallCenterAddInstanceRequest17sp3 ($x0, $x1, $x2, $x3, $x4, $x5, $x6
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddDNISRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupCallCenterAddDNISRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'GroupCallCenterAddDNISRequest',
-        dnisKey => $x0,
-        @params,
-        useCustomDnisAnnouncementSettings => $x1,
-        priority                          => $x2,
-        allowOutgoingACDCall              => $x3
+        dnisKey => [ serviceUserId => $x0, name => $x1 ],
+        @generic_params,
+        useCustomDnisAnnouncementSettings => $x2,
+        priority                          => $x3,
+        allowOutgoingACDCall              => $x4
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAddSupervisorListRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterAddSupervisorListRequest', serviceUserId => $x0, @params );
+method GroupCallCenterAddSupervisorListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterAddSupervisorListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAgentUnavailableCodeAddRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupCallCenterAgentUnavailableCodeAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupCallCenterAgentUnavailableCodeAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         isActive          => $x2,
         code              => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -6918,13 +8428,13 @@ method GroupCallCenterAgentUnavailableCodeGetRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAgentUnavailableCodeModifyRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterAgentUnavailableCodeModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterAgentUnavailableCodeModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         code              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -6938,12 +8448,12 @@ method GroupCallCenterAgentUnavailableCodeSettingsGetRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterAgentUnavailableCodeSettingsModifyRequest ($x0, $x1, @params) {
+method GroupCallCenterAgentUnavailableCodeSettingsModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallCenterAgentUnavailableCodeSettingsModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -6953,19 +8463,23 @@ method GroupCallCenterBouncedCallGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterBouncedCallModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterBouncedCallModifyRequest', serviceUserId => $x0, @params );
+method GroupCallCenterBouncedCallModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterBouncedCallModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterCallDispositionCodeAddRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupCallCenterCallDispositionCodeAddRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupCallCenterCallDispositionCodeAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         code              => $x2,
         isActive          => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -7009,23 +8523,23 @@ method GroupCallCenterCallDispositionCodeGetUsageListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterCallDispositionCodeModifyRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterCallDispositionCodeModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterCallDispositionCodeModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         code              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterCallDispositionCodeModifyActiveListRequest ($x0, $x1, @params) {
+method GroupCallCenterCallDispositionCodeModifyActiveListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallCenterCallDispositionCodeModifyActiveListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -7035,24 +8549,31 @@ method GroupCallCenterComfortMessageBypassGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterComfortMessageBypassModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterComfortMessageBypassModifyRequest17', serviceUserId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupCallCenterCurrentAndPastAgentGetListRequest ($x0, $x1, @params) {
-    return $self->send_query(
-        'GroupCallCenterCurrentAndPastAgentGetListRequest',
-        serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+method GroupCallCenterComfortMessageBypassModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterComfortMessageBypassModifyRequest17',
+        serviceUserId => $x0,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterCurrentAndPastCallCenterGetListRequest ($x0, @params) {
-    return $self->send_query( 'GroupCallCenterCurrentAndPastCallCenterGetListRequest', serviceProviderId => $x0,
-        @params );
+method GroupCallCenterCurrentAndPastAgentGetListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupCallCenterCurrentAndPastAgentGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupCallCenterCurrentAndPastCallCenterGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'GroupCallCenterCurrentAndPastCallCenterGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7066,13 +8587,17 @@ method GroupCallCenterCurrentAndPastDNISGetListRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterDeleteAgentListRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterDeleteAgentListRequest', serviceUserId => $x0, @params );
+method GroupCallCenterDeleteAgentListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterDeleteAgentListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterDeleteDNISRequest ($x0) {
-    return $self->send_command( 'GroupCallCenterDeleteDNISRequest', dnisKey => $x0 );
+method GroupCallCenterDeleteDNISRequest ($x0, $x1) {
+    return $self->send_command( 'GroupCallCenterDeleteDNISRequest', dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
@@ -7081,8 +8606,12 @@ method GroupCallCenterDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterDeleteSupervisorListRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterDeleteSupervisorListRequest', serviceUserId => $x0, @params );
+method GroupCallCenterDeleteSupervisorListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterDeleteSupervisorListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7091,8 +8620,12 @@ method GroupCallCenterDistinctiveRingingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterDistinctiveRingingModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterDistinctiveRingingModifyRequest', serviceUserId => $x0, @params );
+method GroupCallCenterDistinctiveRingingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterDistinctiveRingingModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7105,12 +8638,12 @@ method GroupCallCenterEnhancedReportingBrandingGetRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingBrandingModifyRequest ($x0, $x1, @params) {
+method GroupCallCenterEnhancedReportingBrandingModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallCenterEnhancedReportingBrandingModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -7125,27 +8658,31 @@ method GroupCallCenterEnhancedReportingGetAvailableReportTemplateListRequest ($x
 
 # ----------------------------------------------------------------------
 method GroupCallCenterEnhancedReportingGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallCenterEnhancedReportingGetRequest', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupCallCenterEnhancedReportingModifyRequest',
+    return $self->send_query(
+        'GroupCallCenterEnhancedReportingGetRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingReportTemplateAddRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterEnhancedReportingModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterEnhancedReportingModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupCallCenterEnhancedReportingReportTemplateAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterEnhancedReportingReportTemplateAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -7179,24 +8716,24 @@ method GroupCallCenterEnhancedReportingReportTemplateGetRequest ($x0, $x1, $x2) 
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingReportTemplateModifyRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterEnhancedReportingReportTemplateModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterEnhancedReportingReportTemplateModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingScheduledReportAddRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterEnhancedReportingScheduledReportAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterEnhancedReportingScheduledReportAddRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -7211,32 +8748,32 @@ method GroupCallCenterEnhancedReportingScheduledReportDeleteRequest ($x0, $x1, $
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingScheduledReportGetActiveListRequest ($x0, $x1, @params) {
+method GroupCallCenterEnhancedReportingScheduledReportGetActiveListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallCenterEnhancedReportingScheduledReportGetActiveListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingScheduledReportGetCompletedListRequest ($x0, $x1, @params) {
+method GroupCallCenterEnhancedReportingScheduledReportGetCompletedListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallCenterEnhancedReportingScheduledReportGetCompletedListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingScheduledReportGetListRequest ($x0, $x1, @params) {
+method GroupCallCenterEnhancedReportingScheduledReportGetListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallCenterEnhancedReportingScheduledReportGetListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -7261,13 +8798,13 @@ method GroupCallCenterEnhancedReportingScheduledReportGetRequest ($x0, $x1, $x2)
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterEnhancedReportingScheduledReportModifyRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterEnhancedReportingScheduledReportModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterEnhancedReportingScheduledReportModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -7277,13 +8814,21 @@ method GroupCallCenterForcedForwardingGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterForcedForwardingModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterForcedForwardingModifyRequest17', serviceUserId => $x0, @params );
+method GroupCallCenterForcedForwardingModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterForcedForwardingModifyRequest17',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetAgentListRequest ($x0, @params) {
-    return $self->send_query( 'GroupCallCenterGetAgentListRequest', serviceUserId => $x0, @params );
+method GroupCallCenterGetAgentListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'GroupCallCenterGetAgentListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7292,34 +8837,36 @@ method GroupCallCenterGetAnnouncementRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetAvailableAgentListRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterGetAvailableAgentListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupCallCenterGetAvailableAgentListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         callCenterType    => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetAvailableSupervisorListRequest ($x0, $x1, @params) {
+method GroupCallCenterGetAvailableSupervisorListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallCenterGetAvailableSupervisorListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetDNISAgentListRequest ($x0) {
-    return $self->send_query( 'GroupCallCenterGetDNISAgentListRequest', dnisKey => $x0 );
+method GroupCallCenterGetDNISAgentListRequest ($x0, $x1) {
+    return $self->send_query( 'GroupCallCenterGetDNISAgentListRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetDNISAnnouncementRequest ($x0) {
-    return $self->send_query( 'GroupCallCenterGetDNISAnnouncementRequest', dnisKey => $x0 );
+method GroupCallCenterGetDNISAnnouncementRequest ($x0, $x1) {
+    return $self->send_query( 'GroupCallCenterGetDNISAnnouncementRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
@@ -7328,14 +8875,18 @@ method GroupCallCenterGetDNISListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetDNISRequest ($x0) {
-    return $self->send_query( 'GroupCallCenterGetDNISRequest', dnisKey => $x0 );
+method GroupCallCenterGetDNISRequest ($x0, $x1) {
+    return $self->send_query( 'GroupCallCenterGetDNISRequest', dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterGetInstanceListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupCallCenterGetInstanceListRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupCallCenterGetInstanceListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupCallCenterGetInstanceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7369,12 +8920,20 @@ method GroupCallCenterGetInstanceQueueStatusRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method GroupCallCenterGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallCenterGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallCenterGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupCallCenterGetRoutingPolicyRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallCenterGetRoutingPolicyRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallCenterGetRoutingPolicyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7397,86 +8956,127 @@ method GroupCallCenterHolidayServiceGetRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterHolidayServiceModifyRequest17sp1 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterHolidayServiceModifyRequest17sp1', serviceUserId => $x0, @params );
+method GroupCallCenterHolidayServiceModifyRequest17sp1 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterHolidayServiceModifyRequest17sp1',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupCallCenterModifyActiveInstanceListRequest', @params );
+method GroupCallCenterModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupCallCenterModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyAgentListRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyAgentListRequest', serviceUserId => $x0, @params );
+method GroupCallCenterModifyAgentListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyAgentListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyAnnouncementRequest17 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyAnnouncementRequest17', serviceUserId => $x0, @params );
+method GroupCallCenterModifyAnnouncementRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyAnnouncementRequest17',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyDNISAnnouncementRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyDNISAnnouncementRequest', dnisKey => $x0, @params );
+method GroupCallCenterModifyDNISAnnouncementRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyDNISAnnouncementRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyDistinctiveRingingRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyDistinctiveRingingRequest', serviceUserId => $x0, @params );
+method GroupCallCenterModifyDistinctiveRingingRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyDistinctiveRingingRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyDNISParametersRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyDNISParametersRequest', serviceUserId => $x0, @params );
+method GroupCallCenterModifyDNISParametersRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyDNISParametersRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyDNISRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyDNISRequest', dnisKey => $x0, @params );
+method GroupCallCenterModifyDNISRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyDNISRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyInstanceRequest17sp1 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifyInstanceRequest17sp1', serviceUserId => $x0, @params );
+method GroupCallCenterModifyInstanceRequest17sp1 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyInstanceRequest17sp1',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyInstanceStatisticsReportingRequest17sp1 ($x0, @params) {
+method GroupCallCenterModifyInstanceStatisticsReportingRequest17sp1 ($x0, @generic_params) {
     return $self->send_command(
         'GroupCallCenterModifyInstanceStatisticsReportingRequest17sp1',
         serviceUserId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyInstanceWeightedCallDistributionRequest ($x0, @params) {
+method GroupCallCenterModifyInstanceWeightedCallDistributionRequest ($x0, @generic_params) {
     return $self->send_command(
         'GroupCallCenterModifyInstanceWeightedCallDistributionRequest',
         serviceUserId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupCallCenterModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupCallCenterModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifyRoutingPolicyRequest ($x0, $x1, @params) {
+method GroupCallCenterModifyRoutingPolicyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallCenterModifyRoutingPolicyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterModifySupervisorListRequest16 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterModifySupervisorListRequest16', serviceUserId => $x0, @params );
+method GroupCallCenterModifySupervisorListRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterModifySupervisorListRequest16',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7485,8 +9085,12 @@ method GroupCallCenterNightServiceGetRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterNightServiceModifyRequest17sp1 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterNightServiceModifyRequest17sp1', serviceUserId => $x0, @params );
+method GroupCallCenterNightServiceModifyRequest17sp1 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterNightServiceModifyRequest17sp1',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7495,8 +9099,12 @@ method GroupCallCenterOverflowGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterOverflowModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterOverflowModifyRequest17', serviceUserId => $x0, @params );
+method GroupCallCenterOverflowModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterOverflowModifyRequest17',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7505,18 +9113,22 @@ method GroupCallCenterQueueStatusNotificationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterQueueStatusNotificationModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterQueueStatusNotificationModifyRequest', serviceUserId => $x0, @params );
+method GroupCallCenterQueueStatusNotificationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterQueueStatusNotificationModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterQueueCallDispositionCodeAddRequest ($x0, $x1, $x2, @params) {
+method GroupCallCenterQueueCallDispositionCodeAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallCenterQueueCallDispositionCodeAddRequest',
         serviceUserId => $x0,
         code          => $x1,
         isActive      => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -7536,16 +9148,20 @@ method GroupCallCenterQueueCallDispositionCodeGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method GroupCallCenterQueueCallDispositionCodeGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallCenterQueueCallDispositionCodeGetRequest', serviceUserId => $x0, code => $x1 );
+    return $self->send_query(
+        'GroupCallCenterQueueCallDispositionCodeGetRequest',
+        serviceUserId => $x0,
+        code          => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterQueueCallDispositionCodeModifyRequest ($x0, $x1, @params) {
+method GroupCallCenterQueueCallDispositionCodeModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallCenterQueueCallDispositionCodeModifyRequest',
         serviceUserId => $x0,
         code          => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -7555,11 +9171,11 @@ method GroupCallCenterQueueCallDispositionCodeSettingsGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterQueueCallDispositionCodeSettingsModifyRequest ($x0, @params) {
+method GroupCallCenterQueueCallDispositionCodeSettingsModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'GroupCallCenterQueueCallDispositionCodeSettingsModifyRequest',
         serviceUserId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -7569,38 +9185,55 @@ method GroupCallCenterStrandedCallGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallCenterStrandedCallModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'GroupCallCenterStrandedCallModifyRequest17', serviceUserId => $x0, @params );
+method GroupCallCenterStrandedCallModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupCallCenterStrandedCallModifyRequest17',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallCenterEnhancedReportingBrandingGetRequest () {
-    return $self->send_query('SystemCallCenterEnhancedReportingBrandingGetRequest');
+    return $self->send_query(
+        'SystemCallCenterEnhancedReportingBrandingGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingBrandingModifyRequest (@params) {
-    return $self->send_command( 'SystemCallCenterEnhancedReportingBrandingModifyRequest', @params );
+method SystemCallCenterEnhancedReportingBrandingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallCenterEnhancedReportingBrandingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallCenterEnhancedReportingDataTemplateGetListRequest () {
-    return $self->send_query('SystemCallCenterEnhancedReportingDataTemplateGetListRequest');
+    return $self->send_query(
+        'SystemCallCenterEnhancedReportingDataTemplateGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallCenterEnhancedReportingGetRequest () {
-    return $self->send_query('SystemCallCenterEnhancedReportingGetRequest');
+    return $self->send_query(
+        'SystemCallCenterEnhancedReportingGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingModifyRequest (@params) {
-    return $self->send_command( 'SystemCallCenterEnhancedReportingModifyRequest', @params );
+method SystemCallCenterEnhancedReportingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallCenterEnhancedReportingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingReportTemplateAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemCallCenterEnhancedReportingReportTemplateAddRequest', name => $x0, @params );
+method SystemCallCenterEnhancedReportingReportTemplateAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCallCenterEnhancedReportingReportTemplateAddRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7610,7 +9243,10 @@ method SystemCallCenterEnhancedReportingReportTemplateDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCallCenterEnhancedReportingReportTemplateGetListRequest () {
-    return $self->send_query('SystemCallCenterEnhancedReportingReportTemplateGetListRequest');
+    return $self->send_query(
+        'SystemCallCenterEnhancedReportingReportTemplateGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7619,23 +9255,28 @@ method SystemCallCenterEnhancedReportingReportTemplateGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingReportTemplateModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCallCenterEnhancedReportingReportTemplateModifyRequest', name => $x0, @params );
+method SystemCallCenterEnhancedReportingReportTemplateModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCallCenterEnhancedReportingReportTemplateModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingScheduledReportGetActiveListRequest (@params) {
-    return $self->send_query( 'SystemCallCenterEnhancedReportingScheduledReportGetActiveListRequest', @params );
+method SystemCallCenterEnhancedReportingScheduledReportGetActiveListRequest (@generic_params) {
+    return $self->send_query( 'SystemCallCenterEnhancedReportingScheduledReportGetActiveListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingScheduledReportGetCompletedListRequest (@params) {
-    return $self->send_query( 'SystemCallCenterEnhancedReportingScheduledReportGetCompletedListRequest', @params );
+method SystemCallCenterEnhancedReportingScheduledReportGetCompletedListRequest (@generic_params) {
+    return $self->send_query( 'SystemCallCenterEnhancedReportingScheduledReportGetCompletedListRequest',
+        @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingScheduledReportGetListRequest (@params) {
-    return $self->send_query( 'SystemCallCenterEnhancedReportingScheduledReportGetListRequest', @params );
+method SystemCallCenterEnhancedReportingScheduledReportGetListRequest (@generic_params) {
+    return $self->send_query( 'SystemCallCenterEnhancedReportingScheduledReportGetListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -7646,32 +9287,39 @@ method SystemCallCenterEnhancedReportingScheduledReportGetReportTemplateUsageLis
 
 # ----------------------------------------------------------------------
 method SystemCallCenterEnhancedReportingScheduledTaskParametersGetRequest () {
-    return $self->send_query('SystemCallCenterEnhancedReportingScheduledTaskParametersGetRequest');
+    return $self->send_query(
+        'SystemCallCenterEnhancedReportingScheduledTaskParametersGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterEnhancedReportingScheduledTaskParametersModifyRequest (@params) {
-    return $self->send_command( 'SystemCallCenterEnhancedReportingScheduledTaskParametersModifyRequest', @params );
+method SystemCallCenterEnhancedReportingScheduledTaskParametersModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallCenterEnhancedReportingScheduledTaskParametersModifyRequest',
+        @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallCenterGetRequest17 () {
-    return $self->send_query('SystemCallCenterGetRequest17');
+    return $self->send_query(
+        'SystemCallCenterGetRequest17',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterModifyRequest (@params) {
-    return $self->send_command( 'SystemCallCenterModifyRequest', @params );
+method SystemCallCenterModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallCenterModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterReportingServerAddRequest ($x0, $x1, $x2, @params) {
+method SystemCallCenterReportingServerAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'SystemCallCenterReportingServerAddRequest',
         name       => $x0,
         url        => $x1,
         netAddress => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -7687,21 +9335,28 @@ method SystemCallCenterReportingServerGetCallCenterListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCallCenterReportingServerGetListRequest () {
-    return $self->send_query('SystemCallCenterReportingServerGetListRequest');
+    return $self->send_query(
+        'SystemCallCenterReportingServerGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallCenterReportingServerModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCallCenterReportingServerModifyRequest', name => $x0, @params );
+method SystemCallCenterReportingServerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCallCenterReportingServerModifyRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterAddSupervisedAgentListRequest ($x0, $x1, @params) {
+method UserCallCenterAddSupervisedAgentListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCallCenterAddSupervisedAgentListRequest',
         supervisorUserId => $x0,
         serviceUserId    => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -7721,19 +9376,21 @@ method UserCallCenterCallDispositionCodeGetAvailableListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterDeleteSupervisedAgentListRequest ($x0, $x1, @params) {
+method UserCallCenterDeleteSupervisedAgentListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCallCenterDeleteSupervisedAgentListRequest',
         supervisorUserId => $x0,
         serviceUserId    => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterEnhancedReportingReportTemplateParamInfoGetRequest ($x0) {
-    return $self->send_query( 'UserCallCenterEnhancedReportingReportTemplateParamInfoGetRequest',
-        reportTemplate => $x0 );
+method UserCallCenterEnhancedReportingReportTemplateParamInfoGetRequest ($x0, $x1) {
+    return $self->send_query(
+        'UserCallCenterEnhancedReportingReportTemplateParamInfoGetRequest',
+        reportTemplate => [ templateLevel => $x0, templateName => $x1 ]
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7755,18 +9412,22 @@ method UserCallCenterEnhancedReportingScheduledReportGetRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterEnhancedReportingScheduledReportModifyRequest ($x0, $x1, @params) {
+method UserCallCenterEnhancedReportingScheduledReportModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCallCenterEnhancedReportingScheduledReportModifyRequest',
         supervisorUserId => $x0,
         name             => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method UserCallCenterGetAgentSupervisorListRequest ($x0, $x1) {
-    return $self->send_query( 'UserCallCenterGetAgentSupervisorListRequest', agentUserId => $x0, serviceUserId => $x1 );
+    return $self->send_query(
+        'UserCallCenterGetAgentSupervisorListRequest',
+        agentUserId   => $x0,
+        serviceUserId => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7785,12 +9446,12 @@ method UserCallCenterGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterGetSupervisedAgentListRequest ($x0, $x1, @params) {
+method UserCallCenterGetSupervisedAgentListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'UserCallCenterGetSupervisedAgentListRequest',
         supervisorUserId => $x0,
         serviceUserId    => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -7800,28 +9461,40 @@ method UserCallCenterGetSupervisorCallCenterListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterModifyCallCenterListRequest ($x0, @params) {
-    return $self->send_command( 'UserCallCenterModifyCallCenterListRequest', agentUserId => $x0, @params );
+method UserCallCenterModifyCallCenterListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallCenterModifyCallCenterListRequest',
+        agentUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallCenterModifyRequest', userId => $x0, @params );
+method UserCallCenterModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallCenterModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterModifySupervisedAgentListRequest ($x0, $x1, @params) {
+method UserCallCenterModifySupervisedAgentListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCallCenterModifySupervisedAgentListRequest',
         supervisorUserId => $x0,
         serviceUserId    => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method CallCenterAgentAvailability ($x0, $x1) {
-    return $self->send_query( 'CallCenterAgentAvailability', serviceUserId => $x0, available => $x1 );
+    return $self->send_query(
+        'CallCenterAgentAvailability',
+        serviceUserId => $x0,
+        available     => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7833,8 +9506,12 @@ method UserCallCenterMonitoringGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallCenterMonitoringModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallCenterMonitoringModifyRequest', userId => $x0, @params );
+method UserCallCenterMonitoringModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallCenterMonitoringModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7846,8 +9523,12 @@ method UserCallForwardingAlwaysGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingAlwaysModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallForwardingAlwaysModifyRequest', userId => $x0, @params );
+method UserCallForwardingAlwaysModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallForwardingAlwaysModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7859,8 +9540,12 @@ method UserCallForwardingBusyGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingBusyModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallForwardingBusyModifyRequest', userId => $x0, @params );
+method UserCallForwardingBusyModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallForwardingBusyModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7872,8 +9557,12 @@ method UserCallForwardingNoAnswerGetRequest13mp16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingNoAnswerModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallForwardingNoAnswerModifyRequest', userId => $x0, @params );
+method UserCallForwardingNoAnswerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallForwardingNoAnswerModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7885,32 +9574,43 @@ method UserCallForwardingNotReachableGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingNotReachableModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallForwardingNotReachableModifyRequest', userId => $x0, @params );
+method UserCallForwardingNotReachableModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallForwardingNotReachableModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceCallForwardingSelective
 ##
-method UserCallForwardingSelectiveAddCriteriaRequest16 ($x0, $x1, $x2, @params) {
+method UserCallForwardingSelectiveAddCriteriaRequest16 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserCallForwardingSelectiveAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params, fromDnCriteria => $x2
+        @generic_params, fromDnCriteria => $x2
     );
 }
 
 # ----------------------------------------------------------------------
 method UserCallForwardingSelectiveDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserCallForwardingSelectiveDeleteCriteriaRequest', userId => $x0,
-        criteriaName => $x1 );
+    return $self->send_command(
+        'UserCallForwardingSelectiveDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserCallForwardingSelectiveGetCriteriaRequest16 ($x0, $x1) {
-    return $self->send_query( 'UserCallForwardingSelectiveGetCriteriaRequest16', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserCallForwardingSelectiveGetCriteriaRequest16',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7919,18 +9619,22 @@ method UserCallForwardingSelectiveGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingSelectiveModifyCriteriaRequest ($x0, $x1, @params) {
+method UserCallForwardingSelectiveModifyCriteriaRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCallForwardingSelectiveModifyCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserCallForwardingSelectiveModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallForwardingSelectiveModifyRequest', userId => $x0, @params );
+method UserCallForwardingSelectiveModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallForwardingSelectiveModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7938,21 +9642,24 @@ method UserCallForwardingSelectiveModifyRequest ($x0, @params) {
 ## ServiceCallMeNow
 ##
 method SystemCallMeNowGetRequest () {
-    return $self->send_query('SystemCallMeNowGetRequest');
+    return $self->send_query(
+        'SystemCallMeNowGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallMeNowModifyRequest (@params) {
-    return $self->send_command( 'SystemCallMeNowModifyRequest', @params );
+method SystemCallMeNowModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallMeNowModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserCallMeNowAddCriteriaRequest ($x0, $x1, $x2, $x3, @params) {
+method UserCallMeNowAddCriteriaRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserCallMeNowAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         rejectCall   => $x2,
         toDnCriteria => $x3
     );
@@ -7960,12 +9667,20 @@ method UserCallMeNowAddCriteriaRequest ($x0, $x1, $x2, $x3, @params) {
 
 # ----------------------------------------------------------------------
 method UserCallMeNowDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserCallMeNowDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserCallMeNowDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserCallMeNowGetCriteriaRequest ($x0, $x1) {
-    return $self->send_query( 'UserCallMeNowGetCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserCallMeNowGetCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7974,13 +9689,22 @@ method UserCallMeNowGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallMeNowModifyCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserCallMeNowModifyCriteriaRequest', userId => $x0, criteriaName => $x1, @params );
+method UserCallMeNowModifyCriteriaRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserCallMeNowModifyCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCallMeNowModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallMeNowModifyRequest', userId => $x0, @params );
+method UserCallMeNowModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallMeNowModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -7988,21 +9712,24 @@ method UserCallMeNowModifyRequest ($x0, @params) {
 ## ServiceCallNotify
 ##
 method SystemCallNotifyGetRequest () {
-    return $self->send_query('SystemCallNotifyGetRequest');
+    return $self->send_query(
+        'SystemCallNotifyGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallNotifyModifyRequest (@params) {
-    return $self->send_command( 'SystemCallNotifyModifyRequest', @params );
+method SystemCallNotifyModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallNotifyModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserCallNotifyAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
+method UserCallNotifyAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserCallNotifyAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
@@ -8010,17 +9737,30 @@ method UserCallNotifyAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
 
 # ----------------------------------------------------------------------
 method UserCallNotifyGetCriteriaRequest16 ($x0, $x1) {
-    return $self->send_query( 'UserCallNotifyGetCriteriaRequest16', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserCallNotifyGetCriteriaRequest16',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserCallNotifyDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserCallNotifyDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserCallNotifyDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCallNotifyModifyCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserCallNotifyModifyCriteriaRequest', userId => $x0, criteriaName => $x1, @params );
+method UserCallNotifyModifyCriteriaRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserCallNotifyModifyCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8029,21 +9769,25 @@ method UserCallNotifyGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallNotifyModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallNotifyModifyRequest', userId => $x0, @params );
+method UserCallNotifyModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallNotifyModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceCallPark
 ##
-method GroupCallParkAddInstanceRequest16sp2 ($x0, $x1, $x2, $x3, @params) {
+method GroupCallParkAddInstanceRequest16sp2 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupCallParkAddInstanceRequest16sp2',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params, recallTo => $x3
+        @generic_params, recallTo => $x3
     );
 }
 
@@ -8058,28 +9802,32 @@ method GroupCallParkDeleteInstanceRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallParkGetAvailableAlternateRecallUserListRequest ($x0, $x1, @params) {
+method GroupCallParkGetAvailableAlternateRecallUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallParkGetAvailableAlternateRecallUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallParkGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupCallParkGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallParkGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupCallParkGetInstanceListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallParkGetInstanceListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallParkGetInstanceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8094,23 +9842,32 @@ method GroupCallParkGetInstanceRequest16sp2 ($x0, $x1, $x2) {
 
 # ----------------------------------------------------------------------
 method GroupCallParkGetRequest16sp2 ($x0, $x1) {
-    return $self->send_query( 'GroupCallParkGetRequest16sp2', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallParkGetRequest16sp2',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallParkModifyInstanceRequest ($x0, $x1, $x2, @params) {
+method GroupCallParkModifyInstanceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallParkModifyInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallParkModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupCallParkModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupCallParkModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallParkModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8122,13 +9879,13 @@ method UserCallParkGetRequest ($x0) {
 ##
 ## ServiceCallPickup
 ##
-method GroupCallPickupAddInstanceRequest ($x0, $x1, $x2, @params) {
+method GroupCallPickupAddInstanceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallPickupAddInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -8143,34 +9900,42 @@ method GroupCallPickupDeleteInstanceRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallPickupGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupCallPickupGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupCallPickupGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupCallPickupGetInstanceListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallPickupGetInstanceListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallPickupGetInstanceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupCallPickupGetInstanceRequest ($x0, $x1, $x2) {
-    return $self->send_query( 'GroupCallPickupGetInstanceRequest', serviceProviderId => $x0, groupId => $x1,
-        name => $x2 );
+    return $self->send_query(
+        'GroupCallPickupGetInstanceRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        name              => $x2
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallPickupModifyInstanceRequest ($x0, $x1, $x2, @params) {
+method GroupCallPickupModifyInstanceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallPickupModifyInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -8184,16 +9949,25 @@ method UserCallPickupGetRequest ($x0) {
 ## ServiceCallRecording
 ##
 method GroupCallRecordingGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallRecordingGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallRecordingGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallRecordingModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupCallRecordingModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupCallRecordingModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCallRecordingModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallRecordingAddPlatformRequest ($x0, $x1, $x2, $x3, $x4, @params) {
+method SystemCallRecordingAddPlatformRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'SystemCallRecordingAddPlatformRequest',
         name          => $x0,
@@ -8201,7 +9975,7 @@ method SystemCallRecordingAddPlatformRequest ($x0, $x1, $x2, $x3, $x4, @params) 
         port          => $x2,
         mediaStream   => $x3,
         transportType => $x4,
-        @params
+        @generic_params
     );
 }
 
@@ -8212,7 +9986,10 @@ method SystemCallRecordingDeletePlatformRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCallRecordingGetPlatformListRequest () {
-    return $self->send_query('SystemCallRecordingGetPlatformListRequest');
+    return $self->send_query(
+        'SystemCallRecordingGetPlatformListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8221,8 +9998,12 @@ method SystemCallRecordingGetPlatformUsageRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemCallRecordingModifyPlatformRequest ($x0, @params) {
-    return $self->send_command( 'SystemCallRecordingModifyPlatformRequest', name => $x0, @params );
+method SystemCallRecordingModifyPlatformRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCallRecordingModifyPlatformRequest',
+        name => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8231,8 +10012,12 @@ method UserCallRecordingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallRecordingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallRecordingModifyRequest', userId => $x0, @params );
+method UserCallRecordingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallRecordingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8240,12 +10025,15 @@ method UserCallRecordingModifyRequest ($x0, @params) {
 ## ServiceCallReturn
 ##
 method SystemCallReturnGetRequest () {
-    return $self->send_query('SystemCallReturnGetRequest');
+    return $self->send_query(
+        'SystemCallReturnGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallReturnModifyRequest (@params) {
-    return $self->send_command( 'SystemCallReturnModifyRequest', @params );
+method SystemCallReturnModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallReturnModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8257,8 +10045,12 @@ method UserCallTransferGetRequest14sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallTransferModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallTransferModifyRequest', userId => $x0, @params );
+method UserCallTransferModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallTransferModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8270,18 +10062,25 @@ method UserCallWaitingGetRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallWaitingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallWaitingModifyRequest', userId => $x0, @params );
+method UserCallWaitingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallWaitingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemCallWaitingGetRequest () {
-    return $self->send_query('SystemCallWaitingGetRequest');
+    return $self->send_query(
+        'SystemCallWaitingGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallWaitingModifyRequest (@params) {
-    return $self->send_command( 'SystemCallWaitingModifyRequest', @params );
+method SystemCallWaitingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCallWaitingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8293,8 +10092,12 @@ method UserCallingLineIDBlockingOverrideGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallingLineIDBlockingOverrideModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallingLineIDBlockingOverrideModifyRequest', userId => $x0, @params );
+method UserCallingLineIDBlockingOverrideModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallingLineIDBlockingOverrideModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8306,8 +10109,12 @@ method UserCallingLineIDDeliveryBlockingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallingLineIDDeliveryBlockingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallingLineIDDeliveryBlockingModifyRequest', userId => $x0, @params );
+method UserCallingLineIDDeliveryBlockingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallingLineIDDeliveryBlockingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8319,8 +10126,12 @@ method UserCallingNameDeliveryGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallingNameDeliveryModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallingNameDeliveryModifyRequest', userId => $x0, @params );
+method UserCallingNameDeliveryModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallingNameDeliveryModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8328,12 +10139,15 @@ method UserCallingNameDeliveryModifyRequest ($x0, @params) {
 ## ServiceCallingNameRetrieval
 ##
 method SystemCallingNameRetrievalGetRequest17sp4 () {
-    return $self->send_query('SystemCallingNameRetrievalGetRequest17sp4');
+    return $self->send_query(
+        'SystemCallingNameRetrievalGetRequest17sp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCallingNameRetrievalModifyRequest16sp1 (@params) {
-    return $self->send_command( 'SystemCallingNameRetrievalModifyRequest16sp1', @params );
+method SystemCallingNameRetrievalModifyRequest16sp1 (@generic_params) {
+    return $self->send_command( 'SystemCallingNameRetrievalModifyRequest16sp1', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8342,8 +10156,12 @@ method UserCallingNameRetrievalGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallingNameRetrievalModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallingNameRetrievalModifyRequest', userId => $x0, @params );
+method UserCallingNameRetrievalModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallingNameRetrievalModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8355,16 +10173,24 @@ method UserCallingNumberDeliveryGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallingNumberDeliveryModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCallingNumberDeliveryModifyRequest', userId => $x0, @params );
+method UserCallingNumberDeliveryModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallingNumberDeliveryModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceCallingPartyCategory
 ##
-method SystemCallingPartyCategoryAddRequest ($x0, @params) {
-    return $self->send_command( 'SystemCallingPartyCategoryAddRequest', category => $x0, @params );
+method SystemCallingPartyCategoryAddRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCallingPartyCategoryAddRequest',
+        category => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8374,7 +10200,10 @@ method SystemCallingPartyCategoryDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemCallingPartyCategoryGetListRequest () {
-    return $self->send_query('SystemCallingPartyCategoryGetListRequest');
+    return $self->send_query(
+        'SystemCallingPartyCategoryGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8383,8 +10212,12 @@ method SystemCallingPartyCategoryGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemCallingPartyCategoryModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemCallingPartyCategoryModifyRequest', category => $x0, @params );
+method SystemCallingPartyCategoryModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemCallingPartyCategoryModifyRequest',
+        category => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8393,8 +10226,12 @@ method UserCallingPartyCategoryGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCallingPartyCategoryModifyRequest16 ($x0, @params) {
-    return $self->send_command( 'UserCallingPartyCategoryModifyRequest16', userId => $x0, @params );
+method UserCallingPartyCategoryModifyRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCallingPartyCategoryModifyRequest16',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8412,28 +10249,32 @@ method GroupCallingPlanAddDigitPatternRequest ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method GroupCallingPlanDeleteDigitPatternListRequest ($x0, $x1, @params) {
+method GroupCallingPlanDeleteDigitPatternListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCallingPlanDeleteDigitPatternListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupCallingPlanGetDigitPatternListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCallingPlanGetDigitPatternListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCallingPlanGetDigitPatternListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCallingPlanModifyDigitPatternRequest ($x0, $x1, $x2, @params) {
+method GroupCallingPlanModifyDigitPatternRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupCallingPlanModifyDigitPatternRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -8446,16 +10287,25 @@ method UserChargeNumberGetRequest14sp9 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserChargeNumberModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserChargeNumberModifyRequest', userId => $x0, @params );
+method UserChargeNumberModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserChargeNumberModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceClassMark
 ##
-method SystemClassmarkAddRequest ($x0, $x1, @params) {
-    return $self->send_command( 'SystemClassmarkAddRequest', classmark => $x0, value => $x1, @params );
+method SystemClassmarkAddRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'SystemClassmarkAddRequest',
+        classmark => $x0,
+        value     => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8465,17 +10315,28 @@ method SystemClassmarkDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemClassmarkGetListRequest () {
-    return $self->send_query('SystemClassmarkGetListRequest');
+    return $self->send_query(
+        'SystemClassmarkGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemClassmarkModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemClassmarkModifyRequest', classmark => $x0, @params );
+method SystemClassmarkModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemClassmarkModifyRequest',
+        classmark => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemClassmarkGetUtilizationListRequest ($x0, @params) {
-    return $self->send_query( 'SystemClassmarkGetUtilizationListRequest', classmark => $x0, @params );
+method SystemClassmarkGetUtilizationListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'SystemClassmarkGetUtilizationListRequest',
+        classmark => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8484,8 +10345,12 @@ method UserClassmarkGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserClassmarkModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserClassmarkModifyRequest', userId => $x0, @params );
+method UserClassmarkModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserClassmarkModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8493,16 +10358,20 @@ method UserClassmarkModifyRequest ($x0, @params) {
 ## ServiceCommPilotCallManager
 ##
 method GroupCommPilotCallManagerGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupCommPilotCallManagerGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupCommPilotCallManagerGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupCommPilotCallManagerModifyRequest ($x0, $x1, @params) {
+method GroupCommPilotCallManagerModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupCommPilotCallManagerModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -8512,8 +10381,12 @@ method UserCommPilotCallManagerGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCommPilotCallManagerModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCommPilotCallManagerModifyRequest', userId => $x0, @params );
+method UserCommPilotCallManagerModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCommPilotCallManagerModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8525,8 +10398,12 @@ method UserCommPilotExpressGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCommPilotExpressModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCommPilotExpressModifyRequest', userId => $x0, @params );
+method UserCommPilotExpressModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCommPilotExpressModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8538,8 +10415,12 @@ method UserCommPilotExpressSRGetRequest13mp16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCommPilotExpressSRModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCommPilotExpressSRModifyRequest', userId => $x0, @params );
+method UserCommPilotExpressSRModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCommPilotExpressSRModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8547,12 +10428,15 @@ method UserCommPilotExpressSRModifyRequest ($x0, @params) {
 ## ServiceCommunicationBarringUserControl
 ##
 method SystemCommunicationBarringUserControlGetRequest () {
-    return $self->send_query('SystemCommunicationBarringUserControlGetRequest');
+    return $self->send_query(
+        'SystemCommunicationBarringUserControlGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCommunicationBarringUserControlModifyRequest (@params) {
-    return $self->send_command( 'SystemCommunicationBarringUserControlModifyRequest', @params );
+method SystemCommunicationBarringUserControlModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCommunicationBarringUserControlModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8561,8 +10445,12 @@ method UserCommunicationBarringUserControlGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserCommunicationBarringUserControlModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserCommunicationBarringUserControlModifyRequest', userId => $x0, @params );
+method UserCommunicationBarringUserControlModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCommunicationBarringUserControlModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8574,8 +10462,8 @@ method ServiceProviderBroadWorksCommunicatorGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderBroadWorksCommunicatorModifyRequest (@params) {
-    return $self->send_command( 'ServiceProviderBroadWorksCommunicatorModifyRequest', @params );
+method ServiceProviderBroadWorksCommunicatorModifyRequest (@generic_params) {
+    return $self->send_command( 'ServiceProviderBroadWorksCommunicatorModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8588,12 +10476,15 @@ method UserBroadWorksCommunicatorGetRequest ($x0) {
 ## ServiceConnectedLineIdentificationPresentation
 ##
 method SystemConnectedLineIdentificationPresentationGetRequest () {
-    return $self->send_query('SystemConnectedLineIdentificationPresentationGetRequest');
+    return $self->send_query(
+        'SystemConnectedLineIdentificationPresentationGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemConnectedLineIdentificationPresentationModifyRequest (@params) {
-    return $self->send_command( 'SystemConnectedLineIdentificationPresentationModifyRequest', @params );
+method SystemConnectedLineIdentificationPresentationModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemConnectedLineIdentificationPresentationModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8605,8 +10496,12 @@ method UserConnectedLineIdentificationRestrictionGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserConnectedLineIdentificationRestrictionModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserConnectedLineIdentificationRestrictionModifyRequest', userId => $x0, @params );
+method UserConnectedLineIdentificationRestrictionModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserConnectedLineIdentificationRestrictionModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8614,32 +10509,40 @@ method UserConnectedLineIdentificationRestrictionModifyRequest ($x0, @params) {
 ## ServiceCustomRingback
 ##
 method GroupCustomRingbackGroupGetRequest16 ($x0, $x1) {
-    return $self->send_query( 'GroupCustomRingbackGroupGetRequest16', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupCustomRingbackGroupModifyRequest16 ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupCustomRingbackGroupModifyRequest16',
+    return $self->send_query(
+        'GroupCustomRingbackGroupGetRequest16',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method UserCustomRingbackUserAddCriteriaRequest16 ($x0, $x1, @params) {
+method GroupCustomRingbackGroupModifyRequest16 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupCustomRingbackGroupModifyRequest16',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserCustomRingbackUserAddCriteriaRequest16 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCustomRingbackUserAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method UserCustomRingbackUserDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserCustomRingbackUserDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserCustomRingbackUserDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8649,21 +10552,29 @@ method UserCustomRingbackUserGetCriteriaListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserCustomRingbackUserGetCriteriaRequest16 ($x0, $x1) {
-    return $self->send_query( 'UserCustomRingbackUserGetCriteriaRequest16', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserCustomRingbackUserGetCriteriaRequest16',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCustomRingbackUserModifyActiveCriteriaListRequest ($x0, @params) {
-    return $self->send_command( 'UserCustomRingbackUserModifyActiveCriteriaListRequest', userId => $x0, @params );
+method UserCustomRingbackUserModifyActiveCriteriaListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserCustomRingbackUserModifyActiveCriteriaListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserCustomRingbackUserModifyCriteriaRequest16 ($x0, $x1, @params) {
+method UserCustomRingbackUserModifyCriteriaRequest16 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserCustomRingbackUserModifyCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -8672,12 +10583,15 @@ method UserCustomRingbackUserModifyCriteriaRequest16 ($x0, $x1, @params) {
 ## ServiceCustomerOriginatedTrace
 ##
 method SystemCustomerOriginatedTraceGetRequest () {
-    return $self->send_query('SystemCustomerOriginatedTraceGetRequest');
+    return $self->send_query(
+        'SystemCustomerOriginatedTraceGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemCustomerOriginatedTraceModifyRequest (@params) {
-    return $self->send_command( 'SystemCustomerOriginatedTraceModifyRequest', @params );
+method SystemCustomerOriginatedTraceModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemCustomerOriginatedTraceModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -8689,8 +10603,12 @@ method UserDirectedCallPickupWithBargeInGetRequest14sp7 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserDirectedCallPickupWithBargeInModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserDirectedCallPickupWithBargeInModifyRequest', userId => $x0, @params );
+method UserDirectedCallPickupWithBargeInModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserDirectedCallPickupWithBargeInModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8707,8 +10625,12 @@ method GroupDirectoryNumberHuntingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupDirectoryNumberHuntingModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupDirectoryNumberHuntingModifyRequest', serviceUserId => $x0, @params );
+method GroupDirectoryNumberHuntingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupDirectoryNumberHuntingModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8720,8 +10642,12 @@ method UserDoNotDisturbGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserDoNotDisturbModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserDoNotDisturbModifyRequest', userId => $x0, @params );
+method UserDoNotDisturbModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserDoNotDisturbModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8733,75 +10659,103 @@ method UserDualModeVCCGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserDualModeVCCModifyRequest ($x0, @params) {
-    return $self->send_query( 'UserDualModeVCCModifyRequest', userId => $x0, @params );
+method UserDualModeVCCModifyRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserDualModeVCCModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceEmergencyZones
 ##
-method GroupEmergencyZonesAddHomeZoneListRequest ($x0, $x1, @params) {
+method GroupEmergencyZonesAddHomeZoneListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupEmergencyZonesAddHomeZoneListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupEmergencyZonesDeleteHomeZoneListRequest ($x0, $x1, @params) {
+method GroupEmergencyZonesDeleteHomeZoneListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupEmergencyZonesDeleteHomeZoneListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupEmergencyZonesGetHomeZoneListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupEmergencyZonesGetHomeZoneListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupEmergencyZonesGetHomeZoneListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupEmergencyZonesGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupEmergencyZonesGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupEmergencyZonesGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupEmergencyZonesModifyHomeZoneListRequest (@params) {
-    return $self->send_query( 'GroupEmergencyZonesModifyHomeZoneListRequest', @params );
+method GroupEmergencyZonesModifyHomeZoneListRequest (@generic_params) {
+    return $self->send_query( 'GroupEmergencyZonesModifyHomeZoneListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupEmergencyZonesModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupEmergencyZonesModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupEmergencyZonesModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupEmergencyZonesModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemEmergencyZonesGetRequest () {
-    return $self->send_query('SystemEmergencyZonesGetRequest');
+    return $self->send_query(
+        'SystemEmergencyZonesGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemEmergencyZonesModifyRequest (@params) {
-    return $self->send_command( 'SystemEmergencyZonesModifyRequest', @params );
+method SystemEmergencyZonesModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemEmergencyZonesModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceEnhancedCallLogs
 ##
-method EnterpriseEnhancedCallLogsGetListRequest ($x0, @params) {
-    return $self->send_query( 'EnterpriseEnhancedCallLogsGetListRequest', serviceProviderId => $x0, @params );
+method EnterpriseEnhancedCallLogsGetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'EnterpriseEnhancedCallLogsGetListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupEnhancedCallLogsGetListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupEnhancedCallLogsGetListRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupEnhancedCallLogsGetListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupEnhancedCallLogsGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8810,23 +10764,34 @@ method ServiceProviderEnhancedCallLogsGetRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderEnhancedCallLogsModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderEnhancedCallLogsModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderEnhancedCallLogsModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderEnhancedCallLogsModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemEnhancedCallLogsGetRequest17sp4 () {
-    return $self->send_query('SystemEnhancedCallLogsGetRequest17sp4');
+    return $self->send_query(
+        'SystemEnhancedCallLogsGetRequest17sp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemEnhancedCallLogsModifyRequest (@params) {
-    return $self->send_command( 'SystemEnhancedCallLogsModifyRequest', @params );
+method SystemEnhancedCallLogsModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemEnhancedCallLogsModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserEnhancedCallLogsGetListRequest17sp4 ($x0, @params) {
-    return $self->send_query( 'UserEnhancedCallLogsGetListRequest17sp4', userId => $x0, @params );
+method UserEnhancedCallLogsGetListRequest17sp4 ($x0, @generic_params) {
+    return $self->send_query(
+        'UserEnhancedCallLogsGetListRequest17sp4',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8838,8 +10803,12 @@ method UserExternalCallingLineIDDeliveryGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserExternalCallingLineIDDeliveryModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserExternalCallingLineIDDeliveryModifyRequest', userId => $x0, @params );
+method UserExternalCallingLineIDDeliveryModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserExternalCallingLineIDDeliveryModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8851,9 +10820,12 @@ method ServiceProviderExternalCustomRingbackGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderExternalCustomRingbackModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderExternalCustomRingbackModifyRequest', serviceProviderId => $x0,
-        @params );
+method ServiceProviderExternalCustomRingbackModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderExternalCustomRingbackModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8862,8 +10834,12 @@ method UserExternalCustomRingbackGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserExternalCustomRingbackModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserExternalCustomRingbackModifyRequest', userId => $x0, @params );
+method UserExternalCustomRingbackModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserExternalCustomRingbackModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8875,15 +10851,19 @@ method UserFaxMessagingGetRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserFaxMessagingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserFaxMessagingModifyRequest', userId => $x0, @params );
+method UserFaxMessagingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserFaxMessagingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceGroupPaging
 ##
-method GroupGroupPagingAddInstanceRequest ($x0, $x1, $x2, $x3, $x4, $x5, @params) {
+method GroupGroupPagingAddInstanceRequest ($x0, $x1, $x2, $x3, $x4, $x5, @generic_params) {
     return $self->send_command(
         'GroupGroupPagingAddInstanceRequest',
         serviceProviderId              => $x0,
@@ -8892,18 +10872,26 @@ method GroupGroupPagingAddInstanceRequest ($x0, $x1, $x2, $x3, $x4, $x5, @params
         serviceInstanceProfile         => $x3,
         confirmationToneTimeoutSeconds => $x4,
         deliverOriginatorCLIDInstead   => $x5,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingAddOriginatorListRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingAddOriginatorListRequest', serviceUserId => $x0, @params );
+method GroupGroupPagingAddOriginatorListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingAddOriginatorListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingAddTargetListRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingAddTargetListRequest', serviceUserId => $x0, @params );
+method GroupGroupPagingAddTargetListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingAddTargetListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -8912,37 +10900,49 @@ method GroupGroupPagingDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingDeleteOriginatorListRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingDeleteOriginatorListRequest', serviceUserId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupGroupPagingDeleteTargetListRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingDeleteTargetListRequest', serviceUserId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupGroupPagingGetAvailableOriginatorListRequest ($x0, $x1, @params) {
-    return $self->send_query(
-        'GroupGroupPagingGetAvailableOriginatorListRequest',
-        serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+method GroupGroupPagingDeleteOriginatorListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingDeleteOriginatorListRequest',
+        serviceUserId => $x0,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingGetAvailableTargetListRequest ($x0, @params) {
-    return $self->send_query( 'GroupGroupPagingGetAvailableTargetListRequest', serviceUserId => $x0, @params );
+method GroupGroupPagingDeleteTargetListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingDeleteTargetListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingGetInstanceListRequest ($x0, $x1, @params) {
+method GroupGroupPagingGetAvailableOriginatorListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupGroupPagingGetAvailableOriginatorListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupGroupPagingGetAvailableTargetListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'GroupGroupPagingGetAvailableTargetListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupGroupPagingGetInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupGroupPagingGetInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -8962,37 +10962,53 @@ method GroupGroupPagingGetTargetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupGroupPagingModifyActiveInstanceListRequest', @params );
+method GroupGroupPagingModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupGroupPagingModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingModifyInstanceRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingModifyInstanceRequest', serviceUserId => $x0, @params );
+method GroupGroupPagingModifyInstanceRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingModifyInstanceRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingModifyOriginatorListRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingModifyOriginatorListRequest', serviceUserId => $x0, @params );
+method GroupGroupPagingModifyOriginatorListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingModifyOriginatorListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingModifyTargetListRequest ($x0, @params) {
-    return $self->send_command( 'GroupGroupPagingModifyTargetListRequest', serviceUserId => $x0, @params );
+method GroupGroupPagingModifyTargetListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupGroupPagingModifyTargetListRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupGroupPagingTargetsCapacityGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupGroupPagingTargetsCapacityGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupGroupPagingTargetsCapacityGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupGroupPagingTargetsCapacityModifyRequest ($x0, $x1, @params) {
+method GroupGroupPagingTargetsCapacityModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupGroupPagingTargetsCapacityModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -9002,11 +11018,11 @@ method ServiceProviderGroupPagingTargetsCapacityGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderGroupPagingTargetsCapacityModifyRequest ($x0, @params) {
+method ServiceProviderGroupPagingTargetsCapacityModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderGroupPagingTargetsCapacityModifyRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -9019,8 +11035,12 @@ method UserGroupPagingGetListRequest ($x0) {
 ##
 ## ServiceHotelingGuest
 ##
-method UserHotelingGuestGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserHotelingGuestGetAvailableUserListRequest', userId => $x0, @params );
+method UserHotelingGuestGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserHotelingGuestGetAvailableUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9029,8 +11049,12 @@ method UserHotelingGuestGetRequest14sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserHotelingGuestModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserHotelingGuestModifyRequest', userId => $x0, @params );
+method UserHotelingGuestModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserHotelingGuestModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9042,15 +11066,19 @@ method UserHotelingHostGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserHotelingHostModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserHotelingHostModifyRequest', userId => $x0, @params );
+method UserHotelingHostModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserHotelingHostModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceHuntGroup
 ##
-method GroupHuntGroupAddInstanceRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @params) {
+method GroupHuntGroupAddInstanceRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, @generic_params) {
     return $self->send_command(
         'GroupHuntGroupAddInstanceRequest17sp4',
         serviceProviderId      => $x0,
@@ -9062,7 +11090,7 @@ method GroupHuntGroupAddInstanceRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6,
         noAnswerNumberOfRings  => $x6,
         forwardAfterTimeout    => $x7,
         forwardTimeoutSeconds  => $x8,
-        @params, makeBusyWhenNotReachable => $x9
+        @generic_params, makeBusyWhenNotReachable => $x9
     );
 }
 
@@ -9072,19 +11100,23 @@ method GroupHuntGroupDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupHuntGroupGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupHuntGroupGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupGetInstanceListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupHuntGroupGetInstanceListRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupHuntGroupGetInstanceListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupHuntGroupGetInstanceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9093,32 +11125,39 @@ method GroupHuntGroupGetInstanceRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupHuntGroupModifyActiveInstanceListRequest', @params );
+method GroupHuntGroupModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupHuntGroupModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupModifyInstanceRequest ($x0, @params) {
-    return $self->send_command( 'GroupHuntGroupModifyInstanceRequest', serviceUserId => $x0, @params );
+method GroupHuntGroupModifyInstanceRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupHuntGroupModifyInstanceRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupHuntGroupModifyInstanceWeightedCallDistributionRequest ($x0, @params) {
+method GroupHuntGroupModifyInstanceWeightedCallDistributionRequest ($x0, @generic_params) {
     return $self->send_command(
         'GroupHuntGroupModifyInstanceWeightedCallDistributionRequest',
         serviceUserId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemHuntGroupGetRequest17 () {
-    return $self->send_query('SystemHuntGroupGetRequest17');
+    return $self->send_query(
+        'SystemHuntGroupGetRequest17',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemHuntGroupModifyRequest (@params) {
-    return $self->send_command( 'SystemHuntGroupModifyRequest', @params );
+method SystemHuntGroupModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemHuntGroupModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9130,8 +11169,12 @@ method UserINIntegrationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserINIntegrationModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserINIntegrationModifyRequest', userId => $x0, @params );
+method UserINIntegrationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserINIntegrationModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9143,8 +11186,12 @@ method UserInCallServiceActivationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserInCallServiceActivationModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserInCallServiceActivationModifyRequest', userId => $x0, @params );
+method UserInCallServiceActivationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserInCallServiceActivationModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9153,22 +11200,25 @@ method ServiceProviderInCallServiceActivationGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderInCallServiceActivationModifyRequest17 ($x0, @params) {
+method ServiceProviderInCallServiceActivationModifyRequest17 ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderInCallServiceActivationModifyRequest17',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemInCallServiceActivationGetRequest17 () {
-    return $self->send_query('SystemInCallServiceActivationGetRequest17');
+    return $self->send_query(
+        'SystemInCallServiceActivationGetRequest17',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInCallServiceActivationModifyRequest17 (@params) {
-    return $self->send_command( 'SystemInCallServiceActivationModifyRequest17', @params );
+method SystemInCallServiceActivationModifyRequest17 (@generic_params) {
+    return $self->send_command( 'SystemInCallServiceActivationModifyRequest17', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9176,16 +11226,20 @@ method SystemInCallServiceActivationModifyRequest17 (@params) {
 ## ServiceIncomingCallingPlan
 ##
 method GroupIncomingCallingPlanGetListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupIncomingCallingPlanGetListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupIncomingCallingPlanGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupIncomingCallingPlanModifyListRequest ($x0, $x1, @params) {
+method GroupIncomingCallingPlanModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupIncomingCallingPlanModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -9195,15 +11249,19 @@ method UserIncomingCallingPlanGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserIncomingCallingPlanModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserIncomingCallingPlanModifyRequest', userId => $x0, @params );
+method UserIncomingCallingPlanModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserIncomingCallingPlanModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceInstantConferencing
 ##
-method GroupInstantConferencingAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method GroupInstantConferencingAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @generic_params) {
     return $self->send_command(
         'GroupInstantConferencingAddInstanceRequest14',
         serviceProviderId              => $x0,
@@ -9215,7 +11273,7 @@ method GroupInstantConferencingAddInstanceRequest14 ($x0, $x1, $x2, $x3, $x4, $x
         serviceProfileAppliedOnOutcall => $x6,
         allowOutdialInInvitation       => $x7,
         allowDocumentDownload          => $x8,
-        @params
+        @generic_params
     );
 }
 
@@ -9225,22 +11283,22 @@ method GroupInstantConferencingDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantConferencingGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupInstantConferencingGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupInstantConferencingGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantConferencingGetInstanceListRequest ($x0, $x1, @params) {
+method GroupInstantConferencingGetInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupInstantConferencingGetInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -9251,26 +11309,34 @@ method GroupInstantConferencingGetInstanceRequest17 ($x0) {
 
 # ----------------------------------------------------------------------
 method GroupInstantConferencingGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupInstantConferencingGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupInstantConferencingGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantConferencingModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupInstantConferencingModifyActiveInstanceListRequest', @params );
+method GroupInstantConferencingModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupInstantConferencingModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantConferencingModifyInstanceRequest16 ($x0, @params) {
-    return $self->send_command( 'GroupInstantConferencingModifyInstanceRequest16', serviceUserId => $x0, @params );
+method GroupInstantConferencingModifyInstanceRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupInstantConferencingModifyInstanceRequest16',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantConferencingModifyRequest ($x0, $x1, @params) {
+method GroupInstantConferencingModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupInstantConferencingModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -9280,16 +11346,20 @@ method ServiceProviderInstantConferencingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderInstantConferencingModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderInstantConferencingModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderInstantConferencingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderInstantConferencingModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInstantConferencingAddDeviceRequest14 ($x0, $x1, @params) {
+method SystemInstantConferencingAddDeviceRequest14 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'SystemInstantConferencingAddDeviceRequest14',
         deviceName => $x0,
-        @params, transportProtocol => $x1
+        @generic_params, transportProtocol => $x1
     );
 }
 
@@ -9300,7 +11370,10 @@ method SystemInstantConferencingDeleteDeviceRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemInstantConferencingGetDeviceListRequest14 () {
-    return $self->send_query('SystemInstantConferencingGetDeviceListRequest14');
+    return $self->send_query(
+        'SystemInstantConferencingGetDeviceListRequest14',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9310,27 +11383,37 @@ method SystemInstantConferencingGetDeviceRequest14 ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemInstantConferencingGetHoldPolicyRequest () {
-    return $self->send_query('SystemInstantConferencingGetHoldPolicyRequest');
+    return $self->send_query(
+        'SystemInstantConferencingGetHoldPolicyRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemInstantConferencingGetRequest () {
-    return $self->send_query('SystemInstantConferencingGetRequest');
+    return $self->send_query(
+        'SystemInstantConferencingGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInstantConferencingModifyDeviceRequest14 ($x0, @params) {
-    return $self->send_command( 'SystemInstantConferencingModifyDeviceRequest14', deviceName => $x0, @params );
+method SystemInstantConferencingModifyDeviceRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemInstantConferencingModifyDeviceRequest14',
+        deviceName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInstantConferencingModifyHoldPolicyRequest (@params) {
-    return $self->send_command( 'SystemInstantConferencingModifyHoldPolicyRequest', @params );
+method SystemInstantConferencingModifyHoldPolicyRequest (@generic_params) {
+    return $self->send_command( 'SystemInstantConferencingModifyHoldPolicyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemInstantConferencingModifyRequest (@params) {
-    return $self->send_command( 'SystemInstantConferencingModifyRequest', @params );
+method SystemInstantConferencingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemInstantConferencingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9344,18 +11427,18 @@ method SystemInstantConferencingResynchronizeDeviceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingAddConferenceDocumentRequest ($x0, $x1, $x2, @params) {
+method UserInstantConferencingAddConferenceDocumentRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingAddConferenceDocumentRequest',
         userId        => $x0,
-        conferenceKey => $x1,
-        documentFile  => $x2,
-        @params
+        conferenceKey => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        documentFile  => $x3,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingAddConferenceRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @params) {
+method UserInstantConferencingAddConferenceRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingAddConferenceRequest',
         userId                         => $x0,
@@ -9366,66 +11449,74 @@ method UserInstantConferencingAddConferenceRequest ($x0, $x1, $x2, $x3, $x4, $x5
         leaderReleaseDropsParticipants => $x5,
         announceCallers                => $x6,
         conferenceType                 => $x7,
-        conferenceSchedule             => $x8,
-        @params
+        conferenceSchedule             => [ startDate => $x8 ],
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingAddQuickConferenceRequest ($x0, $x1, $x2, @params) {
+method UserInstantConferencingAddQuickConferenceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingAddQuickConferenceRequest',
         userId              => $x0,
         bridgeServiceUserId => $x1,
         leaderPhoneNumber   => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingControlCallRequest ($x0, $x1, $x2, $x3, @params) {
+method UserInstantConferencingControlCallRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingControlCallRequest',
         userId           => $x0,
-        conferenceKey    => $x1,
-        conferenceCallId => $x2,
-        action           => $x3,
-        @params
+        conferenceKey    => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        conferenceCallId => $x3,
+        action           => $x4,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingControlStandAloneCallRequest ($x0, $x1, $x2, $x3, $x4, @params) {
+method UserInstantConferencingControlStandAloneCallRequest ($x0, $x1, $x2, $x3, $x4, $x5, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingControlStandAloneCallRequest',
         conferenceOwnerUserId => $x0,
-        conferenceKey         => $x1,
-        conferenceCallId      => $x2,
-        action                => $x3,
-        phoneNumber           => $x4,
-        @params
+        conferenceKey         => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        conferenceCallId      => $x3,
+        action                => $x4,
+        phoneNumber           => $x5,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingDeleteConferenceDocumentListRequest ($x0, $x1, $x2, @params) {
+method UserInstantConferencingDeleteConferenceDocumentListRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingDeleteConferenceDocumentListRequest',
         userId           => $x0,
-        conferenceKey    => $x1,
-        conferenceCallId => $x2,
-        @params
+        conferenceKey    => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        conferenceCallId => $x3,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingDeleteConferenceListRequest ($x0, @params) {
-    return $self->send_command( 'UserInstantConferencingDeleteConferenceListRequest', userId => $x0, @params );
+method UserInstantConferencingDeleteConferenceListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserInstantConferencingDeleteConferenceListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingDeleteConferenceRecordingListRequest ($x0, @params) {
-    return $self->send_command( 'UserInstantConferencingDeleteConferenceRecordingListRequest', userId => $x0, @params );
+method UserInstantConferencingDeleteConferenceRecordingListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserInstantConferencingDeleteConferenceRecordingListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9450,8 +11541,12 @@ method UserInstantConferencingGetAvailableBridgeDelegatesListRequest ($x0, $x1) 
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetAvailableConferenceOwnerListRequest ($x0, @params) {
-    return $self->send_query( 'UserInstantConferencingGetAvailableConferenceOwnerListRequest', userId => $x0, @params );
+method UserInstantConferencingGetAvailableConferenceOwnerListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserInstantConferencingGetAvailableConferenceOwnerListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9464,53 +11559,61 @@ method UserInstantConferencingGetBridgeDelegatesListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetConferenceBridgeReportRequest ($x0, $x1, $x2, $x3, @params) {
+method UserInstantConferencingGetConferenceBridgeReportRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_query(
         'UserInstantConferencingGetConferenceBridgeReportRequest',
         userId              => $x0,
         bridgeServiceUserId => $x1,
         reportStartDate     => $x2,
         reportEndDate       => $x3,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetConferenceCallRequest ($x0, $x1, $x2) {
+method UserInstantConferencingGetConferenceCallRequest ($x0, $x1, $x2, $x3) {
     return $self->send_query(
         'UserInstantConferencingGetConferenceCallRequest',
         userId           => $x0,
-        conferenceKey    => $x1,
-        conferenceCallId => $x2
+        conferenceKey    => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        conferenceCallId => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetConferenceDocumentListRequest ($x0, $x1) {
+method UserInstantConferencingGetConferenceDocumentListRequest ($x0, $x1, $x2) {
     return $self->send_query(
         'UserInstantConferencingGetConferenceDocumentListRequest',
         userId        => $x0,
-        conferenceKey => $x1
+        conferenceKey => [ bridgeServiceUserId => $x1, conferenceId => $x2 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetConferenceRecordingListRequest ($x0, @params) {
-    return $self->send_query( 'UserInstantConferencingGetConferenceRecordingListRequest', userId => $x0, @params );
+method UserInstantConferencingGetConferenceRecordingListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserInstantConferencingGetConferenceRecordingListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetConferenceRecordingRequest14Sp9 ($x0, $x1) {
+method UserInstantConferencingGetConferenceRecordingRequest14Sp9 ($x0, $x1, $x2) {
     return $self->send_query(
         'UserInstantConferencingGetConferenceRecordingRequest14Sp9',
         userId       => $x0,
-        recordingKey => $x1
+        recordingKey => [ bridgeServiceUserId => $x1, recordingId => $x2 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetConferenceRequest14Sp6 ($x0, $x1) {
-    return $self->send_query( 'UserInstantConferencingGetConferenceRequest14Sp6', userId => $x0, conferenceKey => $x1 );
+method UserInstantConferencingGetConferenceRequest14Sp6 ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserInstantConferencingGetConferenceRequest14Sp6',
+        userId        => $x0,
+        conferenceKey => [ bridgeServiceUserId => $x1, conferenceId => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9534,51 +11637,51 @@ method UserInstantConferencingGetInstanceListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetStandAloneConferenceCallRequest ($x0, $x1, $x2) {
+method UserInstantConferencingGetStandAloneConferenceCallRequest ($x0, $x1, $x2, $x3) {
     return $self->send_query(
         'UserInstantConferencingGetStandAloneConferenceCallRequest',
         conferenceOwnerUserId => $x0,
-        conferenceKey         => $x1,
-        conferenceCallId      => $x2
+        conferenceKey         => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        conferenceCallId      => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetStandAloneConferenceDocumentListRequest14 ($x0, $x1, $x2) {
+method UserInstantConferencingGetStandAloneConferenceDocumentListRequest14 ($x0, $x1, $x2, $x3) {
     return $self->send_query(
         'UserInstantConferencingGetStandAloneConferenceDocumentListRequest14',
         conferenceOwnerUserId => $x0,
-        conferenceKey         => $x1,
-        isWebServerCollocated => $x2
+        conferenceKey         => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        isWebServerCollocated => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetStandAloneConferenceRecordingRequest ($x0, $x1) {
+method UserInstantConferencingGetStandAloneConferenceRecordingRequest ($x0, $x1, $x2) {
     return $self->send_query(
         'UserInstantConferencingGetStandAloneConferenceRecordingRequest',
         conferenceOwnerUserId => $x0,
-        recordingKey          => $x1
+        recordingKey          => [ bridgeServiceUserId => $x1, recordingId => $x2 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetStandAloneConferenceRequest14Sp6 ($x0, $x1) {
+method UserInstantConferencingGetStandAloneConferenceRequest14Sp6 ($x0, $x1, $x2) {
     return $self->send_query(
         'UserInstantConferencingGetStandAloneConferenceRequest14Sp6',
         conferenceOwnerUserId => $x0,
-        conferenceKey         => $x1
+        conferenceKey         => [ bridgeServiceUserId => $x1, conferenceId => $x2 ]
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingGetStandAloneSlideShowContentRequest ($x0, $x1, $x2, @params) {
+method UserInstantConferencingGetStandAloneSlideShowContentRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'UserInstantConferencingGetStandAloneSlideShowContentRequest',
         bridgeServiceUserId   => $x0,
         conferenceOwnerUserId => $x1,
         documentId            => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -9592,63 +11695,63 @@ method UserInstantConferencingLoginStandAloneRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingModifyBridgeDelegatesRequest ($x0, $x1, @params) {
+method UserInstantConferencingModifyBridgeDelegatesRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingModifyBridgeDelegatesRequest',
         userId              => $x0,
         bridgeServiceUserId => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingModifyConferencePresentationPasswordRequest ($x0, $x1, @params) {
+method UserInstantConferencingModifyConferencePresentationPasswordRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingModifyConferencePresentationPasswordRequest',
         userId        => $x0,
-        conferenceKey => $x1,
-        @params
+        conferenceKey => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingModifyConferenceRecordingSlideShowPasswordRequest ($x0, $x1, $x2, @params) {
+method UserInstantConferencingModifyConferenceRecordingSlideShowPasswordRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingModifyConferenceRecordingSlideShowPasswordRequest',
         userId          => $x0,
-        recordingKey    => $x1,
-        recordingCallId => $x2,
-        @params
+        recordingKey    => [ bridgeServiceUserId => $x1, recordingId => $x2 ],
+        recordingCallId => $x3,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingModifyConferenceRequest14 ($x0, $x1, @params) {
+method UserInstantConferencingModifyConferenceRequest14 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserInstantConferencingModifyConferenceRequest14',
         userId        => $x0,
-        conferenceKey => $x1,
-        @params
+        conferenceKey => [ bridgeServiceUserId => $x1, conferenceId => $x2 ],
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingPlayRecordingToPhoneRequest ($x0, $x1, $x2) {
+method UserInstantConferencingPlayRecordingToPhoneRequest ($x0, $x1, $x2, $x3) {
     return $self->send_command(
         'UserInstantConferencingPlayRecordingToPhoneRequest',
         userId              => $x0,
-        recordingKey        => $x1,
-        playBackPhoneNumber => $x2
+        recordingKey        => [ bridgeServiceUserId => $x1, recordingId => $x2 ],
+        playBackPhoneNumber => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method UserInstantConferencingPlayStandAloneRecordingToPhoneRequest ($x0, $x1, $x2) {
+method UserInstantConferencingPlayStandAloneRecordingToPhoneRequest ($x0, $x1, $x2, $x3) {
     return $self->send_command(
         'UserInstantConferencingPlayStandAloneRecordingToPhoneRequest',
         conferenceOwnerUserId => $x0,
-        recordingKey          => $x1,
-        playBackPhoneNumber   => $x2
+        recordingKey          => [ bridgeServiceUserId => $x1, recordingId => $x2 ],
+        playBackPhoneNumber   => $x3
     );
 }
 
@@ -9694,14 +11797,14 @@ method UserInstantConferencingStartPresentationRequest ($x0, $x1, $x2, $x3, $x4)
 ##
 ## ServiceInstantGroupCall
 ##
-method GroupInstantGroupCallAddInstanceRequest14 ($x0, $x1, $x2, $x3, @params) {
+method GroupInstantGroupCallAddInstanceRequest14 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupInstantGroupCallAddInstanceRequest14',
         serviceProviderId      => $x0,
         groupId                => $x1,
         serviceUserId          => $x2,
         serviceInstanceProfile => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -9711,12 +11814,12 @@ method GroupInstantGroupCallDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantGroupCallGetInstanceListRequest ($x0, $x1, @params) {
+method GroupInstantGroupCallGetInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupInstantGroupCallGetInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -9726,13 +11829,17 @@ method GroupInstantGroupCallGetInstanceRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantGroupCallModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupInstantGroupCallModifyActiveInstanceListRequest', @params );
+method GroupInstantGroupCallModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupInstantGroupCallModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupInstantGroupCallModifyInstanceRequest ($x0, @params) {
-    return $self->send_command( 'GroupInstantGroupCallModifyInstanceRequest', serviceUserId => $x0, @params );
+method GroupInstantGroupCallModifyInstanceRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupInstantGroupCallModifyInstanceRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9740,12 +11847,15 @@ method GroupInstantGroupCallModifyInstanceRequest ($x0, @params) {
 ## ServiceIntelligentNetworkServiceControl
 ##
 method SystemIntelligentNetworkServiceControlGetRequest14 () {
-    return $self->send_query('SystemIntelligentNetworkServiceControlGetRequest14');
+    return $self->send_query(
+        'SystemIntelligentNetworkServiceControlGetRequest14',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemIntelligentNetworkServiceControlModifyRequest (@params) {
-    return $self->send_command( 'SystemIntelligentNetworkServiceControlModifyRequest', @params );
+method SystemIntelligentNetworkServiceControlModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemIntelligentNetworkServiceControlModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9754,8 +11864,12 @@ method UserIntelligentNetworkServiceControlGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserIntelligentNetworkServiceControlModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserIntelligentNetworkServiceControlModifyRequest', userId => $x0, @params );
+method UserIntelligentNetworkServiceControlModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserIntelligentNetworkServiceControlModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9763,43 +11877,61 @@ method UserIntelligentNetworkServiceControlModifyRequest ($x0, @params) {
 ## ServiceIntercept
 ##
 method GroupInterceptGroupGetRequest16sp1 ($x0, $x1) {
-    return $self->send_query( 'GroupInterceptGroupGetRequest16sp1', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupInterceptGroupGetRequest16sp1',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupInterceptGroupModifyRequest16 ($x0, $x1, @params) {
-    return $self->send_command( 'GroupInterceptGroupModifyRequest16', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupInterceptGroupModifyRequest16 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupInterceptGroupModifyRequest16',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInterceptUserAddDnListRequest (@params) {
-    return $self->send_command( 'SystemInterceptUserAddDnListRequest', @params );
+method SystemInterceptUserAddDnListRequest (@generic_params) {
+    return $self->send_command( 'SystemInterceptUserAddDnListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemInterceptUserDeleteDnListRequest (@params) {
-    return $self->send_command( 'SystemInterceptUserDeleteDnListRequest', @params );
+method SystemInterceptUserDeleteDnListRequest (@generic_params) {
+    return $self->send_command( 'SystemInterceptUserDeleteDnListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemInterceptUserGetDnListRequest () {
-    return $self->send_query('SystemInterceptUserGetDnListRequest');
+    return $self->send_query(
+        'SystemInterceptUserGetDnListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemInterceptUserGetRequest () {
-    return $self->send_query('SystemInterceptUserGetRequest');
+    return $self->send_query(
+        'SystemInterceptUserGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInterceptUserModifyDnRequest ($x0, @params) {
-    return $self->send_command( 'SystemInterceptUserModifyDnRequest', phoneNumber => $x0, @params );
+method SystemInterceptUserModifyDnRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemInterceptUserModifyDnRequest',
+        phoneNumber => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInterceptUserModifyRequest (@params) {
-    return $self->send_command( 'SystemInterceptUserModifyRequest', @params );
+method SystemInterceptUserModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemInterceptUserModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9808,8 +11940,12 @@ method UserInterceptUserGetRequest16sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserInterceptUserModifyRequest16 ($x0, @params) {
-    return $self->send_command( 'UserInterceptUserModifyRequest16', userId => $x0, @params );
+method UserInterceptUserModifyRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserInterceptUserModifyRequest16',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9821,15 +11957,19 @@ method UserInternalCallingLineIDDeliveryGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserInternalCallingLineIDDeliveryModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserInternalCallingLineIDDeliveryModifyRequest', userId => $x0, @params );
+method UserInternalCallingLineIDDeliveryModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserInternalCallingLineIDDeliveryModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceInventoryReport
 ##
-method GroupInventoryReportGetRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @params) {
+method GroupInventoryReportGetRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @generic_params) {
     return $self->send_query(
         'GroupInventoryReportGetRequest',
         serviceProviderId    => $x0,
@@ -9839,18 +11979,21 @@ method GroupInventoryReportGetRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @param
         includeDns           => $x4,
         includeAccessDevices => $x5,
         includeDepartments   => $x6,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemInventoryReportGetRequest () {
-    return $self->send_query('SystemInventoryReportGetRequest');
+    return $self->send_query(
+        'SystemInventoryReportGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemInventoryReportModifyRequest (@params) {
-    return $self->send_command( 'SystemInventoryReportModifyRequest', @params );
+method SystemInventoryReportModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemInventoryReportModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9858,28 +12001,40 @@ method SystemInventoryReportModifyRequest (@params) {
 ## ServiceLDAPIntegration
 ##
 method GroupLDAPIntegrationGetDirectoryRequest ($x0, $x1) {
-    return $self->send_query( 'GroupLDAPIntegrationGetDirectoryRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupLDAPIntegrationGetDirectoryRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupLDAPIntegrationModifyDirectoryRequest ($x0, $x1, @params) {
+method GroupLDAPIntegrationModifyDirectoryRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupLDAPIntegrationModifyDirectoryRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupLDAPIntegrationGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupLDAPIntegrationGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupLDAPIntegrationGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupLDAPIntegrationModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupLDAPIntegrationModifyRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupLDAPIntegrationModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupLDAPIntegrationModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9888,32 +12043,43 @@ method ServiceProviderLDAPIntegrationGetDirectoryRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderLDAPIntegrationModifyDirectoryRequest ($x0, @params) {
+method ServiceProviderLDAPIntegrationModifyDirectoryRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderLDAPIntegrationModifyDirectoryRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemLDAPIntegrationGetDirectoryRequest () {
-    return $self->send_query('SystemLDAPIntegrationGetDirectoryRequest');
+    return $self->send_query(
+        'SystemLDAPIntegrationGetDirectoryRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemLDAPIntegrationModifyDirectoryRequest (@params) {
-    return $self->send_command( 'SystemLDAPIntegrationModifyDirectoryRequest', @params );
+method SystemLDAPIntegrationModifyDirectoryRequest (@generic_params) {
+    return $self->send_command( 'SystemLDAPIntegrationModifyDirectoryRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserLDAPIntegrationGetDirectoryListRequest ($x0, @params) {
-    return $self->send_query( 'UserLDAPIntegrationGetDirectoryListRequest', userId => $x0, @params );
+method UserLDAPIntegrationGetDirectoryListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserLDAPIntegrationGetDirectoryListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserLDAPIntegrationGetDirectoryEntryRequest ($x0, $x1) {
-    return $self->send_query( 'UserLDAPIntegrationGetDirectoryEntryRequest', userId => $x0, entryName => $x1 );
+    return $self->send_query(
+        'UserLDAPIntegrationGetDirectoryEntryRequest',
+        userId    => $x0,
+        entryName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9921,22 +12087,32 @@ method UserLDAPIntegrationGetDirectoryEntryRequest ($x0, $x1) {
 ## ServiceLegacyAutomaticCallback
 ##
 method SystemLegacyAutomaticCallbackGetLineTypeListRequest () {
-    return $self->send_query('SystemLegacyAutomaticCallbackGetLineTypeListRequest');
+    return $self->send_query(
+        'SystemLegacyAutomaticCallbackGetLineTypeListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemLegacyAutomaticCallbackGetRequest () {
-    return $self->send_query('SystemLegacyAutomaticCallbackGetRequest');
+    return $self->send_query(
+        'SystemLegacyAutomaticCallbackGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemLegacyAutomaticCallbackModifyLineTypeRequest ($x0, @params) {
-    return $self->send_command( 'SystemLegacyAutomaticCallbackModifyLineTypeRequest', lineType => $x0, @params );
+method SystemLegacyAutomaticCallbackModifyLineTypeRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemLegacyAutomaticCallbackModifyLineTypeRequest',
+        lineType => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemLegacyAutomaticCallbackModifyRequest (@params) {
-    return $self->send_command( 'SystemLegacyAutomaticCallbackModifyRequest', @params );
+method SystemLegacyAutomaticCallbackModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemLegacyAutomaticCallbackModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9945,8 +12121,12 @@ method UserLegacyAutomaticCallbackGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserLegacyAutomaticCallbackModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserLegacyAutomaticCallbackModifyRequest', userId => $x0, @params );
+method UserLegacyAutomaticCallbackModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserLegacyAutomaticCallbackModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9954,12 +12134,15 @@ method UserLegacyAutomaticCallbackModifyRequest ($x0, @params) {
 ## ServiceLocationBasedCallingRestrictions
 ##
 method SystemLocationBasedCallingRestrictionsGetRequest17sp3 () {
-    return $self->send_query('SystemLocationBasedCallingRestrictionsGetRequest17sp3');
+    return $self->send_query(
+        'SystemLocationBasedCallingRestrictionsGetRequest17sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemLocationBasedCallingRestrictionsModifyRequest (@params) {
-    return $self->send_command( 'SystemLocationBasedCallingRestrictionsModifyRequest', @params );
+method SystemLocationBasedCallingRestrictionsModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemLocationBasedCallingRestrictionsModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -9971,8 +12154,12 @@ method UserMWIDeliveryToMobileEndpointGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserMWIDeliveryToMobileEndpointModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserMWIDeliveryToMobileEndpointModifyRequest', userId => $x0, @params );
+method UserMWIDeliveryToMobileEndpointModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserMWIDeliveryToMobileEndpointModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -9984,18 +12171,25 @@ method ServiceProviderMaliciousCallTraceGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderMaliciousCallTraceModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderMaliciousCallTraceModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderMaliciousCallTraceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderMaliciousCallTraceModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemMaliciousCallTraceGetRequest () {
-    return $self->send_query('SystemMaliciousCallTraceGetRequest');
+    return $self->send_query(
+        'SystemMaliciousCallTraceGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMaliciousCallTraceModifyRequest (@params) {
-    return $self->send_command( 'SystemMaliciousCallTraceModifyRequest', @params );
+method SystemMaliciousCallTraceModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemMaliciousCallTraceModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -10004,15 +12198,19 @@ method UserMaliciousCallTraceGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserMaliciousCallTraceModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserMaliciousCallTraceModifyRequest', userId => $x0, @params );
+method UserMaliciousCallTraceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserMaliciousCallTraceModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceMeetMeConferencing
 ##
-method GroupMeetMeConferencingAddInstanceRequest ($x0, $x1, $x2, $x3, $x4, @params) {
+method GroupMeetMeConferencingAddInstanceRequest ($x0, $x1, $x2, $x3, $x4, @generic_params) {
     return $self->send_command(
         'GroupMeetMeConferencingAddInstanceRequest',
         serviceProviderId      => $x0,
@@ -10020,7 +12218,7 @@ method GroupMeetMeConferencingAddInstanceRequest ($x0, $x1, $x2, $x3, $x4, @para
         serviceUserId          => $x2,
         serviceInstanceProfile => $x3,
         allocatedPorts         => $x4,
-        @params
+        @generic_params
     );
 }
 
@@ -10030,22 +12228,22 @@ method GroupMeetMeConferencingDeleteInstanceRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupMeetMeConferencingGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupMeetMeConferencingGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupMeetMeConferencingGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupMeetMeConferencingGetInstanceListRequest ($x0, $x1, @params) {
+method GroupMeetMeConferencingGetInstanceListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupMeetMeConferencingGetInstanceListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10056,26 +12254,34 @@ method GroupMeetMeConferencingGetInstanceRequest17sp3 ($x0) {
 
 # ----------------------------------------------------------------------
 method GroupMeetMeConferencingGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupMeetMeConferencingGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupMeetMeConferencingGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupMeetMeConferencingModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupMeetMeConferencingModifyActiveInstanceListRequest', @params );
+method GroupMeetMeConferencingModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupMeetMeConferencingModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupMeetMeConferencingModifyInstanceRequest ($x0, @params) {
-    return $self->send_command( 'GroupMeetMeConferencingModifyInstanceRequest', serviceUserId => $x0, @params );
+method GroupMeetMeConferencingModifyInstanceRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupMeetMeConferencingModifyInstanceRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupMeetMeConferencingModifyRequest ($x0, $x1, @params) {
+method GroupMeetMeConferencingModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupMeetMeConferencingModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10085,28 +12291,35 @@ method ServiceProviderMeetMeConferencingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderMeetMeConferencingModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderMeetMeConferencingModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderMeetMeConferencingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderMeetMeConferencingModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemMeetMeConferencingGetRequest17sp3 () {
-    return $self->send_query('SystemMeetMeConferencingGetRequest17sp3');
+    return $self->send_query(
+        'SystemMeetMeConferencingGetRequest17sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMeetMeConferencingModifyRequest (@params) {
-    return $self->send_command( 'SystemMeetMeConferencingModifyRequest', @params );
+method SystemMeetMeConferencingModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemMeetMeConferencingModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserMeetMeConferencingAddConferenceRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, @params) {
+method UserMeetMeConferencingAddConferenceRequest ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, @generic_params) {
     return $self->send_query(
         'UserMeetMeConferencingAddConferenceRequest',
         userId   => $x0,
         bridgeId => $x1,
         title    => $x2,
-        @params,
+        @generic_params,
         muteAllAttendeesOnEntry      => $x3,
         endConferenceOnModeratorExit => $x4,
         moderatorRequired            => $x5,
@@ -10116,13 +12329,21 @@ method UserMeetMeConferencingAddConferenceRequest ($x0, $x1, $x2, $x3, $x4, $x5,
 }
 
 # ----------------------------------------------------------------------
-method UserMeetMeConferencingDeleteConferenceListRequest ($x0, @params) {
-    return $self->send_command( 'UserMeetMeConferencingDeleteConferenceListRequest', userId => $x0, @params );
+method UserMeetMeConferencingDeleteConferenceListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserMeetMeConferencingDeleteConferenceListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserMeetMeConferencingDeleteConferenceRecordingListRequest ($x0, @params) {
-    return $self->send_command( 'UserMeetMeConferencingDeleteConferenceRecordingListRequest', userId => $x0, @params );
+method UserMeetMeConferencingDeleteConferenceRecordingListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserMeetMeConferencingDeleteConferenceRecordingListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10141,17 +12362,21 @@ method UserMeetMeConferencingGetConferenceRecordingListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserMeetMeConferencingGetConferenceRequest ($x0, $x1) {
-    return $self->send_query( 'UserMeetMeConferencingGetConferenceRequest', userId => $x0, conferenceKey => $x1 );
+method UserMeetMeConferencingGetConferenceRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserMeetMeConferencingGetConferenceRequest',
+        userId        => $x0,
+        conferenceKey => [ bridgeId => $x1, conferenceId => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserMeetMeConferencingModifyConferenceRequest ($x0, $x1, @params) {
+method UserMeetMeConferencingModifyConferenceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserMeetMeConferencingModifyConferenceRequest',
         userId        => $x0,
-        conferenceKey => $x1,
-        @params
+        conferenceKey => [ bridgeId => $x1, conferenceId => $x2 ],
+        @generic_params
     );
 }
 
@@ -10159,65 +12384,72 @@ method UserMeetMeConferencingModifyConferenceRequest ($x0, $x1, @params) {
 ##
 ## ServiceMusicOnHold
 ##
-method GroupMusicOnHoldAddInstanceRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, @params) {
+method GroupMusicOnHoldAddInstanceRequest16 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, @generic_params) {
     return $self->send_command(
         'GroupMusicOnHoldAddInstanceRequest16',
         serviceProviderId                  => $x0,
         groupId                            => $x1,
-        department                         => $x2,
-        isActiveDuringCallHold             => $x3,
-        isActiveDuringCallPark             => $x4,
-        isActiveDuringBusyCampOn           => $x5,
-        source                             => $x6,
-        useAlternateSourceForInternalCalls => $x7,
-        @params
+        department                         => [],
+        isActiveDuringCallHold             => $x2,
+        isActiveDuringCallPark             => $x3,
+        isActiveDuringBusyCampOn           => $x4,
+        source                             => $x5,
+        useAlternateSourceForInternalCalls => $x6,
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupMusicOnHoldDeleteInstanceRequest ($x0, $x1, $x2) {
+method GroupMusicOnHoldDeleteInstanceRequest ($x0, $x1) {
     return $self->send_command(
         'GroupMusicOnHoldDeleteInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        department        => $x2
+        department        => []
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupMusicOnHoldGetInstanceRequest16 ($x0, $x1, @params) {
-    return $self->send_query( 'GroupMusicOnHoldGetInstanceRequest16', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupMusicOnHoldGetInstanceRequest16 ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupMusicOnHoldGetInstanceRequest16',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupMusicOnHoldGetDepartmentListRequest ($x0, $x1, @params) {
+method GroupMusicOnHoldGetDepartmentListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupMusicOnHoldGetDepartmentListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupMusicOnHoldModifyInstanceRequest16 ($x0, $x1, @params) {
+method GroupMusicOnHoldModifyInstanceRequest16 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupMusicOnHoldModifyInstanceRequest16',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemMusicOnHoldGetRequest () {
-    return $self->send_query('SystemMusicOnHoldGetRequest');
+    return $self->send_query(
+        'SystemMusicOnHoldGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemMusicOnHoldModifyRequest (@params) {
-    return $self->send_command( 'SystemMusicOnHoldModifyRequest', @params );
+method SystemMusicOnHoldModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemMusicOnHoldModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -10226,8 +12458,12 @@ method UserMusicOnHoldGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserMusicOnHoldModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserMusicOnHoldModifyRequest', userId => $x0, @params );
+method UserMusicOnHoldModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserMusicOnHoldModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10236,8 +12472,12 @@ method UserMusicOnHoldUserGetRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserMusicOnHoldUserModifyRequest16 ($x0, @params) {
-    return $self->send_command( 'UserMusicOnHoldUserModifyRequest16', userId => $x0, @params );
+method UserMusicOnHoldUserModifyRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserMusicOnHoldUserModifyRequest16',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10262,42 +12502,42 @@ method GroupOutgoingCallingPlanCallMeNowGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanCallMeNowModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanCallMeNowModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanCallMeNowModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanDepartmentAuthorizationCodeAddListRequest ($x0, $x1, $x2, @params) {
+method GroupOutgoingCallingPlanDepartmentAuthorizationCodeAddListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanDepartmentAuthorizationCodeAddListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params, codeEntry => $x2
+        @generic_params, codeEntry => $x2
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanDepartmentAuthorizationCodeDeleteListRequest ($x0, $x1, $x2, @params) {
+method GroupOutgoingCallingPlanDepartmentAuthorizationCodeDeleteListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanDepartmentAuthorizationCodeDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params, code => $x2
+        @generic_params, code => $x2
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanDepartmentAuthorizationCodeGetListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanDepartmentAuthorizationCodeGetListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupOutgoingCallingPlanDepartmentAuthorizationCodeGetListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10311,12 +12551,12 @@ method GroupOutgoingCallingPlanDigitPlanCallMeNowGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanDigitPlanCallMeNowModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanDigitPlanCallMeNowModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanDigitPlanCallMeNowModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10330,12 +12570,12 @@ method GroupOutgoingCallingPlanDigitPlanOriginatingGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanDigitPlanOriginatingModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanDigitPlanOriginatingModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanDigitPlanOriginatingModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10349,12 +12589,12 @@ method GroupOutgoingCallingPlanDigitPlanRedirectingGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanDigitPlanRedirectingModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanDigitPlanRedirectingModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanDigitPlanRedirectingModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10368,12 +12608,12 @@ method GroupOutgoingCallingPlanOriginatingGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanOriginatingModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanOriginatingModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanOriginatingModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10389,12 +12629,12 @@ method GroupOutgoingCallingPlanPinholeDigitPatternAddRequest ($x0, $x1, $x2, $x3
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanPinholeDigitPatternDeleteListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanPinholeDigitPatternDeleteListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanPinholeDigitPatternDeleteListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10408,13 +12648,13 @@ method GroupOutgoingCallingPlanPinholeDigitPatternGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanPinholeDigitPatternModifyRequest ($x0, $x1, $x2, @params) {
+method GroupOutgoingCallingPlanPinholeDigitPatternModifyRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanPinholeDigitPatternModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -10428,12 +12668,12 @@ method GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowGetListRequest ($x0, $x1
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10447,12 +12687,12 @@ method GroupOutgoingCallingPlanPinholeDigitPlanOriginatingGetListRequest ($x0, $
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanPinholeDigitPlanOriginatingModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanPinholeDigitPlanOriginatingModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanPinholeDigitPlanOriginatingModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10466,12 +12706,12 @@ method GroupOutgoingCallingPlanPinholeDigitPlanRedirectingGetListRequest ($x0, $
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanPinholeDigitPlanRedirectingModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanPinholeDigitPlanRedirectingModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanPinholeDigitPlanRedirectingModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10485,12 +12725,12 @@ method GroupOutgoingCallingPlanRedirectingGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanRedirectingModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanRedirectingModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanRedirectingModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10504,12 +12744,12 @@ method GroupOutgoingCallingPlanRedirectedGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanRedirectedModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanRedirectedModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanRedirectedModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10523,12 +12763,12 @@ method GroupOutgoingCallingPlanTransferNumbersGetListRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupOutgoingCallingPlanTransferNumbersModifyListRequest ($x0, $x1, @params) {
+method GroupOutgoingCallingPlanTransferNumbersModifyListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupOutgoingCallingPlanTransferNumbersModifyListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10553,22 +12793,28 @@ method SystemOutgoingCallingPlanCallTypeDeleteMappingRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method SystemOutgoingCallingPlanCallTypeGetListRequest () {
-    return $self->send_query('SystemOutgoingCallingPlanCallTypeGetListRequest');
+    return $self->send_query(
+        'SystemOutgoingCallingPlanCallTypeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOutgoingCallingPlanCallTypeGetMappingListRequest (@params) {
-    return $self->send_query( 'SystemOutgoingCallingPlanCallTypeGetMappingListRequest', @params );
+method SystemOutgoingCallingPlanCallTypeGetMappingListRequest (@generic_params) {
+    return $self->send_query( 'SystemOutgoingCallingPlanCallTypeGetMappingListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemOutgoingCallingPlanGetRequest17sp3 () {
-    return $self->send_query('SystemOutgoingCallingPlanGetRequest17sp3');
+    return $self->send_query(
+        'SystemOutgoingCallingPlanGetRequest17sp3',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemOutgoingCallingPlanModifyRequest (@params) {
-    return $self->send_command( 'SystemOutgoingCallingPlanModifyRequest', @params );
+method SystemOutgoingCallingPlanModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemOutgoingCallingPlanModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -10582,8 +12828,11 @@ method UserOutgoingCallingPlanAuthorizationCodeAddListRequest ($x0, $x1) {
 
 # ----------------------------------------------------------------------
 method UserOutgoingCallingPlanAuthorizationCodeDeleteListRequest ($x0, $x1) {
-    return $self->send_command( 'UserOutgoingCallingPlanAuthorizationCodeDeleteListRequest', userId => $x0,
-        code => $x1 );
+    return $self->send_command(
+        'UserOutgoingCallingPlanAuthorizationCodeDeleteListRequest',
+        userId => $x0,
+        code   => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10597,8 +12846,12 @@ method UserOutgoingCallingPlanAuthorizationCodeGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanAuthorizationCodeModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanAuthorizationCodeModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanAuthorizationCodeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanAuthorizationCodeModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10607,8 +12860,12 @@ method UserOutgoingCallingPlanCallMeNowGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanCallMeNowModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanCallMeNowModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanCallMeNowModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanCallMeNowModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10617,8 +12874,12 @@ method UserOutgoingCallingPlanDigitPlanCallMeNowGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanDigitPlanCallMeNowModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanDigitPlanCallMeNowModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanDigitPlanCallMeNowModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanDigitPlanCallMeNowModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10627,8 +12888,12 @@ method UserOutgoingCallingPlanDigitPlanOriginatingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanDigitPlanOriginatingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanDigitPlanOriginatingModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanDigitPlanOriginatingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanDigitPlanOriginatingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10637,8 +12902,12 @@ method UserOutgoingCallingPlanDigitPlanRedirectingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanDigitPlanRedirectingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanDigitPlanRedirectingModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanDigitPlanRedirectingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanDigitPlanRedirectingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10647,8 +12916,12 @@ method UserOutgoingCallingPlanOriginatingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanOriginatingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanOriginatingModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanOriginatingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanOriginatingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10657,9 +12930,12 @@ method UserOutgoingCallingPlanPinholeDigitPlanCallMeNowGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyRequest', userId => $x0,
-        @params );
+method UserOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10668,11 +12944,11 @@ method UserOutgoingCallingPlanPinholeDigitPlanOriginatingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanPinholeDigitPlanOriginatingModifyRequest ($x0, @params) {
+method UserOutgoingCallingPlanPinholeDigitPlanOriginatingModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'UserOutgoingCallingPlanPinholeDigitPlanOriginatingModifyRequest',
         userId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -10682,11 +12958,11 @@ method UserOutgoingCallingPlanPinholeDigitPlanRedirectingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanPinholeDigitPlanRedirectingModifyRequest ($x0, @params) {
+method UserOutgoingCallingPlanPinholeDigitPlanRedirectingModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'UserOutgoingCallingPlanPinholeDigitPlanRedirectingModifyRequest',
         userId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -10696,8 +12972,12 @@ method UserOutgoingCallingPlanRedirectingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanRedirectingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanRedirectingModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanRedirectingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanRedirectingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10706,8 +12986,12 @@ method UserOutgoingCallingPlanRedirectedGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanRedirectedModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanRedirectedModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanRedirectedModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanRedirectedModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10716,9 +13000,12 @@ method UserOutgoingCallingPlanSustainedAuthorizationCodeGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanSustainedAuthorizationCodeModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanSustainedAuthorizationCodeModifyRequest', userId => $x0,
-        @params );
+method UserOutgoingCallingPlanSustainedAuthorizationCodeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanSustainedAuthorizationCodeModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10727,8 +13014,12 @@ method UserOutgoingCallingPlanTransferNumbersGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutgoingCallingPlanTransferNumbersModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutgoingCallingPlanTransferNumbersModifyRequest', userId => $x0, @params );
+method UserOutgoingCallingPlanTransferNumbersModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutgoingCallingPlanTransferNumbersModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10740,8 +13031,12 @@ method UserOutlookIntegrationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserOutlookIntegrationModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserOutlookIntegrationModifyRequest', userId => $x0, @params );
+method UserOutlookIntegrationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserOutlookIntegrationModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10749,12 +13044,15 @@ method UserOutlookIntegrationModifyRequest ($x0, @params) {
 ## ServicePhysicalLocation
 ##
 method SystemPhysicalLocationGetRequest () {
-    return $self->send_query('SystemPhysicalLocationGetRequest');
+    return $self->send_query(
+        'SystemPhysicalLocationGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemPhysicalLocationModifyRequest (@params) {
-    return $self->send_command( 'SystemPhysicalLocationModifyRequest', @params );
+method SystemPhysicalLocationModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemPhysicalLocationModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -10763,8 +13061,12 @@ method UserPhysicalLocationGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPhysicalLocationModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserPhysicalLocationModifyRequest', userId => $x0, @params );
+method UserPhysicalLocationModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPhysicalLocationModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10772,27 +13074,40 @@ method UserPhysicalLocationModifyRequest ($x0, @params) {
 ## ServicePolycomPhoneServices
 ##
 method GroupPolycomPhoneServicesGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupPolycomPhoneServicesGetRequest', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupPolycomPhoneServicesModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupPolycomPhoneServicesModifyRequest',
+    return $self->send_query(
+        'GroupPolycomPhoneServicesGetRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method UserPolycomPhoneServicesGetRequest ($x0, $x1) {
-    return $self->send_query( 'UserPolycomPhoneServicesGetRequest', userId => $x0, accessDevice => $x1 );
+method GroupPolycomPhoneServicesModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupPolycomPhoneServicesModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserPolycomPhoneServicesModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserPolycomPhoneServicesModifyRequest', userId => $x0, accessDevice => $x1, @params );
+method UserPolycomPhoneServicesGetRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserPolycomPhoneServicesGetRequest',
+        userId       => $x0,
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ]
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserPolycomPhoneServicesModifyRequest ($x0, $x1, $x2, @generic_params) {
+    return $self->send_command(
+        'UserPolycomPhoneServicesModifyRequest',
+        userId       => $x0,
+        accessDevice => [ deviceLevel => $x1, deviceName => $x2 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10809,22 +13124,30 @@ method EnterprisePreAlertingAnnouncementGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method EnterprisePreAlertingAnnouncementModifyRequest ($x0, @params) {
-    return $self->send_command( 'EnterprisePreAlertingAnnouncementModifyRequest', serviceProviderId => $x0, @params );
+method EnterprisePreAlertingAnnouncementModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'EnterprisePreAlertingAnnouncementModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupPreAlertingAnnouncementGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupPreAlertingAnnouncementGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupPreAlertingAnnouncementGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupPreAlertingAnnouncementModifyRequest ($x0, $x1, @params) {
+method GroupPreAlertingAnnouncementModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupPreAlertingAnnouncementModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10834,41 +13157,52 @@ method UserPreAlertingAnnouncementGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPreAlertingAnnouncementModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserPreAlertingAnnouncementModifyRequest', userId => $x0, @params );
+method UserPreAlertingAnnouncementModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPreAlertingAnnouncementModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserPreAlertingAnnouncementAddCriteriaRequest ($x0, $x1, $x2, $x3, @params) {
+method UserPreAlertingAnnouncementAddCriteriaRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserPreAlertingAnnouncementAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method UserPreAlertingAnnouncementModifyCriteriaRequest ($x0, $x1, @params) {
+method UserPreAlertingAnnouncementModifyCriteriaRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserPreAlertingAnnouncementModifyCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method UserPreAlertingAnnouncementDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserPreAlertingAnnouncementDeleteCriteriaRequest', userId => $x0,
-        criteriaName => $x1 );
+    return $self->send_command(
+        'UserPreAlertingAnnouncementDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserPreAlertingAnnouncementGetCriteriaRequest ($x0, $x1) {
-    return $self->send_query( 'UserPreAlertingAnnouncementGetCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserPreAlertingAnnouncementGetCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10876,26 +13210,30 @@ method UserPreAlertingAnnouncementGetCriteriaRequest ($x0, $x1) {
 ## ServicePreferredCarrier
 ##
 method GroupPreferredCarrierGroupGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupPreferredCarrierGroupGetRequest', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupPreferredCarrierGroupModifyRequest ($x0, $x1, @params) {
-    return $self->send_command(
-        'GroupPreferredCarrierGroupModifyRequest',
+    return $self->send_query(
+        'GroupPreferredCarrierGroupGetRequest',
         serviceProviderId => $x0,
-        groupId           => $x1,
-        @params
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderPreferredCarrierAddRequest ($x0, $x1, @params) {
+method GroupPreferredCarrierGroupModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupPreferredCarrierGroupModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method ServiceProviderPreferredCarrierAddRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderPreferredCarrierAddRequest',
         serviceProviderId => $x0,
         countryCode       => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10930,17 +13268,20 @@ method ServiceProviderPreferredCarrierGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method ServiceProviderPreferredCarrierGetRequest ($x0, $x1) {
-    return $self->send_query( 'ServiceProviderPreferredCarrierGetRequest', serviceProviderId => $x0,
-        countryCode => $x1 );
+    return $self->send_query(
+        'ServiceProviderPreferredCarrierGetRequest',
+        serviceProviderId => $x0,
+        countryCode       => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderPreferredCarrierModifyRequest ($x0, $x1, @params) {
+method ServiceProviderPreferredCarrierModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'ServiceProviderPreferredCarrierModifyRequest',
         serviceProviderId => $x0,
         countryCode       => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -10963,13 +13304,20 @@ method SystemPreferredCarrierDeleteRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemPreferredCarrierGetGroupListRequest ($x0, @params) {
-    return $self->send_query( 'SystemPreferredCarrierGetGroupListRequest', carrier => $x0, @params );
+method SystemPreferredCarrierGetGroupListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'SystemPreferredCarrierGetGroupListRequest',
+        carrier => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemPreferredCarrierGetListRequest () {
-    return $self->send_query('SystemPreferredCarrierGetListRequest');
+    return $self->send_query(
+        'SystemPreferredCarrierGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10978,13 +13326,21 @@ method SystemPreferredCarrierGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemPreferredCarrierGetUserListRequest ($x0, @params) {
-    return $self->send_query( 'SystemPreferredCarrierGetUserListRequest', carrier => $x0, @params );
+method SystemPreferredCarrierGetUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'SystemPreferredCarrierGetUserListRequest',
+        carrier => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemPreferredCarrierModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemPreferredCarrierModifyRequest', carrier => $x0, @params );
+method SystemPreferredCarrierModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemPreferredCarrierModifyRequest',
+        carrier => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -10993,8 +13349,12 @@ method UserPreferredCarrierUserGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPreferredCarrierUserModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserPreferredCarrierUserModifyRequest', userId => $x0, @params );
+method UserPreferredCarrierUserModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPreferredCarrierUserModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11006,20 +13366,24 @@ method UserPrepaidGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPrepaidModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserPrepaidModifyRequest', userId => $x0, @params );
+method UserPrepaidModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPrepaidModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServicePriorityAlert
 ##
-method UserPriorityAlertAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
+method UserPriorityAlertAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserPriorityAlertAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
@@ -11027,7 +13391,11 @@ method UserPriorityAlertAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
 
 # ----------------------------------------------------------------------
 method UserPriorityAlertDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserPriorityAlertDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserPriorityAlertDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11037,17 +13405,30 @@ method UserPriorityAlertGetCriteriaListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserPriorityAlertGetCriteriaRequest16 ($x0, $x1) {
-    return $self->send_query( 'UserPriorityAlertGetCriteriaRequest16', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserPriorityAlertGetCriteriaRequest16',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserPriorityAlertModifyActiveCriteriaListRequest ($x0, @params) {
-    return $self->send_command( 'UserPriorityAlertModifyActiveCriteriaListRequest', userId => $x0, @params );
+method UserPriorityAlertModifyActiveCriteriaListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPriorityAlertModifyActiveCriteriaListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserPriorityAlertModifyCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserPriorityAlertModifyCriteriaRequest', userId => $x0, criteriaName => $x1, @params );
+method UserPriorityAlertModifyCriteriaRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserPriorityAlertModifyCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11059,13 +13440,21 @@ method GroupServiceInstancePrivacyGetRequest17sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupServiceInstancePrivacyModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupServiceInstancePrivacyModifyRequest', serviceUserId => $x0, @params );
+method GroupServiceInstancePrivacyModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupServiceInstancePrivacyModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserPrivacyGetAvailableMonitorsUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserPrivacyGetAvailableMonitorsUserListRequest', userId => $x0, @params );
+method UserPrivacyGetAvailableMonitorsUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserPrivacyGetAvailableMonitorsUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11074,16 +13463,24 @@ method UserPrivacyGetRequest13mp17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPrivacyModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserPrivacyModifyRequest', userId => $x0, @params );
+method UserPrivacyModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPrivacyModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServicePushToTalk
 ##
-method UserPushToTalkGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserPushToTalkGetAvailableUserListRequest', userId => $x0, @params );
+method UserPushToTalkGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserPushToTalkGetAvailableUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11092,8 +13489,12 @@ method UserPushToTalkGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserPushToTalkModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserPushToTalkModifyRequest', userId => $x0, @params );
+method UserPushToTalkModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserPushToTalkModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11101,28 +13502,42 @@ method UserPushToTalkModifyRequest ($x0, @params) {
 ## ServiceReceptionistEnterprise
 ##
 method SystemBroadWorksReceptionistEnterpriseGetRequest () {
-    return $self->send_query('SystemBroadWorksReceptionistEnterpriseGetRequest');
+    return $self->send_query(
+        'SystemBroadWorksReceptionistEnterpriseGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemBroadWorksReceptionistEnterpriseModifyRequest (@params) {
-    return $self->send_command( 'SystemBroadWorksReceptionistEnterpriseModifyRequest', @params );
+method SystemBroadWorksReceptionistEnterpriseModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemBroadWorksReceptionistEnterpriseModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksReceptionistEnterpriseAddUserListRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksReceptionistEnterpriseAddUserListRequest', userId => $x0, @params );
+method UserBroadWorksReceptionistEnterpriseAddUserListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksReceptionistEnterpriseAddUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksReceptionistEnterpriseDeleteUserListRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksReceptionistEnterpriseDeleteUserListRequest', userId => $x0, @params );
+method UserBroadWorksReceptionistEnterpriseDeleteUserListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksReceptionistEnterpriseDeleteUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksReceptionistEnterpriseGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserBroadWorksReceptionistEnterpriseGetAvailableUserListRequest', userId => $x0,
-        @params );
+method UserBroadWorksReceptionistEnterpriseGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserBroadWorksReceptionistEnterpriseGetAvailableUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11131,16 +13546,24 @@ method UserBroadWorksReceptionistEnterpriseGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksReceptionistEnterpriseModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksReceptionistEnterpriseModifyRequest', userId => $x0, @params );
+method UserBroadWorksReceptionistEnterpriseModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksReceptionistEnterpriseModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceReceptionistOffice
 ##
-method UserBroadWorksReceptionistOfficeGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'UserBroadWorksReceptionistOfficeGetAvailableUserListRequest', userId => $x0, @params );
+method UserBroadWorksReceptionistOfficeGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'UserBroadWorksReceptionistOfficeGetAvailableUserListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11149,19 +13572,23 @@ method UserBroadWorksReceptionistOfficeGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksReceptionistOfficeModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksReceptionistOfficeModifyRequest', userId => $x0, @params );
+method UserBroadWorksReceptionistOfficeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksReceptionistOfficeModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceReceptionistSmallBusiness
 ##
-method UserBroadWorksReceptionistSmallBusinessGetAvailableUserListRequest ($x0, @params) {
+method UserBroadWorksReceptionistSmallBusinessGetAvailableUserListRequest ($x0, @generic_params) {
     return $self->send_query(
         'UserBroadWorksReceptionistSmallBusinessGetAvailableUserListRequest',
         userId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -11171,8 +13598,12 @@ method UserBroadWorksReceptionistSmallBusinessGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserBroadWorksReceptionistSmallBusinessModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserBroadWorksReceptionistSmallBusinessModifyRequest', userId => $x0, @params );
+method UserBroadWorksReceptionistSmallBusinessModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserBroadWorksReceptionistSmallBusinessModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11184,33 +13615,37 @@ method UserRemoteOfficeGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserRemoteOfficeModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserRemoteOfficeModifyRequest', userId => $x0, @params );
+method UserRemoteOfficeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserRemoteOfficeModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceRoutePoint
 ##
-method GroupRoutePointAddDNISRequest ($x0, $x1, $x2, @params) {
+method GroupRoutePointAddDNISRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupRoutePointAddDNISRequest',
-        dnisKey => $x0,
-        @params,
-        useCustomDnisAnnouncementSettings => $x1,
-        allowOutgoingACDCall              => $x2
+        dnisKey => [ serviceUserId => $x0, name => $x1 ],
+        @generic_params,
+        useCustomDnisAnnouncementSettings => $x2,
+        allowOutgoingACDCall              => $x3
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointAddInstanceRequest ($x0, $x1, $x2, $x3, @params) {
+method GroupRoutePointAddInstanceRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'GroupRoutePointAddInstanceRequest',
         serviceProviderId      => $x0,
         groupId                => $x1,
         serviceUserId          => $x2,
         serviceInstanceProfile => $x3,
-        @params
+        @generic_params
     );
 }
 
@@ -11220,13 +13655,17 @@ method GroupRoutePointBouncedCallGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointBouncedCallModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointBouncedCallModifyRequest', serviceUserId => $x0, @params );
+method GroupRoutePointBouncedCallModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointBouncedCallModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointDeleteDNISRequest ($x0) {
-    return $self->send_command( 'GroupRoutePointDeleteDNISRequest', dnisKey => $x0 );
+method GroupRoutePointDeleteDNISRequest ($x0, $x1) {
+    return $self->send_command( 'GroupRoutePointDeleteDNISRequest', dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
@@ -11240,8 +13679,12 @@ method GroupRoutePointDistinctiveRingingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointDistinctiveRingingModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointDistinctiveRingingModifyRequest', serviceUserId => $x0, @params );
+method GroupRoutePointDistinctiveRingingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointDistinctiveRingingModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11250,13 +13693,15 @@ method GroupRoutePointGetAnnouncementRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointGetDNISAgentListRequest ($x0) {
-    return $self->send_query( 'GroupRoutePointGetDNISAgentListRequest', dnisKey => $x0 );
+method GroupRoutePointGetDNISAgentListRequest ($x0, $x1) {
+    return $self->send_query( 'GroupRoutePointGetDNISAgentListRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointGetDNISAnnouncementRequest ($x0) {
-    return $self->send_query( 'GroupRoutePointGetDNISAnnouncementRequest', dnisKey => $x0 );
+method GroupRoutePointGetDNISAnnouncementRequest ($x0, $x1) {
+    return $self->send_query( 'GroupRoutePointGetDNISAnnouncementRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
@@ -11265,8 +13710,8 @@ method GroupRoutePointGetDNISListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointGetDNISRequest ($x0) {
-    return $self->send_query( 'GroupRoutePointGetDNISRequest', dnisKey => $x0 );
+method GroupRoutePointGetDNISRequest ($x0, $x1) {
+    return $self->send_query( 'GroupRoutePointGetDNISRequest', dnisKey => [ serviceUserId => $x0, name => $x1 ] );
 }
 
 # ----------------------------------------------------------------------
@@ -11275,9 +13720,13 @@ method GroupRoutePointGetFailoverPolicyRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointGetInstanceListRequest ($x0, $x1, @params) {
-    return $self->send_query( 'GroupRoutePointGetInstanceListRequest', serviceProviderId => $x0, groupId => $x1,
-        @params );
+method GroupRoutePointGetInstanceListRequest ($x0, $x1, @generic_params) {
+    return $self->send_query(
+        'GroupRoutePointGetInstanceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11291,8 +13740,12 @@ method GroupRoutePointForcedForwardingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointForcedForwardingModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointForcedForwardingModifyRequest', serviceUserId => $x0, @params );
+method GroupRoutePointForcedForwardingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointForcedForwardingModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11301,33 +13754,53 @@ method GroupRoutePointHolidayServiceGetRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointHolidayServiceModifyRequest17sp1 ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointHolidayServiceModifyRequest17sp1', serviceUserId => $x0, @params );
+method GroupRoutePointHolidayServiceModifyRequest17sp1 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointHolidayServiceModifyRequest17sp1',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyActiveInstanceListRequest (@params) {
-    return $self->send_command( 'GroupRoutePointModifyActiveInstanceListRequest', @params );
+method GroupRoutePointModifyActiveInstanceListRequest (@generic_params) {
+    return $self->send_command( 'GroupRoutePointModifyActiveInstanceListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyAnnouncementRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointModifyAnnouncementRequest', serviceUserId => $x0, @params );
+method GroupRoutePointModifyAnnouncementRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointModifyAnnouncementRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyDNISAnnouncementRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointModifyDNISAnnouncementRequest', dnisKey => $x0, @params );
+method GroupRoutePointModifyDNISAnnouncementRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointModifyDNISAnnouncementRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyDNISParametersRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointModifyDNISParametersRequest', serviceUserId => $x0, @params );
+method GroupRoutePointModifyDNISParametersRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointModifyDNISParametersRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyDNISRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointModifyDNISRequest', dnisKey => $x0, @params );
+method GroupRoutePointModifyDNISRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointModifyDNISRequest',
+        dnisKey => [ serviceUserId => $x0, name => $x1 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11336,13 +13809,21 @@ method GroupRoutePointManualFailoverRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyFailoverPolicyRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointModifyFailoverPolicyRequest', serviceUserId => $x0, @params );
+method GroupRoutePointModifyFailoverPolicyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointModifyFailoverPolicyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointModifyInstanceRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointModifyInstanceRequest', serviceUserId => $x0, @params );
+method GroupRoutePointModifyInstanceRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointModifyInstanceRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11351,8 +13832,12 @@ method GroupRoutePointNightServiceGetRequest17sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointNightServiceModifyRequest17sp1 ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointNightServiceModifyRequest17sp1', serviceUserId => $x0, @params );
+method GroupRoutePointNightServiceModifyRequest17sp1 ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointNightServiceModifyRequest17sp1',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11361,18 +13846,22 @@ method GroupRoutePointOverflowGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointOverflowModifyRequest ($x0, @params) {
-    return $self->send_command( 'GroupRoutePointOverflowModifyRequest', serviceUserId => $x0, @params );
+method GroupRoutePointOverflowModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'GroupRoutePointOverflowModifyRequest',
+        serviceUserId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointQueueCallDispositionCodeAddRequest ($x0, $x1, $x2, @params) {
+method GroupRoutePointQueueCallDispositionCodeAddRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupRoutePointQueueCallDispositionCodeAddRequest',
         serviceUserId => $x0,
         code          => $x1,
         isActive      => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -11392,16 +13881,20 @@ method GroupRoutePointQueueCallDispositionCodeGetListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method GroupRoutePointQueueCallDispositionCodeGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupRoutePointQueueCallDispositionCodeGetRequest', serviceUserId => $x0, code => $x1 );
+    return $self->send_query(
+        'GroupRoutePointQueueCallDispositionCodeGetRequest',
+        serviceUserId => $x0,
+        code          => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointQueueCallDispositionCodeModifyRequest ($x0, $x1, @params) {
+method GroupRoutePointQueueCallDispositionCodeModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupRoutePointQueueCallDispositionCodeModifyRequest',
         serviceUserId => $x0,
         code          => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -11411,11 +13904,11 @@ method GroupRoutePointQueueCallDispositionCodeSettingsGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method GroupRoutePointQueueCallDispositionCodeSettingsModifyRequest ($x0, @params) {
+method GroupRoutePointQueueCallDispositionCodeSettingsModifyRequest ($x0, @generic_params) {
     return $self->send_command(
         'GroupRoutePointQueueCallDispositionCodeSettingsModifyRequest',
         serviceUserId => $x0,
-        @params
+        @generic_params
     );
 }
 
@@ -11430,21 +13923,25 @@ method UserRoutePointSupervisorGetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserRoutePointSupervisorModifyListRequest ($x0, @params) {
-    return $self->send_command( 'UserRoutePointSupervisorModifyListRequest', userId => $x0, @params );
+method UserRoutePointSupervisorModifyListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserRoutePointSupervisorModifyListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceSMDIMessageDesk
 ##
-method SystemSMDIMessageDeskAddServerRequest ($x0, $x1, $x2, @params) {
+method SystemSMDIMessageDeskAddServerRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'SystemSMDIMessageDeskAddServerRequest',
         deviceName => $x0,
         netAddress => $x1,
         port       => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -11455,18 +13952,28 @@ method SystemSMDIMessageDeskDeleteServerRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemSMDIMessageDeskGetServerListRequest () {
-    return $self->send_query('SystemSMDIMessageDeskGetServerListRequest');
+    return $self->send_query(
+        'SystemSMDIMessageDeskGetServerListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSMDIMessageDeskModifyServerRequest ($x0, @params) {
-    return $self->send_command( 'SystemSMDIMessageDeskModifyServerRequest', deviceName => $x0, @params );
+method SystemSMDIMessageDeskModifyServerRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemSMDIMessageDeskModifyServerRequest',
+        deviceName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSMDIMessageDeskAddServerRouteRequest ($x0, $x1) {
-    return $self->send_command( 'SystemSMDIMessageDeskAddServerRouteRequest', routeDestination => $x0,
-        deviceName => $x1 );
+    return $self->send_command(
+        'SystemSMDIMessageDeskAddServerRouteRequest',
+        routeDestination => $x0,
+        deviceName       => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11476,12 +13983,15 @@ method SystemSMDIMessageDeskDeleteServerRouteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemSMDIMessageDeskGetServerRouteListRequest () {
-    return $self->send_query('SystemSMDIMessageDeskGetServerRouteListRequest');
+    return $self->send_query(
+        'SystemSMDIMessageDeskGetServerRouteListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSMDIMessageDeskModifyServerRouteRequest (@params) {
-    return $self->send_query( 'SystemSMDIMessageDeskModifyServerRouteRequest', @params );
+method SystemSMDIMessageDeskModifyServerRouteRequest (@generic_params) {
+    return $self->send_query( 'SystemSMDIMessageDeskModifyServerRouteRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
@@ -11496,8 +14006,12 @@ method UserSMDIMessageDeskAddServerRequest ($x0, $x1, $x2, $x3) {
 }
 
 # ----------------------------------------------------------------------
-method UserSMDIMessageDeskDeleteServerListRequest ($x0, @params) {
-    return $self->send_command( 'UserSMDIMessageDeskDeleteServerListRequest', userId => $x0, @params );
+method UserSMDIMessageDeskDeleteServerListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSMDIMessageDeskDeleteServerListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11511,20 +14025,24 @@ method UserSMDIMessageDeskGetServerListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserSMDIMessageDeskModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserSMDIMessageDeskModifyRequest', userId => $x0, @params );
+method UserSMDIMessageDeskModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSMDIMessageDeskModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceSelectiveCallAcceptance
 ##
-method UserSelectiveCallAcceptanceAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
+method UserSelectiveCallAcceptanceAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserSelectiveCallAcceptanceAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
@@ -11532,8 +14050,11 @@ method UserSelectiveCallAcceptanceAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @par
 
 # ----------------------------------------------------------------------
 method UserSelectiveCallAcceptanceDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserSelectiveCallAcceptanceDeleteCriteriaRequest', userId => $x0,
-        criteriaName => $x1 );
+    return $self->send_command(
+        'UserSelectiveCallAcceptanceDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11543,21 +14064,29 @@ method UserSelectiveCallAcceptanceGetCriteriaListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserSelectiveCallAcceptanceGetCriteriaRequest16 ($x0, $x1) {
-    return $self->send_query( 'UserSelectiveCallAcceptanceGetCriteriaRequest16', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserSelectiveCallAcceptanceGetCriteriaRequest16',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSelectiveCallAcceptanceModifyActiveCriteriaListRequest ($x0, @params) {
-    return $self->send_command( 'UserSelectiveCallAcceptanceModifyActiveCriteriaListRequest', userId => $x0, @params );
+method UserSelectiveCallAcceptanceModifyActiveCriteriaListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSelectiveCallAcceptanceModifyActiveCriteriaListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSelectiveCallAcceptanceModifyCriteriaRequest ($x0, $x1, @params) {
+method UserSelectiveCallAcceptanceModifyCriteriaRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserSelectiveCallAcceptanceModifyCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -11565,18 +14094,22 @@ method UserSelectiveCallAcceptanceModifyCriteriaRequest ($x0, $x1, @params) {
 ##
 ## ServiceSelectiveCallRejection
 ##
-method UserSelectiveCallRejectionAddCriteriaRequest16 ($x0, $x1, $x2, @params) {
+method UserSelectiveCallRejectionAddCriteriaRequest16 ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserSelectiveCallRejectionAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params, blacklisted => $x2
+        @generic_params, blacklisted => $x2
     );
 }
 
 # ----------------------------------------------------------------------
 method UserSelectiveCallRejectionDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserSelectiveCallRejectionDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserSelectiveCallRejectionDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11586,21 +14119,29 @@ method UserSelectiveCallRejectionGetCriteriaListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserSelectiveCallRejectionGetCriteriaRequest16sp1 ($x0, $x1) {
-    return $self->send_query( 'UserSelectiveCallRejectionGetCriteriaRequest16sp1', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserSelectiveCallRejectionGetCriteriaRequest16sp1',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSelectiveCallRejectionModifyActiveCriteriaListRequest ($x0, @params) {
-    return $self->send_command( 'UserSelectiveCallRejectionModifyActiveCriteriaListRequest', userId => $x0, @params );
+method UserSelectiveCallRejectionModifyActiveCriteriaListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSelectiveCallRejectionModifyActiveCriteriaListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSelectiveCallRejectionModifyCriteriaRequest16 ($x0, $x1, @params) {
+method UserSelectiveCallRejectionModifyCriteriaRequest16 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserSelectiveCallRejectionModifyCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -11608,12 +14149,12 @@ method UserSelectiveCallRejectionModifyCriteriaRequest16 ($x0, $x1, @params) {
 ##
 ## ServiceSequentialRing
 ##
-method UserSequentialRingAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
+method UserSequentialRingAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserSequentialRingAddCriteriaRequest16',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
@@ -11621,12 +14162,20 @@ method UserSequentialRingAddCriteriaRequest16 ($x0, $x1, $x2, $x3, @params) {
 
 # ----------------------------------------------------------------------
 method UserSequentialRingDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserSequentialRingDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserSequentialRingDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserSequentialRingGetCriteriaRequest16 ($x0, $x1) {
-    return $self->send_query( 'UserSequentialRingGetCriteriaRequest16', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserSequentialRingGetCriteriaRequest16',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11635,27 +14184,35 @@ method UserSequentialRingGetRequest14sp4 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserSequentialRingModifyCriteriaRequest ($x0, $x1, @params) {
-    return $self->send_command( 'UserSequentialRingModifyCriteriaRequest', userId => $x0, criteriaName => $x1,
-        @params );
+method UserSequentialRingModifyCriteriaRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserSequentialRingModifyCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSequentialRingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserSequentialRingModifyRequest', userId => $x0, @params );
+method UserSequentialRingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSequentialRingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceSeriesCompletion
 ##
-method GroupSeriesCompletionAddInstanceRequest ($x0, $x1, $x2, @params) {
+method GroupSeriesCompletionAddInstanceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupSeriesCompletionAddInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -11670,18 +14227,22 @@ method GroupSeriesCompletionDeleteInstanceRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupSeriesCompletionGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupSeriesCompletionGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupSeriesCompletionGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupSeriesCompletionGetInstanceListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupSeriesCompletionGetInstanceListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupSeriesCompletionGetInstanceListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11695,13 +14256,13 @@ method GroupSeriesCompletionGetInstanceRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupSeriesCompletionModifyInstanceRequest ($x0, $x1, $x2, @params) {
+method GroupSeriesCompletionModifyInstanceRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupSeriesCompletionModifyInstanceRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -11715,26 +14276,38 @@ method UserSeriesCompletionGetRequest ($x0) {
 ## ServiceServiceScripts
 ##
 method GroupServiceScriptsGroupClearLogRequest ($x0, $x1) {
-    return $self->send_command( 'GroupServiceScriptsGroupClearLogRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_command(
+        'GroupServiceScriptsGroupClearLogRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupServiceScriptsGroupGetLogRequest ($x0, $x1) {
-    return $self->send_query( 'GroupServiceScriptsGroupGetLogRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupServiceScriptsGroupGetLogRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupServiceScriptsGroupGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupServiceScriptsGroupGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupServiceScriptsGroupGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupServiceScriptsGroupModifyRequest ($x0, $x1, @params) {
+method GroupServiceScriptsGroupModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupServiceScriptsGroupModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -11754,8 +14327,12 @@ method UserServiceScriptsUserGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserServiceScriptsUserModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserServiceScriptsUserModifyRequest', userId => $x0, @params );
+method UserServiceScriptsUserModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserServiceScriptsUserModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11774,14 +14351,21 @@ method UserSharedCallAppearanceAddEndpointRequest14sp2 ($x0, $x1, $x2, $x3, $x4)
 }
 
 # ----------------------------------------------------------------------
-method UserSharedCallAppearanceDeleteEndpointListRequest14 ($x0, @params) {
-    return $self->send_command( 'UserSharedCallAppearanceDeleteEndpointListRequest14', userId => $x0, @params );
+method UserSharedCallAppearanceDeleteEndpointListRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSharedCallAppearanceDeleteEndpointListRequest14',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSharedCallAppearanceGetEndpointRequest ($x0, $x1) {
-    return $self->send_query( 'UserSharedCallAppearanceGetEndpointRequest', userId => $x0,
-        accessDeviceEndpoint => $x1 );
+method UserSharedCallAppearanceGetEndpointRequest ($x0, $x1, $x2) {
+    return $self->send_query(
+        'UserSharedCallAppearanceGetEndpointRequest',
+        userId               => $x0,
+        accessDeviceEndpoint => [ accessDevice => $x1, linePort => $x2 ]
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11790,30 +14374,34 @@ method UserSharedCallAppearanceGetRequest16sp2 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserSharedCallAppearanceModifyEndpointRequest ($x0, $x1, @params) {
+method UserSharedCallAppearanceModifyEndpointRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'UserSharedCallAppearanceModifyEndpointRequest',
         userId               => $x0,
-        accessDeviceEndpoint => $x1,
-        @params
+        accessDeviceEndpoint => [ accessDevice => $x1, linePort => $x2 ],
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserSharedCallAppearanceModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserSharedCallAppearanceModifyRequest', userId => $x0, @params );
+method UserSharedCallAppearanceModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSharedCallAppearanceModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceSimultaneousRingFamily
 ##
-method UserSimultaneousRingFamilyAddCriteriaRequest ($x0, $x1, $x2, $x3, @params) {
+method UserSimultaneousRingFamilyAddCriteriaRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserSimultaneousRingFamilyAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
@@ -11821,12 +14409,20 @@ method UserSimultaneousRingFamilyAddCriteriaRequest ($x0, $x1, $x2, $x3, @params
 
 # ----------------------------------------------------------------------
 method UserSimultaneousRingFamilyDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserSimultaneousRingFamilyDeleteCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_command(
+        'UserSimultaneousRingFamilyDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserSimultaneousRingFamilyGetCriteriaRequest ($x0, $x1) {
-    return $self->send_query( 'UserSimultaneousRingFamilyGetCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserSimultaneousRingFamilyGetCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11835,30 +14431,34 @@ method UserSimultaneousRingFamilyGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserSimultaneousRingFamilyModifyCriteriaRequest ($x0, $x1, @params) {
+method UserSimultaneousRingFamilyModifyCriteriaRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserSimultaneousRingFamilyModifyCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserSimultaneousRingFamilyModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'UserSimultaneousRingFamilyModifyRequest17', userId => $x0, @params );
+method UserSimultaneousRingFamilyModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSimultaneousRingFamilyModifyRequest17',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceSimultaneousRingPersonal
 ##
-method UserSimultaneousRingPersonalAddCriteriaRequest ($x0, $x1, $x2, $x3, @params) {
+method UserSimultaneousRingPersonalAddCriteriaRequest ($x0, $x1, $x2, $x3, @generic_params) {
     return $self->send_command(
         'UserSimultaneousRingPersonalAddCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params,
+        @generic_params,
         blacklisted    => $x2,
         fromDnCriteria => $x3
     );
@@ -11866,13 +14466,20 @@ method UserSimultaneousRingPersonalAddCriteriaRequest ($x0, $x1, $x2, $x3, @para
 
 # ----------------------------------------------------------------------
 method UserSimultaneousRingPersonalDeleteCriteriaRequest ($x0, $x1) {
-    return $self->send_command( 'UserSimultaneousRingPersonalDeleteCriteriaRequest', userId => $x0,
-        criteriaName => $x1 );
+    return $self->send_command(
+        'UserSimultaneousRingPersonalDeleteCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
 method UserSimultaneousRingPersonalGetCriteriaRequest ($x0, $x1) {
-    return $self->send_query( 'UserSimultaneousRingPersonalGetCriteriaRequest', userId => $x0, criteriaName => $x1 );
+    return $self->send_query(
+        'UserSimultaneousRingPersonalGetCriteriaRequest',
+        userId       => $x0,
+        criteriaName => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11881,18 +14488,22 @@ method UserSimultaneousRingPersonalGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserSimultaneousRingPersonalModifyCriteriaRequest ($x0, $x1, @params) {
+method UserSimultaneousRingPersonalModifyCriteriaRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'UserSimultaneousRingPersonalModifyCriteriaRequest',
         userId       => $x0,
         criteriaName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserSimultaneousRingPersonalModifyRequest17 ($x0, @params) {
-    return $self->send_command( 'UserSimultaneousRingPersonalModifyRequest17', userId => $x0, @params );
+method UserSimultaneousRingPersonalModifyRequest17 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSimultaneousRingPersonalModifyRequest17',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11900,32 +14511,52 @@ method UserSimultaneousRingPersonalModifyRequest17 ($x0, @params) {
 ## ServiceSpeedDial100
 ##
 method GroupSpeedDial100GetRequest17sp1 ($x0, $x1) {
-    return $self->send_query( 'GroupSpeedDial100GetRequest17sp1', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupSpeedDial100GetRequest17sp1',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupSpeedDial100ModifyRequest ($x0, $x1, @params) {
-    return $self->send_command( 'GroupSpeedDial100ModifyRequest', serviceProviderId => $x0, groupId => $x1, @params );
+method GroupSpeedDial100ModifyRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupSpeedDial100ModifyRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemSpeedDial100GetRequest17sp1 () {
-    return $self->send_query('SystemSpeedDial100GetRequest17sp1');
+    return $self->send_query(
+        'SystemSpeedDial100GetRequest17sp1',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemSpeedDial100ModifyRequest (@params) {
-    return $self->send_command( 'SystemSpeedDial100ModifyRequest', @params );
+method SystemSpeedDial100ModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemSpeedDial100ModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserSpeedDial100AddListRequest ($x0, @params) {
-    return $self->send_command( 'UserSpeedDial100AddListRequest', userId => $x0, @params );
+method UserSpeedDial100AddListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSpeedDial100AddListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSpeedDial100DeleteListRequest ($x0, @params) {
-    return $self->send_command( 'UserSpeedDial100DeleteListRequest', userId => $x0, @params );
+method UserSpeedDial100DeleteListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSpeedDial100DeleteListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11935,12 +14566,20 @@ method UserSpeedDial100GetListRequest17sp1 ($x0) {
 
 # ----------------------------------------------------------------------
 method UserSpeedDial100GetRequest ($x0, $x1) {
-    return $self->send_command( 'UserSpeedDial100GetRequest', userId => $x0, speedCode => $x1 );
+    return $self->send_command(
+        'UserSpeedDial100GetRequest',
+        userId    => $x0,
+        speedCode => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserSpeedDial100ModifyListRequest ($x0, @params) {
-    return $self->send_command( 'UserSpeedDial100ModifyListRequest', userId => $x0, @params );
+method UserSpeedDial100ModifyListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSpeedDial100ModifyListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11952,8 +14591,12 @@ method UserSpeedDial8GetListRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserSpeedDial8ModifyListRequest ($x0, @params) {
-    return $self->send_command( 'UserSpeedDial8ModifyListRequest', userId => $x0, @params );
+method UserSpeedDial8ModifyListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserSpeedDial8ModifyListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -11965,50 +14608,61 @@ method UserThirdPartyVoiceMailSupportGetRequest17 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserThirdPartyVoiceMailSupportModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserThirdPartyVoiceMailSupportModifyRequest', userId => $x0, @params );
+method UserThirdPartyVoiceMailSupportModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserThirdPartyVoiceMailSupportModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupThirdPartyVoiceMailSupportGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupThirdPartyVoiceMailSupportGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupThirdPartyVoiceMailSupportGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupThirdPartyVoiceMailSupportModifyRequest ($x0, $x1, @params) {
+method GroupThirdPartyVoiceMailSupportModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupThirdPartyVoiceMailSupportModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemThirdPartyVoiceMailSupportGetRequest () {
-    return $self->send_query('SystemThirdPartyVoiceMailSupportGetRequest');
+    return $self->send_query(
+        'SystemThirdPartyVoiceMailSupportGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemThirdPartyVoiceMailSupportModifyRequest (@params) {
-    return $self->send_command( 'SystemThirdPartyVoiceMailSupportModifyRequest', @params );
+method SystemThirdPartyVoiceMailSupportModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemThirdPartyVoiceMailSupportModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceTrunkGroup
 ##
-method EnterpriseEnterpriseTrunkAddRequest (@params) {
-    return $self->send_query( 'EnterpriseEnterpriseTrunkAddRequest', @params );
+method EnterpriseEnterpriseTrunkAddRequest (@generic_params) {
+    return $self->send_query( 'EnterpriseEnterpriseTrunkAddRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseEnterpriseTrunkAddUserListRequest ($x0, $x1, @params) {
+method EnterpriseEnterpriseTrunkAddUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseEnterpriseTrunkAddUserListRequest',
         serviceProviderId   => $x0,
         enterpriseTrunkName => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -12022,28 +14676,31 @@ method EnterpriseEnterpriseTrunkDeleteRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseEnterpriseTrunkDeleteUserListRequest ($x0, $x1, @params) {
+method EnterpriseEnterpriseTrunkDeleteUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'EnterpriseEnterpriseTrunkDeleteUserListRequest',
         serviceProviderId   => $x0,
         enterpriseTrunkName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseEnterpriseTrunkGetAvailableTrunkGroupListRequest ($x0, @params) {
+method EnterpriseEnterpriseTrunkGetAvailableTrunkGroupListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseEnterpriseTrunkGetAvailableTrunkGroupListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseEnterpriseTrunkGetAvailableUserListRequest ($x0, @params) {
-    return $self->send_query( 'EnterpriseEnterpriseTrunkGetAvailableUserListRequest', serviceProviderId => $x0,
-        @params );
+method EnterpriseEnterpriseTrunkGetAvailableUserListRequest ($x0, @generic_params) {
+    return $self->send_query(
+        'EnterpriseEnterpriseTrunkGetAvailableUserListRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12061,33 +14718,33 @@ method EnterpriseEnterpriseTrunkGetRequest ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseEnterpriseTrunkGetUserListRequest ($x0, $x1, @params) {
+method EnterpriseEnterpriseTrunkGetUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'EnterpriseEnterpriseTrunkGetUserListRequest',
         serviceProviderId   => $x0,
         enterpriseTrunkName => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method EnterpriseEnterpriseTrunkModifyRequest (@params) {
-    return $self->send_query( 'EnterpriseEnterpriseTrunkModifyRequest', @params );
+method EnterpriseEnterpriseTrunkModifyRequest (@generic_params) {
+    return $self->send_query( 'EnterpriseEnterpriseTrunkModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkAddRequest (@params) {
-    return $self->send_query( 'GroupEnterpriseTrunkAddRequest', @params );
+method GroupEnterpriseTrunkAddRequest (@generic_params) {
+    return $self->send_query( 'GroupEnterpriseTrunkAddRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkAddUserListRequest ($x0, $x1, $x2, @params) {
+method GroupEnterpriseTrunkAddUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupEnterpriseTrunkAddUserListRequest',
         serviceProviderId   => $x0,
         groupId             => $x1,
         enterpriseTrunkName => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -12102,39 +14759,43 @@ method GroupEnterpriseTrunkDeleteRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkDeleteUserListRequest ($x0, $x1, $x2, @params) {
+method GroupEnterpriseTrunkDeleteUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupEnterpriseTrunkDeleteUserListRequest',
         serviceProviderId   => $x0,
         groupId             => $x1,
         enterpriseTrunkName => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkGetAvailableTrunkGroupListRequest ($x0, $x1, @params) {
+method GroupEnterpriseTrunkGetAvailableTrunkGroupListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupEnterpriseTrunkGetAvailableTrunkGroupListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkGetAvailableUserListRequest ($x0, $x1, @params) {
+method GroupEnterpriseTrunkGetAvailableUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupEnterpriseTrunkGetAvailableUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method GroupEnterpriseTrunkGetListRequest ($x0, $x1) {
-    return $self->send_query( 'GroupEnterpriseTrunkGetListRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupEnterpriseTrunkGetListRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12148,29 +14809,29 @@ method GroupEnterpriseTrunkGetRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkGetUserListRequest ($x0, $x1, $x2, @params) {
+method GroupEnterpriseTrunkGetUserListRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_query(
         'GroupEnterpriseTrunkGetUserListRequest',
         serviceProviderId   => $x0,
         groupId             => $x1,
         enterpriseTrunkName => $x2,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupEnterpriseTrunkModifyRequest (@params) {
-    return $self->send_query( 'GroupEnterpriseTrunkModifyRequest', @params );
+method GroupEnterpriseTrunkModifyRequest (@generic_params) {
+    return $self->send_query( 'GroupEnterpriseTrunkModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupAddInstanceRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @params) {
+method GroupTrunkGroupAddInstanceRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6, $x7, $x8, $x9, $x10, $x11, $x12, @generic_params) {
     return $self->send_command(
         'GroupTrunkGroupAddInstanceRequest17sp4',
         serviceProviderId => $x0,
         groupId           => $x1,
         name              => $x2,
-        @params,
+        @generic_params,
         statefulReroutingEnabled                   => $x3,
         sendContinuousOptionsMessage               => $x4,
         continuousOptionsSendingIntervalSeconds    => $x5,
@@ -12185,73 +14846,100 @@ method GroupTrunkGroupAddInstanceRequest17sp4 ($x0, $x1, $x2, $x3, $x4, $x5, $x6
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupDeleteInstanceRequest14sp4 ($x0) {
-    return $self->send_command( 'GroupTrunkGroupDeleteInstanceRequest14sp4', trunkGroupKey => $x0 );
+method GroupTrunkGroupDeleteInstanceRequest14sp4 ($x0, $x1, $x2) {
+    return $self->send_command( 'GroupTrunkGroupDeleteInstanceRequest14sp4',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ] );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupGetInstanceListRequest14sp4 ($x0, $x1, @params) {
+method GroupTrunkGroupGetInstanceListRequest14sp4 ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupTrunkGroupGetInstanceListRequest14sp4',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupGetInstanceRequest17sp4 ($x0) {
-    return $self->send_query( 'GroupTrunkGroupGetInstanceRequest17sp4', trunkGroupKey => $x0 );
+method GroupTrunkGroupGetInstanceRequest17sp4 ($x0, $x1, $x2) {
+    return $self->send_query( 'GroupTrunkGroupGetInstanceRequest17sp4',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ] );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupGetAvailableHostedUserListRequest ($x0, @params) {
-    return $self->send_query( 'GroupTrunkGroupGetAvailableHostedUserListRequest', trunkGroupKey => $x0, @params );
+method GroupTrunkGroupGetAvailableHostedUserListRequest ($x0, $x1, $x2, @generic_params) {
+    return $self->send_query(
+        'GroupTrunkGroupGetAvailableHostedUserListRequest',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupGetInstanceUserListRequest14sp4 ($x0, @params) {
-    return $self->send_query( 'GroupTrunkGroupGetInstanceUserListRequest14sp4', trunkGroupKey => $x0, @params );
+method GroupTrunkGroupGetInstanceUserListRequest14sp4 ($x0, $x1, $x2, @generic_params) {
+    return $self->send_query(
+        'GroupTrunkGroupGetInstanceUserListRequest14sp4',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method GroupTrunkGroupGetRequest14sp9 ($x0, $x1) {
-    return $self->send_query( 'GroupTrunkGroupGetRequest14sp9', serviceProviderId => $x0, groupId => $x1 );
-}
-
-# ----------------------------------------------------------------------
-method GroupTrunkGroupModifyInstanceRequest15 ($x0, @params) {
-    return $self->send_command( 'GroupTrunkGroupModifyInstanceRequest15', trunkGroupKey => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupTrunkGroupModifyRequest14sp9 ($x0, $x1, @params) {
-    return $self->send_command( 'GroupTrunkGroupModifyRequest14sp9', serviceProviderId => $x0, groupId => $x1,
-        @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupTrunkGroupUserCreationTaskAddRequest14sp4 (@params) {
-    return $self->send_query( 'GroupTrunkGroupUserCreationTaskAddRequest14sp4', @params );
-}
-
-# ----------------------------------------------------------------------
-method GroupTrunkGroupUserCreationTaskDeleteRequest14sp4 ($x0, $x1) {
-    return $self->send_command(
-        'GroupTrunkGroupUserCreationTaskDeleteRequest14sp4',
-        trunkGroupKey => $x0,
-        taskName      => $x1
+    return $self->send_query(
+        'GroupTrunkGroupGetRequest14sp9',
+        serviceProviderId => $x0,
+        groupId           => $x1
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupUserCreationTaskGetListRequest14sp4 ($x0) {
-    return $self->send_query( 'GroupTrunkGroupUserCreationTaskGetListRequest14sp4', trunkGroupKey => $x0 );
+method GroupTrunkGroupModifyInstanceRequest15 ($x0, $x1, $x2, @generic_params) {
+    return $self->send_command(
+        'GroupTrunkGroupModifyInstanceRequest15',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ],
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method GroupTrunkGroupUserCreationTaskGetRequest14sp4 ($x0, $x1) {
-    return $self->send_query( 'GroupTrunkGroupUserCreationTaskGetRequest14sp4', trunkGroupKey => $x0, taskName => $x1 );
+method GroupTrunkGroupModifyRequest14sp9 ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'GroupTrunkGroupModifyRequest14sp9',
+        serviceProviderId => $x0,
+        groupId           => $x1,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupTrunkGroupUserCreationTaskAddRequest14sp4 (@generic_params) {
+    return $self->send_query( 'GroupTrunkGroupUserCreationTaskAddRequest14sp4', @generic_params );
+}
+
+# ----------------------------------------------------------------------
+method GroupTrunkGroupUserCreationTaskDeleteRequest14sp4 ($x0, $x1, $x2, $x3) {
+    return $self->send_command(
+        'GroupTrunkGroupUserCreationTaskDeleteRequest14sp4',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ],
+        taskName      => $x3
+    );
+}
+
+# ----------------------------------------------------------------------
+method GroupTrunkGroupUserCreationTaskGetListRequest14sp4 ($x0, $x1, $x2) {
+    return $self->send_query( 'GroupTrunkGroupUserCreationTaskGetListRequest14sp4',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ] );
+}
+
+# ----------------------------------------------------------------------
+method GroupTrunkGroupUserCreationTaskGetRequest14sp4 ($x0, $x1, $x2, $x3) {
+    return $self->send_query(
+        'GroupTrunkGroupUserCreationTaskGetRequest14sp4',
+        trunkGroupKey => [ serviceProviderId => $x0, groupId => $x1, name => $x2 ],
+        taskName      => $x3
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12260,13 +14948,20 @@ method ServiceProviderTrunkGroupGetRequest14sp1 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderTrunkGroupModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderTrunkGroupModifyRequest', serviceProviderId => $x0, @params );
+method ServiceProviderTrunkGroupModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderTrunkGroupModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 method SystemTrunkGroupUserCreationTaskGetListRequest14sp4 () {
-    return $self->send_query('SystemTrunkGroupUserCreationTaskGetListRequest14sp4');
+    return $self->send_query(
+        'SystemTrunkGroupUserCreationTaskGetListRequest14sp4',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12278,13 +14973,21 @@ method UserTwoStageDialingGetRequest13Mp20 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserTwoStageDialingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserTwoStageDialingModifyRequest', userId => $x0, @params );
+method UserTwoStageDialingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserTwoStageDialingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemTwoStageDialingAddDnRequest ($x0, @params) {
-    return $self->send_command( 'SystemTwoStageDialingAddDnRequest', phoneNumber => $x0, @params );
+method SystemTwoStageDialingAddDnRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemTwoStageDialingAddDnRequest',
+        phoneNumber => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12293,13 +14996,17 @@ method SystemTwoStageDialingDeleteDnRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemTwoStageDialingGetDnListRequest (@params) {
-    return $self->send_query( 'SystemTwoStageDialingGetDnListRequest', @params );
+method SystemTwoStageDialingGetDnListRequest (@generic_params) {
+    return $self->send_query( 'SystemTwoStageDialingGetDnListRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemTwoStageDialingModifyDnRequest ($x0, @params) {
-    return $self->send_command( 'SystemTwoStageDialingModifyDnRequest', phoneNumber => $x0, @params );
+method SystemTwoStageDialingModifyDnRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemTwoStageDialingModifyDnRequest',
+        phoneNumber => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12311,29 +15018,33 @@ method UserVideoAddOnGetRequest14 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserVideoAddOnModifyRequest14 ($x0, @params) {
-    return $self->send_command( 'UserVideoAddOnModifyRequest14', userId => $x0, @params );
+method UserVideoAddOnModifyRequest14 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVideoAddOnModifyRequest14',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
 ##
 ## ServiceVirtualOnNetEnterpriseExtensions
 ##
-method EnterpriseVirtualOnNetEnterpriseExtensionsGetUserListRequest ($x0, @params) {
+method EnterpriseVirtualOnNetEnterpriseExtensionsGetUserListRequest ($x0, @generic_params) {
     return $self->send_query(
         'EnterpriseVirtualOnNetEnterpriseExtensionsGetUserListRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupVirtualOnNetEnterpriseExtensionsAddUserRequest ($x0, $x1, @params) {
+method GroupVirtualOnNetEnterpriseExtensionsAddUserRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupVirtualOnNetEnterpriseExtensionsAddUserRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -12348,12 +15059,12 @@ method GroupVirtualOnNetEnterpriseExtensionsDeleteUserRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupVirtualOnNetEnterpriseExtensionsGetUserListRequest ($x0, $x1, @params) {
+method GroupVirtualOnNetEnterpriseExtensionsGetUserListRequest ($x0, $x1, @generic_params) {
     return $self->send_query(
         'GroupVirtualOnNetEnterpriseExtensionsGetUserListRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -12368,13 +15079,13 @@ method GroupVirtualOnNetEnterpriseExtensionsGetUserRequest ($x0, $x1, $x2) {
 }
 
 # ----------------------------------------------------------------------
-method GroupVirtualOnNetEnterpriseExtensionsModifyUserRequest ($x0, $x1, $x2, @params) {
+method GroupVirtualOnNetEnterpriseExtensionsModifyUserRequest ($x0, $x1, $x2, @generic_params) {
     return $self->send_command(
         'GroupVirtualOnNetEnterpriseExtensionsModifyUserRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
         phoneNumber       => $x2,
-        @params
+        @generic_params
     );
 }
 
@@ -12394,12 +15105,19 @@ method SystemVirtualOnNetCallTypeDeleteRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method SystemVirtualOnNetCallTypeGetListRequest () {
-    return $self->send_query('SystemVirtualOnNetCallTypeGetListRequest');
+    return $self->send_query(
+        'SystemVirtualOnNetCallTypeGetListRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemVirtualOnNetCallTypeModifyRequest ($x0, @params) {
-    return $self->send_command( 'SystemVirtualOnNetCallTypeModifyRequest', virtualOnNetCallTypeName => $x0, @params );
+method SystemVirtualOnNetCallTypeModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'SystemVirtualOnNetCallTypeModifyRequest',
+        virtualOnNetCallTypeName => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12407,7 +15125,11 @@ method SystemVirtualOnNetCallTypeModifyRequest ($x0, @params) {
 ## ServiceVoiceMessaging
 ##
 method GroupVoiceMessagingGroupGetRequest ($x0, $x1) {
-    return $self->send_query( 'GroupVoiceMessagingGroupGetRequest', serviceProviderId => $x0, groupId => $x1 );
+    return $self->send_query(
+        'GroupVoiceMessagingGroupGetRequest',
+        serviceProviderId => $x0,
+        groupId           => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12429,32 +15151,32 @@ method GroupVoiceMessagingGroupGetVoicePortalRequest17 ($x0, $x1) {
 }
 
 # ----------------------------------------------------------------------
-method GroupVoiceMessagingGroupModifyRequest ($x0, $x1, @params) {
+method GroupVoiceMessagingGroupModifyRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupVoiceMessagingGroupModifyRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupVoiceMessagingGroupModifyVoicePortalBrandingRequest16 ($x0, $x1, @params) {
+method GroupVoiceMessagingGroupModifyVoicePortalBrandingRequest16 ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupVoiceMessagingGroupModifyVoicePortalBrandingRequest16',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method GroupVoiceMessagingGroupModifyVoicePortalRequest ($x0, $x1, @params) {
+method GroupVoiceMessagingGroupModifyVoicePortalRequest ($x0, $x1, @generic_params) {
     return $self->send_command(
         'GroupVoiceMessagingGroupModifyVoicePortalRequest',
         serviceProviderId => $x0,
         groupId           => $x1,
-        @params
+        @generic_params
     );
 }
 
@@ -12475,41 +15197,51 @@ method ServiceProviderVoiceMessagingGroupGetVoicePortalRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderVoiceMessagingGroupModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderVoiceMessagingGroupModifyRequest', serviceProviderId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method ServiceProviderVoiceMessagingGroupModifyVoicePortalBrandingRequest16 ($x0, @params) {
+method ServiceProviderVoiceMessagingGroupModifyRequest ($x0, @generic_params) {
     return $self->send_command(
-        'ServiceProviderVoiceMessagingGroupModifyVoicePortalBrandingRequest16',
+        'ServiceProviderVoiceMessagingGroupModifyRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderVoiceMessagingGroupModifyVoicePortalRequest ($x0, @params) {
+method ServiceProviderVoiceMessagingGroupModifyVoicePortalBrandingRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderVoiceMessagingGroupModifyVoicePortalBrandingRequest16',
+        serviceProviderId => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method ServiceProviderVoiceMessagingGroupModifyVoicePortalRequest ($x0, @generic_params) {
     return $self->send_command(
         'ServiceProviderVoiceMessagingGroupModifyVoicePortalRequest',
         serviceProviderId => $x0,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
 method SystemVoiceMessageSummaryUpdateGetRequest () {
-    return $self->send_query('SystemVoiceMessageSummaryUpdateGetRequest');
+    return $self->send_query(
+        'SystemVoiceMessageSummaryUpdateGetRequest',
+
+    );
 }
 
 # ----------------------------------------------------------------------
-method SystemVoiceMessageSummaryUpdateModifyRequest (@params) {
-    return $self->send_command( 'SystemVoiceMessageSummaryUpdateModifyRequest', @params );
+method SystemVoiceMessageSummaryUpdateModifyRequest (@generic_params) {
+    return $self->send_command( 'SystemVoiceMessageSummaryUpdateModifyRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
 method SystemVoiceMessagingGroupGetRequest16sp2 () {
-    return $self->send_query('SystemVoiceMessagingGroupGetRequest16sp2');
+    return $self->send_query(
+        'SystemVoiceMessagingGroupGetRequest16sp2',
+
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12518,23 +15250,31 @@ method SystemVoiceMessagingGroupGetVoicePortalMenusRequest14 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method SystemVoiceMessagingGroupModifyRequest16 (@params) {
-    return $self->send_command( 'SystemVoiceMessagingGroupModifyRequest16', @params );
+method SystemVoiceMessagingGroupModifyRequest16 (@generic_params) {
+    return $self->send_command( 'SystemVoiceMessagingGroupModifyRequest16', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method SystemVoiceMessagingGroupModifyVoicePortalMenusRequest (@params) {
-    return $self->send_query( 'SystemVoiceMessagingGroupModifyVoicePortalMenusRequest', @params );
+method SystemVoiceMessagingGroupModifyVoicePortalMenusRequest (@generic_params) {
+    return $self->send_query( 'SystemVoiceMessagingGroupModifyVoicePortalMenusRequest', @generic_params );
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserAddAliasListRequest ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserAddAliasListRequest', userId => $x0, @params );
+method UserVoiceMessagingUserAddAliasListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserAddAliasListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserDeleteAliasListRequest ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserDeleteAliasListRequest', userId => $x0, @params );
+method UserVoiceMessagingUserDeleteAliasListRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserDeleteAliasListRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12549,7 +15289,11 @@ method UserVoiceMessagingUserGetAliasListRequest ($x0) {
 
 # ----------------------------------------------------------------------
 method UserVoiceMessagingUserGetDistributionListRequest ($x0, $x1) {
-    return $self->send_query( 'UserVoiceMessagingUserGetDistributionListRequest', userId => $x0, listId => $x1 );
+    return $self->send_query(
+        'UserVoiceMessagingUserGetDistributionListRequest',
+        userId => $x0,
+        listId => $x1
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12573,38 +15317,58 @@ method UserVoiceMessagingUserGetVoicePortalRequest16 ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyAdvancedVoiceManagementRequest ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserModifyAdvancedVoiceManagementRequest', userId => $x0, @params );
-}
-
-# ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyDistributionListRequest ($x0, $x1, @params) {
+method UserVoiceMessagingUserModifyAdvancedVoiceManagementRequest ($x0, @generic_params) {
     return $self->send_command(
-        'UserVoiceMessagingUserModifyDistributionListRequest',
+        'UserVoiceMessagingUserModifyAdvancedVoiceManagementRequest',
         userId => $x0,
-        listId => $x1,
-        @params
+        @generic_params
     );
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyGreetingRequest16 ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserModifyGreetingRequest16', userId => $x0, @params );
+method UserVoiceMessagingUserModifyDistributionListRequest ($x0, $x1, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserModifyDistributionListRequest',
+        userId => $x0,
+        listId => $x1,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyOutgoingSMDIMWIRequest ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserModifyOutgoingSMDIMWIRequest', userId => $x0, @params );
+method UserVoiceMessagingUserModifyGreetingRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserModifyGreetingRequest16',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyVoiceManagementRequest ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserModifyVoiceManagementRequest', userId => $x0, @params );
+method UserVoiceMessagingUserModifyOutgoingSMDIMWIRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserModifyOutgoingSMDIMWIRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
-method UserVoiceMessagingUserModifyVoicePortalRequest16 ($x0, @params) {
-    return $self->send_command( 'UserVoiceMessagingUserModifyVoicePortalRequest16', userId => $x0, @params );
+method UserVoiceMessagingUserModifyVoiceManagementRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserModifyVoiceManagementRequest',
+        userId => $x0,
+        @generic_params
+    );
+}
+
+# ----------------------------------------------------------------------
+method UserVoiceMessagingUserModifyVoicePortalRequest16 ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoiceMessagingUserModifyVoicePortalRequest16',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12616,8 +15380,12 @@ method UserVoicePortalCallingGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserVoicePortalCallingModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserVoicePortalCallingModifyRequest', userId => $x0, @params );
+method UserVoicePortalCallingModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserVoicePortalCallingModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12629,9 +15397,12 @@ method ServiceProviderZoneCallingRestrictionsGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method ServiceProviderZoneCallingRestrictionsModifyRequest ($x0, @params) {
-    return $self->send_command( 'ServiceProviderZoneCallingRestrictionsModifyRequest', serviceProviderId => $x0,
-        @params );
+method ServiceProviderZoneCallingRestrictionsModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'ServiceProviderZoneCallingRestrictionsModifyRequest',
+        serviceProviderId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
@@ -12640,8 +15411,12 @@ method UserZoneCallingRestrictionsGetRequest ($x0) {
 }
 
 # ----------------------------------------------------------------------
-method UserZoneCallingRestrictionsModifyRequest ($x0, @params) {
-    return $self->send_command( 'UserZoneCallingRestrictionsModifyRequest', userId => $x0, @params );
+method UserZoneCallingRestrictionsModifyRequest ($x0, @generic_params) {
+    return $self->send_command(
+        'UserZoneCallingRestrictionsModifyRequest',
+        userId => $x0,
+        @generic_params
+    );
 }
 
 # ----------------------------------------------------------------------
