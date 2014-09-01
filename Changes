@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.02      2014-09-01 14:54:53+01:00 Europe/London
     - Fixed a batch of parameter mishandling
     - Better type handling
 
