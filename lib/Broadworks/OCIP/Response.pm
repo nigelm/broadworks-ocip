@@ -142,10 +142,11 @@ The type of the returned XML.
 =cut
 
 has type => (
-    is      => 'ro',
-    isa     => 'Str',
-    lazy    => 1,
-    builder => '_build_type'
+    is       => 'ro',
+    isa      => 'Str',
+    lazy     => 1,
+    builder  => '_build_type',
+    weak_ref => 1
 );
 method _build_type () { return ( $self->payload->{'-xsi:type'} ); }
 
@@ -174,10 +175,11 @@ The hash payload of the XML document.
 =cut
 
 has payload => (
-    is      => 'ro',
-    isa     => 'HashRef',
-    lazy    => 1,
-    builder => '_build_payload'
+    is       => 'ro',
+    isa      => 'HashRef',
+    lazy     => 1,
+    builder  => '_build_payload',
+    weak_ref => 1
 );
 method _build_payload () { return $self->hash->{command}; }
 
@@ -193,10 +195,11 @@ Each table is an array of rows, each of which is a hash.
 =cut
 
 has tables => (
-    is      => 'ro',
-    isa     => 'HashRef',
-    lazy    => 1,
-    builder => '_build_tables'
+    is       => 'ro',
+    isa      => 'HashRef',
+    lazy     => 1,
+    builder  => '_build_tables',
+    weak_ref => 1
 );
 
 method _build_tables () {
