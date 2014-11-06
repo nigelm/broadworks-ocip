@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use feature 'unicode_strings';
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Throwable;
@@ -87,10 +87,11 @@ method _build_hash () {
 
 
 has type => (
-    is      => 'ro',
-    isa     => 'Str',
-    lazy    => 1,
-    builder => '_build_type'
+    is       => 'ro',
+    isa      => 'Str',
+    lazy     => 1,
+    builder  => '_build_type',
+    weak_ref => 1
 );
 method _build_type () { return ( $self->payload->{'-xsi:type'} ); }
 
@@ -109,10 +110,11 @@ method _build_status_ok () { return ( ( $self->type eq $self->expected ) ? 1 : 0
 
 
 has payload => (
-    is      => 'ro',
-    isa     => 'HashRef',
-    lazy    => 1,
-    builder => '_build_payload'
+    is       => 'ro',
+    isa      => 'HashRef',
+    lazy     => 1,
+    builder  => '_build_payload',
+    weak_ref => 1
 );
 method _build_payload () { return $self->hash->{command}; }
 
@@ -120,10 +122,11 @@ method _build_payload () { return $self->hash->{command}; }
 
 
 has tables => (
-    is      => 'ro',
-    isa     => 'HashRef',
-    lazy    => 1,
-    builder => '_build_tables'
+    is       => 'ro',
+    isa      => 'HashRef',
+    lazy     => 1,
+    builder  => '_build_tables',
+    weak_ref => 1
 );
 
 method _build_tables () {
@@ -189,7 +192,7 @@ Broadworks::OCIP::Response - A Broadworks OCI-P Response Message
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 

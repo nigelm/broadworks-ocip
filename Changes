@@ -1,3 +1,6 @@
+0.03      2014-11-06 16:20:02+00:00 Europe/London
+    - Weaken some internal references to prevent leaks
+
 0.02      2014-09-01 14:54:53+01:00 Europe/London
     - Fixed a batch of parameter mishandling
     - Better type handling
