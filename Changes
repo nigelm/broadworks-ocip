@@ -1,4 +1,5 @@
 {{$NEXT}}
+    - Removed weaken of tables which did very much the wrong thing
 
 0.03      2014-11-06 16:20:02+00:00 Europe/London
     - Weaken some internal references to prevent leaks

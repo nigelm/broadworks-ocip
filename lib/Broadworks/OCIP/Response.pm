@@ -195,11 +195,10 @@ Each table is an array of rows, each of which is a hash.
 =cut
 
 has tables => (
-    is       => 'ro',
-    isa      => 'HashRef',
-    lazy     => 1,
-    builder  => '_build_tables',
-    weak_ref => 1
+    is      => 'ro',
+    isa     => 'HashRef',
+    lazy    => 1,
+    builder => '_build_tables',
 );
 
 method _build_tables () {
