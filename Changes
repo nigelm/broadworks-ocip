@@ -1,5 +1,6 @@
 {{$NEXT}}
     - Removed weaken of tables which did very much the wrong thing
+    - Fixed Throwable to stop stack trace objects leaking
 
 0.03      2014-11-06 16:20:02+00:00 Europe/London
     - Weaken some internal references to prevent leaks

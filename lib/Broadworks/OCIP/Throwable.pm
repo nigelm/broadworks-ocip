@@ -66,6 +66,25 @@ has error_code => (
 );
 
 # ------------------------------------------------------------------------
+
+=head3 _build_stack_trace_args
+
+Modifies the stack trace to have no_refs set, otherwise the Devel::StackTrace
+objects leak, causing a build up of unreclaimable memory.
+
+Taken from a post by Bill Moseley at
+L<http://www.nntp.perl.org/group/perl.moose/2013/02/msg2574.html>
+
+=cut
+
+around _build_stack_trace_args => sub {
+    my ( $orig, $self, @rest ) = @_;
+    my $args_array = $self->$orig(@rest);
+    push( @{$args_array}, no_refs => 1 );
+    return $args_array;
+};
+
+# ------------------------------------------------------------------------
 __PACKAGE__->meta->make_immutable;
 1;
 
