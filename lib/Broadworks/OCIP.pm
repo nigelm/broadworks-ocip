@@ -8,7 +8,7 @@ use utf8;
 use feature 'unicode_strings';
 use namespace::autoclean;
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Response;
@@ -458,7 +458,7 @@ Broadworks::OCIP - API for communication with Broadworks OCI-P Interface
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

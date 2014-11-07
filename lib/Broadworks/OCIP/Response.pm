@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use feature 'unicode_strings';
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Throwable;
@@ -122,11 +122,10 @@ method _build_payload () { return $self->hash->{command}; }
 
 
 has tables => (
-    is       => 'ro',
-    isa      => 'HashRef',
-    lazy     => 1,
-    builder  => '_build_tables',
-    weak_ref => 1
+    is      => 'ro',
+    isa     => 'HashRef',
+    lazy    => 1,
+    builder => '_build_tables',
 );
 
 method _build_tables () {
@@ -192,7 +191,7 @@ Broadworks::OCIP::Response - A Broadworks OCI-P Response Message
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

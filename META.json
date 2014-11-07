@@ -74,23 +74,23 @@
    "provides" : {
       "Broadworks::OCIP" : {
          "file" : "lib/Broadworks/OCIP.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       },
       "Broadworks::OCIP::Deprecated" : {
          "file" : "lib/Broadworks/OCIP/Deprecated.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       },
       "Broadworks::OCIP::Methods" : {
          "file" : "lib/Broadworks/OCIP/Methods.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       },
       "Broadworks::OCIP::Response" : {
          "file" : "lib/Broadworks/OCIP/Response.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       },
       "Broadworks::OCIP::Throwable" : {
          "file" : "lib/Broadworks/OCIP/Throwable.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       }
    },
    "release_status" : "stable",
@@ -106,7 +106,7 @@
          "web" : "https://gitlab.dev.localnet/broadworks-api/broadworks-ocip"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.020000"
@@ -510,7 +510,7 @@
                "Dist::Zilla::Plugin::Git::Tag" : {
                   "branch" : null,
                   "signed" : 0,
-                  "tag" : "release/0.03",
+                  "tag" : "release/0.04",
                   "tag_format" : "release/%v%t",
                   "tag_message" : "Release of %v%t",
                   "time_zone" : "local"

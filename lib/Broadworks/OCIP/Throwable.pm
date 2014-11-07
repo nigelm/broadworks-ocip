@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use namespace::autoclean;
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Moose;
@@ -27,6 +27,16 @@ has error_code => (
     isa     => 'Str',
     default => 'error',
 );
+
+# ------------------------------------------------------------------------
+
+
+around _build_stack_trace_args => sub {
+    my ( $orig, $self, @rest ) = @_;
+    my $args_array = $self->$orig(@rest);
+    push( @{$args_array}, no_refs => 1 );
+    return $args_array;
+};
 
 # ------------------------------------------------------------------------
 __PACKAGE__->meta->make_immutable;
@@ -49,7 +59,7 @@ Broadworks::OCIP::Throwable - Exception throwing for Broadworks::OCIP
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -74,6 +84,14 @@ Text to give an indication of what we were doing.
 =head3 error_code
 
 Text to uniquely identify what caused this.
+
+=head3 _build_stack_trace_args
+
+Modifies the stack trace to have no_refs set, otherwise the Devel::StackTrace
+objects leak, causing a build up of unreclaimable memory.
+
+Taken from a post by Bill Moseley at
+L<http://www.nntp.perl.org/group/perl.moose/2013/02/msg2574.html>
 
 =head1 AUTHOR
 
