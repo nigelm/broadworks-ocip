@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use namespace::autoclean;
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Moose;
@@ -59,7 +59,7 @@ Broadworks::OCIP::Throwable - Exception throwing for Broadworks::OCIP
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

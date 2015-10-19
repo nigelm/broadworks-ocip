@@ -8,7 +8,7 @@ use utf8;
 use feature 'unicode_strings';
 use namespace::autoclean;
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Response;
@@ -420,7 +420,7 @@ method send_command ($cmd, @parampairs) {
         error_code      => 'no_auth'
     ) unless ( $self->is_authenticated );
     $self->send_command_xml( $cmd, \@parampairs );
-    return $self->receive( 'SuccessResponse', 0 );
+    return $self->receive( 'c:SuccessResponse', 0 );
 }
 
 # ----------------------------------------------------------------------
@@ -458,7 +458,7 @@ Broadworks::OCIP - API for communication with Broadworks OCI-P Interface
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

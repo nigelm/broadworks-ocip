@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use feature 'unicode_strings';
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Throwable;
@@ -191,7 +191,7 @@ Broadworks::OCIP::Response - A Broadworks OCI-P Response Message
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
