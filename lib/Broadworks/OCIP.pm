@@ -581,7 +581,7 @@ method send_command ($cmd, @parampairs) {
         error_code      => 'no_auth'
     ) unless ( $self->is_authenticated );
     $self->send_command_xml( $cmd, \@parampairs );
-    return $self->receive( 'SuccessResponse', 0 );
+    return $self->receive( 'c:SuccessResponse', 0 );
 }
 
 # ----------------------------------------------------------------------
