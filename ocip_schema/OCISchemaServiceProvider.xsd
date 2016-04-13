@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E   P R O V I D E R  P A R T  -->
 <!--                                                                        -->
@@ -39,9 +39,9 @@
     ServiceProviderAccessDeviceDeleteRequest    
     ServiceProviderAccessDeviceFileModifyRequest14sp8    
     ServiceProviderAccessDeviceFileGetListRequest14sp8    
-    ServiceProviderAccessDeviceFileGetRequest16sp1    
+    ServiceProviderAccessDeviceFileGetRequest20    
     ServiceProviderAccessDeviceGetListRequest    
-    ServiceProviderAccessDeviceGetRequest16    
+    ServiceProviderAccessDeviceGetRequest18sp1    
     ServiceProviderAccessDeviceGetUserListRequest    
     ServiceProviderAccessDeviceModifyRequest14    
     ServiceProviderAccessDeviceModifyUserRequest    
@@ -50,13 +50,13 @@
     ServiceProviderAdminAddRequest14    
     ServiceProviderAdminDeleteRequest    
     ServiceProviderAdminGetListRequest14    
-    ServiceProviderAdminGetPolicyRequest17sp3    
+    ServiceProviderAdminGetPolicyRequest20    
     ServiceProviderAdminGetRequest14    
     ServiceProviderAdminModifyPolicyRequest14    
     ServiceProviderAdminModifyRequest    
     ServiceProviderAnswerConfirmationGetRequest16    
     ServiceProviderAnswerConfirmationModifyRequest16    
-    ServiceProviderCallProcessingGetPolicyRequest17sp4    
+    ServiceProviderCallProcessingGetPolicyRequest19sp1    
     ServiceProviderCallProcessingModifyPolicyRequest15    
     ServiceProviderCommunicationBarringCriteriaAssignListRequest    
     ServiceProviderCommunicationBarringCriteriaGetAssignedListRequest    
@@ -67,19 +67,28 @@
     ServiceProviderCommunicationBarringDigitPatternCriteriaGetPatternListRequest    
     ServiceProviderCommunicationBarringDigitPatternCriteriaGetRequest    
     ServiceProviderCommunicationBarringDigitPatternCriteriaModifyRequest    
-    ServiceProviderCommunicationBarringProfileAddRequest17sp3    
+    ServiceProviderCommunicationBarringIncomingCriteriaAssignListRequest    
+    ServiceProviderCommunicationBarringIncomingCriteriaGetAssignedListRequest    
+    ServiceProviderCommunicationBarringIncomingCriteriaUnassignListRequest    
+    ServiceProviderCommunicationBarringProfileAddRequest19sp1    
     ServiceProviderCommunicationBarringProfileDeleteRequest    
     ServiceProviderCommunicationBarringProfileGetAssignedGroupListRequest    
     ServiceProviderCommunicationBarringProfileGetCriteriaUsageListRequest    
     ServiceProviderCommunicationBarringProfileGetDigitPatternCriteriaUsageListRequest    
+    ServiceProviderCommunicationBarringProfileGetIncomingCriteriaUsageListRequest    
     ServiceProviderCommunicationBarringProfileGetListRequest    
-    ServiceProviderCommunicationBarringProfileGetRequest17sp3    
+    ServiceProviderCommunicationBarringProfileGetRequest19sp1    
+    ServiceProviderCommunicationBarringProfileGetRequest19sp1V2    
     ServiceProviderCommunicationBarringProfileModifyDefaultRequest    
     ServiceProviderCommunicationBarringProfileModifyRequest    
     ServiceProviderCPEConfigRebuildDeviceConfigFileRequest    
     ServiceProviderCPEConfigResetDeviceRequest    
     ServiceProviderCPEConfigReorderDeviceLinePortsRequest    
     ServiceProviderDeleteRequest    
+    ServiceProviderDeviceManagementEventGetListRequest    
+    ServiceProviderDeviceManagementInProgressAndPendingEventCancelRequest    
+    ServiceProviderDeviceProfileAuthenticationPasswordRulesGetRequest    
+    ServiceProviderDeviceProfileAuthenticationPasswordRulesModifyRequest    
     ServiceProviderDialableCallerIDCriteriaAddRequest    
     ServiceProviderDialableCallerIDCriteriaDeleteRequest    
     ServiceProviderDialableCallerIDCriteriaGetRequest    
@@ -104,8 +113,8 @@
     ServiceProviderDomainGetAssignedListRequest    
     ServiceProviderDomainUnassignListRequest    
     ServiceProviderEndpointGetListRequest    
-    ServiceProviderFeatureAccessCodeGetListRequest    
-    ServiceProviderFeatureAccessCodeModifyListRequest    
+    ServiceProviderFeatureAccessCodeGetListRequest20    
+    ServiceProviderFeatureAccessCodeModifyListRequest20    
     ServiceProviderFileRepositoryDeviceUserAddRequest    
     ServiceProviderFileRepositoryDeviceUserDeleteRequest    
     ServiceProviderFileRepositoryDeviceUserModifyRequest    
@@ -113,6 +122,9 @@
     ServiceProviderGetDefaultRequest    
     ServiceProviderGetListRequest    
     ServiceProviderGetRequest17sp1    
+    ServiceProviderIMRNAssignListRequest    
+    ServiceProviderIMRNGetListRequest    
+    ServiceProviderIMRNUnassignListRequest    
     ServiceProviderModifyRequest    
     ServiceProviderNetworkClassOfServiceModifyDefaultRequest    
     ServiceProviderNetworkClassOfServiceAssignListRequest    
@@ -121,11 +133,14 @@
     ServiceProviderNetworkClassOfServiceGetAssignedListRequest    
     ServiceProviderNetworkClassOfServiceGetAssignedGroupListRequest    
     ServiceProviderNetworkClassOfServiceUnassignListRequest    
+    ServiceProviderNumberPortabilityQueryGetRequest    
+    ServiceProviderNumberPortabilityQueryModifyRequest    
+    ServiceProviderNumberPortabilityQueryAddListRequest    
     ServiceProviderOfficeZoneAssignListRequest    
     ServiceProviderOfficeZoneGetAssignedListRequest    
     ServiceProviderOfficeZoneGetAssignedGroupListRequest    
     ServiceProviderOfficeZoneUnassignListRequest    
-    ServiceProviderPortalPasscodeRulesGetRequest    
+    ServiceProviderPortalPasscodeRulesGetRequest19    
     ServiceProviderPortalPasscodeRulesModifyRequest    
     ServiceProviderPasswordRulesGetRequest16    
     ServiceProviderPasswordRulesModifyRequest14sp3    
@@ -169,11 +184,15 @@
     ServiceProviderServicePackModifyRequest    
     ServiceProviderSessionAdmissionControlGetRequest    
     ServiceProviderSessionAdmissionControlModifyRequest    
+    ServiceProviderSessionAdmissionControlWhiteListGetRequest    
+    ServiceProviderSessionAdmissionControlWhiteListModifyRequest    
     ServiceProviderLanguageAddRequest    
     ServiceProviderLanguageModifyRequest    
     ServiceProviderLanguageDeleteRequest    
     ServiceProviderLanguageGetListRequest    
     ServiceProviderLanguageGetAvailableListRequest    
+    ServiceProviderSIPAuthenticationPasswordRulesGetRequest    
+    ServiceProviderSIPAuthenticationPasswordRulesModifyRequest    
     ServiceProviderApplicationServerSetModifyRequest    
     ServiceProviderApplicationServerSetGetRequest    
     
@@ -277,7 +296,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceCustomTagsTable" type="core:OCITable"/>
         </xs:sequence>
@@ -326,6 +345,9 @@
       <xs:documentation>
         Request to modify a specified service provider/enterprise access device file.
         The response is either a SuccessResponse or an ErrorResponse.
+
+        The following elements are only used in AS data mode:
+          extendedCaptureEnabled        
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -336,6 +358,7 @@
           <xs:element name="fileFormat" type="DeviceManagementFileFormat"/>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode" minOccurs="0"/>
           <xs:element name="uploadFile" type="FileResource" minOccurs="0"/>
+          <xs:element name="extendedCaptureEnabled" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -363,11 +386,14 @@
       <xs:documentation>
         Response to ServiceProviderAccessDeviceFileGetListRequest14sp8.
         Contains a table of device files managed by the Device Management System on a per-device profile basis.
-        The column headings are: "File Format", "Is Authenticated", "Access URL", "Repository URL", "Template URL".
+        The column headings are: "File Format", "Is Authenticated", "Access URL", "Repository URL", "Template URL", "Extended Capture".
+
+        The following columns are only used in AS data mode:
+          "Extended Capture"
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -375,11 +401,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderAccessDeviceFileGetRequest16sp1">
+  <xs:complexType name="ServiceProviderAccessDeviceFileGetRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get a service provider device profile file.
-        The response is either ServiceProviderAccessDeviceFileGetResponse16sp1 or ErrorResponse.
+        The response is either ServiceProviderAccessDeviceFileGetResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -393,20 +423,26 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderAccessDeviceFileGetResponse16sp1">
+  <xs:complexType name="ServiceProviderAccessDeviceFileGetResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to ServiceProviderAccessDeviceFileGetRequest16sp1.
+        Response to ServiceProviderAccessDeviceFileGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
           <xs:element name="accessUrl" type="URL"/>
           <xs:element name="repositoryUrl" type="URL" minOccurs="0"/>
           <xs:element name="templateUrl" type="URL" minOccurs="0"/>
+          <xs:element name="extendedCaptureEnabled" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="extendedCaptureURL" type="URL" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -428,6 +464,7 @@
           <xs:element name="searchCriteriaDeviceMACAddress" type="SearchCriteriaDeviceMACAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDeviceNetAddress" type="SearchCriteriaDeviceNetAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactDeviceType" type="SearchCriteriaExactDeviceType" minOccurs="0"/>
+          <xs:element name="searchCriteriaAccessDeviceVersion" type="SearchCriteriaAccessDeviceVersion" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -439,7 +476,7 @@
         Response to ServiceProviderAccessDeviceGetListRequest.
         Contains a table of devices configured in the service provider.
         The column headings are: "Device Name", "Device Type", "Available Ports",
-        "Net Address", "MAC Address", and "Status".
+        "Net Address", "MAC Address", "Status", and "Version".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -451,11 +488,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderAccessDeviceGetRequest16">
+  <xs:complexType name="ServiceProviderAccessDeviceGetRequest18sp1">
     <xs:annotation>
       <xs:documentation>
         Requests the configuration of a specified service provider access device.
-        The response is either ServiceProviderAccessDeviceGetResponse16 or ErrorResponse.
+        The response is either ServiceProviderAccessDeviceGetResponse18sp1 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -468,10 +505,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderAccessDeviceGetResponse16">
+  <xs:complexType name="ServiceProviderAccessDeviceGetResponse18sp1">
     <xs:annotation>
       <xs:documentation>
-        Response to ServiceProviderAccessDeviceGetRequest16.
+        Response to ServiceProviderAccessDeviceGetRequest18sp1.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -497,6 +534,7 @@
           <xs:element name="mobilityManagerDefaultTerminatingServiceKey" type="MobilityManagerServiceKey" minOccurs="0"/>
           <xs:element name="useCustomUserNamePassword" type="xs:boolean" minOccurs="0"/>
           <xs:element name="userName" type="UserId" minOccurs="0"/>
+          <xs:element name="version" type="UserAgentHeader" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -524,6 +562,9 @@
           <xs:element name="searchCriteriaGroupId" type="SearchCriteriaGroupId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactEndpointType" type="SearchCriteriaExactEndpointType" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserType" type="SearchCriteriaExactUserType" minOccurs="0"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactPortNumber" type="SearchCriteriaExactPortNumber" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -535,7 +576,7 @@
         Response to ServiceProviderAccessDeviceGetUserListRequest.
         The column headings for the deviceUserTable are: "Line/Port", "Last Name",
         "First Name", "Phone Number", "Group Id", "User Id",
-        "User Type", "Endpoint Type", "Primary Line/Port", "Order"
+        "User Type", "Endpoint Type", "Primary Line/Port", "Order", "Extension", "Department", "Email Address".
         In IMS mode, the table will contain a row for each TEL-URI in the Phone Number column.
         In standalone mode, rows for the alternate numbers are not included.
         The User Type column contains one of the enumerated UserType values.
@@ -717,11 +758,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderAdminGetPolicyRequest17sp3">
+  <xs:complexType name="ServiceProviderAdminGetPolicyRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Requests the service provider administrator's policy settings.
-        The response is either ServiceProviderAdminGetPolicyResponse17sp3 or ErrorResponse.
+        The response is either ServiceProviderAdminGetPolicyResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -733,20 +778,23 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderAdminGetPolicyResponse17sp3">
+  <xs:complexType name="ServiceProviderAdminGetPolicyResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to ServiceProviderAdminGetPolicyRequest17sp3.
+        Response to ServiceProviderAdminGetPolicyRequest20.
         Contains the policy settings for the service provider administrator.
-        The networkPolicyAccess is returned only for the enterprise administrator.
+        The networkPolicyAccess and numberActivationAccess are returned only for the enterprise administrator.
         The following elements are only used in AS data mode:
             dialableCallerIDAccess
-        The following elements are only used in HSS data mode:
-            communicationBarringAccess
+            verifyTranslationAndRoutingAccess
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="profileAccess" type="ServiceProviderAdminProfileAccess"/>
           <xs:element name="groupAccess" type="ServiceProviderAdminGroupAccess"/>
@@ -763,7 +811,9 @@
           <xs:element name="officeZoneAccess" type="ServiceProviderAdminOfficeZoneAccess"/>
           <xs:element name="communicationBarringAccess" type="ServiceProviderAdminCommunicationBarringAccess"/>
           <xs:element name="networkPolicyAccess" type="EnterpriseAdminNetworkPolicyAccess" minOccurs="0"/>
+          <xs:element name="numberActivationAccess" type="EnterpriseAdminNumberActivationAccess" minOccurs="0"/>
           <xs:element name="dialableCallerIDAccess" type="ServiceProviderAdminDialableCallerIDAccess"/>
+          <xs:element name="verifyTranslationAndRoutingAccess" type="ServiceProviderAdminVerifyTranslationAndRoutingAccess"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -807,14 +857,17 @@
     
   <xs:complexType name="ServiceProviderAdminModifyPolicyRequest14">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to modify the service provider administrator's policy settings.
         The response is either SuccessResponse or ErrorResponse.
         The networkPolicyAccess is only modified for the enterprise administrator.
         The following elements are only used in AS data mode:
             dialableCallerIDAccess
-        The following elements are only used in HSS data mode:
-	          communicationBarringAccess
+            verifyTranslationAndroutingAccess
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -836,7 +889,9 @@
           <xs:element name="officeZoneAccess" type="ServiceProviderAdminOfficeZoneAccess" minOccurs="0"/>
           <xs:element name="communicationBarringAccess" type="ServiceProviderAdminCommunicationBarringAccess" minOccurs="0"/>
           <xs:element name="networkPolicyAccess" type="EnterpriseAdminNetworkPolicyAccess" minOccurs="0"/>
+          <xs:element name="numberActivationAccess" type="EnterpriseAdminNumberActivationAccess" minOccurs="0"/>
           <xs:element name="dialableCallerIDAccess" type="ServiceProviderAdminDialableCallerIDAccess" minOccurs="0"/>
+          <xs:element name="verifyTranslationAndRoutingAccess" type="ServiceProviderAdminVerifyTranslationAndRoutingAccess" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -847,7 +902,7 @@
       <xs:documentation>
         Modify a service provider administrator.
         Since old password is not specified here, any password rule related to old password
-        does not apply.        
+        does not apply.          
         The response is either a SuccessResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -917,12 +972,16 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderCallProcessingGetPolicyRequest17sp4">
+  <xs:complexType name="ServiceProviderCallProcessingGetPolicyRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request the service provider level data associated with Call Processing
         Policy. The response is either a
-        ServiceProviderCallProcessingGetPolicyResponse17sp4 or an ErrorResponse.
+        ServiceProviderCallProcessingGetPolicyResponse18sp1 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -934,14 +993,20 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderCallProcessingGetPolicyResponse17sp4">
+  <xs:complexType name="ServiceProviderCallProcessingGetPolicyResponse19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to ServiceProviderCallProcessingGetPolicyRequest17sp4.
+        Response to ServiceProviderCallProcessingGetPolicyRequest19sp1.
         The following elements are only used in AS data mode:
            useServiceProviderDCLIDSetting
            enableDialableCallerID
            allowConfigurableCLIDForRedirectingIdentity
+            enterpriseCallsCLIDPolicy
+            groupCallsCLIDPolicy
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -949,13 +1014,13 @@
         <xs:sequence>
           <xs:element name="useServiceProviderDCLIDSetting" type="xs:boolean"/>
           <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
-          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls19sp1"/>
           <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
-          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls19sp1"/>
           <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
           <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
           <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
-          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes19sp1"/>
           <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
           <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
           <xs:element name="networkUsageSelection" type="NetworkUsageSelection"/>
@@ -969,18 +1034,20 @@
           <xs:element name="useSettingLevel" type="ServiceProviderConferenceURISettingLevel"/>
           <xs:element name="conferenceURI" type="SIPURI" minOccurs="0"/>
           <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
-          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls19sp1"/>
           <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
-          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
-          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth19sp1"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth19sp1"/>
           <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
-          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations19sp1"/>
           <xs:element name="clidPolicy" type="CLIDPolicy"/>
           <xs:element name="emergencyClidPolicy" type="CLIDPolicy"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
           <xs:element name="blockCallingNameForExternalCalls" type="xs:boolean"/>
           <xs:element name="enableDialableCallerID" type="xs:boolean"/>
           <xs:element name="allowConfigurableCLIDForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="enterpriseCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy"/>
+          <xs:element name="groupCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -988,6 +1055,10 @@
     
   <xs:complexType name="ServiceProviderCallProcessingModifyPolicyRequest15">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify the service provider level data associated with Call Procesing
         Policy. The response is either a SuccessResponse or an ErrorResponse.
@@ -995,6 +1066,9 @@
            useServiceProviderDCLIDSetting
            enableDialableCallerID
            allowConfigurableCLIDForRedirectingIdentity
+           enterpriseCallsCLIDPolicy
+           groupCallsCLIDPolicy
+           
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1003,13 +1077,13 @@
           <xs:element name="serviceProviderId" type="ServiceProviderId"/>
           <xs:element name="useServiceProviderDCLIDSetting" type="xs:boolean" minOccurs="0"/>
           <xs:element name="useMaxSimultaneousCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls" minOccurs="0"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls" minOccurs="0"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16" minOccurs="0"/>
           <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes" minOccurs="0"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes19sp1" minOccurs="0"/>
           <xs:element name="mediaPolicySelection" type="MediaPolicySelection" minOccurs="0"/>
           <xs:element name="supportedMediaSetName" type="MediaSetName" nillable="true" minOccurs="0"/>
           <xs:element name="networkUsageSelection" type="NetworkUsageSelection" minOccurs="0"/>
@@ -1023,18 +1097,20 @@
           <xs:element name="useSettingLevel" type="ServiceProviderConferenceURISettingLevel" minOccurs="0"/>
           <xs:element name="conferenceURI" type="SIPURI" nillable="true" minOccurs="0"/>
           <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls" minOccurs="0"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth" minOccurs="0"/>
-          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth" minOccurs="0"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth19sp1" minOccurs="0"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth19sp1" minOccurs="0"/>
           <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations" minOccurs="0"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations19sp1" minOccurs="0"/>
           <xs:element name="clidPolicy" type="CLIDPolicy" minOccurs="0"/>
           <xs:element name="emergencyClidPolicy" type="CLIDPolicy" minOccurs="0"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean" minOccurs="0"/>
           <xs:element name="enableDialableCallerID" type="xs:boolean" minOccurs="0"/>
           <xs:element name="blockCallingNameForExternalCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="allowConfigurableCLIDForRedirectingIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enterpriseCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy" minOccurs="0"/>
+          <xs:element name="groupCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1265,7 +1341,91 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderCommunicationBarringProfileAddRequest17sp3">
+  <xs:complexType name="ServiceProviderCommunicationBarringIncomingCriteriaAssignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Assign a list of Communication Barring Incoming Criteria to a service provider.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="criteriaName" type="CommunicationBarringCriteriaName" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringIncomingCriteriaGetAssignedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get a list of Communication Barring Incoming Criteria assigned to a service provider.
+        The response is either a ServiceProviderCommunicationBarringIncomingCriteriaGetAssignedListResponse 
+        or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringIncomingCriteriaGetAssignedListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderCommunicationBarringIncomingCriteriaGetAssignedListRequest.
+        Contains a table of all Communication Barring Incoming Criteria assigned to the
+        service provider. The column headings are: "Name" and "Description". 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="criteriaTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringIncomingCriteriaUnassignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Unassign a list of Communication Barring Incoming Criteria from a service provider.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="criteriaName" type="CommunicationBarringCriteriaName" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileAddRequest19sp1">
     <xs:annotation>
       <xs:documentation>
         Add a new Communication Barring Profile.
@@ -1274,7 +1434,8 @@
       The following elements are only used in AS data mode:
            callMeNowDefaultAction, use value "Block" in HSS data mode
            callMeNowDefaultCallTimeout
-           callMeNowRule     
+           callMeNowRule  
+           applyToAttendedCallTransfers, use value "false" in HSS data mode      
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1296,8 +1457,9 @@
           <xs:element name="callMeNowRule" type="ServiceProviderCommunicationBarringHierarchicalCallMeNowRule" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="incomingDefaultAction" type="CommunicationBarringIncomingAction"/>
           <xs:element name="incomingDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0"/>
-          <xs:element name="incomingRule" type="CommunicationBarringIncomingRule" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="incomingRule" type="CommunicationBarringIncomingRule19sp1" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="becomeDefault" type="xs:boolean"/>
+          <xs:element name="applyToAttendedCallTransfers" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1364,7 +1526,7 @@
     <xs:annotation>
       <xs:documentation>
         Get a list of Communication Barring profiles within a service provider that have a given Communication Barring Criteria assigned.
-        The response is either a ServiceProviderCommunicationBarringProfileGetCriteriaUsageListResponse 
+        The response is either a ServiceProviderCommunicationBarring ProfileGetCriteriaUsageListResponse 
         or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -1427,6 +1589,49 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetIncomingCriteriaUsageListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get a list of Communication Barring profiles within a service provider that have a given Communication Barring Incoming Criteria assigned.
+        The response is either a ServiceProviderCommunicationBarring ProfileGetIncomingCriteriaUsageListResponse 
+        or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="criteriaName" type="CommunicationBarringCriteriaName"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetIncomingCriteriaUsageListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderCommunicationBarringProfileGetIncomingCriteriaUsageListRequest.
+        Contains a table of profiles that have the Communication Barring Incoming Criteria assigned.
+        The column headings are: "Name" and "Description".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="profileTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="ServiceProviderCommunicationBarringProfileGetListRequest">
     <xs:annotation>
       <xs:documentation>
@@ -1461,11 +1666,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetRequest17sp3">
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get an existing Communication Barring Profile.
-        The response is either a ServiceProviderCommunicationBarringProfileGetResponse17sp3
+        The response is either a ServiceProviderCommunicationBarringProfileGetResponse19sp1
         or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -1479,16 +1688,21 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetResponse17sp3">
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetResponse19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to the ServiceProviderCommunicationBarringProfileGetRequest17sp3.
+        Response to the ServiceProviderCommunicationBarringProfileGetRequest19sp1.
         The response contains the Communication Barring Profile information.
         The incoming, originating, redirecting and call me now rules are returned in ascending priority order.
       The following elements are only used in AS data mode:
            callMeNowDefaultAction
            callMeNowDefaultCallTimeout
-           callMeNowRule     
+           callMeNowRule
+           applyToAttendedCallTransfers      
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1510,6 +1724,71 @@
           <xs:element name="incomingDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0"/>
           <xs:element name="incomingRule" type="CommunicationBarringIncomingRule" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="isDefault" type="xs:boolean"/>
+          <xs:element name="applyToAttendedCallTransfers" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetRequest19sp1V2">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get an existing Communication Barring Profile.
+        The response is either a ServiceProviderCommunicationBarringProfileGetResponse19sp1V2
+        or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="name" type="CommunicationBarringProfileName"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCommunicationBarringProfileGetResponse19sp1V2">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to the ServiceProviderCommunicationBarringProfileGetRequest19sp1V2.
+        The response contains the Communication Barring Profile information.
+        The incoming, originating, redirecting and call me now rules are returned in ascending priority order.
+      The following elements are only used in AS data mode:
+           callMeNowDefaultAction
+           callMeNowDefaultCallTimeout
+           callMeNowRule
+           applyToAttendedCallTransfers      
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="description" type="CommunicationBarringProfileDescription" minOccurs="0"/>
+          <xs:element name="originatingDefaultAction" type="CommunicationBarringOriginatingAction"/>
+          <xs:element name="originatingDefaultTreatmentId" type="TreatmentId" minOccurs="0"/>
+          <xs:element name="originatingDefaultTransferNumber" type="OutgoingDN" minOccurs="0"/>
+          <xs:element name="originatingDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0"/>
+          <xs:element name="originatingRule" type="ServiceProviderCommunicationBarringHierarchicalOriginatingRule" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="redirectingDefaultAction" type="CommunicationBarringRedirectingAction"/>
+          <xs:element name="redirectingDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0"/>
+          <xs:element name="redirectingRule" type="ServiceProviderCommunicationBarringHierarchicalRedirectingRule" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="callMeNowDefaultAction" type="CommunicationBarringCallMeNowAction"/>
+          <xs:element name="callMeNowDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0"/>
+          <xs:element name="callMeNowRule" type="ServiceProviderCommunicationBarringHierarchicalCallMeNowRule" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="incomingDefaultAction" type="CommunicationBarringIncomingAction"/>
+          <xs:element name="incomingDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0"/>
+          <xs:element name="incomingRule" type="CommunicationBarringIncomingRule19sp1" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="isDefault" type="xs:boolean"/>
+          <xs:element name="applyToAttendedCallTransfers" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1534,6 +1813,10 @@
     
   <xs:complexType name="ServiceProviderCommunicationBarringProfileModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify an existing Communication Barring Profile.
         The priorities for OriginatingRules, RedirectingRules, CallMeNowRules and IncomingRules are requantized to consecutive integers as part of the modify.
@@ -1542,6 +1825,7 @@
            callMeNowDefaultAction
            callMeNowDefaultCallTimeout
            callMeNowRule
+           applyToAttendedCallTransfers
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1564,8 +1848,9 @@
           <xs:element name="callMeNowRule" type="ServiceProviderReplacementCommunicationBarringHierarchicalCallMeNowRuleList" minOccurs="0" nillable="true"/>
           <xs:element name="incomingDefaultAction" type="CommunicationBarringIncomingAction" minOccurs="0"/>
           <xs:element name="incomingDefaultCallTimeout" type="CommunicationBarringTimeoutSeconds" minOccurs="0" nillable="true"/>
-          <xs:element name="incomingRule" type="ReplacementCommunicationBarringIncomingRuleList" minOccurs="0" nillable="true"/>
+          <xs:element name="incomingRule" type="ReplacementCommunicationBarringIncomingRuleList19sp1" minOccurs="0" nillable="true"/>
           <xs:element name="becomeDefault" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="applyToAttendedCallTransfers" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1636,6 +1921,213 @@
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderDeviceManagementEventGetListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request device management's events for a specific queue.
+        It is possible to restrict the number of rows returned using 
+        responseSizeLimit. 
+        If eventQueueType is not specified, the events from all the 
+        event queues are returned.
+        The response is either a ServiceProviderDeviceManagementEventGetListResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="eventQueueType" type="DeviceManagementEventQueueType" minOccurs="0"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventStatusInProgressOrPending" type="SearchCriteriaExactDeviceManagementEventStatusInProgressOrPending" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventStatusCompleted" type="SearchCriteriaExactDeviceManagementEventStatusCompleted" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventAction" type="SearchCriteriaExactDeviceManagementEventAction" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventLevel" type="SearchCriteriaExactDeviceManagementEventLevel" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventType" type="SearchCriteriaExactDeviceManagementEventType" minOccurs="0"/>
+          <xs:element name="searchCriteriaDeviceManagementEventAdditionalInfo" type="SearchCriteriaDeviceManagementEventAdditionalInfo" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDeviceManagementEventLoginId" type="SearchCriteriaDeviceManagementEventLoginId" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderDeviceManagementEventGetListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderDeviceManagementEventGetListRequest.
+        Contains a table with column headings: "Event Id", "Status", "Action",
+        "Level", "Type", "Additional Info", "Is Local", "Completion %", 
+        "Pushed/ Same Hash/ Not Pushed", "Login Id", "Start Time", 
+        "Process Time".
+        "Event Id" is a unique identifer for the event.
+        "Status" can be: Pending, Queued, In Progress,
+        Process On Other Host, Stale, Completed, Canceled.
+        "Action" can be: Delete, Download, Rebuild, Reset, Upload.
+        "Level" can be: Device, Device Type, Device Type Group, Group, User.
+        "Type" can be: Automatic, Manual.
+        "Additional Info" includes the affected device type, device or group.
+        It depends on the level of the event:
+          Device Profile: "Device Name" "Service Provider Id" "Group Id"
+          Device Type: "Device Type Name"
+          Device Type Group: "Service Provider Id" "Group Id" "Device Type Name"
+          Group: "Service Provider Id" "Group Id"
+          User: "User Id"
+        "Is Local" is set to "yes" if the event is processed on the server 
+        who received the request, "no" otherwise meaning that the event is
+        processed on another server.
+        "Completion %" provides an estimate of the completion of the event.
+        A percentage is given, the current number of completed expanded event,
+        and the total number of expanded event.
+        "Pushed/ Same Hash/ Not Pushed" gives the total number of files that 
+        were pushed, not pushed because of same hash, and not pushed when 
+        processing the event.
+        "LoginId" is the user or admin id who triggered the event.
+        "Start Time" is the date when the event was started.  The display 
+        shows the month, days, hours, and minutes (MM-dd hh:mm).
+        "Process Time" is the time taken to process the event in hours,
+        minutes, seconds, and milliseconds (hhhh:mm:ss.SSS).
+        Each row represents an event sorted by priority of processing.  The 
+        first row in the table is an event that has an associated expanded 
+        event currently being processed or next in line to be processed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="eventTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderDeviceManagementInProgressAndPendingEventCancelRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Cancel pending and in progress events.  A list of individual events can 
+        be canceled.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="eventId" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderDeviceProfileAuthenticationPasswordRulesGetRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request to get the service provider level device profile authentication password rule settings.
+        The response is either a ServiceProviderDeviceProfileAuthenticationPasswordRulesGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderDeviceProfileAuthenticationPasswordRulesGetResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderDeviceProfileAuthenticationPasswordRulesGetRequest.
+        Contains the device profile authentication password rules for the service provider.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useServiceProviderSettings" type="xs:boolean"/>
+          <xs:element name="disallowAuthenticationName" type="xs:boolean"/>
+          <xs:element name="disallowOldPassword" type="xs:boolean"/>
+          <xs:element name="disallowReversedOldPassword" type="xs:boolean"/>
+          <xs:element name="restrictMinDigits" type="xs:boolean"/>
+          <xs:element name="minDigits" type="PasswordMinDigits"/>
+          <xs:element name="restrictMinUpperCaseLetters" type="xs:boolean"/>
+          <xs:element name="minUpperCaseLetters" type="PasswordMinUpperCaseLetters"/>
+          <xs:element name="restrictMinLowerCaseLetters" type="xs:boolean"/>
+          <xs:element name="minLowerCaseLetters" type="PasswordMinLowerCaseLetters"/>
+          <xs:element name="restrictMinNonAlphanumericCharacters" type="xs:boolean"/>
+          <xs:element name="minNonAlphanumericCharacters" type="PasswordMinNonAlphanumericCharacters"/>
+          <xs:element name="minLength" type="PasswordMinLength"/>
+          <xs:element name="sendPermanentLockoutNotification" type="xs:boolean"/>
+          <xs:element name="permanentLockoutNotifyEmailAddress" type="EmailAddress" minOccurs="0"/>
+          <xs:element name="deviceProfileAuthenticationLockoutType" type="AuthenticationLockoutType"/>
+          <xs:element name="deviceProfileTemporaryLockoutThreshold" type="AuthenticationTemporaryLockoutThreshold"/>
+          <xs:element name="deviceProfileWaitAlgorithm" type="AuthenticationLockoutWaitAlgorithmType"/>
+          <xs:element name="deviceProfileLockoutFixedMinutes" type="AuthenticationLockoutFixedWaitTimeMinutes"/>
+          <xs:element name="deviceProfilePermanentLockoutThreshold" type="AuthenticationPermanentLockoutThreshold"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderDeviceProfileAuthenticationPasswordRulesModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+		    Request to modify the service provider level device profile authentication password rule settings. The useServiceProviderSettings element can only be modified by a system administrator or a provisioning administrator.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="useServiceProviderSettings" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowAuthenticationName" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowOldPassword" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowReversedOldPassword" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="restrictMinDigits" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minDigits" type="PasswordMinDigits" minOccurs="0"/>
+          <xs:element name="restrictMinUpperCaseLetters" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minUpperCaseLetters" type="PasswordMinUpperCaseLetters" minOccurs="0"/>
+          <xs:element name="restrictMinLowerCaseLetters" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minLowerCaseLetters" type="PasswordMinLowerCaseLetters" minOccurs="0"/>
+          <xs:element name="restrictMinNonAlphanumericCharacters" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minNonAlphanumericCharacters" type="PasswordMinNonAlphanumericCharacters" minOccurs="0"/>
+          <xs:element name="minLength" type="PasswordMinLength" minOccurs="0"/>
+          <xs:element name="sendPermanentLockoutNotification" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="permanentLockoutNotifyEmailAddress" type="EmailAddress" nillable="true" minOccurs="0"/>
+          <xs:element name="deviceProfileAuthenticationLockoutType" type="AuthenticationLockoutType" minOccurs="0"/>
+          <xs:element name="deviceProfileTemporaryLockoutThreshold" type="AuthenticationTemporaryLockoutThreshold" minOccurs="0"/>
+          <xs:element name="deviceProfileWaitAlgorithm" type="AuthenticationLockoutWaitAlgorithmType" minOccurs="0"/>
+          <xs:element name="deviceProfileLockoutFixedMinutes" type="AuthenticationLockoutFixedWaitTimeMinutes" minOccurs="0"/>
+          <xs:element name="deviceProfilePermanentLockoutThreshold" type="AuthenticationPermanentLockoutThreshold" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2126,6 +2618,7 @@
     <xs:annotation>
       <xs:documentation>
         Request a list of available DNs not yet assigned to any group.
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either ServiceProviderDnGetAvailableListResponse or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -2158,6 +2651,7 @@
     <xs:annotation>
       <xs:documentation>
         Request a summary table of all DNs in a service provider.
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either ServiceProviderDnGetSummaryListResponse or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -2319,6 +2813,7 @@
           <xs:element name="searchCriteriaDeviceName" type="SearchCriteriaDeviceName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDeviceMACAddress" type="SearchCriteriaDeviceMACAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDeviceNetAddress" type="SearchCriteriaDeviceNetAddress" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2333,8 +2828,8 @@
       <xs:documentation>
         Response to ServiceProviderEndpointGetListRequest.
         The column headings for the endpointTable are: 
-          "Group Id", "Line/Port", "Last Name", "First Name",  "User Id", "User Type", "Phone Number", "Extension", "Device Type", "Device Name", "Net Address", "MAC Address".
-		Possible values for User Type are ‘User’, ‘CCBasic’, ‘CCStandard’, ‘CCPremium’, ‘RP’, ‘MOH’, ‘MOHVideo’.          
+          "Group Id", "Line/Port", "Last Name", "First Name",  "User Id", "User Type", "Phone Number", "Extension", "Device Type", "Device Name", "Net Address", "MAC Address", "Department", "Email Address".
+		Possible values for User Type are "User", "CCBasic", "CCStandard", "CCPremium", "RP", "MOH", "MOHVideo".          
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2346,11 +2841,19 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderFeatureAccessCodeGetListRequest">
+  <xs:complexType name="ServiceProviderFeatureAccessCodeGetListRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get the list of feature access codes for a service provider or enterprise.
-        The response is either a ServiceProviderFeatureAccessCodeGetListResponse or an ErrorResponse.
+        The response is either a ServiceProviderFeatureAccessCodeGetListResponse20
+        or an ErrorResponse. 
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording - Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2362,10 +2865,17 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderFeatureAccessCodeGetListResponse">
+  <xs:complexType name="ServiceProviderFeatureAccessCodeGetListResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to the ServiceProviderFeatureAccessCodeGetListRequest.
+        Response to the ServiceProviderFeatureAccessCodeGetListRequest20. 
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording - Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2377,11 +2887,18 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderFeatureAccessCodeModifyListRequest">
+  <xs:complexType name="ServiceProviderFeatureAccessCodeModifyListRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify a list of feature access codes for a service provider or enterprise.
-        The response is either a SuccessResponse or an ErrorResponse.
+        The response is either a SuccessResponse or an ErrorResponse. 
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording - Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2599,6 +3116,92 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="ServiceProviderIMRNAssignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Assign a list of service provider DNs to the IMRN pool. It is possible to assign either: a single DN,
+        or a list of DNs, or a range of DNs, or any combination thereof.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="imrn" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="imrnRange" type="DNRange" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderIMRNGetListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Returns a list of dns or dn ranges in a service provider IMRN pool.
+        The response is either ServiceProviderIMRNGetListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderIMRNGetListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderIMRNGetListRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="imrn" type="xs:token" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderIMRNUnassignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Unassign a list of service provider DNs from the service provider IMRN pool. The DNs then become available for
+        assignment to groups. It is possible to delete either: a single DN,
+        or a list of DNs, or a range of DNs, or any combination thereof.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="imrn" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="imrnRange" type="DNRange" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="ServiceProviderModifyRequest">
     <xs:annotation>
       <xs:documentation>
@@ -2793,6 +3396,97 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="ServiceProviderNumberPortabilityQueryGetRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request to get the Service Provider Number Portability Query Digit Pattern Trigger List information.
+        The response is either a ServiceProviderNumberPortabilityQueryGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="includeDigitPatterns" type="xs:boolean"/>
+          <xs:element name="searchCriteriaServiceProviderNumberPortabilityQueryDigitPattern" type="SearchCriteriaServiceProviderNumberPortabilityQueryDigitPattern" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderNumberPortabilityQueryGetResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to the ServiceProviderNumberPortabilityQueryGetRequest.
+        The response contains the service provider number portability query information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="enableNumberPortabilityQueryForOutgoingCalls" type="xs:boolean"/>
+          <xs:element name="enableNumberPortabilityQueryForIncomingCalls" type="xs:boolean"/>
+          <xs:element name="enableNumberPortabilityQueryForNetworkCallsOnly" type="xs:boolean"/>
+          <xs:element name="digitPattern" type="DigitPattern" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderNumberPortabilityQueryModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify the Service Provider Number Portability Query information.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="enableNumberPortabilityQueryForOutgoingCalls" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableNumberPortabilityQueryForIncomingCalls" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableNumberPortabilityQueryForNetworkCallsOnly" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="deleteDigitPattern" type="DigitPattern" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderNumberPortabilityQueryAddListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Add a list of the Service Provider Number Portability Query Digit Patterns.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="digitPattern" type="DigitPattern" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="ServiceProviderOfficeZoneAssignListRequest">
     <xs:annotation>
       <xs:appinfo>
@@ -2926,11 +3620,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderPortalPasscodeRulesGetRequest">
+  <xs:complexType name="ServiceProviderPortalPasscodeRulesGetRequest19">
     <xs:annotation>
       <xs:documentation>
         Requests the service provider's passcode rules setting.
-        The response is either ServiceProviderPortalPasscodeRulesGetResponse or ErrorResponse.
+        The response is either ServiceProviderPortalPasscodeRulesGetResponse19 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2942,20 +3636,34 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderPortalPasscodeRulesGetResponse">
+  <xs:complexType name="ServiceProviderPortalPasscodeRulesGetResponse19">
     <xs:annotation>
       <xs:documentation>
-        Response to ServiceProviderPortalPasscodeRulesGetRequest.
+        Response to ServiceProviderPortalPasscodeRulesGetRequest19.
         Contains the service provider's passcode rules setting.
+        
+        The following elements are only used in AS data mode:
+          numberOfRepeatedDigits
+          disallowRepeatedPatterns
+          disallowContiguousSequences
+          numberOfAscendingDigits
+          numberOfDescendingDigits
+          numberOfPreviousPasscodes
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="disallowRepeatedDigits" type="xs:boolean"/>
+          <xs:element name="numberOfRepeatedDigits" type="PasscodeMaxRepeatedDigits"/>
+          <xs:element name="disallowRepeatedPatterns" type="xs:boolean"/>
+          <xs:element name="disallowContiguousSequences" type="xs:boolean"/>
+          <xs:element name="numberOfAscendingDigits" type="PasscodeMaxContiguousDigits"/>
+          <xs:element name="numberOfDescendingDigits" type="PasscodeMaxContiguousDigits"/>
           <xs:element name="disallowUserNumber" type="xs:boolean"/>
           <xs:element name="disallowReversedUserNumber" type="xs:boolean"/>
           <xs:element name="disallowOldPasscode" type="xs:boolean"/>
+          <xs:element name="numberOfPreviousPasscodes" type="PasscodeHistoryCount"/>
           <xs:element name="disallowReversedOldPasscode" type="xs:boolean"/>
           <xs:element name="minCodeLength" type="PasscodeMinLength"/>
           <xs:element name="maxCodeLength" type="PasscodeMaxLength"/>
@@ -2975,6 +3683,14 @@
       <xs:documentation>
         Request to modify the service provider's passcode rules setting.
         The response is either SuccessResponse or ErrorResponse.
+        
+        The following elements are only used in AS data mode:
+          numberOfRepeatedDigits
+          disallowRepeatedPatterns
+          disallowContiguousSequences
+          numberOfAscendingDigits
+          numberOfDescendingDigits
+          numberOfPreviousPasscodes
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2982,9 +3698,15 @@
         <xs:sequence>
           <xs:element name="serviceProviderId" type="ServiceProviderId"/>
           <xs:element name="disallowRepeatedDigits" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="numberOfRepeatedDigits" type="PasscodeMaxRepeatedDigits" minOccurs="0"/>
+          <xs:element name="disallowRepeatedPatterns" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowContiguousSequences" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="numberOfAscendingDigits" type="PasscodeMaxContiguousDigits" minOccurs="0"/>
+          <xs:element name="numberOfDescendingDigits" type="PasscodeMaxContiguousDigits" minOccurs="0"/>
           <xs:element name="disallowUserNumber" type="xs:boolean" minOccurs="0"/>
           <xs:element name="disallowReversedUserNumber" type="xs:boolean" minOccurs="0"/>
           <xs:element name="disallowOldPasscode" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="numberOfPreviousPasscodes" type="PasscodeHistoryCount" minOccurs="0"/>
           <xs:element name="disallowReversedOldPasscode" type="xs:boolean" minOccurs="0"/>
           <xs:element name="minCodeLength" type="PasscodeMinLength" minOccurs="0"/>
           <xs:element name="maxCodeLength" type="PasscodeMaxLength" minOccurs="0"/>
@@ -3249,6 +3971,8 @@
       <xs:documentation>
         Add an event to service provider schedule. 
         The response is either a SuccessResponse or an ErrorResponse.
+        The startDate element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startDate.
+        The endDate element is set to the sum of the adjusted starDate element value and the event duration.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3439,6 +4163,8 @@
       <xs:documentation>
         Modify an event of a service provider schedule.
         The response is either a SuccessResponse or an ErrorResponse.
+        The startDate element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startDate.
+        The endDate element is set to the sum of the adjusted starDate element value and the event duration.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3995,6 +4721,7 @@
             <xs:element name="migrateAllGroups" type="xs:boolean" fixed="true"/>
             <xs:element name="groupIdList" nillable="true" minOccurs="0">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="groupId" type="GroupId" minOccurs="1" maxOccurs="unbounded"/>
                 </xs:sequence>
@@ -4115,6 +4842,10 @@
     
   <xs:complexType name="ServiceProviderSessionAdmissionControlGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get the session admission control capacity for the service provider.
         The response is either a ServiceProviderSessionAdmissionControlGetResponse or an ErrorResponse.
@@ -4131,6 +4862,10 @@
     
   <xs:complexType name="ServiceProviderSessionAdmissionControlGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to the ServiceProviderSessionAdmissionControlGetRequest.
         The response contains the session admission control capacity allocated for the service provider.
@@ -4151,6 +4886,10 @@
     
   <xs:complexType name="ServiceProviderSessionAdmissionControlModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to modify session admission control capacity for the service provider.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -4165,6 +4904,71 @@
           <xs:element name="maxUserOriginatingSessions" type="NonNegativeInt" nillable="true" minOccurs="0"/>
           <xs:element name="maxUserTerminatingSessions" type="NonNegativeInt" nillable="true" minOccurs="0"/>
           <xs:element name="countIntraServiceProviderSessions" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderSessionAdmissionControlWhiteListGetRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request to get the Service Provider Session Admission White List information.
+        The response is either a ServiceProviderSessionAdmissionControlWhiteListGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderSessionAdmissionControlWhiteListGetResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to the ServiceProviderSessionAdmissionControlWhiteListGetRequest.
+        The response contains the White List information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="matchDigitPattern" type="DigitPattern" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="enableWhiteList" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderSessionAdmissionControlWhiteListModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify the Service Provider Session Admission Control White List information.
+        The number of digit pattern entries is limited to 100.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="addMatchDigitPattern" type="DigitPattern" minOccurs="0" maxOccurs="100"/>
+          <xs:element name="deleteMatchDigitPattern" type="DigitPattern" minOccurs="0" maxOccurs="100"/>
+          <xs:element name="enableWhiteList" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4285,6 +5089,115 @@
         <xs:sequence>
           <xs:element name="defaultLanguage" type="Language"/>
           <xs:element name="languageTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderSIPAuthenticationPasswordRulesGetRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request to get the service provider level SIP authentication password rule settings.
+        The response is either a ServiceProviderSIPAuthenticationPasswordRulesGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderSIPAuthenticationPasswordRulesGetResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderSIPAuthenticationPasswordRulesGetRequest.
+        Contains the SIP authentication password rules for the service provider.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useServiceProviderSettings" type="xs:boolean"/>
+          <xs:element name="disallowAuthenticationName" type="xs:boolean"/>
+          <xs:element name="disallowOldPassword" type="xs:boolean"/>
+          <xs:element name="disallowReversedOldPassword" type="xs:boolean"/>
+          <xs:element name="restrictMinDigits" type="xs:boolean"/>
+          <xs:element name="minDigits" type="PasswordMinDigits"/>
+          <xs:element name="restrictMinUpperCaseLetters" type="xs:boolean"/>
+          <xs:element name="minUpperCaseLetters" type="PasswordMinUpperCaseLetters"/>
+          <xs:element name="restrictMinLowerCaseLetters" type="xs:boolean"/>
+          <xs:element name="minLowerCaseLetters" type="PasswordMinLowerCaseLetters"/>
+          <xs:element name="restrictMinNonAlphanumericCharacters" type="xs:boolean"/>
+          <xs:element name="minNonAlphanumericCharacters" type="PasswordMinNonAlphanumericCharacters"/>
+          <xs:element name="minLength" type="PasswordMinLength"/>
+          <xs:element name="sendPermanentLockoutNotification" type="xs:boolean"/>
+          <xs:element name="permanentLockoutNotifyEmailAddress" type="EmailAddress" minOccurs="0"/>
+          <xs:element name="endpointAuthenticationLockoutType" type="AuthenticationLockoutType"/>
+          <xs:element name="endpointTemporaryLockoutThreshold" type="AuthenticationTemporaryLockoutThreshold"/>
+          <xs:element name="endpointWaitAlgorithm" type="AuthenticationLockoutWaitAlgorithmType"/>
+          <xs:element name="endpointLockoutFixedMinutes" type="AuthenticationLockoutFixedWaitTimeMinutes"/>
+          <xs:element name="endpointPermanentLockoutThreshold" type="AuthenticationPermanentLockoutThreshold"/>
+          <xs:element name="trunkGroupTemporaryLockoutThreshold" type="AuthenticationTemporaryLockoutThreshold"/>
+          <xs:element name="trunkGroupAuthenticationLockoutType" type="AuthenticationLockoutType"/>
+          <xs:element name="trunkGroupWaitAlgorithm" type="AuthenticationLockoutWaitAlgorithmType"/>
+          <xs:element name="trunkGroupLockoutFixedMinutes" type="AuthenticationLockoutFixedWaitTimeMinutes"/>
+          <xs:element name="trunkGroupPermanentLockoutThreshold" type="AuthenticationPermanentLockoutThreshold"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderSIPAuthenticationPasswordRulesModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+     Request to modify the service provider level SIP authentication password rule settings. The useServiceProviderSettings element can only be modified by a system administrator or a provisioning administrator.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="useServiceProviderSettings" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowAuthenticationName" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowOldPassword" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowReversedOldPassword" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="restrictMinDigits" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minDigits" type="PasswordMinDigits" minOccurs="0"/>
+          <xs:element name="restrictMinUpperCaseLetters" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minUpperCaseLetters" type="PasswordMinUpperCaseLetters" minOccurs="0"/>
+          <xs:element name="restrictMinLowerCaseLetters" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minLowerCaseLetters" type="PasswordMinLowerCaseLetters" minOccurs="0"/>
+          <xs:element name="restrictMinNonAlphanumericCharacters" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="minNonAlphanumericCharacters" type="PasswordMinNonAlphanumericCharacters" minOccurs="0"/>
+          <xs:element name="minLength" type="PasswordMinLength" minOccurs="0"/>
+          <xs:element name="sendPermanentLockoutNotification" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="permanentLockoutNotifyEmailAddress" type="EmailAddress" nillable="true" minOccurs="0"/>
+          <xs:element name="endpointAuthenticationLockoutType" type="AuthenticationLockoutType" minOccurs="0"/>
+          <xs:element name="endpointTemporaryLockoutThreshold" type="AuthenticationTemporaryLockoutThreshold" minOccurs="0"/>
+          <xs:element name="endpointWaitAlgorithm" type="AuthenticationLockoutWaitAlgorithmType" minOccurs="0"/>
+          <xs:element name="endpointLockoutFixedMinutes" type="AuthenticationLockoutFixedWaitTimeMinutes" minOccurs="0"/>
+          <xs:element name="endpointPermanentLockoutThreshold" type="AuthenticationPermanentLockoutThreshold" minOccurs="0"/>
+          <xs:element name="trunkGroupAuthenticationLockoutType" type="AuthenticationLockoutType" minOccurs="0"/>
+          <xs:element name="trunkGroupTemporaryLockoutThreshold" type="AuthenticationTemporaryLockoutThreshold" minOccurs="0"/>
+          <xs:element name="trunkGroupWaitAlgorithm" type="AuthenticationLockoutWaitAlgorithmType" minOccurs="0"/>
+          <xs:element name="trunkGroupLockoutFixedMinutes" type="AuthenticationLockoutFixedWaitTimeMinutes" minOccurs="0"/>
+          <xs:element name="trunkGroupPermanentLockoutThreshold" type="AuthenticationPermanentLockoutThreshold" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

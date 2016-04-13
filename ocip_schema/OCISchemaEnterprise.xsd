@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  E N T E R P R I S E  P A R T           -->
 <!--                                                                        -->
@@ -52,14 +52,14 @@
     EnterpriseDepartmentGetAvailableParentListRequest    
     EnterpriseDepartmentGetListRequest    
     EnterpriseDepartmentModifyRequest    
-    EnterprisePhoneDirectoryGetListRequest17    
+    EnterprisePhoneDirectoryGetListRequest18    
     EnterpriseSessionAdmissionControlGetAvailableDeviceListRequest    
     EnterpriseSessionAdmissionControlGroupAddDeviceListRequest    
-    EnterpriseSessionAdmissionControlGroupAddRequest    
+    EnterpriseSessionAdmissionControlGroupAddRequest19sp1    
     EnterpriseSessionAdmissionControlGroupDeleteDeviceListRequest    
     EnterpriseSessionAdmissionControlGroupDeleteListRequest    
     EnterpriseSessionAdmissionControlGroupGetListRequest    
-    EnterpriseSessionAdmissionControlGroupGetRequest    
+    EnterpriseSessionAdmissionControlGroupGetRequest19sp1    
     EnterpriseSessionAdmissionControlGroupModifyRequest    
     EnterpriseVoiceVPNAddPolicyRequest    
     EnterpriseVoiceVPNDeletePolicyRequest    
@@ -689,14 +689,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="EnterprisePhoneDirectoryGetListRequest17">
+  <xs:complexType name="EnterprisePhoneDirectoryGetListRequest18">
     <xs:annotation>
       <xs:documentation>
         Request a table containing the phone directory for an enterprise.
         The directory includes all users in the enterprise and all entries in the enterprise common phone list.
         It is possible to search by various criteria to restrict the number of rows returned.
         Multiple search criteria are logically ANDed together.
-        The response is either EnterprisePhoneDirectoryGetListResponse17 or ErrorResponse.
+        The response is either EnterprisePhoneDirectoryGetListResponse18 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -715,20 +715,22 @@
           <xs:element name="searchCriteriaYahooId" type="SearchCriteriaYahooId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="EnterprisePhoneDirectoryGetListResponse17">
+  <xs:complexType name="EnterprisePhoneDirectoryGetListResponse18">
     <xs:annotation>
       <xs:documentation>
-        Response to EnterprisePhoneDirectoryGetListRequest17.
+        Response to EnterprisePhoneDirectoryGetListRequest18.
         Contains a table with  a row for each phone number and column headings :
         "Name", "Number", "Extension", "Mobile", "Email Address", 
-        "Department", "Hiragana Name", "Group Id", "Yahoo Id", "Is Virtual On-Net User".
+        "Department", "Hiragana Name", "Group Id", "Yahoo Id", "User Id", "IMP Id", "Is Virtual On-Net User".
         If extended directory information is requested, the following columns are also included:
-        "First Name", "Last Name", "User Id", "Pager", "Title", "Time Zone", 
+        "First Name", "Last Name", "Pager", "Title", "Time Zone", 
         "Location", "Address Line 1", "Address Line 2",
         "City", "State", "Zip", "Country".
       </xs:documentation>
@@ -744,6 +746,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGetAvailableDeviceListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get the list of devices can be assigned to session admission control group for the enterprise.
         The response is either an EnterpriseSessionAdmissionControlGetAvailableDeviceListResponse or an ErrorResponse.
@@ -767,13 +773,17 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGetAvailableDeviceListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to EnterpriseSessionAdmissionControlGetAvailableDeviceListRequest.
         Contains a table of devices can be assigned to session admission control group in the enterprise.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="accessDevice" type="EnterpriseAccessDevice" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -783,6 +793,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGroupAddDeviceListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to add one or more devices to an enterprise level session admission control group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -799,8 +813,12 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="EnterpriseSessionAdmissionControlGroupAddRequest">
+  <xs:complexType name="EnterpriseSessionAdmissionControlGroupAddRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to add a session admission control group for the enterprise.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -820,6 +838,7 @@
           <xs:element name="becomeDefaultGroup" type="xs:boolean"/>
           <xs:element name="countIntraSACGroupSessions" type="xs:boolean"/>
           <xs:element name="devices" type="EnterpriseAccessDevice" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="blockEmergencyAndRepairCallsDueToSACLimits" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -827,6 +846,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGroupDeleteDeviceListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to delete one or more devices from an enterprise level session admission control group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -845,6 +868,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGroupDeleteListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to delete one or more session admission control groups for the enterprise.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -862,6 +889,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGroupGetListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get the list of session admission control group for the enterprise.
         The response is either an EnterpriseSessionAdmissionControlGroupGetListResponse or an ErrorResponse.
@@ -878,6 +909,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGroupGetListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to EnterpriseSessionAdmissionControlGroupGetListRequest.
         Contains a table of session admission control group configured in the enterprise.
@@ -885,7 +920,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="sessionAdmissionControlGroupTable" type="core:OCITable"/>
         </xs:sequence>
@@ -893,11 +928,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="EnterpriseSessionAdmissionControlGroupGetRequest">
+  <xs:complexType name="EnterpriseSessionAdmissionControlGroupGetRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get a session admission control group for the enterprise.
-        The response is either an EnterpriseSessionAdmissionControlGroupGetResponse or an ErrorResponse.
+        The response is either an EnterpriseSessionAdmissionControlGroupGetResponse19sp1 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -910,15 +949,19 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="EnterpriseSessionAdmissionControlGroupGetResponse">
+  <xs:complexType name="EnterpriseSessionAdmissionControlGroupGetResponse19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to EnterpriseSessionAdmissionControlGroupGetRequest.
+        Response to EnterpriseSessionAdmissionControlGroupGetRequest19sp1.
         Returns the profile information for the session admission control group.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="maxSession" type="NonNegativeInt"/>
           <xs:element name="maxUserOriginatingSessions" type="NonNegativeInt" minOccurs="0"/>
@@ -929,6 +972,7 @@
           <xs:element name="defaultGroup" type="xs:boolean"/>
           <xs:element name="countIntraSACGroupSessions" type="xs:boolean"/>
           <xs:element name="devices" type="EnterpriseAccessDevice" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="blockEmergencyAndRepairCallsDueToSACLimits" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -936,6 +980,10 @@
     
   <xs:complexType name="EnterpriseSessionAdmissionControlGroupModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to modify a session admission control group for the enterprise.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -956,6 +1004,7 @@
           <xs:element name="becomeDefaultGroup" type="xs:boolean" minOccurs="0"/>
           <xs:element name="countIntraSACGroupSessions" type="xs:boolean" minOccurs="0"/>
           <xs:element name="deviceList" type="ReplacementEnterpriseDeviceList" nillable="true" minOccurs="0"/>
+          <xs:element name="blockEmergencyAndRepairCallsDueToSACLimits" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

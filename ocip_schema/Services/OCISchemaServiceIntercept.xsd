@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -124,9 +124,13 @@
     
   <xs:complexType name="SystemInterceptUserAddDnListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-            Request to add an Intercept User number(s) to the system.
-            The response is either a SuccessResponse or an ErrorResponse.
+          Request to add an Intercept User number(s) to the system.
+          The response is either a SuccessResponse or an ErrorResponse.
        </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -140,10 +144,14 @@
     
   <xs:complexType name="SystemInterceptUserDeleteDnListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-              Request to delete an Intercept User number(s) from the system.
-              The response is either a SuccessResponse or an ErrorResponse.
-           </xs:documentation>
+        Request to delete an Intercept User number(s) from the system.
+         The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
@@ -156,6 +164,10 @@
     
   <xs:complexType name="SystemInterceptUserGetDnListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
           Request to get a list of Intercept User dns defined in the system.
           The response is either a SystemInterceptUserGetDnListResponse
@@ -171,6 +183,10 @@
     
   <xs:complexType name="SystemInterceptUserGetDnListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
           Response to SystemInterceptUserGetDnListRequest.
           The Intercept User DN List.
@@ -187,6 +203,10 @@
     
   <xs:complexType name="SystemInterceptUserGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get the system-level intercept user service settings.
         The response is either a SystemInterceptUserGetResponse or an ErrorResponse.
@@ -201,6 +221,10 @@
     
   <xs:complexType name="SystemInterceptUserGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to the SystemInterceptUserGetRequest.
       </xs:documentation>
@@ -216,6 +240,10 @@
     
   <xs:complexType name="SystemInterceptUserModifyDnRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
           Request to modify a Intercept User number's description in the system.
           The response is either a SuccessResponse or an ErrorResponse.
@@ -233,6 +261,10 @@
     
   <xs:complexType name="SystemInterceptUserModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify the system-level intercept user service settings.
         The response is either a SuccessResponse or an ErrorResponse.

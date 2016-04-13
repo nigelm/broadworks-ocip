@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -32,14 +32,14 @@
   section of the schema.
 
   Requests in this schema file:
-    SystemCallingNameRetrievalGetRequest17sp4    
-    SystemCallingNameRetrievalModifyRequest16sp1    
+    SystemCallingNameRetrievalGetRequest20    
+    SystemCallingNameRetrievalModifyRequest20    
     UserCallingNameRetrievalGetRequest    
     UserCallingNameRetrievalModifyRequest    
     
   --> 
   
-  <xs:complexType name="SystemCallingNameRetrievalGetRequest17sp4">
+  <xs:complexType name="SystemCallingNameRetrievalGetRequest20">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -47,7 +47,7 @@
       </xs:appinfo>
       <xs:documentation>
         Request the system's calling name retrieval attributes.
-        The response is either a SystemCallingNameRetrievalGetResponse17sp4 or an ErrorResponse.
+        The response is either a SystemCallingNameRetrievalGetResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -57,14 +57,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemCallingNameRetrievalGetResponse17sp4">
+  <xs:complexType name="SystemCallingNameRetrievalGetResponse20">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Response to SystemCallingNameRetrievalGetRequest17sp4.
+        Response to SystemCallingNameRetrievalGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -78,14 +78,17 @@
           <xs:element name="sipExternalDatabasePort" type="Port1025" minOccurs="0"/>
           <xs:element name="sipExternalDatabaseTransport" type="TransportProtocol"/>
           <xs:element name="soapExternalDatabaseNetAddress" type="NetAddress" minOccurs="0"/>
-          <xs:element name="soapSupportsDNSSRV" type="xs:boolean"/>
           <xs:element name="callingNameSource" type="CallingNameRetrievalSourceIdentity"/>
+          <xs:element name="routeAdvanceTimer" type="CallingNameRetrievalRouteAdvanceTimerMilliseconds"/>
+          <xs:element name="retryFailedCNAMServerInterval" type="CallingNameRetrievalRetryFailedCNAMServerIntervalSeconds"/>
+          <xs:element name="ignoreRestrictedPresentationIndicator" type="xs:boolean"/>
+          <xs:element name="supportsDNSSRV" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemCallingNameRetrievalModifyRequest16sp1">
+  <xs:complexType name="SystemCallingNameRetrievalModifyRequest20">
     <xs:annotation>
       <xs:documentation>
         Modifies the system's calling name retrieval attributes.
@@ -103,8 +106,11 @@
           <xs:element name="sipExternalDatabasePort" type="Port1025" nillable="true" minOccurs="0"/>
           <xs:element name="sipExternalDatabaseTransport" type="TransportProtocol" minOccurs="0"/>
           <xs:element name="soapExternalDatabaseNetAddress" type="NetAddress" nillable="true" minOccurs="0"/>
-          <xs:element name="soapSupportsDNSSRV" type="xs:boolean" minOccurs="0"/>
           <xs:element name="callingNameSource" type="CallingNameRetrievalSourceIdentity" minOccurs="0"/>
+          <xs:element name="routeAdvanceTimer" type="CallingNameRetrievalRouteAdvanceTimerMilliseconds" minOccurs="0"/>
+          <xs:element name="retryFailedCNAMServerInterval" type="CallingNameRetrievalRetryFailedCNAMServerIntervalSeconds" minOccurs="0"/>
+          <xs:element name="ignoreRestrictedPresentationIndicator" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="supportsDNSSRV" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -192,6 +198,30 @@
     <xs:restriction base="xs:token">
       <xs:enumeration value="Presentation Identity"/>
       <xs:enumeration value="Asserted Identity"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="CallingNameRetrievalRetryFailedCNAMServerIntervalSeconds">
+    <xs:annotation>
+      <xs:documentation>
+        Seconds to wait before querying a failed CNAM server.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="604800"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="CallingNameRetrievalRouteAdvanceTimerMilliseconds">
+    <xs:annotation>
+      <xs:documentation>
+        Route Advance Query time out milli-seconds.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="100"/>
+      <xs:maxInclusive value="2000"/>
     </xs:restriction>
   </xs:simpleType>    
     

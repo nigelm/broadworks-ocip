@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -31,16 +31,16 @@
   section of the schema.
 
   Requests in this schema file:
-    UserVideoAddOnGetRequest14    
+    UserVideoAddOnGetRequest19    
     UserVideoAddOnModifyRequest14    
     
   --> 
   
-  <xs:complexType name="UserVideoAddOnGetRequest14">
+  <xs:complexType name="UserVideoAddOnGetRequest19">
     <xs:annotation>
       <xs:documentation>
         Get the user's Video Add-On service setting.
-        The response is either a UserVideoAddOnGetResponse14 or an ErrorResponse.
+        The response is either a UserVideoAddOnGetResponse19 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -52,10 +52,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserVideoAddOnGetResponse14">
+  <xs:complexType name="UserVideoAddOnGetResponse19">
     <xs:annotation>
       <xs:documentation>
-        Response to the UserVideoAddOnGetRequest14.
+        Response to the UserVideoAddOnGetRequest19.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -63,7 +63,7 @@
         <xs:sequence>
           <xs:element name="isActive" type="xs:boolean"/>
           <xs:element name="maxOriginatingCallDelaySeconds" type="VideoAddOnMaxOriginatingCallDelaySeconds"/>
-          <xs:element name="accessDeviceEndpoint" type="AccessDeviceEndpointRead14" minOccurs="0"/>
+          <xs:element name="accessDeviceEndpoint" type="AccessDeviceEndpointWithPortNumberRead" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

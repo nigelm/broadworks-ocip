@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  L O G I N  P A R T                     -->
 <!--                                                                        -->
@@ -32,9 +32,10 @@
     AuthenticationRequest    
     AuthenticationVerifyRequest14sp8    
     AvailabilityTestRequest    
-    DeviceManagementFileAuthLocationGetRequest17    
+    DeviceManagementFileAuthLocationGetRequest18    
     DeviceManagementPutFileRequest    
     ExternalAuthenticationAuthorizeTokenRequest    
+    ExternalAuthenticationCreateLoginTokenRequest    
     LoginRequest14sp4    
     LogoutRequest    
     PasswordModifyRequest    
@@ -82,7 +83,8 @@
   <xs:complexType name="AuthenticationVerifyRequest14sp8">
     <xs:annotation>
       <xs:documentation>
-        AuthenticationVerifyRequest14sp8 is used to authenticate a user either by userId/password or dn/passcode. 
+        AuthenticationVerifyRequest14sp8 is used to authenticate a user either by userId/password, userId/sip username/sip password,
+        dn/passcode or a token previously authorized with the ExternalAuthenticationAuthorizeTokenRequest. 
         The phone number may be any DN associated with a user.
         The response is a AuthenticationVerifyResponse14sp8 or an ErrorResponse
       </xs:documentation>
@@ -97,6 +99,14 @@
           <xs:sequence>
             <xs:element name="phoneNumber" type="DN"/>
             <xs:element name="passcode" type="Passcode"/>
+          </xs:sequence>
+          <xs:sequence>
+            <xs:element name="loginToken" type="LoginToken"/>
+          </xs:sequence>
+          <xs:sequence>
+            <xs:element name="sipAuthenticationUserName" type="SIPAuthenticationUserName"/>
+            <xs:element name="sipAuthenticationPassword" type="SIPAuthenticationPassword"/>
+            <xs:element name="userId" type="UserId"/>
           </xs:sequence>
         </xs:choice>
       </xs:extension>
@@ -143,12 +153,12 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="DeviceManagementFileAuthLocationGetRequest17">
+  <xs:complexType name="DeviceManagementFileAuthLocationGetRequest18">
     <xs:annotation>
       <xs:documentation>
         Get the address and credentials of the File Repository hosting the requested access device file. 
         Also get the file name and path on the File Repository. 
-        The response is either a DeviceManagementFileAuthLocationGetResponse17 or an ErrorResponse.
+        The response is either a DeviceManagementFileAuthLocationGetResponse18 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -169,16 +179,16 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="DeviceManagementFileAuthLocationGetResponse17">
+  <xs:complexType name="DeviceManagementFileAuthLocationGetResponse18">
     <xs:annotation>
       <xs:documentation>
         Return the address and credentials of the File Repository hosting the requested access device file. 
         Also return the file name and path on the File Repository. 
-        This is a response to DeviceManagementFileAuthLocationGetRequest17.
+        This is a response to DeviceManagementFileAuthLocationGetRequest18.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileRepositoryUserName" type="FileRepositoryUserName"/>
           <xs:element name="fileRepositoryPassword" type="FileRepositoryUserPassword"/>
@@ -195,6 +205,7 @@
           <xs:element name="userNamePasswordFileAuthentication" type="xs:boolean" minOccurs="0"/>
           <xs:element name="completionNotification" type="xs:boolean" minOccurs="0"/>
           <xs:element name="fileCategory" type="DeviceManagementFileCategory" minOccurs="0"/>
+          <xs:element name="enableCaching" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -235,6 +246,47 @@
         <xs:sequence>
           <xs:element name="userId" type="UserId"/>
           <xs:element name="password" type="Password" minOccurs="0"/>
+          <xs:element name="loginToken" type="LoginToken"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ExternalAuthenticationCreateLoginTokenRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        This command allows a BroadWorks or Third-Party Client Application to
+        create a Single Sign-On token for a user.
+        The response is either ExternalAuthenticationCreateLoginTokenResponse
+        or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ExternalAuthenticationCreateLoginTokenResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ExternalAuthenticationCreateLoginTokenRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
           <xs:element name="loginToken" type="LoginToken"/>
         </xs:sequence>
       </xs:extension>
@@ -304,7 +356,7 @@
       <xs:documentation>
         Modify the password for a user/administrator.
         When oldPassword is specified, password rule applies. If oldPassword in not specified,
-        any password rule related to old password does not apply.
+        any password rule related to old password does not apply.        
         The response is either a SuccessResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>

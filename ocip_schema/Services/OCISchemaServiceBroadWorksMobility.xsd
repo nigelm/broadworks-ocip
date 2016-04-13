@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -40,14 +40,24 @@
     SystemBroadWorksMobilityServiceAccessCodeDeleteRequest    
     SystemBroadWorksMobilityServiceAccessCodeGetListRequest    
     SystemBroadWorksMobilityServiceAccessCodeModifyRequest    
-    SystemBroadWorksMobilityGetRequest    
-    SystemBroadWorksMobilityModifyRequest    
-    ServiceProviderBroadWorksMobilityGetRequest    
+    SystemBroadWorksMobilityGetRequest19sp1    
+    SystemBroadWorksMobilityModifyRequest17sp4    
+    ServiceProviderBroadWorksMobilityGetRequest19sp1    
     ServiceProviderBroadWorksMobilityModifyRequest    
-    GroupBroadWorksMobilityGetRequest    
+    ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberAddListRequest    
+    ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberDeleteListRequest    
+    ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest    
+    ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetSummaryListRequest    
+    EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest22    
+    EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListRequest    
+    GroupBroadWorksMobilityGetRequest19sp1    
     GroupBroadWorksMobilityModifyRequest    
+    GroupBroadWorksMobilityMobileSubscriberDirectoryNumberAssignListRequest    
+    GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListRequest    
+    GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest    
+    GroupBroadWorksMobilityMobileSubscriberDirectoryNumberUnassignListRequest    
     UserBroadWorksMobilityGetRequest    
-    UserBroadWorksMobilityModifyRequest    
+    UserBroadWorksMobilityModifyRequest20    
     
   --> 
   
@@ -236,7 +246,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemBroadWorksMobilityGetRequest">
+  <xs:complexType name="SystemBroadWorksMobilityGetRequest19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -244,7 +254,7 @@
       </xs:appinfo>
       <xs:documentation>
         Get the broadworks mobility system parameters.
-        The response is either a SystemBroadWorksMobilityGetResponse or an ErrorResponse.
+        The response is either a SystemBroadWorksMobilityGetResponse19sp1 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -254,14 +264,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemBroadWorksMobilityGetResponse">
+  <xs:complexType name="SystemBroadWorksMobilityGetResponse19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        The response to a SystemBroadWorksMobilityGetRequest.
+        The response to a SystemBroadWorksMobilityGetRequest19sp1. 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -273,14 +283,18 @@
           <xs:element name="denyCallOriginations" type="xs:boolean"/>
           <xs:element name="denyCallTerminations" type="xs:boolean"/>
           <xs:element name="imrnTimeoutMillisecnds" type="IMRNTimeoutMilliseconds"/>
-          <xs:element name="scfSignalingIPAddress" type="IPAddress" minOccurs="0"/>
+          <xs:element name="scfSignalingNetAddress" type="NetAddress" minOccurs="0"/>
           <xs:element name="scfSignalingPort" type="Port" minOccurs="0"/>
+          <xs:element name="refreshPeriodSeconds" type="SCFRefreshPeriodSeconds"/>
+          <xs:element name="maxConsecutiveFailures" type="SCFMaxConsecutiveFailures"/>
+          <xs:element name="maxResponseWaitTimeMilliseconds" type="SCFMaxResponseWaitTimeMilliseconds"/>
+          <xs:element name="enableAnnouncementSuppression" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemBroadWorksMobilityModifyRequest">
+  <xs:complexType name="SystemBroadWorksMobilityModifyRequest17sp4">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -300,14 +314,18 @@
           <xs:element name="denyCallOriginations" type="xs:boolean" minOccurs="0"/>
           <xs:element name="denyCallTerminations" type="xs:boolean" minOccurs="0"/>
           <xs:element name="imrnTimeoutMilliseconds" type="IMRNTimeoutMilliseconds" minOccurs="0"/>
-          <xs:element name="scfSignalingIPAddress" type="IPAddress" minOccurs="0" nillable="true"/>
+          <xs:element name="scfSignalingNetAddress" type="NetAddress" minOccurs="0" nillable="true"/>
           <xs:element name="scfSignalingPort" type="Port" minOccurs="0" nillable="true"/>
+          <xs:element name="refreshPeriodSeconds" type="SCFRefreshPeriodSeconds" minOccurs="0"/>
+          <xs:element name="maxConsecutiveFailures" type="SCFMaxConsecutiveFailures" minOccurs="0"/>
+          <xs:element name="maxResponseWaitTimeMilliseconds" type="SCFMaxResponseWaitTimeMilliseconds" minOccurs="0"/>
+          <xs:element name="enableAnnouncementSuppression" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderBroadWorksMobilityGetRequest">
+  <xs:complexType name="ServiceProviderBroadWorksMobilityGetRequest19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -315,7 +333,7 @@
       </xs:appinfo>
       <xs:documentation>
         Get the service provider BroadWorks Mobility service settings.
-        The response is either a ServiceProviderBroadWorksMobilityGetResponse or an ErrorResponse.
+        The response is either a ServiceProviderBroadWorksMobilityGetResponse19sp1 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -327,14 +345,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="ServiceProviderBroadWorksMobilityGetResponse">
+  <xs:complexType name="ServiceProviderBroadWorksMobilityGetResponse19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        The response to a ServiceProviderBroadWorksMobilityGetRequest.
+        The response to a ServiceProviderBroadWorksMobilityGetRequest19sp1.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -346,6 +364,7 @@
           <xs:element name="enableMobileStateChecking" type="xs:boolean"/>
           <xs:element name="denyCallOriginations" type="xs:boolean"/>
           <xs:element name="denyCallTerminations" type="xs:boolean"/>
+          <xs:element name="enableAnnouncementSuppression" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -372,20 +391,246 @@
           <xs:element name="enableMobileStateChecking" type="xs:boolean" minOccurs="0"/>
           <xs:element name="denyCallOriginations" type="xs:boolean" minOccurs="0"/>
           <xs:element name="denyCallTerminations" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableAnnouncementSuppression" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupBroadWorksMobilityGetRequest">
+  <xs:complexType name="ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberAddListRequest">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Get the group’s BroadWorks Mobility settings.
-        The response is either a GroupBroadWorksMobilityGetResponse or an ErrorResponse.
+        Adds Mobile Subscriber Directory Numbers to a service provider. It is possible to add a single DN,
+        or a list of DNs.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="mobileSubscriberDirectoryNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberDeleteListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Deletes Mobile Subscriber Directory Numbers from a service provider. It is possible to delete either: a single number,
+        or a list of numbers.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="mobileSubscriberDirectoryNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request a list of available Mobile Subscriber Directory Numbers not yet assigned to any group. This command is applicable only for service providers and will fail for enterprises.
+        The response is either ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest.
+        Contains a list of available Mobile Subscriber Directory Numbers not yet assigned to any group.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="availableMobileSubscriberDirectoryNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetSummaryListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request a summary table of all Mobile Subscriber Directory Numbers in a service provider. This command is applicable only for service providers and will fail for enterprises.
+        The response is either ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetSummaryListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaMobileSubscriberDirectoryNumber" type="SearchCriteriaMobileSubscriberDirectoryNumber" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaGroupId" type="SearchCriteriaGroupId" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetSummaryListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to ServiceProviderBroadWorksMobilityMobileSubscriberDirectoryNumberGetSummaryListRequest.
+        The column headings are "Phone Number and "Group Id"
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="mobileSubscriberDirectoryNumbersSummaryTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest22">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request a list of available Mobile Subscriber Directory Numbers not yet assigned to any user.
+        The response is either EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListResponse22 or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListResponse22">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest22.
+        The response contains a table with columns: "Formatted DN", "Unformatted DN".
+
+        The "Phone Number" column contains Mobile Subscriber DNs not yet assigned to any user.
+        The "E164 Phone Number" column contains Mobile Subscriber DNs not yet assigned to any user in E.164 format.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="availableMobileSubscriberDirectoryNumberTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request a summary table of all Mobile Subscriber Directory Numbers in an enterprise.
+        The response is either EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaMobileSubscriberDirectoryNumber" type="SearchCriteriaMobileSubscriberDirectoryNumber" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to EnterpriseBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListRequest.
+        The response contains a table with columns: "Mobile Number", “Group Id”, "User Id",
+        "Last Name", "First Name","Phone Number","Extension", “Department” .
+        The "Mobile Number" column contains a single DN.
+        The "User Id", "Last Name" and "First Name" columns contains the corresponding attributes of the user possessing the DN(s).
+        The "Phone Number" column contains a single DN.
+        The “Group Id”   column contains the Group Id of the user.
+        The "Department" column contains the department of the user if it is part of a department.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="mobileSubscriberDirectoryNumbersAssignmentTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityGetRequest19sp1">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get the group's BroadWorks Mobility settings.
+        The response is either a GroupBroadWorksMobilityGetResponse19sp1 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -398,14 +643,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupBroadWorksMobilityGetResponse">
+  <xs:complexType name="GroupBroadWorksMobilityGetResponse19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        The response to a GroupBroadWorksMobilityGetRequest.
+        The response to a GroupBroadWorksMobilityGetRequest19sp1.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -417,6 +662,7 @@
           <xs:element name="enableMobileStateChecking" type="xs:boolean"/>
           <xs:element name="denyCallOriginations" type="xs:boolean"/>
           <xs:element name="denyCallTerminations" type="xs:boolean"/>
+          <xs:element name="enableAnnouncementSuppression" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -444,6 +690,151 @@
           <xs:element name="enableMobileStateChecking" type="xs:boolean" minOccurs="0"/>
           <xs:element name="denyCallOriginations" type="xs:boolean" minOccurs="0"/>
           <xs:element name="denyCallTerminations" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableAnnouncementSuppression" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityMobileSubscriberDirectoryNumberAssignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Assign Mobile Subscriber Directory Numbers to a group. It is possible to
+        add a single DN,or a list of DNs.
+.       This command is applicable only for group in a service provider and will fail for a group in an enterprise.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="mobileSubscriberDirectoryNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get the list of assigned and unassigned Mobile Subscriber Directory Numbers in a group. Each DN can be assigned to a user.
+.       This command is applicable only for group in a service provider and will fail for a group in an enterprise. 
+        The response is either a GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaMobileSubscriberDirectoryNumber" type="SearchCriteriaMobileSubscriberDirectoryNumber" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to the GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAssignmentListRequest.
+        The response contains a table with columns: "Mobile Number", "User Id",
+        "Last Name", "First Name","Phone Number", “Extension”, “Department”,.
+        The "Mobile Number" column contains a single DN.
+        The "User Id", "Last Name" and "First Name" columns contains the corresponding attributes of the user possessing the DN(s).
+        The "Phone Number" column contains a single DN.
+        The "Department" column contains the department of the user if it is part of a department.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="mobileSubscriberDirectoryNumberTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request a list of available Mobile Subscriber Directory Numbers not yet assigned to any user.
+.       This command is applicable only for group in a service provider and will fail for a group in an enterprise.
+        The response is either GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to GroupBroadWorksMobilityMobileSubscriberDirectoryNumberGetAvailableListRequest.
+        Contains a list of available Mobile Subscriber Directory Numbers not yet assigned to any user.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="mobileSubscriberDirectoryNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupBroadWorksMobilityMobileSubscriberDirectoryNumberUnassignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Unassign Mobile Subscriber Directory Numbers from a group. It is possible to unassign either: a single DN, or a list of DNs.
+.       This command is applicable only for group in a service provider and will fail for a group in an enterprise.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="mobileSubscriberDirectoryNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -498,7 +889,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserBroadWorksMobilityModifyRequest">
+  <xs:complexType name="UserBroadWorksMobilityModifyRequest20">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -507,6 +898,8 @@
       <xs:documentation>
         Modify the user's broadworks mobility service settings.
         The response is either a SuccessResponse or an ErrorResponse.
+        If the request modifies the mobilePhoneNumber and the new number does not belong to the appropriate Mobile Subscriber Directory Numbers pool, the request is rejected. For a service provider the number must belong to the group Mobile Subscriber Directory Numbers pool. For an enterprise user, the number must belong to the enterprise Mobile Subscriber Directory Numbers pool. 
+        If the request is executed by a user and modifies the mobilePhoneNumber, the request is rejected. 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -542,30 +935,6 @@
     </xs:restriction>
   </xs:simpleType>    
     
-  <xs:simpleType name="BroadWorksMobilityServiceProviderSettingLevel">
-    <xs:annotation>
-      <xs:documentation>
-        BroadWorks Mobility setting for the service provider level.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="ServiceProvider"/>
-      <xs:enumeration value="System"/>
-    </xs:restriction>
-  </xs:simpleType>    
-    
-  <xs:simpleType name="BroadWorksMobilityGroupSettingLevel">
-    <xs:annotation>
-      <xs:documentation>
-        BroadWorks Mobility setting for the group level.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="Group"/>
-      <xs:enumeration value="ServiceProvider"/>
-    </xs:restriction>
-  </xs:simpleType>    
-    
   <xs:simpleType name="BroadWorksMobilityUserSettingLevel">
     <xs:annotation>
       <xs:documentation>
@@ -575,18 +944,6 @@
     <xs:restriction base="xs:token">
       <xs:enumeration value="Group"/>
       <xs:enumeration value="User"/>
-    </xs:restriction>
-  </xs:simpleType>    
-    
-  <xs:simpleType name="IMRNTimeoutMilliseconds">
-    <xs:annotation>
-      <xs:documentation>
-        IMRN Timeout interval in milliseconds.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="100"/>
-      <xs:maxInclusive value="60000"/>
     </xs:restriction>
   </xs:simpleType>    
     

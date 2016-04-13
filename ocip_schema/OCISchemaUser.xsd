@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  U S E R  P A R T                       -->
 <!--                                                                        -->
@@ -19,6 +19,7 @@
              schemaLocation = "OCISchemaBASE.xsd"/>
   
   <xs:include schemaLocation="OCISchemaSearchCriteria.xsd"/>
+  <xs:include schemaLocation="OCISchemaSortCriteria.xsd"/>
   <xs:include schemaLocation="OCISchemaDataTypes.xsd"/>
   
   <!-- ********************************************************************************** -->
@@ -36,41 +37,58 @@
     UserAccessDeviceResetRequest    
     UserAccessDeviceTagsGetRequest    
     UserAddRequest17sp4    
+    UserAnnouncementFileAddRequest    
+    UserAnnouncementFileDeleteListRequest    
+    UserAnnouncementFileGetListRequest    
+    UserAnnouncementFileGetAvailableListRequest    
+    UserAnnouncementFileGetRequest    
+    UserAnnouncementFileModifyRequest    
     UserAssignedServicesGetListRequest    
     UserDeleteRequest    
     UserDnGetActivationListRequest    
-    UserGetRequest17sp4    
+    UserGetRequest20    
     UserGetRegistrationListRequest    
     UserModifyRequest17sp4    
     UserCallLogsClearRequest14sp4    
-    UserCallPoliciesGetRequest17    
+    UserCallPoliciesGetRequest19sp1    
     UserCallPoliciesModifyRequest    
-    UserCallProcessingGetPolicyRequest17sp4    
+    UserCallProcessingGetPolicyRequest19sp1    
     UserCallProcessingModifyPolicyRequest14sp7    
+    UserCommunicationBarringGetRequest    
+    UserCommunicationBarringModifyRequest    
     UserCommunicationBarringAuthorizationCodeAddListRequest    
     UserCommunicationBarringAuthorizationCodeDeleteListRequest    
     UserCommunicationBarringAuthorizationCodeGetListRequest    
-    UserFeatureAccessCodeGetListRequest    
+    UserDevicePoliciesGetRequest20    
+    UserDevicePoliciesModifyRequest    
+    UserEnterpriseCommonPhoneListGetPagedSortedListRequest    
+    UserFeatureAccessCodeGetListRequest20    
     UserGetListInGroupRequest    
     UserGetListInServiceProviderRequest    
     UserGetListInSystemRequest    
     UserGetServiceInstanceListInServiceProviderRequest    
     UserGetServiceInstanceListInSystemRequest    
+    UserGroupCommonPhoneListGetPagedSortedListRequest    
+    UserGroupCustomContactDirectoryGetPagedSortedListRequest    
     UserLinePortGetListRequest    
     UserModifyUserIdRequest    
     UserNetworkConferencingGetRequest    
     UserOCICallControlApplicationGetListRequest    
     UserOCICallControlApplicationModifyRequest    
     UserPasswordInfoGetRequest    
+    UserPersonalPhoneListGetPagedSortedListRequest    
     UserPersonalPhoneListAddListRequest    
     UserPersonalPhoneListDeleteListRequest    
     UserPersonalPhoneListGetListRequest    
     UserPersonalPhoneListModifyRequest    
+    UserPhoneDirectoryGetPagedSortedListRequest    
     UserPhoneDirectoryGetListRequest    
     UserPhoneDirectoryGetPagedListRequest    
     UserPhoneDirectoryGetSearchedListRequest    
     UserPortalPasscodeGetInfoRequest    
     UserPortalPasscodeModifyRequest    
+    UserPrimaryEndpointAdvancedSettingGetRequest    
+    UserPrimaryEndpointAdvancedSettingModifyRequest    
     UserScheduleAddEventRequest    
     UserScheduleAddRequest    
     UserScheduleDeleteEventListRequest    
@@ -88,6 +106,7 @@
     UserShInterfaceGetUserIdDataRequest    
     UserShInterfaceModifyRequest    
     UserShInterfacePublicIdentityRefreshTaskStartRequest    
+    UserScheduleGetEventDetailListRequest    
     
   --> 
   
@@ -117,7 +136,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -150,7 +169,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="templateUrl" type="URL" minOccurs="0"/>
         </xs:sequence>
@@ -223,7 +242,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceTagsTable" type="core:OCITable"/>
         </xs:sequence>
@@ -250,6 +269,7 @@
           <xs:element name="firstName" type="FirstName"/>
           <xs:element name="callingLineIdLastName" type="CallingLineIdLastName"/>
           <xs:element name="callingLineIdFirstName" type="CallingLineIdFirstName"/>
+          <xs:element name="nameDialingName" type="NameDialingName" minOccurs="0"/>
           <xs:element name="hiraganaLastName" type="HiraganaLastName" minOccurs="0"/>
           <xs:element name="hiraganaFirstName" type="HiraganaFirstName" minOccurs="0"/>
           <xs:element name="phoneNumber" type="DN" minOccurs="0"/>
@@ -272,6 +292,196 @@
           <xs:element name="addressLocation" type="AddressLocation" minOccurs="0"/>
           <xs:element name="address" type="StreetAddress" minOccurs="0"/>
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileAddRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Add an announcement to the user announcement repository
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="announcementFileName" type="AnnouncementFileName"/>
+          <xs:element name="announcementFile" type="LabeledMediaFileResource"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileDeleteListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Delete one or more announcements from the user announcement repository
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="announcementFileKey" type="AnnouncementFileKey" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileGetListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Get the list of announcement names with associated media type and filesize for a User and 
+        given Announcement Repository Type
+        The response is either a UserAnnouncementFileGetListResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="announcementFileType" type="AnnouncementFileType" minOccurs="0"/>
+          <xs:element name="includeAnnouncementTable" type="xs:boolean"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaAnnouncementFileName" type="SearchCriteriaAnnouncementFileName" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileGetListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to UserAnnouncementFileGetListRequest.
+        When requested, the response contains a table with columns: "Name", "Media Type", "File Size".
+        The "Name" column contains the name of the announcement file.
+        The "Media Type" column contains the media type of the announcement file with the possible values:
+                WMA - Windows Media Audio file
+                WAV - A WAV file
+                3GP - A 3GP file
+                MOV - A MOV file using a H.263 or H.264 codec.
+        The "File Size" column contains the file size in kB of the announcement file.
+        The response also contains the current total file size (KB) for the user across
+        all media types and the maximum total file size (MB) allowed for the user.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="announcementTable" type="core:OCITable" minOccurs="0"/>
+          <xs:element name="totalFileSize" type="xs:int"/>
+          <xs:element name="maxFileSize" type="RepositoryTotalFileSize"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileGetAvailableListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Get the list of available announcement files for a User from the Announcement Repository,
+        for Virtual subscribers the list will also include the announcements for it's group.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="announcementFileType" type="AnnouncementFileType" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileGetAvailableListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to UserAnnouncementFileGetAvailableListRequest.
+        The response contains a table with columns: "Name", "Media Type", "File Size" and "Repository Type".
+        The "Name" column contains the name of the announcement file.
+        The "Media Type" column contains the media type of the announcement file with the possible values:
+                WMA - Windows Media Audio file
+                WAV - A WAV file
+                3GP - A 3GP file
+                MOV - A MOV file using a H.263 or H.264 codec.
+        The "File Size" is in Kilobytes.
+        The "Repository Type" column contains the type of repository for the announcement file such as "User" or "Group"
+        The "File Size" column contains the file size in kB of the announcement file.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="announcementTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileGetRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request to get the announcement repository file information.  
+        The response is either UserAnnouncementFileGetResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="announcementFileKey" type="AnnouncementFileKey"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to UserAnnouncementFileGetRequest.
+        The response contains the file size (KB), uploaded timestamp, description and usage for 
+        an announcement file in the user announcement repository.
+        The usage table has columns "Service Name", "Criteria Name"
+        The "Service Name"" values correspond to string values of the UserService data types.
+        With the exception of the string “Voice Portal” which is returned when the announcement is being used by Voice Portal Personalized Name. 
+        For Call Center and Route Point users the "Instance Name" column contains the instance id and 
+        when the announcement is being used by a DNIS, "Intance Name" column contans the instance id and the DNIS id.
+        For Auto Attendants with submenus and the announcement is used by a submenu the "Instance Name" column will contain the submenu name
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="description" type="FileDescription"/>
+          <xs:element name="filesize" type="xs:int"/>
+          <xs:element name="lastUploaded" type="xs:dateTime"/>
+          <xs:element name="usageTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserAnnouncementFileModifyRequest">
+    <xs:annotation>
+      <xs:documentation>
+        This command is used to change the name of the file or upload a new announcement file for 
+        an existing announcement in the user repository.
+        When modifying the file type the command will fail if the media type of the new file changes 
+        the announcement from audio to video (or vice versa).
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="announcementFileKey" type="AnnouncementFileKey"/>
+          <xs:element name="newAnnouncementFileName" type="AnnouncementFileName" minOccurs="0"/>
+          <xs:element name="announcementFile" type="LabeledMediaFileResource" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -359,11 +569,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserGetRequest17sp4">
+  <xs:complexType name="UserGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Request to get the user information.  The response is either 
-        UserGetResponse17sp4 or ErrorResponse.
+        UserGetResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -375,10 +585,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserGetResponse17sp4">
+  <xs:complexType name="UserGetResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to UserGetRequest17sp4.
+        Response to UserGetRequest20.
         It is possible that the TrunkAddressingRead element is present with nothing populated in it which means the user is a trunk user.
         The following data elements are only used in AS data mode:
           contact[2]-contact[5]
@@ -399,6 +609,7 @@
           <xs:element name="firstName" type="FirstName"/>
           <xs:element name="callingLineIdLastName" type="CallingLineIdLastName"/>
           <xs:element name="callingLineIdFirstName" type="CallingLineIdFirstName"/>
+          <xs:element name="nameDialingName" type="NameDialingName" minOccurs="0"/>
           <xs:element name="hiraganaLastName" type="HiraganaLastName" minOccurs="0"/>
           <xs:element name="hiraganaFirstName" type="HiraganaFirstName" minOccurs="0"/>
           <xs:element name="phoneNumber" type="DN" minOccurs="0"/>
@@ -412,7 +623,7 @@
           <xs:element name="defaultAlias" type="SIPURI"/>
           <xs:element name="alias" type="SIPURI" minOccurs="0" maxOccurs="3"/>
           <xs:choice>
-            <xs:element name="accessDeviceEndpoint" type="AccessDeviceMultipleContactEndpointRead" minOccurs="0"/>
+            <xs:element name="accessDeviceEndpoint" type="AccessDeviceMultipleContactEndpointRead20" minOccurs="0"/>
             <xs:element name="trunkAddressing" type="TrunkAddressingMultipleContactRead" minOccurs="0"/>
           </xs:choice>
           <xs:element name="title" type="Title" minOccurs="0"/>
@@ -427,6 +638,7 @@
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
           <xs:element name="officeZoneName" type="OfficeZoneName" minOccurs="0"/>
           <xs:element name="primaryZoneName" type="ZoneName" minOccurs="0"/>
+          <xs:element name="impId" type="IMPUserId" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -452,8 +664,8 @@
     <xs:annotation>
       <xs:documentation>
         Response to UserGetRegistrationListRequest.
-        The table column headings are:
-          "Device Level", "Device Name", "Order", "URI", "Expiration", "Line/Port", "Endpoint Type".
+        The registrationTable table column headings are:
+          "Device Level", "Device Name", "Order", "URI", "Expiration", "Line/Port", "Endpoint Type"", "Public Net Address", "Public Port", "Private Net Address", "Private Port", "User Agent", "Lockout Started", "Lockout Expires", "Lockout Count".
         The "Device Level" column contains one of the AccessDeviceLevel enumerated constants.
         The "Line/Port" column in IMS mode can be any Public User Identity which can be either a
         SIPURI or a TELURI.
@@ -461,7 +673,8 @@
         The Endpoint Type column contains one of the enumerated EndpointType values.
         The Endpoint Type is empty when the registration is against a TELURI.
         The table is sorted by: telURI (after SIPURI), Line/Port, static (after dynamic), order.
-      </xs:documentation>
+        Lockout times are shown in GMT offset. When a permanent lockout is shown, the "Lockout Expires" column is empty and the "Lockout Count" column contains the word Permanent.
+  </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
@@ -482,6 +695,9 @@
         The response is either SuccessResponse or ErrorResponse.
         The following data elements are only used in AS data mode:
           contact[2]-contact[5]
+        The impId and impPassword are accepted when the Third-Party IMP service is assigned to the user; 
+        when Integrated IMP service is assigned to the user and active, only the impPassword is accepted; 
+        all other cases, the request fails if either field is changed.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -492,6 +708,7 @@
           <xs:element name="firstName" type="FirstName" minOccurs="0"/>
           <xs:element name="callingLineIdLastName" type="CallingLineIdLastName" minOccurs="0"/>
           <xs:element name="callingLineIdFirstName" type="CallingLineIdFirstName" minOccurs="0"/>
+          <xs:element name="nameDialingName" type="NameDialingName" nillable="true" minOccurs="0"/>
           <xs:element name="hiraganaLastName" type="HiraganaLastName" minOccurs="0"/>
           <xs:element name="hiraganaFirstName" type="HiraganaFirstName" minOccurs="0"/>
           <xs:element name="phoneNumber" type="DN" nillable="true" minOccurs="0"/>
@@ -505,6 +722,7 @@
           <xs:element name="sipAliasList" type="ReplacementSIPAliasList" nillable="true" minOccurs="0"/>
           <xs:element name="endpoint" nillable="true" minOccurs="0">
             <xs:complexType>
+              <xs:annotation/>
               <xs:choice>
                 <xs:element name="accessDeviceEndpoint" type="AccessDeviceMultipleContactEndpointModify"/>
                 <xs:element name="trunkAddressing" type="TrunkAddressingMultipleContactModify"/>
@@ -521,6 +739,8 @@
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
           <xs:element name="officeZoneName" type="OfficeZoneName" minOccurs="0"/>
           <xs:element name="primaryZoneName" type="ZoneName" minOccurs="0"/>
+          <xs:element name="impId" type="IMPUserId" nillable="true" minOccurs="0"/>
+          <xs:element name="impPassword" type="Password" nillable="true" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -543,6 +763,7 @@
             <xs:element name="deleteAllCallLogs" type="xs:boolean" fixed="true" minOccurs="0"/>
             <xs:element name="deleteSpecifiedCallLogs">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="placedCallLogId" type="CallLogId17sp4" minOccurs="0" maxOccurs="unbounded"/>
                   <xs:element name="receivedCallLogId" type="CallLogId17sp4" minOccurs="0" maxOccurs="unbounded"/>
@@ -556,11 +777,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCallPoliciesGetRequest17">
+  <xs:complexType name="UserCallPoliciesGetRequest19sp1">
     <xs:annotation>
       <xs:documentation>
         Request the user level data associated with Call Policies.
-        The response is either a UserCallPoliciesGetResponse17
+        The response is either a UserCallPoliciesGetResponse19sp1
         or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -573,10 +794,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCallPoliciesGetResponse17">
+  <xs:complexType name="UserCallPoliciesGetResponse19sp1">
     <xs:annotation>
       <xs:documentation>
-        Response to UserCallPoliciesGetRequest17.
+        Response to UserCallPoliciesGetRequest19sp1.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -584,6 +805,7 @@
         <xs:sequence>
           <xs:element name="redirectedCallsCOLPPrivacy" type="ConnectedLineIdentificationPrivacyOnRedirectedCalls"/>
           <xs:element name="callBeingForwardedResponseCallType" type="CallBeingForwardedResponseCallType"/>
+          <xs:element name="callingLineIdentityForRedirectedCalls" type="CallingLineIdentityForRedirectedCalls"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -602,18 +824,19 @@
           <xs:element name="userId" type="UserId"/>
           <xs:element name="redirectedCallsCOLPPrivacy" type="ConnectedLineIdentificationPrivacyOnRedirectedCalls" minOccurs="0"/>
           <xs:element name="callBeingForwardedResponseCallType" type="CallBeingForwardedResponseCallType" minOccurs="0"/>
+          <xs:element name="callingLineIdentityForRedirectedCalls" type="CallingLineIdentityForRedirectedCalls" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCallProcessingGetPolicyRequest17sp4">
+  <xs:complexType name="UserCallProcessingGetPolicyRequest19sp1">
     <xs:annotation>
       <xs:documentation>
-          Request the user level data associated with Call Processing Policy.
-          The response is either a UserCallProcessingGetPolicyResponse17sp4 or an
-          ErrorResponse.
-        </xs:documentation>
+        Request the user level data associated with Call Processing Policy.
+        The response is either a UserCallProcessingGetPolicyResponse19sp1 or an
+        ErrorResponse.
+      </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
@@ -624,27 +847,24 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCallProcessingGetPolicyResponse17sp4">
+  <xs:complexType name="UserCallProcessingGetPolicyResponse19sp1">
     <xs:annotation>
       <xs:documentation>
-          Response to UserCallProcessingGetPolicyRequest17sp4.
-	      The useUserCLIDSetting attribute controls the CLID settings 
-	      (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity)
-	      
-          The useUserMediaSetting attribute controls the Media settings 
-          (medisPolicySelection, supportedMediaSetName)
-          
-          The useUserCallLimitsSetting attribute controls the Call Limits setting 
-          (useMaxSimultaneousCalls, maxSimultaneousCalls, useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
-       
-          The useUserDCLIDSetting controls the Dialable Caller ID settings (enableDialableCallerID)
-
-          The following elements are only used in AS data mode:
-           useUserDCLIDSetting
-           enableDialableCallerID
-           allowConfigurableCLIDForRedirectingIdentity
-
-        </xs:documentation>
+        Response to UserCallProcessingGetPolicyRequest19sp1.
+     The useUserCLIDSetting attribute controls the CLID settings 
+     (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity, allowDepartmentCLIDNameOverride)
+     
+        The useUserMediaSetting attribute controls the Media settings 
+        (medisPolicySelection, supportedMediaSetName)
+        
+        The useUserCallLimitsSetting attribute controls the Call Limits setting 
+        (useMaxSimultaneousCalls, maxSimultaneousCalls, useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
+        The following elements are only used in AS data mode:
+         useUserDCLIDSetting
+         enableDialableCallerID
+         allowConfigurableCLIDForRedirectingIdentity
+         allowDepartmentCLIDNameOverride
+       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
@@ -654,22 +874,22 @@
           <xs:element name="useUserCallLimitsSetting" type="xs:boolean"/>
           <xs:element name="useUserDCLIDSetting" type="xs:boolean"/>
           <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
-          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls19sp1"/>
           <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
-          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls19sp1"/>
           <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
           <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
           <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
-          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes19sp1"/>
           <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
           <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
           <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
-          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls19sp1"/>
           <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
-          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
-          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth19sp1"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth19sp1"/>
           <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
-          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations19sp1"/>
           <xs:element name="clidPolicy" type="GroupCLIDPolicy"/>
           <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
@@ -677,6 +897,7 @@
           <xs:element name="blockCallingNameForExternalCalls" type="xs:boolean"/>
           <xs:element name="enableDialableCallerID" type="xs:boolean"/>
           <xs:element name="allowConfigurableCLIDForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="allowDepartmentCLIDNameOverride" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -689,7 +910,7 @@
           The response is either a SuccessResponse or an ErrorResponse.
  
           The useUserCLIDSetting attribute controls the CLID settings 
-          (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity)
+          (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity, allowDepartmentCLIDNameOverride)
           
           The useUserMediaSetting attribute controls the Media settings 
           (medisPolicySelection, supportedMediaSetName)
@@ -703,6 +924,7 @@
            useUserDCLIDSetting
            enableDialableCallerID
            allowConfigurableCLIDForRedirectingIdentity      
+           allowDepartmentCLIDNameOverride         
           
         </xs:documentation>
     </xs:annotation>
@@ -715,22 +937,22 @@
           <xs:element name="useUserCallLimitsSetting" type="xs:boolean" minOccurs="0"/>
           <xs:element name="useUserDCLIDSetting" type="xs:boolean" minOccurs="0"/>
           <xs:element name="useMaxSimultaneousCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls" minOccurs="0"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls" minOccurs="0"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16" minOccurs="0"/>
           <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes" minOccurs="0"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes19sp1" minOccurs="0"/>
           <xs:element name="mediaPolicySelection" type="MediaPolicySelection" minOccurs="0"/>
           <xs:element name="supportedMediaSetName" type="MediaSetName" nillable="true" minOccurs="0"/>
           <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls" minOccurs="0"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth" minOccurs="0"/>
-          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth" minOccurs="0"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth19sp1" minOccurs="0"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth19sp1" minOccurs="0"/>
           <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations" minOccurs="0"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations19sp1" minOccurs="0"/>
           <xs:element name="clidPolicy" type="GroupCLIDPolicy" minOccurs="0"/>
           <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy" minOccurs="0"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean" minOccurs="0"/>
@@ -738,6 +960,64 @@
           <xs:element name="enableDialableCallerID" type="xs:boolean" minOccurs="0"/>
           <xs:element name="blockCallingNameForExternalCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="allowConfigurableCLIDForRedirectingIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowDepartmentCLIDNameOverride" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserCommunicationBarringGetRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Gets the Communication Barring settings for a user.  
+        The response is either a UserCommunicationBarringGetResponse or an ErrorResponse.
+        This command only applies to groups in an Enterprise. This command will fail for groups in a Service Provider.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserCommunicationBarringGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to UserCommunicationBarringGetRequest.
+        This command only applies to users in an Enterprise.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useGroupSetting" type="xs:boolean"/>
+          <xs:element name="profileName" type="CommunicationBarringProfileName" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserCommunicationBarringModifyRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Modify the Communication Barring settings for a user. If useDefaultServiceProviderProfile is set to false, a profile name must be present. 
+        The response is either a SuccessResponse or an ErrorResponse.
+        This command only applies to groups in an Enterprise. This command will fail for groups in a Service Provider.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="useGroupSetting" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="profileName" type="CommunicationBarringProfileName" minOccurs="0" nillable="true"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -811,11 +1091,155 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserFeatureAccessCodeGetListRequest">
+  <xs:complexType name="UserDevicePoliciesGetRequest20">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+          Request the user level data associated with Device Policy.
+          The response is either a UserDevicePoliciesGetResponse20 or an
+          ErrorResponse.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserDevicePoliciesGetResponse20">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+          Response to UserDevicePoliciesGetRequest201. enableDeviceFeatureSynchronization is ignored by the application server in Multiple User Shared mode.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="lineMode" type="UserDevicePolicyLineMode"/>
+          <xs:element name="enableDeviceFeatureSynchronization" type="xs:boolean"/>
+          <xs:element name="enableDnd" type="xs:boolean"/>
+          <xs:element name="enableCallForwardingAlways" type="xs:boolean"/>
+          <xs:element name="enableCallForwardingBusy" type="xs:boolean"/>
+          <xs:element name="enableCallForwardingNoAnswer" type="xs:boolean"/>
+          <xs:element name="enableAcd" type="xs:boolean"/>
+          <xs:element name="enableExecutive" type="xs:boolean"/>
+          <xs:element name="enableExecutiveAssistant" type="xs:boolean"/>
+          <xs:element name="enableSecurityClassification" type="xs:boolean"/>
+          <xs:element name="enableCallRecording" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserDevicePoliciesModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+          Modify the user level data associated with Device Policy. enableDeviceFeatureSynchronization can be configured regardless of lineMode, but is ignored by the application server in Multiple User Shared mode. 
+          The response is either a SuccessResponse or an ErrorResponse. 
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="lineMode" type="UserDevicePolicyLineMode" minOccurs="0"/>
+          <xs:element name="enableDeviceFeatureSynchronization" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableDnd" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableCallForwardingAlways" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableCallForwardingBusy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableCallForwardingNoAnswer" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableAcd" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableExecutive" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableExecutiveAssistant" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableSecurityClassification" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableCallRecording" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserEnterpriseCommonPhoneListGetPagedSortedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Get an enterprise's common phone list for a user.
+				The response is either a UserEnterpriseCommonPhoneListGetPagedSortedListResponse
+				or an ErrorResponse.
+				The search can be done using multiple criterion.
+				If the searchCriteriaModeOr is present, any result matching any one
+				criteria is included in the results.
+				Otherwise, only results matching all the search criterion are included in the
+				results.
+				If no search criteria is specified, all results are returned.
+				Specifying searchCriteriaModeOr without any search criteria results
+				in an ErrorResponse.
+				The sort can be done on the name or the number in the common phone list.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="responsePagingControl" type="ResponsePagingControl"/>
+          <xs:choice>
+            <xs:element name="sortByEnterpriseCommonPhoneListNumber" type="SortByEnterpriseCommonPhoneListNumber"/>
+            <xs:element name="sortByEnterpriseCommonPhoneListName" type="SortByEnterpriseCommonPhoneListName"/>
+          </xs:choice>
+          <xs:element name="searchCriteriaModeOr" type="xs:boolean" fixed="true" minOccurs="0"/>
+          <xs:element name="searchCriteriaEnterpriseCommonPhoneListName" type="SearchCriteriaEnterpriseCommonPhoneListName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaEnterpriseCommonPhoneListNumber" type="SearchCriteriaEnterpriseCommonPhoneListNumber" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserEnterpriseCommonPhoneListGetPagedSortedListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Response to the UserEnterpriseCommonPhoneListGetPagedSortedListRequest. The response
+				contains the enterprise's common phone list. The response contains a
+				table with column headings: "Name" and "Phone Number".
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="totalNumberOfRows" type="xs:int"/>
+          <xs:element name="enterpriseCommonPhoneListTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserFeatureAccessCodeGetListRequest20">
     <xs:annotation>
       <xs:documentation>
         Get the list of feature access codes for a user.
-        The response is either a UserFeatureAccessCodeGetListResponse or an ErrorResponse.
+        The response is either a UserFeatureAccessCodeGetListResponse20 or an ErrorResponse. 
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -827,10 +1251,13 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserFeatureAccessCodeGetListResponse">
+  <xs:complexType name="UserFeatureAccessCodeGetListResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the UserFeatureAccessCodeGetListRequest.
+        Response to the UserFeatureAccessCodeGetListRequest20. 
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -863,6 +1290,8 @@
           <xs:element name="searchCriteriaEmailAddress" type="SearchCriteriaEmailAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0" maxOccurs="1"/>
           <xs:element name="searchCriteriaExactUserInTrunkGroup" type="SearchCriteriaExactUserInTrunkGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -873,7 +1302,7 @@
       <xs:documentation>
         Response to UserGetListInGroupRequest.
         Contains a table with column headings : "User Id",
-        "Last Name", "First Name", "Department", "Phone Number", "Phone Number Activated", "Email Address",  "Hiragana Last Name", "Hiragana First Name", "In Trunk Group"
+        "Last Name", "First Name", "Department", "Phone Number", "Phone Number Activated", "Email Address",  "Hiragana Last Name", "Hiragana First Name", "In Trunk Group", "Extension"
         in a row for each user.
       </xs:documentation>
     </xs:annotation>
@@ -905,6 +1334,9 @@
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaEmailAddress" type="SearchCriteriaEmailAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserInTrunkGroup" type="SearchCriteriaExactUserInTrunkGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -915,7 +1347,7 @@
       <xs:documentation>
         Response to UserGetListInServiceProviderRequest.
         Contains a table with column headings : "User Id", "Group Id",
-        "Last Name", "First Name", "Department", "Phone Number", "Phone Number Activated", "Email Address", "Hiragana Last Name", "Hiragana First Name", "In Trunk Group"
+        "Last Name", "First Name", "Department", "Phone Number", "Phone Number Activated", "Email Address", "Hiragana Last Name", "Hiragana First Name", "In Trunk Group", "Extension"
         in a row for each user.
       </xs:documentation>
     </xs:annotation>
@@ -949,6 +1381,8 @@
           <xs:element name="searchCriteriaExactServiceProvider" type="SearchCriteriaExactServiceProvider" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserInTrunkGroup" type="SearchCriteriaExactUserInTrunkGroup" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserNetworkClassOfService" type="SearchCriteriaExactUserNetworkClassOfService" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -959,7 +1393,7 @@
       <xs:documentation>
         Response to UserGetListInSystemRequest.
         Contains a table with column headings : "User Id", "Group Id", "Service Provider Id"
-        "Last Name", "First Name", "Department", "Phone Number", "Phone Number Activated", "Email Address",  "Hiragana Last Name", "Hiragana First Name", "In Trunk Group"
+        "Last Name", "First Name", "Department", "Phone Number", "Phone Number Activated", "Email Address",  "Hiragana Last Name", "Hiragana First Name", "In Trunk Group", "Extension"
         in a row for each user.
       </xs:documentation>
     </xs:annotation>
@@ -1068,6 +1502,151 @@
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="serviceInstanceTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserGroupCommonPhoneListGetPagedSortedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Get a user's group's common phone list.
+				The response is either a UserGroupCommonPhoneListGetPagedSortedListResponse or an
+				ErrorResponse.
+				The search can be done using multiple criterion.
+				If the searchCriteriaModeOr is present, any result matching any one
+				criteria is included in the results.
+				Otherwise, only results matching all the search criterion are included in the
+				results.
+				If no search criteria is specified, all results are returned.
+				Specifying searchCriteriaModeOr without any search criteria results
+				in an ErrorResponse.
+				The sort can be done on the name or the number in the common phone list.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="responsePagingControl" type="ResponsePagingControl"/>
+          <xs:choice>
+            <xs:element name="sortByGroupCommonPhoneListNumber" type="SortByGroupCommonPhoneListNumber"/>
+            <xs:element name="sortByGroupCommonPhoneListName" type="SortByGroupCommonPhoneListName"/>
+          </xs:choice>
+          <xs:element name="searchCriteriaModeOr" type="xs:boolean" fixed="true" minOccurs="0"/>
+          <xs:element name="searchCriteriaGroupCommonPhoneListName" type="SearchCriteriaGroupCommonPhoneListName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaGroupCommonPhoneListNumber" type="SearchCriteriaGroupCommonPhoneListNumber" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserGroupCommonPhoneListGetPagedSortedListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Response to the UserGroupCommonPhoneListGetPagedSortedListRequest.
+				The response contains the group's common phone list. The response
+				contains a table with column headings: "Name" and "Phone Number".
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="totalNumberOfRows" type="xs:int"/>
+          <xs:element name="groupCommonPhoneListTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserGroupCustomContactDirectoryGetPagedSortedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Gets a Custom Contact Directory in a group.
+				The response is either UserGroupCustomContactDirectoryGetPagedSortedListResponse
+				or ErrorResponse.
+				The search can be done using multiple criterion.
+				If the searchCriteriaModeOr is present, any result matching any one
+				criteria is included in the results.
+				Otherwise, only results matching all the search criterion are included in the
+				results.
+				If no search criteria is specified, all results are returned.
+				Specifying searchCriteriaModeOr without any search criteria results
+				in an ErrorResponse.
+				The sort can be done on the user last name, first name, or department.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="name" type="CustomContactDirectoryName"/>
+          <xs:element name="responsePagingControl" type="ResponsePagingControl"/>
+          <xs:choice>
+            <xs:element name="sortByUserLastName" type="SortByUserLastName"/>
+            <xs:element name="sortByUserFirstName" type="SortByUserFirstName"/>
+            <xs:element name="sortByUserDepartment" type="SortByUserDepartment"/>
+          </xs:choice>
+          <xs:element name="searchCriteriaModeOr" type="xs:boolean" fixed="true" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaMobilePhoneNumber" type="SearchCriteriaMobilePhoneNumber" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDepartmentName" type="SearchCriteriaDepartmentName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserGroupCustomContactDirectoryGetPagedSortedListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Response to the UserGroupCustomContactDirectoryGetPagedSortedListRequest.
+	
+				Returns the number of entries that would be returned if the response
+				Was not page size restricted.
+	
+				The response contains all the contacts in the group's given custom
+				contact directory. Contains a table with column headings: "User Id",
+				"Last Name", "First Name", "Hiragana Last Name",
+				"Hiragana First Name", "Virtual On-Net Phone Number", "Group Id",
+				"Is Virtual On-Net User", "Department", "Phone Number", "Extension",
+				"Mobile", "Email Address", "Yahoo Id", "Title", "IMP Id".
+				If the entry represents a Virtual On-Net user then "User Id" is blank,
+				the "Virtual On-Net Phone Number" contains the phone Number of the
+				Virtual On-Net user, the "Group Id" contains the Virtual On-Net
+				user's
+				group and the "Is Virtual On-Net User" contains true.
+				If the entry represents a BroadWorks user then the "User Id" contains
+				his BroadWorks userId, the "Virtual On-Net Phone Number" and
+				"Group Id" fields are field is blank and the "Is Virtual On-Net User"
+				contains false.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="totalNumberOfRows" type="xs:int"/>
+          <xs:element name="userTable" type="core:OCITable"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1239,6 +1818,66 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="UserPersonalPhoneListGetPagedSortedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Get a user's personal phone list.
+				The response is either a UserPersonalPhoneListGetPagedSortedListResponse or an
+				ErrorResponse.
+				The search can be done using multiple criterion.
+				If the searchCriteriaModeOr is present, any result matching any one
+				criteria is included in the results.
+				Otherwise, only results matching all the search criterion are included in the
+				results.
+				If no search criteria is specified, all results are returned.
+				Specifying searchCriteriaModeOr without any search criteria results
+				in an ErrorResponse.
+				The sort can done by the personal phone list number or name.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="responsePagingControl" type="ResponsePagingControl"/>
+          <xs:choice>
+            <xs:element name="sortByUserPersonalPhoneListNumber" type="SortByUserPersonalPhoneListNumber"/>
+            <xs:element name="sortByUserPersonalPhoneListName" type="SortByUserPersonalPhoneListName"/>
+          </xs:choice>
+          <xs:element name="searchCriteriaModeOr" type="xs:boolean" fixed="true" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserPersonalPhoneListName" type="SearchCriteriaUserPersonalPhoneListName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserPersonalPhoneListNumber" type="SearchCriteriaUserPersonalPhoneListNumber" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserPersonalPhoneListGetPagedSortedListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Response to the UserPersonalPhoneListGetPagedSortedListRequest.
+				The response contains a user's personal phone list. The response
+				contains a table with column headings: "Name" and "Phone Number".
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="totalNumberOfRows" type="xs:int"/>
+          <xs:element name="personalPhoneListTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="UserPersonalPhoneListAddListRequest">
     <xs:annotation>
       <xs:documentation>
@@ -1335,6 +1974,91 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="UserPhoneDirectoryGetPagedSortedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+				Request a table containing the phone directory for a user.
+				Setting isEnterpriseRequested to true will return enterprise directory
+				members in the response if the user is in an enterprise.
+				Otherwise,
+				just the group directory members for a user are returned in the
+				response.
+				The response is either UserPhoneDirectoryGetPagedSortedListResponse or
+				ErrorResponse.
+				The search can be done using multiple criterias.
+				If the searchCriteriaModeOr is present, any result matching any one
+				criteria is included in the results. Otherwise, only
+				results matching all the search criterias are included in the results.
+				If no search criteria is specified, all results are returned.
+				Specifying searchCriteriaModeOr without any search criteria
+				results
+				in an ErrorResponse.
+				The sort can be performed on user last name, first name, or department.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="isEnterpriseInfoRequested" type="xs:boolean"/>
+          <xs:element name="responsePagingControl" type="ResponsePagingControl"/>
+          <xs:choice>
+            <xs:element name="sortByUserLastName" type="SortByUserLastName"/>
+            <xs:element name="sortByUserFirstName" type="SortByUserFirstName"/>
+            <xs:element name="sortByUserDepartment" type="SortByUserDepartment"/>
+          </xs:choice>
+          <xs:element name="searchCriteriaModeOr" type="xs:boolean" fixed="true" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaGroupLocationCode" type="SearchCriteriaGroupLocationCode" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaMobilePhoneNumber" type="SearchCriteriaMobilePhoneNumber" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaEmailAddress" type="SearchCriteriaEmailAddress" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaYahooId" type="SearchCriteriaYahooId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaDepartmentName" type="SearchCriteriaDepartmentName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserPhoneDirectoryGetPagedSortedListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+			Response to UserPhoneDirectoryGetPagedSortedListRequest.
+			Returns the number of entries that would be returned if the response
+			Was not page size restricted.
+			Contains a table with a row for each user and column headings:
+			"User Id", "CLID First Name", "CLID Last Name", "First Name",
+			"Last Name", "Hiragana First Name", "Hiragana Last Name",
+			"Title", "Phone Number", "Extension", "Mobile", "Pager",
+			"Email Address", "Yahoo Id", "Department", "Group Id", "Location",
+			"Address Line 1", "Address Line 2", "City", "State", "Zip",
+			"Country",
+			"IMP Id", "Location Code".
+		</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="totalNumberOfRows" type="xs:int"/>
+          <xs:element name="directoryTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="UserPhoneDirectoryGetListRequest">
     <xs:annotation>
       <xs:documentation>
@@ -1370,6 +2094,8 @@
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
           <xs:element name="searchCriteriaExactCustomContactDirectory" type="SearchCriteriaExactCustomContactDirectory" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1380,7 +2106,8 @@
       <xs:documentation>
         Response to UserPhoneDirectoryGetListRequest.
         Contains a table with  a row for each phone number and column headings :
-        "Name", "Number", "Extension", "Mobile", "Email Address", "Department", "First Name", "Last Name", "User Id", "Title",
+        "Name", "Number", "Extension", "Mobile", "Email Address", "Department", "First Name", "Last Name", 
+        "User Id", "Title", "IMP Id".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1394,6 +2121,10 @@
     
   <xs:complexType name="UserPhoneDirectoryGetPagedListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request a table containing the phone directory for a user.  
         Setting isEnterpriseRequested to true will return enterprise directory
@@ -1409,6 +2140,8 @@
         In all cases, if a responseSizeLimit is specified and the number of matching results is more than this limit, then an
         ErrorResponse is returned.
         Specifying searchCriteriaModeOr without any search criteria results in an ErrorResponse.
+        The boolean sortByFirstName is optional. If it is not specified, the response is 
+        sorted by Last Name.          
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1429,6 +2162,8 @@
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
           <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="sortByFirstName" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1436,6 +2171,10 @@
     
   <xs:complexType name="UserPhoneDirectoryGetPagedListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to UserPhoneDirectoryGetPagedListRequest.
         Returns the number of entries that would be returned if the response 
@@ -1445,7 +2184,8 @@
         "Last Name Unicode", "Hiragana First Name", "Hiragana Last Name",
         "Title", "Phone Number", "Extension", "Mobile", "Pager", 
         "Email Address", "Yahoo Id", "Department", "Group Id", "Location",
-        "Address Line 1", "Address Line 2", "City", "State", "Zip", "Country".
+        "Address Line 1", "Address Line 2", "City", "State", "Zip", "Country",
+        "IMP Id", "Location Code".
         The response entries are sorted by "Last Name Unicode" first and
         "First Name unicode" secondarily.
       </xs:documentation>
@@ -1488,7 +2228,8 @@
       <xs:documentation>
         Response to UserPhoneDirectoryGetSearchedListRequest.
         Contains a table with  a row for each phone number and column headings :
-        "Name", "Number", "Extension", "Mobile", "Email Address", "Department", "Hiragana Name", "Group Id", "Yahoo Id".
+        "Name", "Number", "Extension", "Mobile", "Email Address", "Department", 
+        "Hiragana Name", "Group Id", "Yahoo Id", "User Id", "IMP Id", "First Name", "Last Name" .
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1554,11 +2295,63 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="UserPrimaryEndpointAdvancedSettingGetRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Get the Users Primary Endpoint setting.
+        The response is either a UserPrimaryEndpointAdvancedSettingGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserPrimaryEndpointAdvancedSettingGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to the UserPrimaryEndpointAdvancedSettingGetRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="allowOrigination" type="xs:boolean"/>
+          <xs:element name="allowTermination" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserPrimaryEndpointAdvancedSettingModifyRequest">
+    <xs:annotation>
+      <xs:documentation>
+          Modify the Users Primary Endpoint line control settings.
+          The response is either a SuccessResponse or an ErrorResponse.
+       </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="allowOrigination" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowTermination" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="UserScheduleAddEventRequest">
     <xs:annotation>
       <xs:documentation>
         Add an event to user schedule. 
         The response is either a SuccessResponse or an ErrorResponse.
+        The startDate element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startDate.
+        The endDate element is set to the sum of the adjusted starDate element value and the event duration.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1716,6 +2509,7 @@
       <xs:documentation>
         Get the list of schedules viewable by a User. The list can be filtered by schedule type.
         The response is either a UserScheduleGetListResponse17sp1 or an ErrorResponse.
+        This command is authorized to user who is Executive-Assistant of the Executive. 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1751,6 +2545,8 @@
       <xs:documentation>
         Modify an event of a user schedule.
         The response is either a SuccessResponse or an ErrorResponse.
+        The startDate element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startDate.
+        The endDate element is set to the sum of the adjusted starDate element value and the event duration.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2004,49 +2800,6 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="AccessDeviceMultipleContactEndpointAdd">
-    <xs:annotation>
-      <xs:documentation>
-        Access device end point used in the context of add that can have more than one contact defined.
-        Only Static Registration capabable devices may have more than one contact defined.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="accessDevice" type="AccessDevice"/>
-      <xs:element name="linePort" type="AccessDeviceEndpointLinePort"/>
-      <xs:element name="contact" type="SIPContact" minOccurs="0" maxOccurs="5"/>
-    </xs:sequence>
-  </xs:complexType>    
-    
-  <xs:complexType name="AccessDeviceMultipleContactEndpointModify">
-    <xs:annotation>
-      <xs:documentation>
-        Access device end point used in the context of modify that can have more than one contact defined.
-        Only Static Registration capabable devices may have more than one contact defined.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="accessDevice" type="AccessDevice" minOccurs="0"/>
-      <xs:element name="linePort" type="AccessDeviceEndpointLinePort" minOccurs="0"/>
-      <xs:element name="contactList" type="ReplacementContactList" nillable="true" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>    
-    
-  <xs:complexType name="AccessDeviceMultipleContactEndpointRead">
-    <xs:annotation>
-      <xs:documentation>
-        Access device end point that can have multiple contacts.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="accessDevice" type="AccessDevice"/>
-      <xs:element name="linePort" type="AccessDeviceEndpointLinePort"/>
-      <xs:element name="contact" type="SIPContact" minOccurs="0" maxOccurs="5"/>
-      <xs:element name="staticRegistrationCapable" type="xs:boolean"/>
-      <xs:element name="useDomain" type="xs:boolean"/>
-    </xs:sequence>
-  </xs:complexType>    
-    
   <xs:simpleType name="CallBeingForwardedResponseCallType">
     <xs:annotation>
       <xs:documentation>
@@ -2068,18 +2821,6 @@
       <xs:minLength value="1"/>
     </xs:restriction>
   </xs:simpleType>    
-    
-  <xs:complexType name="ReplacementContactList">
-    <xs:annotation>
-      <xs:documentation>
-        A list of SIP contacts that replaces a previously configured list.
-        By convention, an element of this type may be set nill to clear the list.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="contact" type="SIPContact" minOccurs="1" maxOccurs="5"/>
-    </xs:sequence>
-  </xs:complexType>    
     
   <xs:complexType name="ReplacementOCICallControlApplicationIdList">
     <xs:annotation>
@@ -2187,6 +2928,39 @@
       <xs:element name="useDomain" type="xs:boolean"/>
       <xs:element name="isPilotUser" type="xs:boolean"/>
     </xs:sequence>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserScheduleGetEventDetailListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request the list of schedules viewable by a User. The list can be filtered by schedule type.
+        The response is either a UserScheduleGetEventListForGroupResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="scheduleGlobalKey" type="ScheduleGlobalKey" minOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserScheduleGetEventDetailListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to UserScheduleGetEventRequest.
+        The response contains collection of event details of a requested schedule.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="scheduleEvents" type="ScheduleEvents" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>    
     
 </xs:schema>

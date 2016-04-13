@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -123,6 +123,10 @@
           <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -132,9 +136,9 @@
     <xs:annotation>
       <xs:documentation>
         Response to the UserPrivacyGetAvailableMonitorsUserListRequest.
-        Returns a 5 column table with column headings:
+        Returns a 10 column table with column headings:
         "User Id", "Last Name", "First Name", "Hiragana Last Name",
-        "Hiragana First Name".
+        "Hiragana First Name", "Phone Number", "Extension", "Department", "Email Address", "IMP Id".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -174,8 +178,8 @@
         of this table are allowed to monitor the user even if
         enablePhoneStatusPrivacy is set to true.  The table
         contains column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name",
-        "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address", "IMP Id".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>

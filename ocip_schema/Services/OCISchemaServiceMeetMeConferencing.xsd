@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -33,31 +33,36 @@
   section of the schema.
 
   Requests in this schema file:
-    GroupMeetMeConferencingAddInstanceRequest    
+    GroupMeetMeConferencingAddInstanceRequest19    
     GroupMeetMeConferencingDeleteInstanceRequest    
     GroupMeetMeConferencingGetAvailableUserListRequest    
     GroupMeetMeConferencingGetInstanceListRequest    
-    GroupMeetMeConferencingGetInstanceRequest17sp3    
+    GroupMeetMeConferencingGetInstanceRequest19sp1    
     GroupMeetMeConferencingGetRequest    
     GroupMeetMeConferencingModifyActiveInstanceListRequest    
     GroupMeetMeConferencingModifyInstanceRequest    
     GroupMeetMeConferencingModifyRequest    
     ServiceProviderMeetMeConferencingGetRequest    
     ServiceProviderMeetMeConferencingModifyRequest    
-    SystemMeetMeConferencingGetRequest17sp3    
+    SystemMeetMeConferencingGetRequest19    
     SystemMeetMeConferencingModifyRequest    
-    UserMeetMeConferencingAddConferenceRequest    
+    UserMeetMeConferencingAddConferenceRequest19    
     UserMeetMeConferencingDeleteConferenceListRequest    
     UserMeetMeConferencingDeleteConferenceRecordingListRequest    
+    UserMeetMeConferencingGetAvailableDelegateListRequest    
     UserMeetMeConferencingGetBridgeListRequest    
+    UserMeetMeConferencingGetConferenceDelegateListRequest    
     UserMeetMeConferencingGetConferenceListRequest    
     UserMeetMeConferencingGetConferenceRecordingListRequest    
-    UserMeetMeConferencingGetConferenceRequest    
+    UserMeetMeConferencingGetConferenceRequest20    
     UserMeetMeConferencingModifyConferenceRequest    
+    UserMeetMeConferencingModifyConferenceDelegateListRequest    
+    UserMeetMeConferencingGetConferenceGreetingRequest20    
+    UserMeetMeConferencingModifyConferenceGreetingRequest20    
     
   --> 
   
-  <xs:complexType name="GroupMeetMeConferencingAddInstanceRequest">
+  <xs:complexType name="GroupMeetMeConferencingAddInstanceRequest19">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -78,9 +83,15 @@
           <xs:element name="serviceInstanceProfile" type="ServiceInstanceAddProfile"/>
           <xs:element name="allocatedPorts" type="MeetMeConferencingConferencePorts"/>
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
+          <xs:element name="securityPinLength" type="MeetMeConferencingConferenceSecurityPinLength"/>
           <xs:element name="allowIndividualOutDial" type="xs:boolean"/>
           <xs:element name="operatorNumber" type="OutgoingDNorSIPURI" minOccurs="0"/>
           <xs:element name="conferenceHostUserId" type="UserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="playWarningPrompt" type="xs:boolean"/>
+          <xs:element name="conferenceEndWarningPromptMinutes" type="MeetMeConferencingConferenceEndWarningPromptMinutes"/>
+          <xs:element name="enableMaxConferenceDuration" type="xs:boolean"/>
+          <xs:element name="maxConferenceDurationMinutes" type="MeetMeConferencingConferenceDuration"/>
+          <xs:element name="maxScheduledConferenceDurationMinutes" type="MeetMeConferencingConferenceDuration"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -144,7 +155,8 @@
       </xs:appinfo>
       <xs:documentation>
         Response to the GroupMeetMeConferencingGetAvailableUserListRequest.
-        Contains a table with column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", and "Hiragana First Name", "Phone Number", "Extension"
+        Contains a table with column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", and "Hiragana First Name", 
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -200,7 +212,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupMeetMeConferencingGetInstanceRequest17sp3">
+  <xs:complexType name="GroupMeetMeConferencingGetInstanceRequest19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -208,7 +220,7 @@
       </xs:appinfo>
       <xs:documentation>
         Request to get all the information of a Meet-Me Conferencing bridge.
-        The response is either GroupMeetMeConferencingGetInstanceResponse or ErrorResponse.
+        The response is either GroupMeetMeConferencingGetInstanceResponse19sp1 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -220,27 +232,34 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupMeetMeConferencingGetInstanceResponse17sp3">
+  <xs:complexType name="GroupMeetMeConferencingGetInstanceResponse19sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Response to GroupMeetMeConferencingGetInstanceRequest.
+        Response to GroupMeetMeConferencingGetInstanceRequest19sp1.
         Contains the service profile information and a table of assigned hosts.
-        The table has column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", and "Hiragana First Name".
+        The table has column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", 
+        "Hiragana First Name", Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
-          <xs:element name="serviceInstanceProfile" type="ServiceInstanceReadProfile17"/>
+          <xs:element name="serviceInstanceProfile" type="ServiceInstanceReadProfile19sp1"/>
           <xs:element name="allocatedPorts" type="MeetMeConferencingConferencePorts"/>
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
+          <xs:element name="securityPinLength" type="MeetMeConferencingConferenceSecurityPinLength"/>
           <xs:element name="allowIndividualOutDial" type="xs:boolean"/>
           <xs:element name="operatorNumber" type="OutgoingDNorSIPURI" minOccurs="0"/>
           <xs:element name="conferenceHostUserTable" type="core:OCITable"/>
+          <xs:element name="playWarningPrompt" type="xs:boolean"/>
+          <xs:element name="conferenceEndWarningPromptMinutes" type="MeetMeConferencingConferenceEndWarningPromptMinutes"/>
+          <xs:element name="enableMaxConferenceDuration" type="xs:boolean"/>
+          <xs:element name="maxConferenceDurationMinutes" type="MeetMeConferencingConferenceDuration"/>
+          <xs:element name="maxScheduledConferenceDurationMinutes" type="MeetMeConferencingConferenceDuration"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -325,9 +344,15 @@
           <xs:element name="serviceInstanceProfile" type="ServiceInstanceModifyProfile" minOccurs="0"/>
           <xs:element name="allocatedPorts" type="MeetMeConferencingConferencePorts" minOccurs="0"/>
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
+          <xs:element name="securityPinLength" type="MeetMeConferencingConferenceSecurityPinLength" minOccurs="0"/>
           <xs:element name="allowIndividualOutDial" type="xs:boolean" minOccurs="0"/>
           <xs:element name="operatorNumber" type="OutgoingDNorSIPURI" nillable="true" minOccurs="0"/>
           <xs:element name="conferenceHostUserIdList" type="ReplacementUserIdList" nillable="true" minOccurs="0"/>
+          <xs:element name="playWarningPrompt" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="conferenceEndWarningPromptMinutes" type="MeetMeConferencingConferenceEndWarningPromptMinutes" minOccurs="0"/>
+          <xs:element name="enableMaxConferenceDuration" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="maxConferenceDurationMinutes" type="MeetMeConferencingConferenceDuration" minOccurs="0"/>
+          <xs:element name="maxScheduledConferenceDurationMinutes" type="MeetMeConferencingConferenceDuration" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -415,7 +440,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemMeetMeConferencingGetRequest17sp3">
+  <xs:complexType name="SystemMeetMeConferencingGetRequest19">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -423,7 +448,7 @@
       </xs:appinfo>
       <xs:documentation>
         Request the system level data associated with Meet-Me Conferencing functions.
-        The response is either a SystemMeetMeConferencingGetResponse or an ErrorResponse.
+        The response is either a SystemMeetMeConferencingGetResponse19 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -433,14 +458,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemMeetMeConferencingGetResponse17sp3">
+  <xs:complexType name="SystemMeetMeConferencingGetResponse19">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Response to SystemMeetMeConferencingGetRequest17sp3.
+        Response to SystemMeetMeConferencingGetRequest19.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -454,6 +479,13 @@
           <xs:element name="expiredConferenceHoldPeriodDays" type="MeetMeConferencingExpiredConferenceHoldPeriodDays"/>
           <xs:element name="recordingWebAppURL" type="URL" minOccurs="0"/>
           <xs:element name="recordingFileFormat" type="MeetMeConferencingRecordingFileFormat"/>
+          <xs:element name="terminateAfterGracePeriod" type="xs:boolean"/>
+          <xs:element name="conferenceGracePeriodMinutes" type="MeetMeConferencingConferenceDuration"/>
+          <xs:element name="conferenceParticipantEarlyEntryMinutes" type="MeetMeConferencingParticipantEarlyEntryMinutes"/>
+          <xs:element name="enableConferenceExpiryNotification" type="xs:boolean"/>
+          <xs:element name="enableActiveConferenceNotification" type="xs:boolean"/>
+          <xs:element name="conferenceFromAddress" type="EmailAddress"/>
+          <xs:element name="conferenceActiveTalkerRefreshIntervalSeconds" type="MeetMeConferencingActiveTalkerRefreshIntervalSeconds"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -481,12 +513,19 @@
           <xs:element name="expiredConferenceHoldPeriodDays" type="MeetMeConferencingExpiredConferenceHoldPeriodDays" minOccurs="0"/>
           <xs:element name="recordingWebAppURL" type="URL" nillable="true" minOccurs="0"/>
           <xs:element name="recordingFileFormat" type="MeetMeConferencingRecordingFileFormat" minOccurs="0"/>
+          <xs:element name="terminateAfterGracePeriod" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="conferenceGracePeriodMinutes" type="MeetMeConferencingConferenceDuration" minOccurs="0"/>
+          <xs:element name="conferenceParticipantEarlyEntryMinutes" type="MeetMeConferencingParticipantEarlyEntryMinutes" minOccurs="0"/>
+          <xs:element name="enableConferenceExpiryNotification" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableActiveConferenceNotification" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="conferenceFromAddress" type="EmailAddress" minOccurs="0"/>
+          <xs:element name="conferenceActiveTalkerRefreshIntervalSeconds" type="MeetMeConferencingActiveTalkerRefreshIntervalSeconds" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserMeetMeConferencingAddConferenceRequest">
+  <xs:complexType name="UserMeetMeConferencingAddConferenceRequest19">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -494,7 +533,9 @@
       </xs:appinfo>
       <xs:documentation>
         Add a Meet-Me conference.
-        The response is either UserMeetMeConferencingAddConferenceResponse or ErrorResponse.
+        The response is either UserMeetMeConferencingAddConferenceResponse19 or ErrorResponse.
+        The startTime element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startTime.
+        The startTime, endTime and recurrence information for a conferenceSchedule element will be adjusted to the user Host time zone.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -512,6 +553,8 @@
           <xs:element name="muteAllAttendeesOnEntry" type="xs:boolean"/>
           <xs:element name="endConferenceOnModeratorExit" type="xs:boolean"/>
           <xs:element name="moderatorRequired" type="xs:boolean"/>
+          <xs:element name="requireSecurityPin" type="xs:boolean"/>
+          <xs:element name="allowUniqueIdentifier" type="xs:boolean"/>
           <xs:element name="attendeeNotification" type="MeetMeConferencingConferenceAttendeeNotification"/>
           <xs:element name="conferenceSchedule" type="MeetMeConferencingConferenceSchedule"/>
         </xs:sequence>
@@ -519,14 +562,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserMeetMeConferencingAddConferenceResponse">
+  <xs:complexType name="UserMeetMeConferencingAddConferenceResponse19">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Response to UserMeetMeConferencingAddConferenceRequest.
+        Response to UserMeetMeConferencingAddConferenceRequest19.
+        Contains the information of a conference.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -534,6 +578,7 @@
         <xs:sequence>
           <xs:element name="conferenceId" type="MeetMeConferencingConferencePassCode"/>
           <xs:element name="moderatorPin" type="MeetMeConferencingConferencePassCode"/>
+          <xs:element name="securityPin" type="MeetMeConferencingConferenceSecurityPin" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -581,6 +626,56 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="UserMeetMeConferencingGetAvailableDelegateListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+      Get a list of users that can be assigned as a delegate to a Meet-Me Conference.
+        Searching for users, who are host on a Meet-Me Conferencing bridge.
+        The response is either UserMeetMeConferencingGetAvailableDelegateListResponse or ErrorResponse.
+    </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="conferenceKey" type="MeetMeConferencingConferenceKey"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserMeetMeConferencingGetAvailableDelegateListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to UserMeetMeConferencingGetAvailableDelegateListRequest.
+        Contains all hosts assigned on a bridge.
+        The table has column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name", "Phone Number", "Extension", "Department" and "Email Address".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="conferenceDelegateUserTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="UserMeetMeConferencingGetBridgeListRequest">
     <xs:annotation>
       <xs:appinfo>
@@ -622,6 +717,48 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="UserMeetMeConferencingGetConferenceDelegateListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get the conference delegates for this conference.
+        The response is either UserMeetMeConferencingGetConferenceDelegateListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="conferenceKey" type="MeetMeConferencingConferenceKey"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserMeetMeConferencingGetConferenceDelegateListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to UserMeetMeConferencingGetConferenceDelegateListRequest.
+        Contains a table with table heading:"User Id", "Last Name", "First Name", "Hiragana Last Name",
+        "Hiragana First Name","Phone Number", "Extension", "Department" and "Email Address".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="conferenceDelegateUserTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="UserMeetMeConferencingGetConferenceListRequest">
     <xs:annotation>
       <xs:appinfo>
@@ -629,7 +766,7 @@
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Get the list of all conferences owned by the user.
+        Get the list of all conferences for which user is a host or a delegate.
         The response is either UserMeetMeConferencingGetConferenceListResponse or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -637,6 +774,7 @@
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="userId" type="UserId"/>
+          <xs:element name="bridgeId" type="UserId" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -650,7 +788,7 @@
       </xs:appinfo>
       <xs:documentation>
         Response to the UserMeetMeConferencingGetConferenceListRequest.
-        Contains a table with column headings: "Bridge Id", "Conference Id", "Title", "Bridge Name", "Status", "Type", and "Start Time".
+        Contains a table with column headings: "Bridge Id", "Conference Id", "Title", "Bridge Name", "Status", "Type", "Start Time", "Last Name", "First Name" and "Host Id".
         The column values for "Status" can be Active, Inactive, or Expired.
         The column values for "Type" can be Reservationless, One Time, Recurring Daily, Recurring Weekly, Recurring Monthly, or Recurring Yearly.
         Start Time is in the format "yyyy-MM-dd'T'HH:mm:ss:SSSZ". Example: 2010-10-01T09:30:00:000-0400.
@@ -706,7 +844,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserMeetMeConferencingGetConferenceRequest">
+  <xs:complexType name="UserMeetMeConferencingGetConferenceRequest20">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -714,7 +852,7 @@
       </xs:appinfo>
       <xs:documentation>
         Get the information of a conference owned by the user.
-        The response is either UserMeetMeConferencingGetConferenceResponse or ErrorResponse.
+        The response is either UserMeetMeConferencingGetConferenceResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -727,14 +865,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserMeetMeConferencingGetConferenceResponse">
+  <xs:complexType name="UserMeetMeConferencingGetConferenceResponse20">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Response to UserMeetMeConferencingGetConferenceRequest.
+        Response to UserMeetMeConferencingGetConferenceRequest20.
         Contains the information of a conference.
       </xs:documentation>
     </xs:annotation>
@@ -751,9 +889,13 @@
           <xs:element name="muteAllAttendeesOnEntry" type="xs:boolean"/>
           <xs:element name="endConferenceOnModeratorExit" type="xs:boolean"/>
           <xs:element name="moderatorRequired" type="xs:boolean"/>
+          <xs:element name="requireSecurityPin" type="xs:boolean"/>
+          <xs:element name="securityPin" type="MeetMeConferencingConferenceSecurityPin" minOccurs="0"/>
+          <xs:element name="allowUniqueIdentifier" type="xs:boolean"/>
           <xs:element name="attendeeNotification" type="MeetMeConferencingConferenceAttendeeNotification"/>
           <xs:element name="conferenceSchedule" type="MeetMeConferencingConferenceSchedule"/>
           <xs:element name="moderatorPin" type="MeetMeConferencingConferencePassCode"/>
+          <xs:element name="hostTimeZone" type="TimeZone"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -768,6 +910,8 @@
       <xs:documentation>
         Modify an existing conference.
         The response is either SuccessResponse or ErrorResponse.
+        The startTime element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startTime.
+        The startTime, endTime and recurrence information for a conferenceSchedule element will be adjusted to the user Host time zone.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -785,8 +929,97 @@
           <xs:element name="muteAllAttendeesOnEntry" type="xs:boolean" minOccurs="0"/>
           <xs:element name="endConferenceOnModeratorExit" type="xs:boolean" minOccurs="0"/>
           <xs:element name="moderatorRequired" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="requireSecurityPin" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowUniqueIdentifier" type="xs:boolean" minOccurs="0"/>
           <xs:element name="attendeeNotification" type="MeetMeConferencingConferenceAttendeeNotification" minOccurs="0"/>
           <xs:element name="conferenceSchedule" type="MeetMeConferencingConferenceSchedule" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserMeetMeConferencingModifyConferenceDelegateListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify the existing conference delegates list.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="conferenceKey" type="MeetMeConferencingConferenceKey"/>
+          <xs:element name="conferenceDelegateUserList" type="ReplacementUserIdList" nillable="true" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserMeetMeConferencingGetConferenceGreetingRequest20">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get the information of a conference custom greeting.
+        The response is either UserMeetMeConferencingGetConferenceGreetingResponse20 or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="conferenceKey" type="MeetMeConferencingConferenceKey"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserMeetMeConferencingGetConferenceGreetingResponse20">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to UserMeetMeConferencingGetConferenceGreetingRequest20.
+        Contains the information of a conference custom greeting.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="playEntranceGreeting" type="xs:boolean"/>
+          <xs:element name="entranceGreetingFile" type="AnnouncementFileKey" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserMeetMeConferencingModifyConferenceGreetingRequest20">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify an existing custom greeting audio file.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="conferenceKey" type="MeetMeConferencingConferenceKey"/>
+          <xs:element name="playEntranceGreeting" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="entranceGreetingFile" type="AnnouncementFileKey" nillable="true" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -852,27 +1085,15 @@
     </xs:restriction>
   </xs:simpleType>    
     
-  <xs:complexType name="MeetMeConferencingConferenceKey">
+  <xs:simpleType name="MeetMeConferencingConferenceEndWarningPromptMinutes">
     <xs:annotation>
       <xs:documentation>
-        Identifier for conference.
+         Warning prompt before conference end in minutes.
       </xs:documentation>
     </xs:annotation>
-    <xs:sequence>
-      <xs:element name="bridgeId" type="UserId"/>
-      <xs:element name="conferenceId" type="MeetMeConferencingConferencePassCode"/>
-    </xs:sequence>
-  </xs:complexType>    
-    
-  <xs:simpleType name="MeetMeConferencingConferencePassCode">
-    <xs:annotation>
-      <xs:documentation>
-        Conference Id or moderator pin.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:minLength value="6"/>
-      <xs:maxLength value="12"/>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="15"/>
     </xs:restriction>
   </xs:simpleType>    
     
@@ -898,6 +1119,7 @@
       <xs:element name="unlimited" type="xs:boolean" fixed="true"/>
       <xs:element name="quantity">
         <xs:simpleType>
+          <xs:annotation/>
           <xs:restriction base="xs:int">
             <xs:minInclusive value="0"/>
             <xs:maxInclusive value="999999"/>
@@ -942,6 +1164,7 @@
       <xs:choice>
         <xs:element name="scheduleReservationless">
           <xs:complexType>
+            <xs:annotation/>
             <xs:sequence>
               <xs:element name="startTime" type="xs:dateTime"/>
               <xs:element name="endTime" type="xs:dateTime" nillable="true"/>
@@ -950,6 +1173,7 @@
         </xs:element>
         <xs:element name="scheduleOneTime">
           <xs:complexType>
+            <xs:annotation/>
             <xs:sequence>
               <xs:element name="startTime" type="xs:dateTime"/>
               <xs:element name="duration" type="MeetMeConferencingConferenceDuration"/>
@@ -958,6 +1182,7 @@
         </xs:element>
         <xs:element name="scheduleRecurring">
           <xs:complexType>
+            <xs:annotation/>
             <xs:sequence>
               <xs:element name="startTime" type="xs:dateTime"/>
               <xs:element name="duration" type="MeetMeConferencingConferenceDuration"/>
@@ -1010,6 +1235,54 @@
     <xs:restriction base="xs:int">
       <xs:minInclusive value="1"/>
       <xs:maxInclusive value="294"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="MeetMeConferencingParticipantEarlyEntryMinutes">
+    <xs:annotation>
+      <xs:documentation>
+       Early entry into the conference before the conference start in minutes
+     </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="15"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="MeetMeConferencingConferenceSecurityPin">
+    <xs:annotation>
+      <xs:documentation>
+        Security pin for Meet-Me Conference.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:minLength value="4"/>
+      <xs:maxLength value="12"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="MeetMeConferencingConferenceSecurityPinLength">
+    <xs:annotation>
+      <xs:documentation>
+        Length of security pin for Meet-Me Conference.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="4"/>
+      <xs:maxInclusive value="12"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="MeetMeConferencingActiveTalkerRefreshIntervalSeconds">
+    <xs:annotation>
+      <xs:documentation>
+      Interval in seconds at which, the MS will refresh and notify active talker  details.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="5"/>
     </xs:restriction>
   </xs:simpleType>    
     

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- ********************************************************************** -->
+<!--       O C I   X M L   S C H E M A  :  S O R T  C R I T E R I A         -->
+<!--                                                                        -->
+<!-- This file defines the XML Schema for the BroadSoft Application Server  -->
+<!-- Open Client Interface (OCI).                                           -->
+<!-- ********************************************************************** -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="C" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:include schemaLocation="OCISchemaDataTypes.xsd"/>
+  <xs:complexType name="SortCriteria" abstract="true">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies whether sort is ascending or descending, and
+				whether the sort is case sensitive. Sort order defaults to
+				ascending and case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="isAscending" type="xs:boolean" default="true"/>
+      <xs:element name="isCaseSensitive" type="xs:boolean" default="true"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SortByEnterpriseCommonPhoneListName">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the enterprise common phone list name as the
+				column for the sort, whether sort is ascending or descending, and 
+				whether the sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByEnterpriseCommonPhoneListNumber">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the enterprise common phone list number as as the column 
+				for the sort, whether sort is ascending or descending, and whether the sort is
+				case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByGroupCommonPhoneListName">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the group common phone list name as the column for the sort, whether
+				the sort is ascending or descending, and whether the sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByGroupCommonPhoneListNumber">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the group common phone list number as the column for the sort, whether
+				sort is ascending or descending, and whether the sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByUserPersonalPhoneListName">
+    <xs:annotation>
+      <xs:documentation>
+			The sort criteria specifies the user personal phone list name as the column for the sort, whether
+			sort is ascending or descending, and whether the sort is case sensitive.
+		</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByUserPersonalPhoneListNumber">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the user personal phone list number as the column for
+				the sort, whether the sort is ascending or descending, and whether the
+				sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByUserLastName">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the user last name as the column for the sort, whether the
+				sort is ascending or descending, and whether the sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByUserFirstName">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the user first name as the column for the sort, whether the
+				sort is ascending or descending, and whether the sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SortByUserDepartment">
+    <xs:annotation>
+      <xs:documentation>
+				The sort criteria specifies the user department name as the column for the sort, whether the
+				sort is ascending or descending, and whether the sort is case sensitive.
+			</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SortCriteria">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

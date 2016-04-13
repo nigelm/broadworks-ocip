@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  G R O U P  P A R T                     -->
 <!--                                                                        -->
@@ -37,19 +37,22 @@
     GroupAccessDeviceCustomTagModifyRequest    
     GroupAccessDeviceDeleteRequest    
     GroupAccessDeviceFileGetListRequest14sp8    
-    GroupAccessDeviceFileGetRequest16sp1    
+    GroupAccessDeviceFileGetRequest20    
     GroupAccessDeviceFileModifyRequest14sp8    
     GroupAccessDeviceGetEnhancedConfigurationTypeListRequest    
     GroupAccessDeviceGetEnhancedConfigurationTypeRequest14    
-    GroupAccessDeviceGetAvailableDetailListRequest14    
+    GroupAccessDeviceGetAvailableDetailListRequest19    
     GroupAccessDeviceGetListRequest    
-    GroupAccessDeviceGetRequest16    
+    GroupAccessDeviceGetRequest18sp1    
     GroupAccessDeviceGetUserListRequest    
     GroupAccessDeviceModifyRequest14    
     GroupAccessDeviceModifyUserRequest    
     GroupAccessDeviceResetRequest    
-    GroupApplicationServerSetGetRequest    
-    GroupApplicationServerSetModifyRequest    
+    GroupAnnouncementFileAddRequest    
+    GroupAnnouncementFileDeleteListRequest    
+    GroupAnnouncementFileGetListRequest    
+    GroupAnnouncementFileGetRequest    
+    GroupAnnouncementFileModifyRequest    
     GroupDialableCallerIDCriteriaAddRequest    
     GroupDialableCallerIDCriteriaDeleteRequest    
     GroupDialableCallerIDCriteriaGetRequest    
@@ -61,9 +64,9 @@
     GroupAdminDeleteRequest    
     GroupAdminGetListRequest    
     GroupAdminGetRequest    
-    GroupAdminGetPolicyRequest17sp3    
-    GroupAdminModifyRequest    
+    GroupAdminGetPolicyRequest20    
     GroupAdminModifyPolicyRequest    
+    GroupAdminModifyRequest    
     GroupBroadWorksMobileManagerAddRequest    
     GroupBroadWorksMobileManagerGetRequest    
     GroupBroadWorksMobileManagerGetDomainListRequest    
@@ -77,12 +80,14 @@
     GroupBroadWorksMobileManagerDeleteHomeZoneRequest    
     GroupBroadWorksMobileManagerDeleteHomeZoneListRequest    
     GroupBroadWorksMobileManagerModifyHomeZoneRequest    
-    GroupCallProcessingGetPolicyRequest17sp4    
+    GroupCallProcessingGetPolicyRequest19sp1    
     GroupCallProcessingModifyPolicyRequest15sp2    
     GroupCommonPhoneListAddListRequest    
     GroupCommonPhoneListDeleteListRequest    
     GroupCommonPhoneListGetListRequest    
     GroupCommonPhoneListModifyRequest    
+    GroupCommunicationBarringProfileModifyListRequest    
+    GroupCommunicationBarringProfileGetAssignedListRequest    
     GroupCommunicationBarringAuthorizationCodeAddListRequest    
     GroupCommunicationBarringAuthorizationCodeDeleteListRequest    
     GroupCommunicationBarringAuthorizationCodeGetListRequest    
@@ -109,8 +114,12 @@
     GroupDepartmentAdminModifyRequest    
     GroupDepartmentDeleteRequest    
     GroupDepartmentGetAvailableParentListRequest    
-    GroupDepartmentGetListRequest    
+    GroupDepartmentGetListRequest18    
+    GroupDepartmentGetRequest    
     GroupDepartmentModifyRequest    
+    GroupDeviceManagementEventGetListRequest    
+    GroupDeviceManagementGetAccessDeviceCountForDeviceTypeGroupRequest    
+    GroupDeviceManagementInProgressAndPendingEventCancelRequest    
     GroupDeviceTypeCustomTagAddRequest    
     GroupDeviceTypeCustomTagDeleteListRequest    
     GroupDeviceTypeCustomTagModifyRequest    
@@ -131,9 +140,10 @@
     GroupDnAssignListRequest    
     GroupDnDeactivateListRequest    
     GroupDnGetActivationListRequest    
-    GroupDnGetAssignmentListRequest    
+    GroupDnGetAssignmentListRequest18    
     GroupDnGetDetailedAvailableListRequest    
     GroupDnGetAvailableListRequest    
+    GroupDnGetAvailableRangesListRequest    
     GroupDnGetListRequest    
     GroupDnGetSummaryListRequest    
     GroupDnListAssignDepartmentRequest    
@@ -143,12 +153,14 @@
     GroupDomainGetAssignedListRequest    
     GroupDomainUnassignListRequest    
     GroupEndpointGetListRequest    
+    GroupExchangeIntegrationGetRequest    
+    GroupExchangeIntegrationModifyRequest    
     GroupExistingUsersAssignUserServiceListRequest    
     GroupExistingUsersUnassignUserServiceListRequest    
     GroupExtensionLengthGetRequest17    
     GroupExtensionLengthModifyRequest17    
-    GroupFeatureAccessCodeGetRequest    
-    GroupFeatureAccessCodeModifyRequest    
+    GroupFeatureAccessCodeGetRequest20    
+    GroupFeatureAccessCodeModifyRequest20    
     GroupFileRepositoryDeviceUserAddRequest    
     GroupFileRepositoryDeviceUserDeleteRequest    
     GroupFileRepositoryDeviceUserModifyRequest    
@@ -158,6 +170,9 @@
     GroupGetListInSystemRequest    
     GroupGetRequest14sp7    
     GroupGetUserServiceAssignedUserListRequest    
+    GroupIMRNAssignListRequest    
+    GroupIMRNGetListRequest    
+    GroupIMRNUnassignListRequest    
     GroupModifyRequest    
     GroupNetworkClassOfServiceAssignListRequest    
     GroupNetworkClassOfServiceAssignToAllUsersRequest    
@@ -173,13 +188,13 @@
     GroupOfficeZoneUnassignListRequest    
     GroupPasswordRulesGetRequest16    
     GroupPasswordRulesModifyRequest    
-    GroupPhoneDirectoryGetListRequest17    
-    GroupPolicyGetRequest17    
+    GroupPhoneDirectoryGetListRequest18    
+    GroupPolicyGetRequest20    
     GroupPolicyModifyRequest    
     GroupServiceGetAuthorizationListRequest    
     GroupServiceGetAuthorizedListRequest    
     GroupServiceModifyAuthorizationListRequest    
-    GroupPortalPasscodeRulesGetRequest    
+    GroupPortalPasscodeRulesGetRequest19    
     GroupPortalPasscodeRulesModifyRequest    
     GroupRoutePointExternalSystemAssignListRequest    
     GroupRoutePointExternalSystemGetAssignedListRequest    
@@ -203,14 +218,17 @@
     GroupSessionAdmissionControlGetRequest    
     GroupSessionAdmissionControlModifyRequest    
     GroupSessionAdmissionControlGroupAddDeviceListRequest    
-    GroupSessionAdmissionControlGroupAddRequest    
+    GroupSessionAdmissionControlGroupAddRequest19sp1    
     GroupSessionAdmissionControlGroupDeleteDeviceListRequest    
     GroupSessionAdmissionControlGroupDeleteListRequest    
     GroupSessionAdmissionControlGroupGetListRequest    
-    GroupSessionAdmissionControlGroupGetRequest    
+    GroupSessionAdmissionControlGroupGetRequest19sp1    
     GroupSessionAdmissionControlGroupModifyRequest    
     GroupShInterfaceGetUserListRequest    
     GroupTrunkGroupGetAvailableDetailListRequest    
+    GroupApplicationServerSetModifyRequest    
+    GroupApplicationServerSetGetRequest    
+    GroupAccessDeviceAvailablePortGetListRequest    
     
   --> 
   
@@ -316,7 +334,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceCustomTagsTable" type="core:OCITable"/>
         </xs:sequence>
@@ -385,11 +403,14 @@
       <xs:documentation>
         Response to GroupAccessDeviceFileGetListRequest14sp8.
         Contains a table of device files managed by the Device Management System on a per-device profile basis.
-        The column headings are: "File Format", "Is Authenticated", "Access URL", "Repository URL", "Template URL".
+        The column headings are: "File Format", "Is Authenticated", "Access URL", "Repository URL", "Template URL", "Extended Capture".
+                
+        The following columns are only used in AS data mode:
+          "Extended Capture"        
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -397,11 +418,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAccessDeviceFileGetRequest16sp1">
+  <xs:complexType name="GroupAccessDeviceFileGetRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get a group device profile file.
-        The response is either GroupAccessDeviceFileGetResponse16sp1 or ErrorResponse.
+        The response is either GroupAccessDeviceFileGetResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -416,20 +441,26 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAccessDeviceFileGetResponse16sp1">
+  <xs:complexType name="GroupAccessDeviceFileGetResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to GroupAccessDeviceFileGetRequest16sp1.
+        Response to GroupAccessDeviceFileGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
           <xs:element name="accessUrl" type="URL"/>
           <xs:element name="repositoryUrl" type="URL" minOccurs="0"/>
           <xs:element name="templateUrl" type="URL" minOccurs="0"/>
+          <xs:element name="extendedCaptureEnabled" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="extendedCaptureURL" type="URL" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -440,6 +471,9 @@
       <xs:documentation>
         Request to modify a specified group access device file.
         The response is either a SuccessResponse or an ErrorResponse.
+
+        The following elements are only used in AS data mode:
+          extendedCaptureEnabled        
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -451,6 +485,7 @@
           <xs:element name="fileFormat" type="DeviceManagementFileFormat"/>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode" minOccurs="0"/>
           <xs:element name="uploadFile" type="FileResource" minOccurs="0"/>
+          <xs:element name="extendedCaptureEnabled" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -527,12 +562,12 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAccessDeviceGetAvailableDetailListRequest14">
+  <xs:complexType name="GroupAccessDeviceGetAvailableDetailListRequest19">
     <xs:annotation>
       <xs:documentation>
         Requests the list of available access devices for assignment to a user
         within a group. The list includes devices created at the system, service provider, and group levels.
-        The response is either GroupAccessDeviceGetAvailableDetailListResponse14 or
+        The response is either GroupAccessDeviceGetAvailableDetailListResponse19 or
         ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -548,10 +583,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAccessDeviceGetAvailableDetailListResponse14">
+  <xs:complexType name="GroupAccessDeviceGetAvailableDetailListResponse19">
     <xs:annotation>
       <xs:documentation>
-        Response to GroupAccessDeviceGetAvailableDetailListRequest14.
+        Response to GroupAccessDeviceGetAvailableDetailListRequest19.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -559,10 +594,12 @@
         <xs:sequence>
           <xs:element name="availableAccessDevice" minOccurs="0" maxOccurs="unbounded">
             <xs:complexType>
+              <xs:annotation/>
               <xs:sequence>
                 <xs:element name="accessDevice" type="AccessDevice"/>
                 <xs:element name="staticRegistrationCapable" type="xs:boolean"/>
                 <xs:element name="useDomain" type="xs:boolean"/>
+                <xs:element name="staticLineOrdering" type="xs:boolean"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -588,6 +625,7 @@
           <xs:element name="searchCriteriaDeviceMACAddress" type="SearchCriteriaDeviceMACAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDeviceNetAddress" type="SearchCriteriaDeviceNetAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactDeviceType" type="SearchCriteriaExactDeviceType" minOccurs="0"/>
+          <xs:element name="searchCriteriaAccessDeviceVersion" type="SearchCriteriaAccessDeviceVersion" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -598,7 +636,7 @@
       <xs:documentation>
         Response to GroupAccessDeviceGetListRequest.
         Contains a table of devices configured in the group.
-        The column headings are: "Device Name", "Device Type", "Available Ports", "Net Address", "MAC Address" and "Status".
+        The column headings are: "Device Name", "Device Type", "Available Ports", "Net Address", "MAC Address", "Status" and "Version".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -610,11 +648,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAccessDeviceGetRequest16">
+  <xs:complexType name="GroupAccessDeviceGetRequest18sp1">
     <xs:annotation>
       <xs:documentation>
         Requests the configuration of a specified group access device.
-        The response is either GroupAccessDeviceGetResponse16 or ErrorResponse.
+        The response is either GroupAccessDeviceGetResponse18sp1 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -628,10 +666,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAccessDeviceGetResponse16">
+  <xs:complexType name="GroupAccessDeviceGetResponse18sp1">
     <xs:annotation>
       <xs:documentation>
-        Response to GroupAccessDeviceGetRequest16.
+        Response to GroupAccessDeviceGetRequest18sp1.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -659,6 +697,7 @@
           <xs:element name="mobilityManagerDefaultTerminatingServiceKey" type="MobilityManagerServiceKey" minOccurs="0"/>
           <xs:element name="useCustomUserNamePassword" type="xs:boolean" minOccurs="0"/>
           <xs:element name="userName" type="UserId" minOccurs="0"/>
+          <xs:element name="version" type="UserAgentHeader" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -686,6 +725,9 @@
           <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactEndpointType" type="SearchCriteriaExactEndpointType" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserType" type="SearchCriteriaExactUserType" minOccurs="0"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactPortNumber" type="SearchCriteriaExactPortNumber" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -696,7 +738,7 @@
       <xs:documentation>
         Response to GroupAccessDeviceGetUserListRequest.
         The column headings for the deviceUserTable are: "Line/Port", "Last Name",
-        "First Name", "Phone Number", "User Id", "User Type", "Endpoint Type", "Order", "Primary Line/Port".
+        "First Name", "Phone Number", "User Id", "User Type", "Endpoint Type", "Order", "Primary Line/Port", "Extension", "Department", "Email Address".
         In IMS mode, the table will contain a row for each TEL-URI in the Phone Number column.
         In Standalone mode, rows for the alternate numbers are not included.
         The User Type column contains one of the enumerated UserType values.
@@ -787,52 +829,148 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupApplicationServerSetGetRequest">
+  <xs:complexType name="GroupAnnouncementFileAddRequest">
     <xs:annotation>
       <xs:documentation>
-        Get the Application Server set for a group.
-        The response is either a GroupApplicationServerSetGetResponse or an ErrorResponse.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIRequest">
-        <xs:sequence>
-          <xs:element name="groupId" type="GroupId"/>
-          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="GroupApplicationServerSetGetResponse">
-    <xs:annotation>
-      <xs:documentation>
-        Response to the GroupApplicationServerSetGetRequest.
-        The response contains the group's Application Server set information.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIDataResponse">
-        <xs:sequence>
-          <xs:element name="applicationServerSetName" type="ApplicationServerSetName" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="GroupApplicationServerSetModifyRequest">
-    <xs:annotation>
-      <xs:documentation>
-        Modify the Application Server set for a group.
+        Add an announcement to the group announcement repository
         The response is either a SuccessResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
-          <xs:element name="applicationServerSetName" type="ApplicationServerSetName" minOccurs="0" nillable="true"/>
-          <xs:element name="groupId" type="GroupId"/>
           <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="announcementFileName" type="AnnouncementFileName"/>
+          <xs:element name="announcementFile" type="LabeledMediaFileResource"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAnnouncementFileDeleteListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Delete one or more announcements from the group announcement repository
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="announcementFileKey" type="AnnouncementFileKey" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAnnouncementFileGetListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Get the list of available announcement files for a Group.
+        The response is either a GroupAnnouncementFileGetListResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="announcementFileType" type="AnnouncementFileType" minOccurs="0"/>
+          <xs:element name="includeAnnouncementTable" type="xs:boolean"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaAnnouncementFileName" type="SearchCriteriaAnnouncementFileName" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAnnouncementFileGetListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to GroupAnnouncementFileGetAvailableListRequest.
+        When requested, the response contains a table with columns: "Name", "Media Type" and "File Size".
+        The "Name" column contains the name of the announcement file.
+        The "Media Type" column contains the media type of the announcement 
+        File with the possible values:
+                WMA - Windows Media Audio file
+                WAV - A WAV file
+                3GP - A 3GP file
+                MOV - A MOV file using a H.263 or H.264 codec.
+        The "File Size" column contains the file size (KB) of the announcement file.
+        The response also contains the current total file size (KB) for the group across
+        all media types and the maximum total file size (MB) allowed for the group.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="announcementTable" type="core:OCITable" minOccurs="0"/>
+          <xs:element name="totalFileSize" type="xs:int"/>
+          <xs:element name="maxFileSize" type="RepositoryTotalFileSize"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAnnouncementFileGetRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request to get the announcement repository file information.  
+        The response is either GroupAnnouncementFileGetResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="announcementFileKey" type="AnnouncementFileKey"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAnnouncementFileGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to GroupAnnouncementFileGetRequest.
+        The response contains the file size, uploaded timestamp, description and usage for 
+        an announcement file in the user announcement repository.
+        The usage table has columns "Service Name", and "Instance Name".
+        The Service Name values correspond to string values of the GroupService and UserService data types.
+        With the exception of the string "Voice Portal" which is returned when the announcement is being used by Voice Portal Personalized Name.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="description" type="FileDescription"/>
+          <xs:element name="filesize" type="xs:int"/>
+          <xs:element name="lastUploaded" type="xs:dateTime"/>
+          <xs:element name="usageTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAnnouncementFileModifyRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Modify an existing announcement in the group repository
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="announcementFileKey" type="AnnouncementFileKey"/>
+          <xs:element name="newAnnouncementFileName" type="AnnouncementFileName" minOccurs="0"/>
+          <xs:element name="announcementFile" type="LabeledMediaFileResource" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -989,8 +1127,9 @@
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Get the Group&#146;s Dialable Caller ID settings and criteria list.
-        The response is either a GroupDialableCallerIDGetResponse or an ErrorResponse.
+        Get the Group’s Dialable Caller ID settings and criteria list.
+        The response is either a 
+        GroupDialableCallerIDGetResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1011,7 +1150,7 @@
       </xs:appinfo>
       <xs:documentation>
         Response to the GroupDialableCallerIDGetRequest.
-        The criteria table&#146;s column headings are "Active", "Name", "Description", &#147;Prefix Digits&#148;, &#147;Priority&#148;.
+        The criteria table�s column headings are "Active", "Name", "Description", �Prefix Digits�, �Priority�.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1032,7 +1171,7 @@
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-        Modify the group&#146;s Dialable Caller ID settings and criteria list.
+        Modify the group�s Dialable Caller ID settings and criteria list.
         The response is either a SuccessResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -1182,11 +1321,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAdminGetPolicyRequest17sp3">
+  <xs:complexType name="GroupAdminGetPolicyRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Requests the Group administrator's policy settings.
-        The response is either GroupAdminGetPolicyResponse17sp3 or ErrorResponse.
+        The response is either GroupAdminGetPolicyResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1198,13 +1341,19 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupAdminGetPolicyResponse17sp3">
+  <xs:complexType name="GroupAdminGetPolicyResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to GroupAdminGetPolicyRequest17sp3.
+        Response to GroupAdminGetPolicyRequest20.
         Contains the policy settings for the group administrator.
         The following elements are only used in AS data mode:
             dialableCallerIDAccess
+            verifyTranslationAndroutingAccess
+            communicationBarringUserProfileAccess (This element is only returned for groups in an enterprise)
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1223,7 +1372,51 @@
           <xs:element name="trunkGroupAccess" type="GroupAdminTrunkGroupAccess"/>
           <xs:element name="sessionAdmissionControlAccess" type="GroupAdminSessionAdmissionControlAccess"/>
           <xs:element name="officeZoneAccess" type="GroupAdminOfficeZoneAccess"/>
+          <xs:element name="numberActivationAccess" type="GroupAdminNumberActivationAccess"/>
           <xs:element name="dialableCallerIDAccess" type="GroupAdminDialableCallerIDAccess"/>
+          <xs:element name="verifyTranslationAndRoutingAccess" type="GroupAdminVerifyTranslationAndRoutingAccess"/>
+          <xs:element name="communicationBarringUserProfileAccess" type="GroupAdminCommunicationBarringUserProfileAccess" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAdminModifyPolicyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request to modify the group administrator's policy settings.
+        The response is either SuccessResponse or ErrorResponse.
+        The following elements are only used in AS data mode:
+            dialableCallerIDAccess
+            verifyTranslationAndRoutingAccess
+            communicationBarringUserProfileAccess (only applicable to groups in an Enterprise)            
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+          <xs:element name="profileAccess" type="GroupAdminProfileAccess" minOccurs="0"/>
+          <xs:element name="userAccess" type="GroupAdminUserAccess" minOccurs="0"/>
+          <xs:element name="adminAccess" type="GroupAdminAdminAccess" minOccurs="0"/>
+          <xs:element name="departmentAccess" type="GroupAdminDepartmentAccess" minOccurs="0"/>
+          <xs:element name="accessDeviceAccess" type="GroupAdminAccessDeviceAccess" minOccurs="0"/>
+          <xs:element name="enhancedServiceInstanceAccess" type="GroupAdminEnhancedServiceInstanceAccess" minOccurs="0"/>
+          <xs:element name="featureAccessCodeAccess" type="GroupAdminFeatureAccessCodeAccess" minOccurs="0"/>
+          <xs:element name="phoneNumberExtensionAccess" type="GroupAdminPhoneNumberExtensionAccess" minOccurs="0"/>
+          <xs:element name="callingLineIdNumberAccess" type="GroupAdminCallingLineIdNumberAccess" minOccurs="0"/>
+          <xs:element name="serviceAccess" type="GroupAdminServiceAccess" minOccurs="0"/>
+          <xs:element name="trunkGroupAccess" type="GroupAdminTrunkGroupAccess" minOccurs="0"/>
+          <xs:element name="sessionAdmissionControlAccess" type="GroupAdminSessionAdmissionControlAccess" minOccurs="0"/>
+          <xs:element name="officeZoneAccess" type="GroupAdminOfficeZoneAccess" minOccurs="0"/>
+          <xs:element name="dialableCallerIDAccess" type="GroupAdminDialableCallerIDAccess" minOccurs="0"/>
+          <xs:element name="numberActivationAccess" type="GroupAdminNumberActivationAccess" minOccurs="0"/>
+          <xs:element name="verifyTranslationAndRoutingAccess" type="GroupAdminVerifyTranslationAndRoutingAccess" minOccurs="0"/>
+          <xs:element name="communicationBarringUserProfileAccess" type="GroupAdminCommunicationBarringUserProfileAccess" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1246,38 +1439,6 @@
           <xs:element name="lastName" type="LastName" nillable="true" minOccurs="0"/>
           <xs:element name="password" type="Password" nillable="true" minOccurs="0"/>
           <xs:element name="language" type="Language" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="GroupAdminModifyPolicyRequest">
-    <xs:annotation>
-      <xs:documentation>
-        Request to modify the group administrator's policy settings.
-        The response is either SuccessResponse or ErrorResponse.
-        The following elements are only used in AS data mode:
-            dialableCallerIDAccess
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIRequest">
-        <xs:sequence>
-          <xs:element name="userId" type="UserId"/>
-          <xs:element name="profileAccess" type="GroupAdminProfileAccess" minOccurs="0"/>
-          <xs:element name="userAccess" type="GroupAdminUserAccess" minOccurs="0"/>
-          <xs:element name="adminAccess" type="GroupAdminAdminAccess" minOccurs="0"/>
-          <xs:element name="departmentAccess" type="GroupAdminDepartmentAccess" minOccurs="0"/>
-          <xs:element name="accessDeviceAccess" type="GroupAdminAccessDeviceAccess" minOccurs="0"/>
-          <xs:element name="enhancedServiceInstanceAccess" type="GroupAdminEnhancedServiceInstanceAccess" minOccurs="0"/>
-          <xs:element name="featureAccessCodeAccess" type="GroupAdminFeatureAccessCodeAccess" minOccurs="0"/>
-          <xs:element name="phoneNumberExtensionAccess" type="GroupAdminPhoneNumberExtensionAccess" minOccurs="0"/>
-          <xs:element name="callingLineIdNumberAccess" type="GroupAdminCallingLineIdNumberAccess" minOccurs="0"/>
-          <xs:element name="serviceAccess" type="GroupAdminServiceAccess" minOccurs="0"/>
-          <xs:element name="trunkGroupAccess" type="GroupAdminTrunkGroupAccess" minOccurs="0"/>
-          <xs:element name="sessionAdmissionControlAccess" type="GroupAdminSessionAdmissionControlAccess" minOccurs="0"/>
-          <xs:element name="officeZoneAccess" type="GroupAdminOfficeZoneAccess" minOccurs="0"/>
-          <xs:element name="dialableCallerIDAccess" type="GroupAdminDialableCallerIDAccess" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1688,34 +1849,39 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupCallProcessingGetPolicyRequest17sp4">
+  <xs:complexType name="GroupCallProcessingGetPolicyRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-          Request the group level data associated with Call Processing Policy.
-          The response is either a GroupCallProcessingGetPolicyResponse17sp4 or an
-          ErrorResponse.
+        Request the group level data associated with Call Processing Policy.
+        The response is either a GroupCallProcessingGetPolicyResponse19sp1 or an
+        ErrorResponse.
 
-          The useGroupCLIDSetting attribute controls the CLID settings 
-          (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity)
+        The useGroupCLIDSetting attribute controls the CLID settings 
+        (clidPolicy,enterpriseCallsCLIDPolicy, groupCallsCLIDPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowDepartmentCLIDNameOverride)
 
-          The useGroupMediaSetting attribute controls the Media settings 
-          (medisPolicySelection, supportedMediaSetName)
+        The useGroupMediaSetting attribute controls the Media settings 
+        (medisPolicySelection, supportedMediaSetName)
 
-         The useGroupCallLimitsSetting attribute controls the Call Limits settings 
-         (useMaxSimultaneousCalls, maxSimultaneousCalls, 
-         useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
+        The useGroupCallLimitsSetting attribute controls the Call Limits settings 
+        (useMaxSimultaneousCalls, maxSimultaneousCalls, 
+        useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
 
-         The useGroupTranslationRoutingSetting attribute controls the routing and translation settings 
-         (networkUsageSelection, enforceGroupCallingLineIdentityRestriction, 
-         allowEnterpriseGroupCallTypingForPrivateDialingPlan, allowEnterpriseGroupCallTypingForPublicDialingPlan, overrideCLIDRestrictionForExternalCallsViaPrivateDialingPlan, enableEnterpriseExtensionDialing)
+        The useGroupTranslationRoutingSetting attribute controls the routing and translation settings 
+        (networkUsageSelection, enforceGroupCallingLineIdentityRestriction, 
+        allowEnterpriseGroupCallTypingForPrivateDialingPlan, allowEnterpriseGroupCallTypingForPublicDialingPlan, overrideCLIDRestrictionForExternalCallsViaPrivateDialingPlan, enableEnterpriseExtensionDialing)
 
-         The useGroupDCLIDSetting controls the Dialable Caller ID settings (enableDialableCallerID)
-         
-         The following elements are only used in AS data mode:
-           useGroupDCLIDSetting
-           enableDialableCallerID
+        The following elements are only used in AS data mode:
+          useGroupDCLIDSetting
+          enableDialableCallerID
+          allowDepartmentCLIDNameOverride
+          enterpriseCallsCLIDPolicy
+          groupCallsCLIDPolicy
  
-        </xs:documentation>
+      </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
@@ -1727,15 +1893,22 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupCallProcessingGetPolicyResponse17sp4">
+  <xs:complexType name="GroupCallProcessingGetPolicyResponse19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-          Response to GroupCallProcessingGetPolicyRequest17sp4.
-          The following elements are only used in AS data mode:
-           useGroupDCLIDSetting
-           enableDialableCallerID
-           allowConfigurableCLIDForRedirectingIdentity
-        </xs:documentation>
+        Response to GroupCallProcessingGetPolicyRequest.
+        The following elements are only used in AS data mode:
+          useGroupDCLIDSetting
+          enableDialableCallerID
+          allowConfigurableCLIDForRedirectingIdentity
+          allowDepartmentCLIDNameOverride
+          enterpriseCallsCLIDPolicy
+          groupCallsCLIDPolicy
+      </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
@@ -1746,13 +1919,13 @@
           <xs:element name="useGroupTranslationRoutingSetting" type="xs:boolean"/>
           <xs:element name="useGroupDCLIDSetting" type="xs:boolean"/>
           <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
-          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls19sp1"/>
           <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
-          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls19sp1"/>
           <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
           <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
           <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
-          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes19sp1"/>
           <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
           <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
           <xs:element name="networkUsageSelection" type="NetworkUsageSelection"/>
@@ -1763,12 +1936,12 @@
           <xs:element name="useEnterpriseCLIDForPrivateCallCategory" type="xs:boolean" minOccurs="0"/>
           <xs:element name="enableEnterpriseExtensionDialing" type="xs:boolean"/>
           <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
-          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls19sp1"/>
           <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
-          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
-          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth19sp1"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth19sp1"/>
           <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
-          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations19sp1"/>
           <xs:element name="clidPolicy" type="GroupCLIDPolicy"/>
           <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
@@ -1776,6 +1949,9 @@
           <xs:element name="blockCallingNameForExternalCalls" type="xs:boolean"/>
           <xs:element name="enableDialableCallerID" type="xs:boolean"/>
           <xs:element name="allowConfigurableCLIDForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="allowDepartmentCLIDNameOverride" type="xs:boolean"/>
+          <xs:element name="enterpriseCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy"/>
+          <xs:element name="groupCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1783,21 +1959,25 @@
     
   <xs:complexType name="GroupCallProcessingModifyPolicyRequest15sp2">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>true</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-          Modify the group level data associated with Call Procesing Policy.
-          The response is either a SuccessResponse or an ErrorResponse.
-      The useGroupCLIDSetting attribute controls the CLID settings 
-      (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity)
+        Modify the group level data associated with Call Procesing Policy.
+        The response is either a SuccessResponse or an ErrorResponse.
+        The useGroupCLIDSetting attribute controls the CLID settings 
+        (clidPolicy,enterpriseCallsCLIDPolicy, groupCallsCLIDPolicy,  emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName, allowConfigurableCLIDForRedirectingIdentity, allowDepartmentCLIDNameOverride)
 
-      The useGroupMediaSetting attribute controls the Media settings 
-      (medisPolicySelection, supportedMediaSetName)
+        The allowDepartmentCLID attribute is automatically set to false when the useGroupName attribute is set to false.
 
-          The useGroupCallLimitsSetting attribute controls the Call Limits settings 
-          (useMaxSimultaneousCalls, maxSimultaneousCalls, useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
+        The useGroupMediaSetting attribute controls the Media settings 
+        (medisPolicySelection, supportedMediaSetName)
 
-        The useGroupTranslationRoutingSetting attribute controls the routing and
-         translation settings (networkUsageSelection, enforceGroupCallingLineIdentityRestriction, 
-         allowEnterpriseGroupCallTypingForPrivateDialingPlan, allowEnterpriseGroupCallTypingForPublicDialingPlan, overrideCLIDRestrictionForExternalCallsViaPrivateDialingPlan, enableEnterpriseExtensionDialing)
+        The useGroupCallLimitsSetting attribute controls the Call Limits settings 
+        (useMaxSimultaneousCalls, maxSimultaneousCalls, useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
+
+        The useGroupTranslationRoutingSetting attribute controls the routing and translation settings (networkUsageSelection, enforceGroupCallingLineIdentityRestriction, allowEnterpriseGroupCallTypingForPrivateDialingPlan, allowEnterpriseGroupCallTypingForPublicDialingPlan, overrideCLIDRestrictionForExternalCallsViaPrivateDialingPlan, enableEnterpriseExtensionDialing)
 
         The useGroupDCLIDSetting controls the Dialable Caller ID settings (enableDialableCallerID)
         
@@ -1805,8 +1985,11 @@
            useGroupDCLIDSetting
            enableDialableCallerID
            allowConfigurableCLIDForRedirectingIdentity
-           
-        </xs:documentation>
+           allowDepartmentCLIDNameOverride
+           allowConfigurableCLIDForRedirectingIdentity
+           enterpriseCallsCLIDPolicy
+           groupCallsCLIDPolicy
+      </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
@@ -1819,13 +2002,13 @@
           <xs:element name="useGroupTranslationRoutingSetting" type="xs:boolean" minOccurs="0"/>
           <xs:element name="useGroupDCLIDSetting" type="xs:boolean" minOccurs="0"/>
           <xs:element name="useMaxSimultaneousCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls" minOccurs="0"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls" minOccurs="0"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16" minOccurs="0"/>
           <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes" minOccurs="0"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes19sp1" minOccurs="0"/>
           <xs:element name="mediaPolicySelection" type="MediaPolicySelection" minOccurs="0"/>
           <xs:element name="supportedMediaSetName" type="MediaSetName" nillable="true" minOccurs="0"/>
           <xs:element name="networkUsageSelection" type="NetworkUsageSelection" minOccurs="0"/>
@@ -1836,12 +2019,12 @@
           <xs:element name="useEnterpriseCLIDForPrivateCallCategory" type="xs:boolean" minOccurs="0"/>
           <xs:element name="enableEnterpriseExtensionDialing" type="xs:boolean" minOccurs="0"/>
           <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls" minOccurs="0"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls19sp1" minOccurs="0"/>
           <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth" minOccurs="0"/>
-          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth" minOccurs="0"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth19sp1" minOccurs="0"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth19sp1" minOccurs="0"/>
           <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations" minOccurs="0"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations19sp1" minOccurs="0"/>
           <xs:element name="clidPolicy" type="GroupCLIDPolicy" minOccurs="0"/>
           <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy" minOccurs="0"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean" minOccurs="0"/>
@@ -1849,6 +2032,9 @@
           <xs:element name="blockCallingNameForExternalCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="enableDialableCallerID" type="xs:boolean" minOccurs="0"/>
           <xs:element name="allowConfigurableCLIDForRedirectingIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowDepartmentCLIDNameOverride" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enterpriseCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy" minOccurs="0"/>
+          <xs:element name="groupCallsCLIDPolicy" type="EnterpriseInternalCallsCLIDPolicy" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1949,6 +2135,67 @@
           <xs:element name="entryName" type="PhoneListEntryName"/>
           <xs:element name="newEntryName" type="PhoneListEntryName" minOccurs="0"/>
           <xs:element name="phoneNumber" type="OutgoingDN" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupCommunicationBarringProfileModifyListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Assign a replacement list of Communication Barring Profiles to a group.
+        The response is either a SuccessResponse or an ErrorResponse.
+        This command only applies to groups in an Enterprise. This command will fail for groups in a Service Provider.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="profileName" type="CommunicationBarringProfileReplacementList" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupCommunicationBarringProfileGetAssignedListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get the list of all communication barring profiles assigned to the group. The response is either a 
+        GroupCommunicationBarringProfileGetAssignedListResponse or an ErrorResponse.
+        This command only applies to groups in an Enterprise. This command will fail for groups in a Service Provider.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupCommunicationBarringProfileGetAssignedListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to the GroupCommunicationBarringProfileGetAssignedListRequest.
+        The response contains a simple list of all communication barring profiles assigned to the group.     
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="profileName" type="CommunicationBarringProfileName" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2090,6 +2337,7 @@
           <xs:element name="serviceProviderId" type="ServiceProviderId"/>
           <xs:element name="groupId" type="GroupId"/>
           <xs:element name="deviceType" type="AccessDeviceType"/>
+          <xs:element name="force" type="xs:boolean" minOccurs="0" fixed="true"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2118,7 +2366,7 @@
       <xs:documentation>
         Reorder the lines of a group device. You can not add or delete line ports, only
         re-ordering the list is allowed. The ordered list of line ports can be obtained
-        with the GroupAccessDeviceGetRequest14sp6 command.
+        with the GroupAccessDeviceGetRequest16 command.
         The response is either a SuccessResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -2243,6 +2491,9 @@
           <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2255,7 +2506,8 @@
         GroupCustomContactDirectoryGetAvailableUserListRequest17.
         Contains a table with column headings: "User Id", "Last Name", 
         "First Name", "Hiragana Last Name", "Hiragana First Name", 
-        "Virtual On-Net Phone Number", "Group Id", "Is Virtual On-Net User".
+        "Virtual On-Net Phone Number", "Group Id", "Is Virtual On-Net User", 
+        "Phone Number", "Extension", "Department", "Email Address".
 
         If the entry represents a Virtual On-Net user then "User Id" is blank,  
         the "Virtual On-Net Phone Number" contains the phone Number of the 
@@ -2338,6 +2590,9 @@
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaMobilePhoneNumber" type="SearchCriteriaMobilePhoneNumber" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2352,7 +2607,7 @@
         "Last Name", "First Name", "Hiragana Last Name", 
         "Hiragana First Name", "Virtual On-Net Phone Number", "Group Id", 
         "Is Virtual On-Net User", "Department", "Phone Number", "Extension",
-        "Mobile", "Email Address", "Yahoo Id", "Title".
+        "Mobile", "Email Address", "Yahoo Id", "Title", "IMP Id".
         If the entry represents a Virtual On-Net user then "User Id" is blank,  
         the "Virtual On-Net Phone Number" contains the phone Number of the 
         Virtual On-Net user, the "Group Id" contains the Virtual On-Net user's 
@@ -2414,6 +2669,10 @@
       <xs:documentation>
         Add a department to a group.
         The response is either a SuccessResponse or an ErrorResponse.
+
+        The following elements are only used in AS data mode:
+           callingLineIdName
+           caliingLineIdPhoneNumber
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2423,6 +2682,8 @@
           <xs:element name="groupId" type="GroupId"/>
           <xs:element name="departmentName" type="DepartmentName"/>
           <xs:element name="parentDepartmentKey" type="DepartmentKey" minOccurs="0"/>
+          <xs:element name="callingLineIdName" type="DepartmentCallingLineIdName" minOccurs="0"/>
+          <xs:element name="callingLineIdPhoneNumber" type="DN" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2612,14 +2873,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupDepartmentGetListRequest">
+  <xs:complexType name="GroupDepartmentGetListRequest18">
     <xs:annotation>
       <xs:documentation>
         Request a list of departments in a group. You may request only the
         list of departments defined at the group-level, or you may request
         the list of all departments in the group including all the departments
         defined within the enterprise the group belongs to.
-        The response is either GroupDepartmentGetListResponse or ErrorResponse.
+        The response is either GroupDepartmentGetListResponse18 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2633,18 +2894,56 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupDepartmentGetListResponse">
+  <xs:complexType name="GroupDepartmentGetListResponse18">
     <xs:annotation>
       <xs:documentation>
-        Response to GroupDepartmentGetListRequest.
-        The response includes two parallel arrays of department keys and department display names.
+        Response to GroupDepartmentGetListRequest18.
+        Contains a table of department attributes.
+        The column headings are: "Is Enterprise Department", "Department Name", "Full Path Name", "Calling Line Id Name", and "Calling Line Id Phone Number"
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
-          <xs:element name="departmentKey" type="DepartmentKey" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="fullPathName" type="DepartmentFullPathName" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="departmentTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDepartmentGetRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request the attributes of a department.
+        The response is either a GroupDepartmentGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="departmentName" type="DepartmentName"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDepartmentGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to GroupDepartmentGetRequest.
+        The following elements are only used in AS data mode:
+          callingLineIdName
+          caliingLineIdPhoneNumber
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="parentDepartmentKey" type="DepartmentKey" minOccurs="0"/>
+          <xs:element name="callingLineIdName" type="DepartmentCallingLineIdName" minOccurs="0"/>
+          <xs:element name="callingLineIdPhoneNumber" type="DN" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2655,6 +2954,10 @@
       <xs:documentation>
         Modify a department of a group.
         The response is either a SuccessResponse or an ErrorResponse.
+
+        The following elements are only used in AS data mode:
+           callingLineIdName
+           caliingLineIdPhoneNumber
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -2665,6 +2968,163 @@
           <xs:element name="departmentName" type="DepartmentName"/>
           <xs:element name="newDepartmentName" type="DepartmentName" minOccurs="0"/>
           <xs:element name="newParentDepartmentKey" type="DepartmentKey" nillable="true" minOccurs="0"/>
+          <xs:element name="callingLineIdName" type="DepartmentCallingLineIdName" nillable="true" minOccurs="0"/>
+          <xs:element name="callingLineIdPhoneNumber" type="DN" nillable="true" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDeviceManagementEventGetListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request device management's events for a specific queue.
+        It is possible to restrict the number of rows returned using 
+        responseSizeLimit. 
+        If eventQueueType is not specified, the events from all the 
+        event queues are returned.
+        The response is either a GroupDeviceManagementEventGetListResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="eventQueueType" type="DeviceManagementEventQueueType" minOccurs="0"/>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventStatusInProgressOrPending" type="SearchCriteriaExactDeviceManagementEventStatusInProgressOrPending" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventStatusCompleted" type="SearchCriteriaExactDeviceManagementEventStatusCompleted" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventAction" type="SearchCriteriaExactDeviceManagementEventAction" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventLevel" type="SearchCriteriaExactDeviceManagementEventLevel" minOccurs="0"/>
+          <xs:element name="searchCriteriaExactDeviceManagementEventType" type="SearchCriteriaExactDeviceManagementEventType" minOccurs="0"/>
+          <xs:element name="searchCriteriaDeviceManagementEventAdditionalInfo" type="SearchCriteriaDeviceManagementEventAdditionalInfo" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDeviceManagementEventLoginId" type="SearchCriteriaDeviceManagementEventLoginId" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDeviceManagementEventGetListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to GroupDeviceManagementEventGetListRequest.
+        Contains a table with column headings: "Event Id", "Status", "Action",
+        "Level", "Type", "Additional Info", "Is Local", "Completion %", 
+        "Pushed/ Same Hash/ Not Pushed", "Login Id", "Start Time", 
+        "Process Time".
+        "Event Id" is a unique identifer for the event.
+        "Status" can be: Pending, Queued, In Progress,
+        Process On Other Host, Stale, Completed, Canceled.
+        "Action" can be: Delete, Download, Rebuild, Reset, Upload.
+        "Level" can be: Device, Device Type, Device Type Group, Group, User.
+        "Type" can be: Automatic, Manual.
+        "Additional Info" includes the affected device type, device or group.
+        It depends on the level of the event:
+          Device Profile: "Device Name" "Service Provider Id" "Group Id"
+          Device Type: "Device Type Name"
+          Device Type Group: "Service Provider Id" "Group Id" "Device Type Name"
+          Group: "Service Provider Id" "Group Id"
+          User: "User Id"
+        "Is Local" is set to "yes" if the event is processed on the server 
+        who received the request, "no" otherwise meaning that the event is
+        processed on another server.        
+        "Completion %" provides an estimate of the completion of the event.
+        A percentage is given, the current number of completed expanded event,
+        and the total number of expanded event.
+        "Pushed/ Same Hash/ Not Pushed" gives the total number of files that 
+        were pushed, not pushed because of same hash, and not pushed when 
+        processing the event.
+        "LoginId" is the user or admin id who triggered the event.
+        "Start Time" is the date when the event was started.  The display 
+        shows the month, days, hours, and minutes (MM-dd hh:mm).
+        "Process Time" is the time taken to process the event in hours,
+        minutes, seconds, and milliseconds (hhhh:mm:ss.SSS).
+        Each row represents an event sorted by priority of processing.  The 
+        first row in the table is an event that has an associated expanded 
+        event currently being processed or next in line to be processed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="eventTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDeviceManagementGetAccessDeviceCountForDeviceTypeGroupRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request the number of access device of a particular device type and group.
+        If countOnlyResetSupportedDevice is true, count only access devices if the device type supports reset.        
+        Devices are counted only if their device type supports Device Management.
+        An error is returned if deviceType is specified but does not support device management.
+        The response is either GroupDeviceManagementGetAccessDeviceCountForDeviceTypeGroupResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="deviceType" type="AccessDeviceType"/>
+          <xs:element name="countOnlyResetSupportedDevice" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDeviceManagementGetAccessDeviceCountForDeviceTypeGroupResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to GroupDeviceManagementGetAccessDeviceCountForDeviceTypeGroupRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="accessDeviceCount" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDeviceManagementInProgressAndPendingEventCancelRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Cancel pending and in progress events.  A list of individual events can 
+        be canceled.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="eventId" type="xs:int" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -2756,7 +3216,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="groupDeviceTypeCustomTagsTable" type="core:OCITable"/>
         </xs:sequence>
@@ -2812,7 +3272,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="groupDeviceTypeFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -2846,7 +3306,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode" minOccurs="0"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -3112,7 +3572,7 @@
       <xs:documentation>
         Activate a list of assigned DNs on a group. It is possible to activate either: a single DN,
         or a list of DNs, or a range of DNs, or any combination thereof.
-        The DNs must have previously been assigned to a user or virtual service.
+        
         It is not an error to activate an already activated DN
         The response is either SuccessResponse or ErrorResponse.
       </xs:documentation>
@@ -3175,7 +3635,12 @@
   <xs:complexType name="GroupDnGetActivationListRequest">
     <xs:annotation>
       <xs:documentation>
-        Get the list of activated and deactivated DNs in a group. Ranges of DNs with identical assignment and activation properties are coalesced to a single table row entry.  Only DNs assigned to a users are listed in the response.
+        Get the list of activated and deactivated DNs in a group. 
+        Ranges of DNs with identical assignment and activation properties are coalesced 
+        to a single table row entry.  
+        Only DNs assigned to a users are listed in the response when the number
+        activation Mode is set to "User Activation Enabled"
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either a GroupDnGetActivationListResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -3207,13 +3672,14 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupDnGetAssignmentListRequest">
+  <xs:complexType name="GroupDnGetAssignmentListRequest18">
     <xs:annotation>
       <xs:documentation>
         Get the list of assigned and unassigned DNs in a group. Each DN can be assigned
-  to a user and/or department. Ranges of DNs with identical assignment and activation properties
-  are coalesced to a single table row entry.
-  The response is either a GroupDnGetAssignmentListResponse or an ErrorResponse.
+        to a user and/or department. Ranges of DNs with identical assignment and activation properties
+        are coalesced to a single table row entry.
+        Dns assigned to the IMRN pool are not listed in the response.
+        The response is either a GroupDnGetAssignmentListResponse18 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3227,20 +3693,26 @@
           <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactDnDepartment" type="SearchCriteriaExactDnDepartment" minOccurs="0"/>
           <xs:element name="searchCriteriaExactDnActivation" type="SearchCriteriaExactDnActivation" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupDnGetAssignmentListResponse">
+  <xs:complexType name="GroupDnGetAssignmentListResponse18">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupDnGetAssignmentListRequest.
-        The response contains a table with columns: "Phone Numbers", "Assigned To", "Department".
+        Response to the GroupDnGetAssignmentListRequest18.
+        The response contains a table with columns: "Phone Numbers", "Department", "Activated", "User Id",
+        "Last Name", "First Name", "Extension", "Email Address", "User Type".
         The "Phone Numbers" column contains either a single DN or a range of DNs.
-        The "Assigned To" column contains the user name or service instance name possessing the DN(s).
+        The "User Id", "Last Name" and "First Name" columns contains the corresponding attributes of the user possessing the DN(s).
+        For a service instance, "Last Name" contains the service instance name and "First Name" column contains the corresponding enumerated UserType value.
         The "Department" column contains the department of the DN, not the department of the user or service instance.
         The "Activated" column indicates if the DN or DN range has been activated.  Only has a value if the DN(s) is assigned to a user.
+        The "User Type" column contains the corresponding enumerated UserType value.
+        NOTE: the same phone number can show up in the list twice if the phone number is being used as the group calling line Id. 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3258,6 +3730,7 @@
         Get the list of DNs that are assigned to a group and still available for
         assignment to users within the group with the department name, if the DN
         is assigned to the department.
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either a GroupDnGetDetailedAvailableListResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -3278,6 +3751,9 @@
         The response contains a table with columns: "Phone Number", "Department".
         The "Phone Numbers" column contains a single DN.
         The "Department" column contains the department of the DN if the DN is part of the department.
+        The "Activated" column indicates if the DN has been activated. 
+        Only has a value if the DN(s) is assigned to a user or if "Group
+        Enable Activation Mode" is enabled.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3294,6 +3770,7 @@
       <xs:documentation>
         Get the list of DNs that are assigned to a group and still available for
         assignment to users or service instances within the group.
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either a GroupDnGetAvailableListResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -3324,10 +3801,46 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="GroupDnGetAvailableRangesListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Get a list of group DNs that are not assigned to user, service instances or IMRN pool.
+        The Dns are returned in a list of DNs or DN ranges and formated in E164 format for display.
+        The response is either a GroupDnGetAvailableRangeListResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupDnGetAvailableRangesListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to the GroupDnGetAvailableRangesListRequest.
+        The response contains the list of group DNs that are not assigned to user, service instances or IMRN pool.
+        The Dns are returned in a list of DNs or DN ranges and formated in E164 format for display.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="phoneNumber" type="xs:token" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="GroupDnGetListRequest">
     <xs:annotation>
       <xs:documentation>
         Get the list of DNs that are assigned to a group.
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either a GroupDnGetListResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -3361,6 +3874,7 @@
     <xs:annotation>
       <xs:documentation>
         Get the list of assigned and unassigned DN ranges in a group.
+        Dns assigned to the IMRN pool are not listed in the response.
         The response is either a GroupDnGetSummaryListResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -3382,7 +3896,9 @@
         The "Phone Numbers" column contains either a single DN or a range of DNs.
         The "Assigned" column contains a boolean flag indicating if the DN(s) are
         currently assigned to a user or service instance.
-        The "Activated" column indicates if the DN or DN range has been activated.  Only has a value if the DN(s) is assigned to a user.
+        The "Activated" column indicates if the DN or DN range has been activated.  
+        Only has a value if the DN(s) is assigned to a user or if "Group Enable Activation
+        Mode" is enabled.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3473,6 +3989,8 @@
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaEmailAddress" type="SearchCriteriaEmailAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -3483,7 +4001,7 @@
       <xs:documentation>
         Response to GroupDomainGetAssignedUserListRequest.
         The table columns are: "User Id", "Last Name", "First Name", "Department", "Phone Number", "Email Address",
-        "Service Provider Id", "Group Id", "Hiragana Last Name" and "Hiragana First Name"
+        "Service Provider Id", "Group Id", "Hiragana Last Name" and "Hiragana First Name", "Extension".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3574,6 +4092,7 @@
           <xs:element name="searchCriteriaDeviceName" type="SearchCriteriaDeviceName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDeviceMACAddress" type="SearchCriteriaDeviceMACAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDeviceNetAddress" type="SearchCriteriaDeviceNetAddress" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -3588,14 +4107,80 @@
       <xs:documentation>
         Response to GroupEndpointGetListRequest.
         The column headings for the endpointTable are: 
-          "Line/Port", "Last Name", "First Name",  "User Id", "User Type", "Phone Number", "Extension", "Device Type", "Device Name", "Net Address", "MAC Address".
-          Possible values for User Type are ‘User’, ‘CCBasic’, ‘CCStandard’, ‘CCPremium’, ‘RP’, ‘MOH’, ‘MOHVideo’.
+          "Line/Port", "Last Name", "First Name",  "User Id", "User Type", "Phone Number", "Extension", "Device Type", "Device Name", "Net Address", "MAC Address", "Department", "Email Address".
+          Possible values for User Type are �User�, �CCBasic�, �CCStandard�, �CCPremium�, �RP�, �MOH�, �MOHVideo�.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="endpointTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupExchangeIntegrationGetRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request the group level configuration for Exchange Integration.
+        The response is either a GroupExchangeIntegrationGetResponse or an ErrorResponse.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupExchangeIntegrationGetResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to GroupExchangeIntegrationGetRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="enableExchangeIntegration" type="xs:boolean"/>
+          <xs:element name="exchangeURL" type="URL" minOccurs="0"/>
+          <xs:element name="exchangeUserName" type="ExchangeUserName" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupExchangeIntegrationModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify the group level configuration for Exchange Integration.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="enableExchangeIntegration" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="exchangeURL" type="URL" minOccurs="0" nillable="true"/>
+          <xs:element name="exchangeCredentials" type="ExchangeUserNamePassword" minOccurs="0" nillable="true"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -3699,12 +4284,21 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupFeatureAccessCodeGetRequest">
+  <xs:complexType name="GroupFeatureAccessCodeGetRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get group FAC code level and the list of feature access codes for a group.
-        The response is either a GroupFeatureAccessCodeGetResponse or an ErrorResponse.
-        Returned Feature Access Codes may be group specific, or Service Provider Feature Access Codes, depending on FAC code level.
+        The response is either a GroupFeatureAccessCodeGetResponse20 or an 
+        ErrorResponse.
+        Returned Feature Access Codes may be group specific, or Service Provider
+        Feature Access Codes, depending on FAC code level.
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording - Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3717,10 +4311,17 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupFeatureAccessCodeGetResponse">
+  <xs:complexType name="GroupFeatureAccessCodeGetResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to the GroupFeatureAccessCodeGetRequest.
+        Response to the GroupFeatureAccessCodeGetRequest20. 
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording - Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -3733,12 +4334,21 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupFeatureAccessCodeModifyRequest">
+  <xs:complexType name="GroupFeatureAccessCodeModifyRequest20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Modify group FAC code level and the list of feature access codes for a group.
+        Modify group FAC code level and the list of feature access codes for a
+        group.
         The response is either a SuccessResponse or an ErrorResponse.
-        Note: choice element is only valid when useFeatureAccessCodeLevel is set to "Group", otherwise an ErrorResponse will be returned.
+        Note: choice element is only valid when useFeatureAccessCodeLevel is set
+        to "Group", otherwise an ErrorResponse will be returned.
+
+        In release 20 the "Call Recording" FAC name is changed to 
+        "Call Recording - Start".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4039,7 +4649,7 @@
         Return a table containing the list of users assigned the user service
         or service pack.  The table contains columns: "User Id", "Last Name",
         "First Name", "Department", "Phone Number", "Email Address", "Hiragana Last Name";
-        "Hiragana First Name"
+        "Hiragana First Name", "Extension".
         This is a response to the GroupGetUserServiceAssignedUserListRequest.
       </xs:documentation>
     </xs:annotation>
@@ -4047,6 +4657,95 @@
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="userListTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupIMRNAssignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Assign a list of group DNs to the IMRN pool. It is possible to assign either: a single DN,
+        or a list of DNs, or a range of DNs, or any combination thereof.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="imrn" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="imrnRange" type="DNRange" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupIMRNGetListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request a summary table of all DNs in a group IMRN pool.
+        The response is either GroupIMRNGetListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupIMRNGetListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to GroupIMRNGetListRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="imrn" type="xs:token" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupIMRNUnassignListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Unassign a list of group DNs from the group IMRN pool. The DNs then become available for
+        assignment to users. It is possible to delete either: a single DN,
+        or a list of DNs, or a range of DNs, or any combination thereof.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="imrn" type="DN" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="imrnRange" type="DNRange" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4175,6 +4874,27 @@
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaEmailAddress" type="SearchCriteriaEmailAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupNetworkClassOfServiceGetAssignedUserListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to GroupNetworkClassOfServiceGetAssignedUserListRequest.
+        Contains a table of users that have the Network Class of Service 
+        assigned. The column headings are: "User Id", "User Type", "Last Name", "First Name",
+        "Department", "Phone Number", "Email Address", "Service Provider Id", 
+        "Group Id", "Hiragana Last Name" and "Hiragana First Name" , "Extension".
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="userTable" type="core:OCITable"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4193,25 +4913,6 @@
           <xs:element name="serviceProviderId" type="ServiceProviderId"/>
           <xs:element name="groupId" type="GroupId"/>
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="GroupNetworkClassOfServiceGetAssignedUserListResponse">
-    <xs:annotation>
-      <xs:documentation>
-        Response to GroupNetworkClassOfServiceGetAssignedUserListRequest.
-        Contains a table of users that have the Network Class of Service 
-        assigned. The column headings are: "User Id", "User Type", "Last Name", "First Name",
-        "Department", "Phone Number", "Email Address", "Service Provider Id", 
-        "Group Id", "Hiragana Last Name" and "Hiragana First Name".
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIDataResponse">
-        <xs:sequence>
-          <xs:element name="userTable" type="core:OCITable"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4352,6 +5053,8 @@
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaEmailAddress" type="SearchCriteriaEmailAddress" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4362,7 +5065,7 @@
       <xs:documentation>
         Response to GroupOfiiceZoneGetAssignedUserListRequest.  
         Contains a table of users that have the Office Zone assigned. The column headings are: "User Id", "User Type", "Last Name", 
-        "First Name", "Department", "Phone Number", "Email Address", "Hiragana Last Name" and "Hiragana First Name".
+        "First Name", "Department", "Phone Number", "Email Address", "Hiragana Last Name" and "Hiragana First Name", "Extension".
         Office Zones can only be unassigned if the Location-Based Calling Restrictions has been authorized to the group otherwise the request will fail.
       </xs:documentation>
     </xs:annotation>
@@ -4481,7 +5184,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupPhoneDirectoryGetListRequest17">
+  <xs:complexType name="GroupPhoneDirectoryGetListRequest18">
     <xs:annotation>
       <xs:documentation>
         Request a table containing the phone directory for a group.
@@ -4497,7 +5200,7 @@
         rows returned.
 
         Multiple search criteria are logically ANDed together.
-        The response is either GroupPhoneDirectoryGetListResponse17 or 
+        The response is either GroupPhoneDirectoryGetListResponse18 or 
         ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -4518,23 +5221,24 @@
           <xs:element name="searchCriteriaYahooId" type="SearchCriteriaYahooId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupPhoneDirectoryGetListResponse17">
+  <xs:complexType name="GroupPhoneDirectoryGetListResponse18">
     <xs:annotation>
       <xs:documentation>
-        Response to GroupPhoneDirectoryGetListRequest17.
+        Response to GroupPhoneDirectoryGetListRequest18.
         Contains a table with a row for each phone number and column headings :
         "Name", "Number", "Extension", "Mobile", "Email Address", 
-        "Department", "Hiragana Name", "Group Id", "Yahoo Id", 
-        "Is Virtual On-Net User"
+        "Department", "Hiragana Name", "Group Id", "Yahoo Id", "User Id", "IMP Id" and "Is Virtual On-Net User".
+
         If extended directory information is requested, the following columns are also included:
-        "First Name", "Last Name", "User Id", "Pager", "Title", "Time Zone", 
-        "Location", "Address Line 1", "Address Line 2", "City", "State", 
-        "Zip", "Country".
+        "First Name", "Last Name", "Pager", "Title", "Time Zone", 
+        "Location", "Address Line 1", "Address Line 2", "City", "State", "Zip", "Country".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4546,11 +5250,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupPolicyGetRequest17">
+  <xs:complexType name="GroupPolicyGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Requests the Group's policy settings.
-        The response is either GroupPolicyGetResponse17 or ErrorResponse.
+        The response is either GroupPolicyGetResponse20 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4563,10 +5267,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupPolicyGetResponse17">
+  <xs:complexType name="GroupPolicyGetResponse20">
     <xs:annotation>
       <xs:documentation>
-          Response to GroupPolicyGetRequest17.
+          Response to GroupPolicyGetRequest20.
           Contains the policy settings for the group.
         </xs:documentation>
     </xs:annotation>
@@ -4585,6 +5289,7 @@
           <xs:element name="userGroupDirectoryAccess" type="GroupUserGroupDirectoryAccess"/>
           <xs:element name="userProfileAccess" type="GroupUserProfileAccess"/>
           <xs:element name="userEnhancedCallLogAccess" type="GroupUserCallLogAccess"/>
+          <xs:element name="userAutoAttendantNameDialingAccess" type="GroupUserAutoAttendantNameDialingAccess"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4614,6 +5319,7 @@
           <xs:element name="userGroupDirectoryAccess" type="GroupUserGroupDirectoryAccess" minOccurs="0"/>
           <xs:element name="userProfileAccess" type="GroupUserProfileAccess" minOccurs="0"/>
           <xs:element name="userEnhancedCallLogAccess" type="GroupUserCallLogAccess" minOccurs="0"/>
+          <xs:element name="userAutoAttendantNameDialingAccess" type="GroupUserAutoAttendantNameDialingAccess" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4716,7 +5422,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupPortalPasscodeRulesGetRequest">
+  <xs:complexType name="GroupPortalPasscodeRulesGetRequest19">
     <xs:annotation>
       <xs:documentation>
         Requests the group's passcode rules setting.
@@ -4733,11 +5439,19 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupPortalPasscodeRulesGetResponse">
+  <xs:complexType name="GroupPortalPasscodeRulesGetResponse19">
     <xs:annotation>
       <xs:documentation>
-        Response to GroupPortalPasscodeRulesGetRequest.
+        Response to GroupPortalPasscodeRulesGetRequest19.
         Contains the group's passcode rules setting.
+        
+        The following elements are only used in AS data mode:
+          numberOfRepeatedDigits
+          disallowRepeatedPatterns
+          disallowContiguousSequences
+          numberOfAscendingDigits
+          numberOfDescendingDigits
+          numberOfPreviousPasscodes
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4745,9 +5459,15 @@
         <xs:sequence>
           <xs:element name="useRuleLevel" type="GroupPasscodeRulesLevel"/>
           <xs:element name="disallowRepeatedDigits" type="xs:boolean"/>
+          <xs:element name="numberOfRepeatedDigits" type="PasscodeMaxRepeatedDigits"/>
+          <xs:element name="disallowRepeatedPatterns" type="xs:boolean"/>
+          <xs:element name="disallowContiguousSequences" type="xs:boolean"/>
+          <xs:element name="numberOfAscendingDigits" type="PasscodeMaxContiguousDigits"/>
+          <xs:element name="numberOfDescendingDigits" type="PasscodeMaxContiguousDigits"/>
           <xs:element name="disallowUserNumber" type="xs:boolean"/>
           <xs:element name="disallowReversedUserNumber" type="xs:boolean"/>
           <xs:element name="disallowOldPasscode" type="xs:boolean"/>
+          <xs:element name="numberOfPreviousPasscodes" type="PasscodeHistoryCount"/>
           <xs:element name="disallowReversedOldPasscode" type="xs:boolean"/>
           <xs:element name="minCodeLength" type="PasscodeMinLength"/>
           <xs:element name="maxCodeLength" type="PasscodeMaxLength"/>
@@ -4767,6 +5487,14 @@
       <xs:documentation>
         Request to modify the group's passcode rules setting.
         The response is either SuccessResponse or ErrorResponse.
+        
+        The following elements are only used in AS data mode:
+          numberOfRepeatedDigits
+          disallowRepeatedPatterns
+          disallowContiguousSequences
+          numberOfAscendingDigits
+          numberOfDescendingDigits
+          numberOfPreviousPasscodes
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -4776,9 +5504,15 @@
           <xs:element name="groupId" type="GroupId"/>
           <xs:element name="useRuleLevel" type="GroupPasscodeRulesLevel" minOccurs="0"/>
           <xs:element name="disallowRepeatedDigits" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="numberOfRepeatedDigits" type="PasscodeMaxRepeatedDigits" minOccurs="0"/>
+          <xs:element name="disallowRepeatedPatterns" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="disallowContiguousSequences" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="numberOfAscendingDigits" type="PasscodeMaxContiguousDigits" minOccurs="0"/>
+          <xs:element name="numberOfDescendingDigits" type="PasscodeMaxContiguousDigits" minOccurs="0"/>
           <xs:element name="disallowUserNumber" type="xs:boolean" minOccurs="0"/>
           <xs:element name="disallowReversedUserNumber" type="xs:boolean" minOccurs="0"/>
           <xs:element name="disallowOldPasscode" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="numberOfPreviousPasscodes" type="PasscodeHistoryCount" minOccurs="0"/>
           <xs:element name="disallowReversedOldPasscode" type="xs:boolean" minOccurs="0"/>
           <xs:element name="minCodeLength" type="PasscodeMinLength" minOccurs="0"/>
           <xs:element name="maxCodeLength" type="PasscodeMaxLength" minOccurs="0"/>
@@ -4956,6 +5690,8 @@
       <xs:documentation>
         Add an event to group schedule. 
         The response is either a SuccessResponse or an ErrorResponse.
+        The startDate element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startDate.
+        The endDate element is set to the sum of the adjusted starDate element value and the event duration.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -5154,6 +5890,8 @@
       <xs:documentation>
         Modify an event of a group schedule.
         The response is either a SuccessResponse or an ErrorResponse.
+        The startDate element is adjusted to the first occurrence of the recurrent schedule that comes at or after the startDate.
+        The endDate element is set to the sum of the adjusted starDate element value and the event duration.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -5268,6 +6006,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGetAvailableDeviceListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get the list of devices can be assigned to session admission control group for the group.
         The response is either an GroupSessionAdmissionControlGetAvailableDeviceListResponse or an ErrorResponse.
@@ -5291,13 +6033,17 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGetAvailableDeviceListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to GroupSessionAdmissionControlGetAvailableDeviceListRequest.
         Contains a table of devices can be assigned to session admission control group in the group.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="accessDevice" type="AccessDevice" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -5307,6 +6053,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get the session admission control capacity for the group.
         The response is either a GroupSessionAdmissionControlGetResponse or an ErrorResponse.
@@ -5324,6 +6074,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to the GroupSessionAdmissionControlGetRequest.
         The response contains the session admission control capacity allocated for the group.
@@ -5344,6 +6098,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to modify session admission control capacity for the group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -5366,6 +6124,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGroupAddDeviceListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to add one ore more devices to a group level session admission control group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -5383,8 +6145,12 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupSessionAdmissionControlGroupAddRequest">
+  <xs:complexType name="GroupSessionAdmissionControlGroupAddRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to add a session admission control group for the group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -5405,6 +6171,7 @@
           <xs:element name="becomeDefaultGroup" type="xs:boolean"/>
           <xs:element name="countIntraSACGroupSessions" type="xs:boolean"/>
           <xs:element name="devices" type="AccessDevice" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="blockEmergencyAndRepairCallsDueToSACLimits" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -5412,6 +6179,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGroupDeleteDeviceListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to delete one or more devices from a group level session admission control group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -5431,6 +6202,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGroupDeleteListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to delete one or more session admission control groups for the group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -5449,6 +6224,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGroupGetListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get the list of session admission control group for the group.
         The response is either a GroupSessionAdmissionControlGroupGetListResponse or an ErrorResponse.
@@ -5466,6 +6245,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGroupGetListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to GroupSessionAdmissionControlGroupGetListRequest.
         Contains a table of session admission control group configured in the group.
@@ -5473,7 +6256,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="sessionAdmissionControlGroupTable" type="core:OCITable"/>
         </xs:sequence>
@@ -5481,11 +6264,15 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupSessionAdmissionControlGroupGetRequest">
+  <xs:complexType name="GroupSessionAdmissionControlGroupGetRequest19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to get a session admission control group for the group.
-        The response is either a GroupSessionAdmissionControlGroupGetResponse or an ErrorResponse.
+        The response is either a GroupSessionAdmissionControlGroupGetResponse19sp1 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -5499,15 +6286,19 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupSessionAdmissionControlGroupGetResponse">
+  <xs:complexType name="GroupSessionAdmissionControlGroupGetResponse19sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to GroupSessionAdmissionControlGroupGetRequest.
+        Response to GroupSessionAdmissionControlGroupGetRequest19sp1.
         Returns the profile information for the session admission control group.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="maxSession" type="NonNegativeInt"/>
           <xs:element name="maxUserOriginatingSessions" type="NonNegativeInt" minOccurs="0"/>
@@ -5518,6 +6309,7 @@
           <xs:element name="defaultGroup" type="xs:boolean"/>
           <xs:element name="countIntraSACGroupSessions" type="xs:boolean"/>
           <xs:element name="devices" type="AccessDevice" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="blockEmergencyAndRepairCallsDueToSACLimits" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -5525,6 +6317,10 @@
     
   <xs:complexType name="GroupSessionAdmissionControlGroupModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request to modify a session admission control group for the group.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -5546,6 +6342,7 @@
           <xs:element name="becomeDefaultGroup" type="xs:boolean" minOccurs="0"/>
           <xs:element name="countIntraSACGroupSessions" type="xs:boolean" minOccurs="0"/>
           <xs:element name="deviceList" type="ReplacementDeviceList" nillable="true" minOccurs="0"/>
+          <xs:element name="blockEmergencyAndRepairCallsDueToSACLimits" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -5614,6 +6411,7 @@
         <xs:sequence>
           <xs:element name="trunkGroup" minOccurs="0" maxOccurs="unbounded">
             <xs:complexType>
+              <xs:annotation/>
               <xs:sequence>
                 <xs:element name="name" type="TrunkGroupDeviceName"/>
                 <xs:element name="staticRegistrationCapable" type="xs:boolean"/>
@@ -5645,6 +6443,16 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>    
+    
+  <xs:simpleType name="DepartmentCallingLineIdName">
+    <xs:annotation>
+      <xs:documentation>Department calling line ID name.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="80"/>
+    </xs:restriction>
+  </xs:simpleType>    
     
   <xs:complexType name="ReplacementCustomContactDirectoryEntryList">
     <xs:annotation>
@@ -5709,6 +6517,91 @@
       <xs:element name="SCSCFName" type="SIPURI" minOccurs="0"/>
       <xs:element name="IMSUserState" type="IMSUserState"/>
     </xs:sequence>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupApplicationServerSetModifyRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Modify the Application Server set for a group.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="applicationServerSetName" type="ApplicationServerSetName" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupApplicationServerSetGetRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Get the Application Server set for a group.
+        The response is either a GroupApplicationServerSetGetResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupApplicationServerSetGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to the GroupApplicationServerSetGetRequest.
+        The response contains the group's Application Server set information.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="applicationServerSetName" type="ApplicationServerSetName" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAccessDeviceAvailablePortGetListRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request to get the list of available ports in a device.
+        The response is either GroupAccessDeviceAvailablePortGetListResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="accessDevice" type="AccessDevice"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAccessDeviceAvailablePortGetListResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to GroupAccessDeviceAvailablePortGetListRequest.
+        Contains a list of available ports in a device using static mode. The list is empty in case the device is using dynamic mode.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="portNumber" type="AccessDevicePortNumber" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>    
     
 </xs:schema>
