@@ -1767,7 +1767,7 @@ Modify the group level data associated with Call Procesing Policy.
 
 The response is either a C<SuccessResponse> or an C<ErrorResponse>. The
 C<useGroupCLIDSetting> attribute controls the CLID settings
-(C<clidPolicy>,C<enterpriseCallsCLIDPolicy>, C<groupCallsCLIDPolicy>, 
+(C<clidPolicy>,C<enterpriseCallsCLIDPolicy>, C<groupCallsCLIDPolicy>,
 C<emergencyClidPolicy>, C<allowAlternateNumbersForRedirectingIdentity>,
 C<useGroupName>, C<allowConfigurableCLIDForRedirectingIdentity>,
 C<allowDepartmentCLIDNameOverride>) The C<allowDepartmentCLID> attribute is
@@ -2179,7 +2179,7 @@ Fixed parameters are:-
 Get a list of users that can be part of a custom contact directory.
 
 The response is either
-C<GroupCustomContactDirectoryGetAvailableUserListResponse17> or 
+C<GroupCustomContactDirectoryGetAvailableUserListResponse17> or
 C<ErrorResponse>.
 
 Fixed parameters are:-
@@ -8846,7 +8846,7 @@ Fixed parameters are:-
 
 Requests the list of Diameter routing realms.
 
-The response is either C<SystemBwDiameterRoutingRealmGetListResponse> or 
+The response is either C<SystemBwDiameterRoutingRealmGetListResponse> or
 C<ErrorResponse>.
 
 Fixed parameters are:-
@@ -8926,7 +8926,7 @@ Fixed parameters are:-
 Requests the list of Diameter routing peers associated with the specified
 realm.
 
-The response is either C<SystemBwDiameterRoutingPeerGetListResponse> or 
+The response is either C<SystemBwDiameterRoutingPeerGetListResponse> or
 C<ErrorResponse>.
 
 Fixed parameters are:-
@@ -10563,7 +10563,7 @@ Fixed parameters are:-
 
 Requests a table of all the existing NS Treatment Mappings in the system.
 
-The response is either a  
+The response is either a
 C<SystemTreatmentMappingNetworkServerTreatmentGetListResponse> or an
 C<ErrorResponse>.
 
@@ -16609,18 +16609,19 @@ Additionally there are generic tagged parameters.
 =head3 UserEnterpriseCommonPhoneListGetPagedSortedListRequest
 
 
-				Get an enterprise's common phone list for a user.
+Get an enterprise's common phone list for a user.
 
 The response is either a
 C<UserEnterpriseCommonPhoneListGetPagedSortedListResponse>                 or
-an C<ErrorResponse>.                 The search can be done using multiple
-criterion.                If the C<searchCriteriaModeOr> is present, any result
-matching any one              criteria is included in the results.             
-  Otherwise, only results matching all the search criterion are included in the
-              results.                If no search criteria is specified, all
-results are returned.               Specifying C<searchCriteriaModeOr> without
-any search criteria results              in an C<ErrorResponse>.               
- The sort can be done on the name or the number in the common phone list.
+an C<ErrorResponse>.
+
+The search can be done using multiple criterion.                If the
+C<searchCriteriaModeOr> is present, any result matching any one criteria is
+included in the results.   Otherwise, only results matching all the search
+criterion are included in the  results. If no search criteria is specified, all
+results are returned. Specifying C<searchCriteriaModeOr> without any search
+criteria results    in an C<ErrorResponse>.  The sort can be done on the name
+or the number in the common phone list.
 
 Fixed parameters are:-
 
@@ -16756,10 +16757,10 @@ using multiple criterion.                If the C<searchCriteriaModeOr> is
 present, any result matching any one              criteria is included in the
 results.                Otherwise, only results matching all the search
 criterion are included in the               results.                If no
-search criteria is specified, all results are returned.              
-Specifying C<searchCriteriaModeOr> without any search criteria results         
-    in an C<ErrorResponse>.                 The sort can be done on the name or
-the number in the common phone list.
+search criteria is specified, all results are returned. Specifying
+C<searchCriteriaModeOr> without any search criteria results     in an
+C<ErrorResponse>.                 The sort can be done on the name or the
+number in the common phone list.
 
 Fixed parameters are:-
 
@@ -16777,19 +16778,19 @@ Additionally there are generic tagged parameters.
 
 =head3 UserGroupCustomContactDirectoryGetPagedSortedListRequest
 
-
-				Gets a Custom Contact Directory in a group.
+Gets a Custom Contact Directory in a group.
 
 The response is either
-C<UserGroupCustomContactDirectoryGetPagedSortedListResponse>                 or
-C<ErrorResponse>.                The search can be done using multiple
-criterion.                If the C<searchCriteriaModeOr> is present, any result
-matching any one              criteria is included in the results.             
-  Otherwise, only results matching all the search criterion are included in the
-              results.                If no search criteria is specified, all
-results are returned.               Specifying C<searchCriteriaModeOr> without
-any search criteria results              in an C<ErrorResponse>.               
- The sort can be done on the user last name, first name, or department.
+C<UserGroupCustomContactDirectoryGetPagedSortedListResponse> or
+C<ErrorResponse>.
+
+The search can be done using multiple criterion.                If the
+C<searchCriteriaModeOr> is present, any result matching any one criteria is
+included in the results.   Otherwise, only results matching all the search
+criterion are included in the  results. If no search criteria is specified, all
+results are returned. Specifying C<searchCriteriaModeOr> without any search
+criteria results    in an C<ErrorResponse>.  The sort can be done on the user
+last name, first name, or department.
 
 Fixed parameters are:-
 
@@ -16898,18 +16899,18 @@ Fixed parameters are:-
 =head3 UserPersonalPhoneListGetPagedSortedListRequest
 
 
-				Get a user's personal phone list.
+Get a user's personal phone list.
 
 The response is either a C<UserPersonalPhoneListGetPagedSortedListResponse> or
-an               C<ErrorResponse>.               The search can be done using
-multiple criterion.                If the C<searchCriteriaModeOr> is present,
-any result matching any one              criteria is included in the results.  
-             Otherwise, only results matching all the search criterion are
-included in the               results.                If no search criteria is
-specified, all results are returned.               Specifying
-C<searchCriteriaModeOr> without any search criteria results              in an
-C<ErrorResponse>.                 The sort can done by the personal phone list
-number or name.
+an C<ErrorResponse>.
+
+The search can be done using multiple criterion.                If the
+C<searchCriteriaModeOr> is present, any result matching any one criteria is
+included in the results. Otherwise, only results matching all the search
+criterion are included in the results. If no search criteria is specified, all
+results are returned. Specifying C<searchCriteriaModeOr> without any search
+criteria results in an C<ErrorResponse>. The sort can done by the personal
+phone list number or name.
 
 Fixed parameters are:-
 
@@ -17011,15 +17012,15 @@ Additionally there are generic tagged parameters.
 				just the group directory members for a user are returned in the
 				response.
 
-The response is either C<UserPhoneDirectoryGetPagedSortedListResponse> or      
-        C<ErrorResponse>.               The search can be done using multiple
+The response is either C<UserPhoneDirectoryGetPagedSortedListResponse> or
+C<ErrorResponse>.               The search can be done using multiple
 criterias.                If the C<searchCriteriaModeOr> is present, any result
 matching any one              criteria is included in the results. Otherwise,
 only                results matching all the search criterias are included in
 the results.              If no search criteria is specified, all results are
 returned.               Specifying C<searchCriteriaModeOr> without any search
-criteria              results                 in an C<ErrorResponse>.          
-      The sort can be performed on user last name, first name, or department.
+criteria              results                 in an C<ErrorResponse>.       The
+sort can be performed on user last name, first name, or department.
 
 Fixed parameters are:-
 
@@ -22773,8 +22774,8 @@ Fixed parameters are:-
 =head3 UserCallCenterGetAvailableCallCenterListRequest
 
 This request gets a list of all call centers which the user can be assigned to
-as an agent. Some of the call centers may already have the user as an agent. 
-It is the clients responsibility to discard the call centers that the user is
+as an agent. Some of the call centers may already have the user as an agent. It
+is the clients responsibility to discard the call centers that the user is
 already an agent of.
 
 The response is either a C<UserCallCenterGetAvailableCallCenterListResponse> or
@@ -27370,7 +27371,7 @@ Fixed parameters are:-
 
 =head3 SystemInCallServiceActivationModifyRequest17
 
-Modifies the system's DTMF based in-call service activation trigger 
+Modifies the system's DTMF based in-call service activation trigger
 attributes.The response is either a C<SuccessResponse> or an C<ErrorResponse>.
 
 Fixed parameters are:-
@@ -29247,7 +29248,7 @@ Additionally there are generic tagged parameters.
 
 =head3 GroupOutgoingCallingPlanDepartmentAuthorizationCodeGetListRequest
 
-Request the list of authorization codes for a group default or a department. 
+Request the list of authorization codes for a group default or a department.
 When department is not specified, it is for the group default.
 
 The response is either a
@@ -34698,7 +34699,7 @@ Request the list of Virtual On-Net users in an Enterprise. It is possible to
 search by various criteria to restrict the number of rows returned. Multiple
 search criteria are logically C<ANDed> together.
 
-The response is either a 
+The response is either a
 C<EnterpriseVirtualOnNetEnterpriseExtensionsGetUserListResponse> or an
 C<ErrorResponse>.
 

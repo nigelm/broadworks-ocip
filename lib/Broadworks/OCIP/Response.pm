@@ -23,7 +23,7 @@ use XML::Fast;
 1;
 __END__
 
-=for stopwords NIGELM 
+=for stopwords NIGELM
 
 =for Pod::Coverage mvp_multivalue_args
 

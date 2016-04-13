@@ -6201,7 +6201,7 @@ Fixed parameters are:-
 
 =head3 SystemInCallServiceActivationModifyRequest
 
-Modifies the system's DTMF based in-call service activation trigger 
+Modifies the system's DTMF based in-call service activation trigger
 attributes.The response is either a C<SuccessResponse> or an C<ErrorResponse>.
 Replaced by: C<SystemInCallServiceActivationModifyRequest17>
 
@@ -9061,9 +9061,8 @@ Add a new Communication Barring Profile. The priorities for C<IncomingRules>
 are requantized to consecutive integers as part of the add.
 
 The response is either a C<SuccessResponse> or an C<ErrorResponse>. The
-following elements are only used in HSS data mode:     
-C<incomingDefaultAction>      C<incomingDefaultCallTimeout>     
-C<incomingRule>
+following elements are only used in HSS data mode: C<incomingDefaultAction>
+C<incomingDefaultCallTimeout> C<incomingRule>
 
 Fixed parameters are:-
 
