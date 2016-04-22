@@ -27,19 +27,19 @@ name: Broadworks-OCIP
 provides:
   Broadworks::OCIP:
     file: lib/Broadworks/OCIP.pm
-    version: '0.05'
+    version: '0.06'
   Broadworks::OCIP::Deprecated:
     file: lib/Broadworks/OCIP/Deprecated.pm
-    version: '0.05'
+    version: '0.06'
   Broadworks::OCIP::Methods:
     file: lib/Broadworks/OCIP/Methods.pm
-    version: '0.05'
+    version: '0.06'
   Broadworks::OCIP::Response:
     file: lib/Broadworks/OCIP/Response.pm
-    version: '0.05'
+    version: '0.06'
   Broadworks::OCIP::Throwable:
     file: lib/Broadworks/OCIP/Throwable.pm
-    version: '0.05'
+    version: '0.06'
 requires:
   Config::Any: '0'
   Data::UUID: '0'
@@ -66,7 +66,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Broadworks-OCIP
   homepage: https://metacpan.org/release/Broadworks-OCIP
   repository: https://gitlab.dev.localnet/broadworks-api/broadworks-ocip.git
-version: '0.05'
+version: '0.06'
 x_Dist_Zilla:
   perl:
     version: '5.022000'
@@ -122,7 +122,9 @@ x_Dist_Zilla:
           follow_symlinks: 0
           include_dotfiles: 0
           prefix: ''
-          prune_directory: []
+          prune_directory:
+            - local
+            - vendor
           root: .
       name: '@NIGELM/GatherDir'
       version: '5.039'
@@ -159,10 +161,6 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@NIGELM/PodSyntaxTests'
       version: '5.039'
-    -
-      class: Dist::Zilla::Plugin::Test::PodSpelling
-      name: '@NIGELM/Test::PodSpelling'
-      version: '2.006009'
     -
       class: Dist::Zilla::Plugin::KwaliteeTests
       name: '@NIGELM/KwaliteeTests'
@@ -446,7 +444,7 @@ x_Dist_Zilla:
           branch: ~
           changelog: Changes
           signed: 0
-          tag: release/0.05
+          tag: release/0.06
           tag_format: release/%v%t
           tag_message: 'Release of %v%t'
         Dist::Zilla::Role::Git::Repo:

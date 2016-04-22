@@ -8,7 +8,7 @@ use utf8;
 use feature 'unicode_strings';
 use namespace::autoclean;
 
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Response;
@@ -448,7 +448,7 @@ __END__
 =for test_synopsis 1;
 __END__
 
-=for stopwords NIGELM 
+=for stopwords NIGELM
 
 =for Pod::Coverage mvp_multivalue_args
 
@@ -458,7 +458,7 @@ Broadworks::OCIP - API for communication with Broadworks OCI-P Interface
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

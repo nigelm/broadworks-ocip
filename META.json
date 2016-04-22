@@ -36,7 +36,6 @@
             "Test::NoTabs" : "0",
             "Test::Pod" : "1.41",
             "Test::Pod::Coverage" : "1.08",
-            "Test::Spelling" : "0.12",
             "Test::Synopsis" : "0"
          }
       },
@@ -81,23 +80,23 @@
    "provides" : {
       "Broadworks::OCIP" : {
          "file" : "lib/Broadworks/OCIP.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Broadworks::OCIP::Deprecated" : {
          "file" : "lib/Broadworks/OCIP/Deprecated.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Broadworks::OCIP::Methods" : {
          "file" : "lib/Broadworks/OCIP/Methods.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Broadworks::OCIP::Response" : {
          "file" : "lib/Broadworks/OCIP/Response.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       },
       "Broadworks::OCIP::Throwable" : {
          "file" : "lib/Broadworks/OCIP/Throwable.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       }
    },
    "release_status" : "stable",
@@ -113,7 +112,7 @@
          "web" : "https://gitlab.dev.localnet/broadworks-api/broadworks-ocip"
       }
    },
-   "version" : "0.05",
+   "version" : "0.06",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.022000"
@@ -186,7 +185,10 @@
                   "follow_symlinks" : 0,
                   "include_dotfiles" : 0,
                   "prefix" : "",
-                  "prune_directory" : [],
+                  "prune_directory" : [
+                     "local",
+                     "vendor"
+                  ],
                   "root" : "."
                }
             },
@@ -234,11 +236,6 @@
             "class" : "Dist::Zilla::Plugin::PodSyntaxTests",
             "name" : "@NIGELM/PodSyntaxTests",
             "version" : "5.039"
-         },
-         {
-            "class" : "Dist::Zilla::Plugin::Test::PodSpelling",
-            "name" : "@NIGELM/Test::PodSpelling",
-            "version" : "2.006009"
          },
          {
             "class" : "Dist::Zilla::Plugin::KwaliteeTests",
@@ -607,7 +604,7 @@
                   "branch" : null,
                   "changelog" : "Changes",
                   "signed" : 0,
-                  "tag" : "release/0.05",
+                  "tag" : "release/0.06",
                   "tag_format" : "release/%v%t",
                   "tag_message" : "Release of %v%t"
                },

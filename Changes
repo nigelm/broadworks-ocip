@@ -1,3 +1,6 @@
+0.06      2016-04-22 14:45:38+01:00 Europe/London
+    - Updated to Broadworks Release 20 SP1
+
 0.05      2015-10-19 11:09:00+01:00 Europe/London
     - Fixed the correct return value for commands, so checking works.
 

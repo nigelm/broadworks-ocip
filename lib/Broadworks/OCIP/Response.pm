@@ -7,7 +7,7 @@ use warnings;
 use utf8;
 use feature 'unicode_strings';
 
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Broadworks::OCIP::Throwable;
@@ -181,7 +181,7 @@ __END__
 =for test_synopsis 1;
 __END__
 
-=for stopwords NIGELM 
+=for stopwords NIGELM
 
 =for Pod::Coverage mvp_multivalue_args
 
@@ -191,7 +191,7 @@ Broadworks::OCIP::Response - A Broadworks OCI-P Response Message
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
