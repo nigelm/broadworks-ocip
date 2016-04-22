@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -33,7 +33,7 @@
 
   Requests in this schema file:
     GroupDirectoryNumberHuntingGetAvailableUserListRequest    
-    GroupDirectoryNumberHuntingGetRequest    
+    GroupDirectoryNumberHuntingGetRequest17sp1    
     GroupDirectoryNumberHuntingModifyRequest    
     
   --> 
@@ -62,7 +62,8 @@
       <xs:documentation>
         Response to the GroupDirectoryNumberHuntingGetAvailableUserListRequest.
         Contains a table with column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name", "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -74,7 +75,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupDirectoryNumberHuntingGetRequest">
+  <xs:complexType name="GroupDirectoryNumberHuntingGetRequest17sp1">
     <xs:annotation>
       <xs:documentation>
         Request to get the properties of the DNH service for a specified serviceUserId.
@@ -93,18 +94,21 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupDirectoryNumberHuntingGetResponse">
+  <xs:complexType name="GroupDirectoryNumberHuntingGetResponse17sp1">
     <xs:annotation>
       <xs:documentation>
         Response to the GroupDirectoryNumberHuntingGetRequest.
         Contains a table with column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name", "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="agentUserTable" type="core:OCITable"/>
+          <xs:element name="useTerminateCallToAgentFirst" type="xs:boolean"/>
+          <xs:element name="useOriginalAgentServicesForBusyAndNoAnswerCalls" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -122,6 +126,8 @@
         <xs:sequence>
           <xs:element name="serviceUserId" type="UserId"/>
           <xs:element name="agentUserIdList" type="ReplacementUserIdList" nillable="true" minOccurs="0"/>
+          <xs:element name="useTerminateCallToAgentFirst" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="useOriginalAgentServicesForBusyAndNoAnswerCalls" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

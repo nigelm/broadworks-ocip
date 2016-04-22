@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -33,12 +33,14 @@
   Requests in this schema file:
     GroupCallRecordingGetRequest    
     GroupCallRecordingModifyRequest    
-    SystemCallRecordingAddPlatformRequest    
+    SystemCallRecordingAddPlatformRequest20    
     SystemCallRecordingDeletePlatformRequest    
-    SystemCallRecordingGetPlatformListRequest    
+    SystemCallRecordingGetPlatformListRequest20sp1    
     SystemCallRecordingGetPlatformUsageRequest    
     SystemCallRecordingModifyPlatformRequest    
-    UserCallRecordingGetRequest    
+    SystemCallRecordingGetRequest    
+    SystemCallRecordingModifyRequest    
+    UserCallRecordingGetRequest20    
     UserCallRecordingModifyRequest    
     
   --> 
@@ -94,7 +96,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemCallRecordingAddPlatformRequest">
+  <xs:complexType name="SystemCallRecordingAddPlatformRequest20">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -110,10 +112,12 @@
         <xs:sequence>
           <xs:element name="name" type="CallRecordingPlatformName"/>
           <xs:element name="netAddress" type="NetAddress"/>
-          <xs:element name="port" type="Port"/>
+          <xs:element name="port" type="Port" minOccurs="0"/>
           <xs:element name="mediaStream" type="MediaStream"/>
           <xs:element name="transportType" type="TransportProtocol"/>
           <xs:element name="description" type="CallRecordingPlatformDescription" minOccurs="0"/>
+          <xs:element name="schemaVersion" type="CallRecordingPlatformSchemaVersion"/>
+          <xs:element name="supportVideoRecording" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -139,7 +143,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemCallRecordingGetPlatformListRequest">
+  <xs:complexType name="SystemCallRecordingGetPlatformListRequest20sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
@@ -147,7 +151,10 @@
       </xs:appinfo>
       <xs:documentation>
         Get list of Call Recording platforms.
-        The response is either SystemCallRecordingGetPlatformListResponse or ErrorResponse.
+        The response is either SystemCallRecordingGetPlatformListResponse20sp1 or ErrorResponse.
+        
+        The possible values for "Support Video Rec" can be either true or false.  
+        Schema version values include: 1.0, 2.0, 3.0
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -155,15 +162,22 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemCallRecordingGetPlatformListResponse">
+  <xs:complexType name="SystemCallRecordingGetPlatformListResponse20sp1">
     <xs:annotation>
       <xs:appinfo>
         <asDataModeSupported>true</asDataModeSupported>
         <hssDataModeSupported>false</hssDataModeSupported>
       </xs:appinfo>
       <xs:documentation>
-         Response to SystemCallRecordingGetPlatformListRequest.
-         Contains the default system Call Recording platform and a table with columns headings "Name", "Net Address", "Port", "Transport Type", "Media Stream", "Description" of Call Recording platforms.  The system default recording platform also appears in the table with the other platforms.
+         Response to SystemCallRecordingGetPlatformListRequest20sp1.
+         Contains the default system Call Recording platform and a table with columns headings "Name", "Net Address", "Port",   
+         "Transport Type", "Media Stream", "Description", "Schema Version", "Support Video Rec".  
+         The system default recording platform also appears in the table with the other platforms.
+         
+         The port can be empty if it is not defined in the recording platform.
+         
+         The possible values for "Support Video Rec" can be either true or false.
+         Schema version values include: 1.0, 2.0, 3.0
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -232,21 +246,99 @@
         <xs:sequence>
           <xs:element name="name" type="CallRecordingPlatformName"/>
           <xs:element name="netAddress" type="NetAddress" minOccurs="0"/>
-          <xs:element name="port" type="Port" minOccurs="0"/>
+          <xs:element name="port" type="Port" minOccurs="0" nillable="true"/>
           <xs:element name="mediaStream" type="MediaStream" minOccurs="0"/>
           <xs:element name="becomeSystemDefault" type="xs:boolean" fixed="true" minOccurs="0"/>
           <xs:element name="transportType" type="TransportProtocol" minOccurs="0"/>
           <xs:element name="description" type="CallRecordingPlatformDescription" minOccurs="0" nillable="true"/>
+          <xs:element name="schemaVersion" type="CallRecordingPlatformSchemaVersion" minOccurs="0"/>
+          <xs:element name="supportVideoRecording" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCallRecordingGetRequest">
+  <xs:complexType name="SystemCallRecordingGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request the system level data associated with Call Recording.
+        The response is either a SystemCallRecordingGetResponse or an
+        ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemCallRecordingGetResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to SystemCallRecordingGetRequest.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="continueCallAfterRecordingFailure" type="xs:boolean"/>
+          <xs:element name="refreshPeriodSeconds" type="RecordingRefreshPeriodSeconds"/>
+          <xs:element name="maxConsecutiveFailures" type="RecordingMaxConsecutiveFailures"/>
+          <xs:element name="maxResponseWaitTimeMilliseconds" type="RecordingMaxResponseWaitTimeMilliseconds"/>
+          <xs:element name="continueCallAfterVideoRecordingFailure" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemCallRecordingModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify the system level data associated with Call Recording.
+        The response is either a SuccessResponse or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="continueCallAfterRecordingFailure" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="refreshPeriodSeconds" type="RecordingRefreshPeriodSeconds" minOccurs="0"/>
+          <xs:element name="maxConsecutiveFailures" type="RecordingMaxConsecutiveFailures" minOccurs="0"/>
+          <xs:element name="maxResponseWaitTimeMilliseconds" type="RecordingMaxResponseWaitTimeMilliseconds" minOccurs="0"/>
+          <xs:element name="continueCallAfterVideoRecordingFailure" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserCallRecordingGetRequest20">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get the Call Recording attributes for a user.
-        The response is either a UserCallRecordingGetResponse or an ErrorResponse.
+        The response is either a UserCallRecordingGetResponse20 or an ErrorResponse.
+        
+        The following parameters are not returned for service instance:
+          - pauseResumeNotification
+          - enableCallRecordingAnnouncement
+          - enableRecordCallRepeatWarningTone
+          - recordCallRepeatWarningToneTimerSeconds 
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -258,17 +350,36 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCallRecordingGetResponse">
+  <xs:complexType name="UserCallRecordingGetResponse20">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to the UserCallRecordingGetRequest.
+        Response to the UserCallRecordingGetRequest20.
         The response contains the user's Call Recording option information.
+        
+        The following parameters are not returned for service instance:
+          - pauseResumeNotification
+          - enableCallRecordingAnnouncement
+          - enableRecordCallRepeatWarningTone
+          - recordCallRepeatWarningToneTimerSeconds
+          
+        The enableVoiceMailRecording parameter is only returned if the Voice
+        Messaging User service is assigned to the user.  This applies to both
+        users and service instances.  
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
-          <xs:element name="recordingOption" type="RecordingOption"/>
+          <xs:element name="recordingOption" type="RecordingOption20"/>
+          <xs:element name="pauseResumeNotification" type="RecordingPauseResumeNotificationType" minOccurs="0"/>
+          <xs:element name="enableCallRecordingAnnouncement" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableRecordCallRepeatWarningTone" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="recordCallRepeatWarningToneTimerSeconds" type="CallRecordingRecordCallRepeatWarningToneTimerSeconds" minOccurs="0"/>
+          <xs:element name="enableVoiceMailRecording" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -276,63 +387,120 @@
     
   <xs:complexType name="UserCallRecordingModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Modify the Call Recording attributes for a user. The recording option "On Demand" is not accepted for service instances.
+        Modify the Call Recording attributes for a user. The recording options 
+        "Always with Pause/Resume", "On Demand", and "On Demand with User 
+        Initiated Start" are not accepted for service instances.
+
         The response is either a SuccessResponse or an ErrorResponse.
+        
+        The following parameters are not accepted for service
+        instance:
+          - pauseResumeNotification
+          - enableCallRecordingAnnouncement
+          - enableRecordCallRepeatWarningTone
+          - recordCallRepeatWarningToneTimerSeconds
+          
+        The enableVoiceMailRecording parameter is only applicable 
+        if the Voice Messaging User service is assigned to the user.
+        This applies to both users and service instances.  
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="userId" type="UserId"/>
-          <xs:element name="recordingOption" type="RecordingOption" minOccurs="0"/>
+          <xs:element name="recordingOption" type="RecordingOption20" minOccurs="0"/>
+          <xs:element name="pauseResumeNotification" type="RecordingPauseResumeNotificationType" minOccurs="0"/>
+          <xs:element name="enableCallRecordingAnnouncement" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableRecordCallRepeatWarningTone" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="recordCallRepeatWarningToneTimerSeconds" type="CallRecordingRecordCallRepeatWarningToneTimerSeconds" minOccurs="0"/>
+          <xs:element name="enableVoiceMailRecording" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:simpleType name="CallRecordingPlatformDescription">
-    <xs:annotation>
-      <xs:documentation>Call Recording Platform Description.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:minLength value="1"/>
-      <xs:maxLength value="80"/>
-    </xs:restriction>
-  </xs:simpleType>    
-    
-  <xs:simpleType name="CallRecordingPlatformName">
-    <xs:annotation>
-      <xs:documentation>Call Recording Platform Name.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:minLength value="1"/>
-      <xs:maxLength value="80"/>
-    </xs:restriction>
-  </xs:simpleType>    
-    
-  <xs:simpleType name="MediaStream">
+  <xs:simpleType name="CallRecordingRecordCallRepeatWarningToneTimerSeconds">
     <xs:annotation>
       <xs:documentation>
-        Media Stream Type.  Subscriber's media is sent separately from the media generated by the called/calling parties when "Dual" is selected while "Single" is a single media stream that contains all media.  
+        The value in seconds specifying how often the end user
+        receives the warning tone that call is being recorded.
       </xs:documentation>
     </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="Dual"/>
-      <xs:enumeration value="Single"/>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="10"/>
+      <xs:maxInclusive value="1800"/>
     </xs:restriction>
   </xs:simpleType>    
     
-  <xs:simpleType name="RecordingOption">
+  <xs:simpleType name="RecordingOption20">
     <xs:annotation>
       <xs:documentation>
-        Recording Service Configuration.
+        Recording Service Configuration option.  The Always with Pause/Resume,
+        On Demand, and On Demand with User Initiated Start option are not
+        applicable for Service Users.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:token">
       <xs:enumeration value="Always"/>
       <xs:enumeration value="Never"/>
       <xs:enumeration value="On Demand"/>
+      <xs:enumeration value="Always with Pause/Resume"/>
+      <xs:enumeration value="On Demand with User Initiated Start"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="RecordingPauseResumeNotificationType">
+    <xs:annotation>
+      <xs:documentation>
+        Recording Service Play Resume Notidication Type.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Beep"/>
+      <xs:enumeration value="Play Announcement"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="RecordingMaxConsecutiveFailures">
+    <xs:annotation>
+      <xs:documentation>
+        The number of failure detections it takes to mark a server out of service.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="10"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="RecordingMaxResponseWaitTimeMilliseconds">
+    <xs:annotation>
+      <xs:documentation>
+        The value in milliseconds specifying how long to wait for a response from a server.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1000"/>
+      <xs:maxInclusive value="10000"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="RecordingRefreshPeriodSeconds">
+    <xs:annotation>
+      <xs:documentation>
+        The value in seconds specifying how long to wait before retrying a failed server.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="10"/>
+      <xs:maxInclusive value="300"/>
     </xs:restriction>
   </xs:simpleType>    
     

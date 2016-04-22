@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -96,6 +96,10 @@
     
   <xs:complexType name="SystemMaliciousCallTraceGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get Malicious Call Trace system parameters and the list of users that use the 
         Malicious Call Trace feature.
@@ -112,6 +116,10 @@
     
   <xs:complexType name="SystemMaliciousCallTraceGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to the SystemMaliciousCallTraceGetRequest.
         The response contains the Malicious Call Trace system parameters and the list of users
@@ -119,7 +127,7 @@
 
         The column headings are "Service Provider Id",
         "Group Id", "User Id", "Last Name", "First Name", "Phone Number", "Trace Type", "Status",
-        "Hiragana Last Name" and "Hiragana First Name".
+        "Hiragana Last Name" and "Hiragana First Name", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -134,6 +142,10 @@
     
   <xs:complexType name="SystemMaliciousCallTraceModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify a Malicious Call Trace system parameter.
         The response is either a SuccessResponse or an ErrorResponse.

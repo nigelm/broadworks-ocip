@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -40,7 +40,7 @@
     <xs:annotation>
       <xs:documentation>
         Request the user level data associated with Call Transfer.
-        The response is either a UserCallTransferGetResponse or an
+        The response is either a UserCallTransferGetResponse14sp4 or an
         ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -56,7 +56,7 @@
   <xs:complexType name="UserCallTransferGetResponse14sp4">
     <xs:annotation>
       <xs:documentation>
-        Response to UserCallTransferGetRequest.
+        Response to UserCallTransferGetRequest14sp4.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>

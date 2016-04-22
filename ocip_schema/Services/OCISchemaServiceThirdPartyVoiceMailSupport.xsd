@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -22,6 +22,7 @@
              schemaLocation = "../OCISchemaBASE.xsd"/>
   
   <xs:include schemaLocation="../OCISchemaDataTypes.xsd"/>
+  <xs:include schemaLocation="../OCISchemaSearchCriteria.xsd"/>
   
   <!-- ********************************************************************************** -->
   <!-- T H I R D   P A R T Y   V O I C E   M A I L   S U P P O R T                        -->
@@ -37,7 +38,11 @@
     UserThirdPartyVoiceMailSupportModifyRequest    
     GroupThirdPartyVoiceMailSupportGetRequest    
     GroupThirdPartyVoiceMailSupportModifyRequest    
-    SystemThirdPartyVoiceMailSupportGetRequest    
+    SystemThirdPartyVoiceMailSupportAddDnRequest    
+    SystemThirdPartyVoiceMailSupportDeleteDnRequest    
+    SystemThirdPartyVoiceMailSupportGetDnListRequest    
+    SystemThirdPartyVoiceMailSupportModifyDnRequest    
+    SystemThirdPartyVoiceMailSupportGetRequest17sp4    
     SystemThirdPartyVoiceMailSupportModifyRequest    
     
   --> 
@@ -162,6 +167,111 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportAddDnRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+       Request to add a ThirdPartyVoiceMailSupport User DN to the system.
+       The response is either a SuccessResponse or an ErrorResponse.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="phoneNumber" type="DN"/>
+          <xs:element name="description" type="ThirdPartyVoiceMailDestinationDescription" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportDeleteDnRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+       Request to delete a ThirdPartyVoiceMailSupport User DN from the system.
+       The response is either a SuccessResponse or an ErrorResponse.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="phoneNumber" type="DN"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportGetDnListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+       Request to get a list of ThirdPartyVoiceMailSupport User DN's defined in the system.
+       The response is either a SystemThirdPartyVoiceMailSupportGetDnListResponse or an ErrorResponse.
+       The search can be done using multiple criterion.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="responseSizeLimit" type="ResponseSizeLimit" minOccurs="0"/>
+          <xs:element name="searchCriteriaSystemServiceDn" type="SearchCriteriaSystemServiceDn" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportGetDnListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+       Response to SystemThirdPartyVoiceMailSupportGetDnListRequest.
+       Contains a table with a row for each ThirdPartyVoiceMailSupport User DN and column headings:
+       "Phone Number", "Description"
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="thirdPartyVoiceMailSupportTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportModifyDnRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+       Request to modify a ThirdPartyVoiceMailSupport User DN and description in the system.
+       The response is either a SuccessResponse or an ErrorResponse.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="phoneNumber" type="DN"/>
+          <xs:element name="description" type="ThirdPartyVoiceMailDestinationDescription" nillable="true" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:simpleType name="ThirdPartyVoiceMailSupportServerSelection">
     <xs:annotation>
       <xs:documentation>
@@ -228,11 +338,15 @@
     </xs:restriction>
   </xs:simpleType>    
     
-  <xs:complexType name="SystemThirdPartyVoiceMailSupportGetRequest">
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportGetRequest17sp4">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request the system level data associated with Third-party Voice Mail Support.
-        The response is either a SystemThirdPartyVoiceMailSupportGetResponse or an
+        The response is either a SystemThirdPartyVoiceMailSupportGetResponse17sp4 or an
         ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -243,16 +357,21 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemThirdPartyVoiceMailSupportGetResponse">
+  <xs:complexType name="SystemThirdPartyVoiceMailSupportGetResponse17sp4">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to SystemThirdPartyVoiceMailSupportGetRequest.
+        Response to SystemThirdPartyVoiceMailSupportGetRequest17sp4.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="overrideAltCallerIdForVMRetrieval" type="xs:boolean"/>
+          <xs:element name="stripDiversionOnVMDestinationRetrieval" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -263,15 +382,31 @@
       <xs:documentation>
         Modify the system level data associated with Third-party Voice Mail Support.
         The response is either a SuccessResponse or an ErrorResponse.
+        
+        The following elements are only used in AS data mode:
+          stripDiversionOnVMDestinationRetrieval   
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="overrideAltCallerIdForVMRetrieval" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="stripDiversionOnVMDestinationRetrieval" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
+    
+  <xs:simpleType name="ThirdPartyVoiceMailDestinationDescription">
+    <xs:annotation>
+      <xs:documentation>
+        ThirdPartyVoiceMailSupport User DN's Description.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="80"/>
+    </xs:restriction>
+  </xs:simpleType>    
     
 </xs:schema>

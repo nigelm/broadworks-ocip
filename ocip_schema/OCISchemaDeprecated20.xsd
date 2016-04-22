@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************** -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
+<!-- ********************************************************************** -->
+<!-- O C I   X M L   S C H E M A  :  D E P R E C A T E D  20                -->
+<!--                                                                        -->
+<!-- This file defines the XML Schema for the BroadSoft Application Server  -->
+<!-- Open Client Interface (OCI).                                           -->
+<!-- ********************************************************************** -->
+
+<xs:schema xmlns:xs             = "http://www.w3.org/2001/XMLSchema"
+           xmlns:core           = "C"
+           xmlns                = ""
+           attributeFormDefault = "qualified"
+           elementFormDefault   = "qualified">
+  
+  <xs:import namespace      = "C"
+             schemaLocation = "OCISchemaBASE.xsd"/>
+  
+  <xs:include schemaLocation="OCISchemaUser.xsd"/>
+  <xs:include schemaLocation="OCISchemaDataTypes.xsd"/>
+  <xs:include schemaLocation="OCISchemaSearchCriteria.xsd"/>
+  
+  <!-- ********************************************************************************** -->
+  <!-- D E P R E C A T E D  C O M M A N D S  F R O M  R E L E A S E  20                   -->
+  <!-- ********************************************************************************** -->
+  <!--
+  Requests and responses are listed here in alphabetical order.
+  The non-primitive attributes inside the commands are defined in another
+  section of the schema.
+
+  Requests in this schema file:
+    GroupTrunkGroupAddInstanceRequest19sp1    
+    GroupTrunkGroupGetInstanceRequest19sp1V2    
+    GroupTrunkGroupModifyInstanceRequest19sp1    
+    SystemAdviceOfChargeGetRequest    
+    SystemAdviceOfChargeModifyRequest    
+    SystemEnhancedCallLogsGetRequest17sp4    
+    SystemCallRecordingGetPlatformListRequest    
+    
+  --> 
+  
+  <xs:complexType name="GroupTrunkGroupAddInstanceRequest19sp1">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Add a Trunk Group instance to a group.
+        The command will fail if enableNetworkAddressIdentity is set to 
+        true and administrator is not System/Provisioning level administrator.        
+        The response is either a SuccessResponse or an ErrorResponse.
+        
+        This command is being replaced by GroupTrunkGroupAddInstanceRequest20sp1
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+          <xs:element name="name" type="TrunkGroupName"/>
+          <xs:element name="pilotUser" type="TrunkGroupMultipleContactPilotUser" minOccurs="0"/>
+          <xs:element name="department" type="DepartmentKey" minOccurs="0"/>
+          <xs:element name="accessDevice" type="AccessDevice" minOccurs="0"/>
+          <xs:element name="maxActiveCalls" type="MaxActiveCalls"/>
+          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls" minOccurs="0"/>
+          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls" minOccurs="0"/>
+          <xs:element name="enableBursting" type="xs:boolean"/>
+          <xs:element name="burstingMaxActiveCalls" type="BurstingMaxActiveCalls" minOccurs="0"/>
+          <xs:element name="burstingMaxIncomingCalls" type="BurstingMaxIncomingCalls" minOccurs="0"/>
+          <xs:element name="burstingMaxOutgoingCalls" type="BurstingMaxOutgoingCalls" minOccurs="0"/>
+          <xs:element name="capacityExceededAction" type="TrunkGroupCapacityExceededAction" minOccurs="0"/>
+          <xs:element name="capacityExceededForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
+          <xs:element name="capacityExceededRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0"/>
+          <xs:element name="capacityExceededTrapInitialCalls" type="TrapInitialThreshold"/>
+          <xs:element name="capacityExceededTrapOffsetCalls" type="TrapOffsetThreshold"/>
+          <xs:element name="unreachableDestinationAction" type="TrunkGroupUnreachableDestinationAction" minOccurs="0"/>
+          <xs:element name="unreachableDestinationForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
+          <xs:element name="unreachableDestinationRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0"/>
+          <xs:element name="invitationTimeout" type="TrunkGroupInvitationTimeoutSeconds"/>
+          <xs:element name="requireAuthentication" type="xs:boolean"/>
+          <xs:element name="sipAuthenticationUserName" type="SIPAuthenticationUserName" minOccurs="0"/>
+          <xs:element name="sipAuthenticationPassword" type="Password" minOccurs="0"/>
+          <xs:element name="hostedUserId" type="UserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="trunkGroupIdentity" type="SIPURI" minOccurs="0"/>
+          <xs:element name="otgDtgIdentity" type="OtgDtgIdentity" minOccurs="0"/>
+          <xs:element name="allowTerminationToTrunkGroupIdentity" type="xs:boolean"/>
+          <xs:element name="allowTerminationToDtgIdentity" type="xs:boolean"/>
+          <xs:element name="includeTrunkGroupIdentity" type="xs:boolean"/>
+          <xs:element name="includeDtgIdentity" type="xs:boolean"/>
+          <xs:element name="includeTrunkGroupIdentityForNetworkCalls" type="xs:boolean"/>
+          <xs:element name="includeOtgIdentityForNetworkCalls" type="xs:boolean"/>
+          <xs:element name="enableNetworkAddressIdentity" type="xs:boolean"/>
+          <xs:element name="allowUnscreenedCalls" type="xs:boolean"/>
+          <xs:element name="allowUnscreenedEmergencyCalls" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineIdentityForExternalCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+          <xs:element name="pilotUserChargeNumberPolicy" type="TrunkGroupPilotUserChargeNumberUsagePolicy"/>
+          <xs:element name="callForwardingAlwaysAction" type="TrunkGroupCallForwardingAlwaysAction" minOccurs="0"/>
+          <xs:element name="callForwardingAlwaysForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
+          <xs:element name="callForwardingAlwaysRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0"/>
+          <xs:element name="peeringDomain" type="DomainName" minOccurs="0"/>
+          <xs:element name="routeToPeeringDomain" type="xs:boolean"/>
+          <xs:element name="prefixEnabled" type="xs:boolean"/>
+          <xs:element name="prefix" type="TrunkGroupPrefix" minOccurs="0"/>
+          <xs:element name="statefulReroutingEnabled" type="xs:boolean"/>
+          <xs:element name="sendContinuousOptionsMessage" type="xs:boolean"/>
+          <xs:element name="continuousOptionsSendingIntervalSeconds" type="TrunkGroupContinuousOptionsSendingIntervalSeconds"/>
+          <xs:element name="failureOptionsSendingIntervalSeconds" type="TrunkGroupFailureOptionsSendingIntervalSeconds"/>
+          <xs:element name="failureThresholdCounter" type="TrunkGroupThresholdCounter"/>
+          <xs:element name="successThresholdCounter" type="TrunkGroupThresholdCounter"/>
+          <xs:element name="inviteFailureThresholdCounter" type="TrunkGroupThresholdCounter"/>
+          <xs:element name="inviteFailureThresholdWindowSeconds" type="TrunkGroupFailureThresholdWindowSeconds"/>
+          <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy"/>
+          <xs:element name="useSystemCallingLineAssertedIdentityPolicy" type="xs:boolean"/>
+          <xs:element name="pilotUserCallOptimizationPolicy" type="TrunkGroupPilotUserCallOptimizationPolicy"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy"/>
+          <xs:element name="useSystemCLIDSourceForScreenedCallsPolicy" type="xs:boolean"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy"/>
+          <xs:element name="useSystemUserLookupPolicy" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineIdentityForEmergencyCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+          <xs:element name="pilotUserNetworkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupTrunkGroupGetInstanceRequest19sp1V2">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get a Trunk Group Instance's profile.
+        The response is either a GroupTrunkGroupGetInstanceResponse19sp1V2 or an ErrorResponse.
+        The response contains a hosted user table with column headings: "User Id", "Last Name",
+        "First Name", "Hiragana Last Name", "Hiragana First Name", "Phone Number", "Extension", 
+        "Department", "Email Address".
+        
+        This command is replaced by GroupTrunkGroupGetInstanceRequest20sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="trunkGroupKey" type="TrunkGroupKey"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupTrunkGroupGetInstanceResponse19sp1V2">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to GroupTrunkGroupGetInstanceRequest19sp1V2.
+        Returns the profile information for the Trunk Group.
+        Contains a hosted user table with column headings: "User Id", "Last Name",
+        "First Name", "Hiragana Last Name", "Hiragana First Name", "Phone Number", 
+        "Extension", "Department", "Email Address".
+
+        This command is replaced by GroupTrunkGroupGetInstanceResponse20sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="pilotUserId" type="UserId" minOccurs="0"/>
+          <xs:element name="department" type="DepartmentKey" minOccurs="0"/>
+          <xs:element name="accessDevice" type="AccessDevice" minOccurs="0"/>
+          <xs:element name="maxActiveCalls" type="MaxActiveCalls"/>
+          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls" minOccurs="0"/>
+          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls" minOccurs="0"/>
+          <xs:element name="enableBursting" type="xs:boolean"/>
+          <xs:element name="burstingMaxActiveCalls" type="BurstingMaxActiveCalls" minOccurs="0"/>
+          <xs:element name="burstingMaxIncomingCalls" type="BurstingMaxIncomingCalls" minOccurs="0"/>
+          <xs:element name="burstingMaxOutgoingCalls" type="BurstingMaxOutgoingCalls" minOccurs="0"/>
+          <xs:element name="capacityExceededAction" type="TrunkGroupCapacityExceededAction" minOccurs="0"/>
+          <xs:element name="capacityExceededForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
+          <xs:element name="capacityExceededRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0"/>
+          <xs:element name="capacityExceededTrapInitialCalls" type="TrapInitialThreshold"/>
+          <xs:element name="capacityExceededTrapOffsetCalls" type="TrapOffsetThreshold"/>
+          <xs:element name="unreachableDestinationAction" type="TrunkGroupUnreachableDestinationAction" minOccurs="0"/>
+          <xs:element name="unreachableDestinationForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
+          <xs:element name="unreachableDestinationRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0"/>
+          <xs:element name="invitationTimeout" type="TrunkGroupInvitationTimeoutSeconds"/>
+          <xs:element name="requireAuthentication" type="xs:boolean"/>
+          <xs:element name="sipAuthenticationUserName" type="SIPAuthenticationUserName" minOccurs="0"/>
+          <xs:element name="hostedUserTable" type="core:OCITable" minOccurs="0"/>
+          <xs:element name="trunkGroupIdentity" type="SIPURI" minOccurs="0"/>
+          <xs:element name="otgDtgIdentity" type="OtgDtgIdentity" minOccurs="0"/>
+          <xs:element name="allowTerminationToTrunkGroupIdentity" type="xs:boolean"/>
+          <xs:element name="allowTerminationToDtgIdentity" type="xs:boolean"/>
+          <xs:element name="includeTrunkGroupIdentity" type="xs:boolean"/>
+          <xs:element name="includeDtgIdentity" type="xs:boolean"/>
+          <xs:element name="includeTrunkGroupIdentityForNetworkCalls" type="xs:boolean"/>
+          <xs:element name="includeOtgIdentityForNetworkCalls" type="xs:boolean"/>
+          <xs:element name="enableNetworkAddressIdentity" type="xs:boolean"/>
+          <xs:element name="allowUnscreenedCalls" type="xs:boolean"/>
+          <xs:element name="allowUnscreenedEmergencyCalls" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineIdentityForExternalCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+          <xs:element name="pilotUserChargeNumberPolicy" type="TrunkGroupPilotUserChargeNumberUsagePolicy"/>
+          <xs:element name="callForwardingAlwaysAction" type="TrunkGroupCallForwardingAlwaysAction" minOccurs="0"/>
+          <xs:element name="callForwardingAlwaysForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
+          <xs:element name="callForwardingAlwaysRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0"/>
+          <xs:element name="peeringDomain" type="DomainName" minOccurs="0"/>
+          <xs:element name="routeToPeeringDomain" type="xs:boolean"/>
+          <xs:element name="prefixEnabled" type="xs:boolean"/>
+          <xs:element name="prefix" type="TrunkGroupPrefix" minOccurs="0"/>
+          <xs:element name="statefulReroutingEnabled" type="xs:boolean"/>
+          <xs:element name="sendContinuousOptionsMessage" type="xs:boolean"/>
+          <xs:element name="continuousOptionsSendingIntervalSeconds" type="TrunkGroupContinuousOptionsSendingIntervalSeconds"/>
+          <xs:element name="failureOptionsSendingIntervalSeconds" type="TrunkGroupFailureOptionsSendingIntervalSeconds"/>
+          <xs:element name="failureThresholdCounter" type="TrunkGroupThresholdCounter"/>
+          <xs:element name="successThresholdCounter" type="TrunkGroupThresholdCounter"/>
+          <xs:element name="inviteFailureThresholdCounter" type="TrunkGroupThresholdCounter"/>
+          <xs:element name="inviteFailureThresholdWindowSeconds" type="TrunkGroupFailureThresholdWindowSeconds"/>
+          <xs:element name="trunkGroupState" type="TrunkGroupState"/>
+          <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy"/>
+          <xs:element name="useSystemCallingLineAssertedIdentityPolicy" type="xs:boolean"/>
+          <xs:element name="totalActiveIncomingCalls" type="xs:int"/>
+          <xs:element name="totalActiveOutgoingCalls" type="xs:int"/>
+          <xs:element name="pilotUserCallOptimizationPolicy" type="TrunkGroupPilotUserCallOptimizationPolicy"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy"/>
+          <xs:element name="useSystemCLIDSourceForScreenedCallsPolicy" type="xs:boolean"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy"/>
+          <xs:element name="useSystemUserLookupPolicy" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineIdentityForEmergencyCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupTrunkGroupModifyInstanceRequest19sp1">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+      Modify a Trunk Group Instance in a group.
+      The access device cannot be modified or cleared if there are any users assigned to the Trunk Group.
+      The command will fail if enableNetworkAddressIdentity is set and 
+      administrator is not System/Provisioning level administrator.
+      The response is either a SuccessResponse or an ErrorResponse.
+
+      This command is replaced by GroupTrunkGroupModifyInstanceRequest20sp1.
+     </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="trunkGroupKey" type="TrunkGroupKey"/>
+          <xs:element name="newName" type="TrunkGroupName" minOccurs="0"/>
+          <xs:element name="pilotUserId" type="UserId" nillable="true" minOccurs="0"/>
+          <xs:element name="department" type="DepartmentKey" nillable="true" minOccurs="0"/>
+          <xs:element name="accessDevice" type="AccessDevice" nillable="true" minOccurs="0"/>
+          <xs:element name="maxActiveCalls" type="MaxActiveCalls" minOccurs="0"/>
+          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls" nillable="true" minOccurs="0"/>
+          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls" nillable="true" minOccurs="0"/>
+          <xs:element name="enableBursting" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="burstingMaxActiveCalls" type="BurstingMaxActiveCalls" nillable="true" minOccurs="0"/>
+          <xs:element name="burstingMaxIncomingCalls" type="BurstingMaxIncomingCalls" nillable="true" minOccurs="0"/>
+          <xs:element name="burstingMaxOutgoingCalls" type="BurstingMaxOutgoingCalls" nillable="true" minOccurs="0"/>
+          <xs:element name="capacityExceededAction" type="TrunkGroupCapacityExceededAction" nillable="true" minOccurs="0"/>
+          <xs:element name="capacityExceededForwardAddress" type="OutgoingDNorSIPURI" nillable="true" minOccurs="0"/>
+          <xs:element name="capacityExceededRerouteTrunkGroupKey" type="TrunkGroupKey" nillable="true" minOccurs="0"/>
+          <xs:element name="capacityExceededTrapInitialCalls" type="TrapInitialThreshold" minOccurs="0"/>
+          <xs:element name="capacityExceededTrapOffsetCalls" type="TrapOffsetThreshold" minOccurs="0"/>
+          <xs:element name="unreachableDestinationAction" type="TrunkGroupUnreachableDestinationAction" nillable="true" minOccurs="0"/>
+          <xs:element name="unreachableDestinationForwardAddress" type="OutgoingDNorSIPURI" nillable="true" minOccurs="0"/>
+          <xs:element name="unreachableDestinationRerouteTrunkGroupKey" type="TrunkGroupKey" nillable="true" minOccurs="0"/>
+          <xs:element name="invitationTimeout" type="TrunkGroupInvitationTimeoutSeconds" minOccurs="0"/>
+          <xs:element name="requireAuthentication" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="sipAuthenticationUserName" type="SIPAuthenticationUserName" nillable="true" minOccurs="0"/>
+          <xs:element name="sipAuthenticationPassword" type="Password" nillable="true" minOccurs="0"/>
+          <xs:element name="hostedUserIdList" type="ReplacementUserIdList" nillable="true" minOccurs="0"/>
+          <xs:element name="trunkGroupIdentity" type="SIPURI" minOccurs="0" nillable="true"/>
+          <xs:element name="otgDtgIdentity" type="OtgDtgIdentity" minOccurs="0" nillable="true"/>
+          <xs:element name="allowTerminationToTrunkGroupIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowTerminationToDtgIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="includeTrunkGroupIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="includeDtgIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="includeTrunkGroupIdentityForNetworkCalls" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="includeOtgIdentityForNetworkCalls" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableNetworkAddressIdentity" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowUnscreenedCalls" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="allowUnscreenedEmergencyCalls" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="pilotUserCallingLineIdentityForExternalCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy" minOccurs="0"/>
+          <xs:element name="pilotUserChargeNumberPolicy" type="TrunkGroupPilotUserChargeNumberUsagePolicy" minOccurs="0"/>
+          <xs:element name="callForwardingAlwaysAction" type="TrunkGroupCallForwardingAlwaysAction" minOccurs="0" nillable="true"/>
+          <xs:element name="callForwardingAlwaysForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0" nillable="true"/>
+          <xs:element name="callForwardingAlwaysRerouteTrunkGroupKey" type="TrunkGroupKey" minOccurs="0" nillable="true"/>
+          <xs:element name="peeringDomain" type="DomainName" minOccurs="0" nillable="true"/>
+          <xs:element name="routeToPeeringDomain" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="prefixEnabled" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="prefix" type="TrunkGroupPrefix" minOccurs="0" nillable="true"/>
+          <xs:element name="statefulReroutingEnabled" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="sendContinuousOptionsMessage" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="continuousOptionsSendingIntervalSeconds" type="TrunkGroupContinuousOptionsSendingIntervalSeconds" minOccurs="0"/>
+          <xs:element name="failureOptionsSendingIntervalSeconds" type="TrunkGroupFailureOptionsSendingIntervalSeconds" minOccurs="0"/>
+          <xs:element name="failureThresholdCounter" type="TrunkGroupThresholdCounter" minOccurs="0"/>
+          <xs:element name="successThresholdCounter" type="TrunkGroupThresholdCounter" minOccurs="0"/>
+          <xs:element name="inviteFailureThresholdCounter" type="TrunkGroupThresholdCounter" minOccurs="0"/>
+          <xs:element name="inviteFailureThresholdWindowSeconds" type="TrunkGroupFailureThresholdWindowSeconds" minOccurs="0"/>
+          <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy" minOccurs="0"/>
+          <xs:element name="useSystemCallingLineAssertedIdentityPolicy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="pilotUserCallOptimizationPolicy" type="TrunkGroupPilotUserCallOptimizationPolicy" minOccurs="0"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy" minOccurs="0"/>
+          <xs:element name="useSystemCLIDSourceForScreenedCallsPolicy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy" minOccurs="0"/>
+          <xs:element name="useSystemUserLookupPolicy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="pilotUserCallingLineIdentityForEmergencyCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemAdviceOfChargeGetRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request to get the list of Advice of Charge system parameters.
+        The response is either SystemAdviceOfChargeGetResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemAdviceOfChargeGetResponse">
+    <xs:annotation>
+      <xs:documentation>
+        Response to SystemAdviceOfChargeGetRequest.
+        Contains a list of system Advice of Charge parameters.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="delayBetweenNotificationSeconds" type="AdviceOfChargeDelayBetweenNotificationSeconds"/>
+          <xs:element name="incomingAocHandling" type="AdviceOfChargeIncomingAocHandling"/>
+          <xs:element name="costInformationSource" type="NetAddress" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemAdviceOfChargeModifyRequest">
+    <xs:annotation>
+      <xs:documentation>
+        Request to modify Advice of Charge system parameters.
+        The response is either SuccessResponse or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="delayBetweenNotificationSeconds" type="AdviceOfChargeDelayBetweenNotificationSeconds" minOccurs="0"/>
+          <xs:element name="incomingAocHandling" type="AdviceOfChargeIncomingAocHandling" minOccurs="0"/>
+          <xs:element name="costInformationSource" type="NetAddress" minOccurs="0" nillable="true"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemEnhancedCallLogsGetRequest17sp4">
+    <xs:annotation>
+      <xs:documentation>
+        Request the system level data associated with Enhanced Call Logs. The response is either a 
+        SystemEnhancedCallLogsGetResponse17sp4 or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemCallRecordingGetPlatformListRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Get list of Call Recording platforms.
+        The response is either SystemCallRecordingGetPlatformListResponse or ErrorResponse.
+        
+        The possible values for "Support Video Rec" can be either true or false.  
+        Schema version values include: 1.0, 2.0, 3.0
+        
+        Replaced by: SystemCallRecordingGetPlatformListRequest20sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest"/>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemCallRecordingGetPlatformListResponse">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+         Response to SystemCallRecordingGetPlatformListRequest.
+         Contains the default system Call Recording platform and a table with columns headings "Name", "Net Address", "Port", 
+         "Transport Type", "Media Stream", "Description", "Schema Version", "Support Video Rec".  
+         The system default recording platform also appears in the table with the other platforms.
+         
+         The possible values for "Support Video Rec" can be either true or false.
+         Schema version values include: 1.0, 2.0, 3.0
+         
+         Replaced by: SystemCallRecordingGetPlatformListResponse20sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="systemDefault" type="CallRecordingPlatformName" minOccurs="0"/>
+          <xs:element name="callRecordingPlatformTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemEnhancedCallLogsGetResponse17sp4">
+    <xs:annotation>
+      <xs:documentation>
+        Response to SystemEnhancedCallLogsGetRequest17sp4.
+        The following elements are only used in AS data mode:
+          isSendEnabled
+          server1NetAddress
+          server1SendPort
+          server1RetrievePort
+          server2NetAddress
+          server2SendPort
+          server2RetrievePort
+          sharedSecret
+          retransmissionDelayMilliSeconds
+          maxTransmissions
+          soapTimeoutSeconds
+          useDBS
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="isSendEnabled" type="xs:boolean"/>
+          <xs:element name="server1NetAddress" type="NetAddress" minOccurs="0"/>
+          <xs:element name="server1SendPort" type="Port1025"/>
+          <xs:element name="server1RetrievePort" type="Port"/>
+          <xs:element name="server2NetAddress" type="NetAddress" minOccurs="0"/>
+          <xs:element name="server2SendPort" type="Port1025"/>
+          <xs:element name="server2RetrievePort" type="Port"/>
+          <xs:element name="sharedSecret" type="EnhancedCallLogsSharedSecret" minOccurs="0"/>
+          <xs:element name="retransmissionDelayMilliSeconds" type="EnhancedCallLogsRetransmissionDelayMilliSeconds"/>
+          <xs:element name="maxTransmissions" type="EnhancedCallLogsMaxTransmissions"/>
+          <xs:element name="soapTimeoutSeconds" type="EnhancedCallLogsSoapTimeoutSeconds"/>
+          <xs:element name="useDBS" type="xs:boolean"/>
+          <xs:element name="maxNonPagedResponseSize" type="EnhancedCallLogsNonPagedResponseSize"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:simpleType name="MaxIncomingCalls">
+    <xs:annotation>
+      <xs:documentation>
+        Maximum Number of Incoming Calls
+        
+        This data type is replaced by MaxIncomingCalls20sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="999999"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="MaxOutgoingCalls">
+    <xs:annotation>
+      <xs:documentation>
+        Maximum Number of Outgoing Calls
+        
+        This data type is replaced by MaxOutgoingCalls20sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="999999"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+</xs:schema>

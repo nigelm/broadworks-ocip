@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -41,30 +41,30 @@
     GroupRoutePointDeleteInstanceRequest    
     GroupRoutePointDistinctiveRingingGetRequest    
     GroupRoutePointDistinctiveRingingModifyRequest    
-    GroupRoutePointGetAnnouncementRequest    
+    GroupRoutePointGetAnnouncementRequest20    
     GroupRoutePointGetDNISAgentListRequest    
-    GroupRoutePointGetDNISAnnouncementRequest    
+    GroupRoutePointGetDNISAnnouncementRequest20    
     GroupRoutePointGetDNISListRequest    
     GroupRoutePointGetDNISRequest    
     GroupRoutePointGetFailoverPolicyRequest    
     GroupRoutePointGetInstanceListRequest    
-    GroupRoutePointGetInstanceRequest    
-    GroupRoutePointForcedForwardingGetRequest    
-    GroupRoutePointForcedForwardingModifyRequest    
-    GroupRoutePointHolidayServiceGetRequest17sp1    
-    GroupRoutePointHolidayServiceModifyRequest17sp1    
+    GroupRoutePointGetInstanceRequest19sp1    
+    GroupRoutePointForcedForwardingGetRequest20    
+    GroupRoutePointForcedForwardingModifyRequest20    
+    GroupRoutePointHolidayServiceGetRequest20    
+    GroupRoutePointHolidayServiceModifyRequest20    
     GroupRoutePointModifyActiveInstanceListRequest    
-    GroupRoutePointModifyAnnouncementRequest    
-    GroupRoutePointModifyDNISAnnouncementRequest    
+    GroupRoutePointModifyAnnouncementRequest20    
+    GroupRoutePointModifyDNISAnnouncementRequest20    
     GroupRoutePointModifyDNISParametersRequest    
     GroupRoutePointModifyDNISRequest    
     GroupRoutePointManualFailoverRequest    
     GroupRoutePointModifyFailoverPolicyRequest    
     GroupRoutePointModifyInstanceRequest    
-    GroupRoutePointNightServiceGetRequest17sp1    
-    GroupRoutePointNightServiceModifyRequest17sp1    
-    GroupRoutePointOverflowGetRequest    
-    GroupRoutePointOverflowModifyRequest    
+    GroupRoutePointNightServiceGetRequest20    
+    GroupRoutePointNightServiceModifyRequest20    
+    GroupRoutePointOverflowGetRequest20    
+    GroupRoutePointOverflowModifyRequest20    
     GroupRoutePointQueueCallDispositionCodeAddRequest    
     GroupRoutePointQueueCallDispositionCodeDeleteRequest    
     GroupRoutePointQueueCallDispositionCodeGetListRequest    
@@ -281,11 +281,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointGetAnnouncementRequest">
+  <xs:complexType name="GroupRoutePointGetAnnouncementRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a route point's announcement settings.
-        The response is either a GroupRoutePointGetAnnouncementResponse or an ErrorResponse.
+        The response is either a GroupRoutePointGetAnnouncementResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -297,16 +297,16 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointGetAnnouncementResponse">
+  <xs:complexType name="GroupRoutePointGetAnnouncementResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupRoutePointGetAnnouncementRequest.
+        Response to the GroupRoutePointGetAnnouncementRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
-          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceRead17"/>
+          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceRead20"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -333,7 +333,8 @@
       <xs:documentation>
         Response to the GroupRoutePointGetDNISAgentListRequest.
         Contains a table with column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name", "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -345,11 +346,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointGetDNISAnnouncementRequest">
+  <xs:complexType name="GroupRoutePointGetDNISAnnouncementRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a route point's DNIS Announcements
-        The response is either a GroupRoutePointGetDNISAnnouncementResponse or an ErrorResponse.
+        The response is either a GroupRoutePointGetDNISAnnouncementResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -361,16 +362,16 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointGetDNISAnnouncementResponse">
+  <xs:complexType name="GroupRoutePointGetDNISAnnouncementResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupRoutePointGetDNISAnnouncementRequest.
+        Response to the GroupRoutePointGetDNISAnnouncementRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
-          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceRead17"/>
+          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceRead20"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -526,11 +527,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointGetInstanceRequest">
+  <xs:complexType name="GroupRoutePointGetInstanceRequest19sp1">
     <xs:annotation>
       <xs:documentation>
         Request to get all the information of a Route Point instance.
-        The response is either GroupRoutePointGetInstanceResponse or ErrorResponse.
+        The response is either GroupRoutePointGetInstanceResponse19sp1 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -542,16 +543,16 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointGetInstanceResponse">
+  <xs:complexType name="GroupRoutePointGetInstanceResponse19sp1">
     <xs:annotation>
       <xs:documentation>
-        Response to GroupRoutePointGetInstanceRequest.
+        Response to GroupRoutePointGetInstanceRequest19sp1.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
-          <xs:element name="serviceInstanceProfile" type="ServiceInstanceReadProfile17"/>
+          <xs:element name="serviceInstanceProfile" type="ServiceInstanceReadProfile19sp1"/>
           <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
           <xs:element name="externalPreferredAudioCodec" type="AudioFileCodec"/>
           <xs:element name="internalPreferredAudioCodec" type="AudioFileCodec"/>
@@ -571,11 +572,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointForcedForwardingGetRequest">
+  <xs:complexType name="GroupRoutePointForcedForwardingGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a route point's forced forwarding settings.
-        The response is either a GroupRoutePointForcedForwardingGetResponse or an ErrorResponse.
+        The response is either a GroupRoutePointForcedForwardingGetResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -587,10 +588,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointForcedForwardingGetResponse">
+  <xs:complexType name="GroupRoutePointForcedForwardingGetResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupRoutePointForcedForwardingGetRequest.
+        Response to the GroupRoutePointForcedForwardingGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -601,18 +602,16 @@
           <xs:element name="playAnnouncementBeforeForwarding" type="xs:boolean"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="audioMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="videoMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointForcedForwardingModifyRequest">
+  <xs:complexType name="GroupRoutePointForcedForwardingModifyRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a route point's forced forwarding settings.
@@ -628,20 +627,20 @@
           <xs:element name="playAnnouncementBeforeForwarding" type="xs:boolean" minOccurs="0"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointHolidayServiceGetRequest17sp1">
+  <xs:complexType name="GroupRoutePointHolidayServiceGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a route point's holiday service settings.
-        The response is either a GroupRoutePointHolidayServiceGetResponse17sp1 or an ErrorResponse.
+        The response is either a GroupRoutePointHolidayServiceGetResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -653,10 +652,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointHolidayServiceGetResponse17sp1">
+  <xs:complexType name="GroupRoutePointHolidayServiceGetResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupRoutePointHolidayServiceGetRequest17sp1.
+        Response to the GroupRoutePointHolidayServiceGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -668,18 +667,16 @@
           <xs:element name="playAnnouncementBeforeAction" type="xs:boolean"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="audioMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="videoMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointHolidayServiceModifyRequest17sp1">
+  <xs:complexType name="GroupRoutePointHolidayServiceModifyRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a route point's holiday service settings.
@@ -697,10 +694,10 @@
           <xs:element name="playAnnouncementBeforeAction" type="xs:boolean" minOccurs="0"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -722,7 +719,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointModifyAnnouncementRequest">
+  <xs:complexType name="GroupRoutePointModifyAnnouncementRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a route point's announcement settings.
@@ -733,13 +730,13 @@
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="serviceUserId" type="UserId"/>
-          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceModify17" minOccurs="0"/>
+          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceModify20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointModifyDNISAnnouncementRequest">
+  <xs:complexType name="GroupRoutePointModifyDNISAnnouncementRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a route point DNIS announcement settings.
@@ -750,7 +747,7 @@
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="dnisKey" type="DNISKey"/>
-          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceModify17" minOccurs="0"/>
+          <xs:element name="mediaOnHoldSource" type="CallCenterMediaOnHoldSourceModify20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -869,11 +866,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointNightServiceGetRequest17sp1">
+  <xs:complexType name="GroupRoutePointNightServiceGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a route point's night service settings.
-        The response is either a GroupRoutePointNightServiceGetResponse17sp1 or an ErrorResponse.
+        The response is either a GroupRoutePointNightServiceGetResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -885,10 +882,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointNightServiceGetResponse17sp1">
+  <xs:complexType name="GroupRoutePointNightServiceGetResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupRoutePointNightServiceGetRequest17sp1.
+        Response to the GroupRoutePointNightServiceGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -901,27 +898,23 @@
           <xs:element name="playAnnouncementBeforeAction" type="xs:boolean"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="audioMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="videoMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
           <xs:element name="manualAnnouncementMode" type="CallCenterManualNightServiceAnnouncementMode"/>
           <xs:element name="manualAudioMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="manualAudioUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="manualAudioFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="manualAudioMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="manualAudioFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
           <xs:element name="manualVideoMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="manualVideoUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="manualVideoFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="manualVideoMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="manualVideoFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointNightServiceModifyRequest17sp1">
+  <xs:complexType name="GroupRoutePointNightServiceModifyRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a route point's night service settings.
@@ -940,27 +933,27 @@
           <xs:element name="playAnnouncementBeforeAction" type="xs:boolean" minOccurs="0"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
           <xs:element name="manualAnnouncementMode" type="CallCenterManualNightServiceAnnouncementMode" minOccurs="0"/>
           <xs:element name="manualAudioMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="manualAudioUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="manualAudioFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="manualAudioFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
           <xs:element name="manualVideoMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="manualVideoUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="manualVideoFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="manualVideoFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointOverflowGetRequest">
+  <xs:complexType name="GroupRoutePointOverflowGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a route point's overflow settings.
-        The response is either a GroupRoutePointOverflowGetResponse or an ErrorResponse.
+        The response is either a GroupRoutePointOverflowGetResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -972,10 +965,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointOverflowGetResponse">
+  <xs:complexType name="GroupRoutePointOverflowGetResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupRoutePointOverflowGetRequest .
+        Response to the GroupRoutePointOverflowGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -988,18 +981,16 @@
           <xs:element name="playAnnouncementBeforeOverflowProcessing" type="xs:boolean"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="audioMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLList" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementDescriptionList" minOccurs="0"/>
-          <xs:element name="videoMediaTypeList" type="CallCenterAnnouncementMediaFileTypeList" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListRead20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupRoutePointOverflowModifyRequest">
+  <xs:complexType name="GroupRoutePointOverflowModifyRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a route point's overflow settings.
@@ -1017,10 +1008,10 @@
           <xs:element name="playAnnouncementBeforeOverflowProcessing" type="xs:boolean" minOccurs="0"/>
           <xs:element name="audioMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="audioUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="audioFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
           <xs:element name="videoMessageSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
           <xs:element name="videoUrlList" type="CallCenterAnnouncementURLListModify" minOccurs="0"/>
-          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify" minOccurs="0"/>
+          <xs:element name="videoFileList" type="CallCenterAnnouncementFileListModify20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1241,6 +1232,10 @@
     
   <xs:complexType name="UserRoutePointSupervisorGetListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get a list of Route Point supervisors assigned to a user.
         The response is either a
@@ -1258,10 +1253,16 @@
     
   <xs:complexType name="UserRoutePointSupervisorGetListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to the UserRoutePointSupervisorGetListRequest.
         Contains a table with column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name", "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address",
+		"Location Code".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>

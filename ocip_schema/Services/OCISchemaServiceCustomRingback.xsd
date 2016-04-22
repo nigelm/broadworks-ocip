@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -31,22 +31,22 @@
   section of the schema.
 
   Requests in this schema file:
-    GroupCustomRingbackGroupGetRequest16    
-    GroupCustomRingbackGroupModifyRequest16    
-    UserCustomRingbackUserAddCriteriaRequest16    
+    GroupCustomRingbackGroupGetRequest20    
+    GroupCustomRingbackGroupModifyRequest20    
+    UserCustomRingbackUserAddCriteriaRequest20    
     UserCustomRingbackUserDeleteCriteriaRequest    
     UserCustomRingbackUserGetCriteriaListRequest    
-    UserCustomRingbackUserGetCriteriaRequest16    
+    UserCustomRingbackUserGetCriteriaRequest20    
     UserCustomRingbackUserModifyActiveCriteriaListRequest    
-    UserCustomRingbackUserModifyCriteriaRequest16    
+    UserCustomRingbackUserModifyCriteriaRequest20    
     
   --> 
   
-  <xs:complexType name="GroupCustomRingbackGroupGetRequest16">
+  <xs:complexType name="GroupCustomRingbackGroupGetRequest20">
     <xs:annotation>
       <xs:documentation>
         Get the group's custom ring back service settings.
-        The response is either a GroupCustomRingbackGroupGetResponse16 or an ErrorResponse.
+        The response is either a GroupCustomRingbackGroupGetResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -59,10 +59,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupCustomRingbackGroupGetResponse16">
+  <xs:complexType name="GroupCustomRingbackGroupGetResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupCustomRingbackGroupGetRequest16.
+        Response to the GroupCustomRingbackGroupGetRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -70,19 +70,17 @@
         <xs:sequence>
           <xs:element name="isActive" type="xs:boolean"/>
           <xs:element name="audioSelection" type="ExtendedFileResourceSelection"/>
-          <xs:element name="audioFileDescription" type="FileDescription" minOccurs="0"/>
-          <xs:element name="audioMediaType" type="MediaFileType" minOccurs="0"/>
+          <xs:element name="audioFile" type="AnnouncementFileKey" minOccurs="0"/>
           <xs:element name="audioFileUrl" type="URL" minOccurs="0"/>
           <xs:element name="videoSelection" type="ExtendedFileResourceSelection"/>
-          <xs:element name="videoFileDescription" type="FileDescription" minOccurs="0"/>
-          <xs:element name="videoMediaType" type="MediaFileType" minOccurs="0"/>
+          <xs:element name="videoFile" type="AnnouncementFileKey" minOccurs="0"/>
           <xs:element name="videoFileUrl" type="URL" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupCustomRingbackGroupModifyRequest16">
+  <xs:complexType name="GroupCustomRingbackGroupModifyRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify the group's custom ring back service settings.
@@ -96,15 +94,15 @@
           <xs:element name="groupId" type="GroupId"/>
           <xs:element name="isActive" type="xs:boolean" minOccurs="0"/>
           <xs:element name="audioSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="audioFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="audioFile" type="ExtendedMediaFileResource20" minOccurs="0" nillable="true"/>
           <xs:element name="videoSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="videoFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="videoFile" type="ExtendedMediaFileResource20" minOccurs="0" nillable="true"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCustomRingbackUserAddCriteriaRequest16">
+  <xs:complexType name="UserCustomRingbackUserAddCriteriaRequest20">
     <xs:annotation>
       <xs:documentation>
         Add a criteria to the user's custom ringback service.
@@ -121,13 +119,13 @@
           <xs:element name="blacklisted" type="xs:boolean"/>
           <xs:element name="fromDnCriteria" type="CriteriaFromDn"/>
           <xs:element name="audioSelection" type="ExtendedFileResourceSelection"/>
-          <xs:element name="audioFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="audioFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
           <xs:element name="videoSelection" type="ExtendedFileResourceSelection"/>
-          <xs:element name="videoFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="videoFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
           <xs:element name="callWaitingAudioSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="callWaitingAudioFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="callWaitingAudioFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
           <xs:element name="callWaitingVideoSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="callWaitingVideoFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="callWaitingVideoFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -183,11 +181,11 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCustomRingbackUserGetCriteriaRequest16">
+  <xs:complexType name="UserCustomRingbackUserGetCriteriaRequest20">
     <xs:annotation>
       <xs:documentation>
         Get a criteria for the user's custom ringback service.
-        The response is either a UserCustomRingbackUserGetCriteriaResponse16 or an ErrorResponse.
+        The response is either a UserCustomRingbackUserGetCriteriaResponse20 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -200,10 +198,10 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCustomRingbackUserGetCriteriaResponse16">
+  <xs:complexType name="UserCustomRingbackUserGetCriteriaResponse20">
     <xs:annotation>
       <xs:documentation>
-        Response to the UserCustomRingbackUserGetCriteriaRequest16.
+        Response to the UserCustomRingbackUserGetCriteriaRequest20.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -214,20 +212,16 @@
           <xs:element name="blacklisted" type="xs:boolean"/>
           <xs:element name="fromDnCriteria" type="CriteriaFromDn"/>
           <xs:element name="audioSelection" type="ExtendedFileResourceSelection"/>
-          <xs:element name="audioFileDescription" type="FileDescription" minOccurs="0"/>
-          <xs:element name="audioMediaType" type="MediaFileType" minOccurs="0"/>
+          <xs:element name="audioFile" type="AnnouncementFileLevelKey" minOccurs="0"/>
           <xs:element name="audioFileUrl" type="URL" minOccurs="0"/>
           <xs:element name="videoSelection" type="ExtendedFileResourceSelection"/>
-          <xs:element name="videoFileDescription" type="FileDescription" minOccurs="0"/>
-          <xs:element name="videoMediaType" type="MediaFileType" minOccurs="0"/>
+          <xs:element name="videoFile" type="AnnouncementFileLevelKey" minOccurs="0"/>
           <xs:element name="videoFileUrl" type="URL" minOccurs="0"/>
           <xs:element name="callWaitingAudioSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="callWaitingAudioFileDescription" type="FileDescription" minOccurs="0"/>
-          <xs:element name="callWaitingAudioMediaType" type="MediaFileType" minOccurs="0"/>
+          <xs:element name="callWaitingAudioFile" type="AnnouncementFileLevelKey" minOccurs="0"/>
           <xs:element name="callWaitingAudioFileUrl" type="URL" minOccurs="0"/>
           <xs:element name="callWaitingVideoSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="callWaitingVideoFileDescription" type="FileDescription" minOccurs="0"/>
-          <xs:element name="callWaitingVideoMediaType" type="MediaFileType" minOccurs="0"/>
+          <xs:element name="callWaitingVideoFile" type="AnnouncementFileLevelKey" minOccurs="0"/>
           <xs:element name="callWaitingVideoFileUrl" type="URL" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
@@ -251,7 +245,7 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserCustomRingbackUserModifyCriteriaRequest16">
+  <xs:complexType name="UserCustomRingbackUserModifyCriteriaRequest20">
     <xs:annotation>
       <xs:documentation>
         Modify a criteria for the user's custom ringback service.
@@ -269,13 +263,13 @@
           <xs:element name="blacklisted" type="xs:boolean" minOccurs="0"/>
           <xs:element name="fromDnCriteria" type="CriteriaFromDnModify" minOccurs="0"/>
           <xs:element name="audioSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="audioFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="audioFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
           <xs:element name="videoSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="videoFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="videoFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
           <xs:element name="callWaitingAudioSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="callWaitingAudioFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="callWaitingAudioFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
           <xs:element name="callWaitingVideoSelection" type="ExtendedFileResourceSelection" minOccurs="0"/>
-          <xs:element name="callWaitingVideoFile" type="ExtendedMediaFileResource" minOccurs="0"/>
+          <xs:element name="callWaitingVideoFile" type="ExtendedMediaFileLevelResource20" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

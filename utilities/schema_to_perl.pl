@@ -43,7 +43,7 @@ sub build_pod {
         $doc =~ tr/\001-\176/ /cs;
         $doc =~ s/^\s{6,}//mg;
         $doc =~ s/\s+$//mg;
-        $doc =~ s/^\s{,2}(?=\w)//mg;
+        $doc =~ s/^\s\s?(?=\w)/\n/mg;
         $doc =~ s/\s+(?=The\s+response\s+is)/\n\n/mg;
         $doc =~ s/\b(\w+[A-Z][a-z]\w+)\b/C<$1>/g;
 
@@ -80,7 +80,7 @@ sub build_pod_entry {
     $out->print( $info->{pod} );
 
     # output fixed parameter info
-    $out->print("\nFixed parameters are:-\n");
+    $out->print("\n\nFixed parameters are:-\n");
     $out->print("\n=over 4\n");
     $out->print("\n$_\n") foreach ( @{ $info->{parameter_pod} } );
     $out->print("\n=back\n");

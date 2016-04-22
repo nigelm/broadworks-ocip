@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -40,7 +40,7 @@
     <xs:annotation>
       <xs:documentation>
         Request the user level data associated with Charge Number.
-        The response is either a UserChargeNumberGetResponse or an ErrorResponse.
+        The response is either a UserChargeNumberGetResponse14sp9 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>

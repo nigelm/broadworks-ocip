@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -133,9 +133,10 @@
       <xs:documentation>
         Response to the UserSharedCallAppearanceGetRequest16sp2.
         The endpointTable contains columns:
-          "Device Level", "Device Name", "Device Type", "Line/Port", "SIP Contact".
+          "Device Level", "Device Name", "Device Type", "Line/Port", "SIP Contact", "Port Number", "Device Support Visual Device Management".
         The "Device Level" column contains one of the AccessDeviceLevel enumerated constants.
-        
+        Port numbers are only used by devices with static line ordering.
+
         The following elements are only used in AS data mode:
          enableCallParkNotification
       </xs:documentation>

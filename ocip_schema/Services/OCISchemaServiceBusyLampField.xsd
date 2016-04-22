@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -32,7 +32,7 @@
   section of the schema.
 
   Requests in this schema file:
-    SystemBusyLampFieldGetRequest    
+    SystemBusyLampFieldGetRequest18    
     SystemBusyLampFieldModifyRequest    
     UserBusyLampFieldGetAvailableUserListRequest    
     UserBusyLampFieldGetRequest16sp2    
@@ -40,12 +40,12 @@
     
   --> 
   
-  <xs:complexType name="SystemBusyLampFieldGetRequest">
+  <xs:complexType name="SystemBusyLampFieldGetRequest18">
     <xs:annotation>
       <xs:documentation>
         Request the system level data associated with the Busy Lamp
         Field service. The response is either a 
-        SystemBusyLampFieldGetResponse or an ErrorResponse.
+        SystemBusyLampFieldGetResponse18 or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -55,16 +55,20 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="SystemBusyLampFieldGetResponse">
+  <xs:complexType name="SystemBusyLampFieldGetResponse18">
     <xs:annotation>
       <xs:documentation>
-        Response to SystemBusyLampFieldGetRequest.
+        Response to SystemBusyLampFieldGetRequest18.
+        
+        The following elements are only used in AS data mode:
+         forceUseOfTCP
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="displayLocalUserIdentityLastNameFirst" type="xs:boolean"/>
+          <xs:element name="forceUseOfTCP" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -76,12 +80,16 @@
         Modify the system level data associated with the Busy Lamp Field
         Service. The response is either a SuccessResponse or an 
         ErrorResponse.
+        
+        The following elements are only used in AS data mode:
+         forceUseOfTCP
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
         <xs:sequence>
           <xs:element name="displayLocalUserIdentityLastNameFirst" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="forceUseOfTCP" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -103,6 +111,10 @@
           <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
           <xs:element name="searchCriteriaExactUserGroup" type="SearchCriteriaExactUserGroup" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaImpId" type="SearchCriteriaImpId" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -113,7 +125,8 @@
       <xs:documentation>
         Response to the BusyLampFieldGetAvailableUserListRequest.
         Returns a table with column headings:
-          "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name".
+          "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name",
+          "Phone Number", "Extension", "Department", "Email Address", "IMP Id".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -146,7 +159,8 @@
       <xs:documentation>
         Response to UserBusyLampFieldGetRequest16sp2.
         The table has column headings:
-          "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name".
+          "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name",
+          "Phone Number", "Extension", "Department", "Email Address", "IMP Id".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>

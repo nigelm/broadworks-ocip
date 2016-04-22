@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  D E P R E C A T E D  14                -->
 <!--                                                                        -->
@@ -181,9 +181,6 @@
     UserHotelingGuestGetRequest14    
     UserHotelingGuestGetRequest14sp2    
     UserHotelingHostGetRequest14    
-    UserInstantConferencingGetConferenceRecordingRequest    
-    UserInstantConferencingGetConferenceRequest    
-    UserInstantConferencingGetStandAloneConferenceRequest    
     UserModifyRequest14    
     UserSharedCallAppearanceAddEndpointRequest14    
     UserPrivacyGetRequest    
@@ -732,6 +729,7 @@
         Response to the GroupCallCenterGetSupervisorListRequest.
         Contains a table with column headings: "User Id", "Last Name",
         "First Name", "Hiragana Last Name", "Hiragana First Name".
+        Element "reportingServerURL"" will always be blank.        
         Replaced By: GroupCallCenterSupervisorReportingGetResponse
       </xs:documentation>
     </xs:annotation>
@@ -798,6 +796,7 @@
         Replaces a list of users as supervisors for a call center.
         Also allows the modification of the reporting server URL address.
         The response is either a SuccessResponse or an ErrorResponse.
+        Element "reportingServerURL"" will always be ignored.        
         Replaced By: GroupCallCenterSupervisorReportingModifyRequest
       </xs:documentation>
     </xs:annotation>
@@ -2335,6 +2334,7 @@
           <xs:choice>
             <xs:element name="userPhoneNumbers">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="phoneNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
                   <xs:element name="dnRange" type="DNRange" minOccurs="0" maxOccurs="unbounded"/>
@@ -2343,6 +2343,7 @@
             </xs:element>
             <xs:element name="userExtensions">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="extension" type="Extension" minOccurs="0" maxOccurs="unbounded"/>
                   <xs:element name="extensionRange" type="ExtensionRange" minOccurs="0" maxOccurs="unbounded"/>
@@ -3891,6 +3892,7 @@
           <xs:element name="deviceType" type="AccessDeviceType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="typeInfo" minOccurs="0" maxOccurs="unbounded">
             <xs:complexType>
+              <xs:annotation/>
               <xs:sequence>
                 <xs:element name="profile" type="SignalingAddressType"/>
                 <xs:element name="staticRegistrationCapable" type="xs:boolean"/>
@@ -3942,6 +3944,7 @@
           <xs:element name="deviceType" type="AccessDeviceType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="typeInfo" minOccurs="0" maxOccurs="unbounded">
             <xs:complexType>
+              <xs:annotation/>
               <xs:sequence>
                 <xs:element name="profile" type="SignalingAddressType"/>
                 <xs:element name="staticRegistrationCapable" type="xs:boolean"/>
@@ -4662,7 +4665,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -4713,7 +4716,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -4767,7 +4770,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -4823,7 +4826,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -4882,7 +4885,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -5056,10 +5059,6 @@
     
   <xs:complexType name="SystemSMDIModifyACLEntryRequest">
     <xs:annotation>
-      <xs:appinfo>
-        <asDataModeSupported>true</asDataModeSupported>
-        <hssDataModeSupported>false</hssDataModeSupported>
-      </xs:appinfo>
       <xs:documentation>
         Modify an entry from the SMDI access control list.
         The response is either SuccessResponse or ErrorResponse.
@@ -6003,160 +6002,6 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="UserInstantConferencingGetConferenceRecordingRequest">
-    <xs:annotation>
-      <xs:documentation>
-        Get the information of a conference recording owned or delegated by the user.
-        The response is either UserInstantConferencingGetConferenceRecordingResponse
-        or ErrorResponse.
-        Replaced by: name="UserInstantConferencingGetConferenceRecordingRequest14Sp9
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIRequest">
-        <xs:sequence>
-          <xs:element name="userId" type="UserId"/>
-          <xs:element name="recordingKey" type="InstantConferencingRecordingKey"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="UserInstantConferencingGetConferenceRecordingResponse">
-    <xs:annotation>
-      <xs:documentation>
-        Response to UserInstantConferencingGetConferenceRecordingRequest.
-        Contains the information of a conference recording.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIDataResponse">
-        <xs:sequence>
-          <xs:element name="recordingCallId" type="InstantConferencingRecordingCallId"/>
-          <xs:element name="conferenceOwnerUserId" type="UserId"/>
-          <xs:element name="conferenceOwnerDisplayNames" type="UserDisplayNames"/>
-          <xs:element name="title" type="InstantConferencingTitle"/>
-          <xs:element name="documentId" type="InstantConferencingDocumentId"/>
-          <xs:element name="startDateTime" type="xs:dateTime"/>
-          <xs:element name="duration" type="xs:duration"/>
-          <xs:element name="isBridgeActive" type="xs:boolean"/>
-          <xs:element name="bridgeName" type="ServiceInstanceProfileName"/>
-          <xs:element name="bridgePhoneNumber" type="DN" minOccurs="0"/>
-          <xs:element name="accessCode" type="InstantConferencingAccessCode"/>
-          <xs:element name="hasSlideShow" type="xs:boolean"/>
-          <xs:element name="slideShowPassword" type="InstantConferencingSlideShowPassword" minOccurs="0"/>
-          <xs:element name="slideShowPasswordHex" type="InstantConferencingSlideShowPasswordHex" minOccurs="0"/>
-          <xs:element name="conferenceServerFQDN" type="DomainName"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="UserInstantConferencingGetConferenceRequest">
-    <xs:annotation>
-      <xs:documentation>
-        Get the information of a conference owned or delegated by the user.
-        The response is either UserInstantConferencingGetConferenceResponse
-        or ErrorResponse.
-        Replaced by: UserInstantConferencingGetConferenceRequest14sp6
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIRequest">
-        <xs:sequence>
-          <xs:element name="userId" type="UserId"/>
-          <xs:element name="conferenceKey" type="InstantConferencingConferenceKey"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="UserInstantConferencingGetConferenceResponse">
-    <xs:annotation>
-      <xs:documentation>
-        Response to UserInstantConferencingGetConferenceRequest.
-        Contains the information of a conference.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIDataResponse">
-        <xs:sequence>
-          <xs:element name="conferenceCallId" type="InstantConferencingCallId"/>
-          <xs:element name="conferenceOwnerUserId" type="UserId"/>
-          <xs:element name="conferenceOwnerDisplayNames" type="UserDisplayNames"/>
-          <xs:element name="title" type="InstantConferencingTitle"/>
-          <xs:element name="leaderRequired" type="xs:boolean"/>
-          <xs:element name="leaderReleaseDropsParticipants" type="xs:boolean"/>
-          <xs:element name="announceCallers" type="xs:boolean"/>
-          <xs:element name="conferenceType" type="InstantConferencingConferenceType"/>
-          <xs:element name="conferenceSchedule" type="InstantConferencingSchedule"/>
-          <xs:element name="billingCode" type="InstantConferencingBillingCode" minOccurs="0"/>
-          <xs:element name="leaderAccessCode" type="InstantConferencingAccessCode"/>
-          <xs:element name="participantAccessCode" type="InstantConferencingAccessCode"/>
-          <xs:element name="isCallActive" type="xs:boolean"/>
-          <xs:element name="isExpired" type="xs:boolean"/>
-          <xs:element name="isFuture" type="xs:boolean"/>
-          <xs:element name="hasPresentation" type="xs:boolean"/>
-          <xs:element name="presentationPassword" type="InstantConferencingPresentationPassword" minOccurs="0"/>
-          <xs:element name="allowOutdialInInvitation" type="xs:boolean"/>
-          <xs:element name="bridgePhoneNumber" type="DN" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="UserInstantConferencingGetStandAloneConferenceRequest">
-    <xs:annotation>
-      <xs:documentation>
-        Get the information of a conference owned or delegated by the user.
-        The response is either UserInstantConferencingGetStandAloneConferenceResponse
-        or ErrorResponse.
-        Replaced by: UserInstantConferencingGetStandAloneConferenceRequest14sp6
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIRequest">
-        <xs:sequence>
-          <xs:element name="conferenceOwnerUserId" type="UserId"/>
-          <xs:element name="conferenceKey" type="InstantConferencingConferenceKey"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="UserInstantConferencingGetStandAloneConferenceResponse">
-    <xs:annotation>
-      <xs:documentation>
-        Response to UserInstantConferencingGetStandAloneConferenceRequest.
-        Contains the information of a conference.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIDataResponse">
-        <xs:sequence>
-          <xs:element name="conferenceCallId" type="InstantConferencingCallId"/>
-          <xs:element name="conferenceOwnerDisplayNames" type="UserDisplayNames"/>
-          <xs:element name="title" type="InstantConferencingTitle"/>
-          <xs:element name="leaderRequired" type="xs:boolean"/>
-          <xs:element name="leaderReleaseDropsParticipants" type="xs:boolean"/>
-          <xs:element name="announceCallers" type="xs:boolean"/>
-          <xs:element name="conferenceType" type="InstantConferencingConferenceType"/>
-          <xs:element name="conferenceSchedule" type="InstantConferencingSchedule"/>
-          <xs:element name="billingCode" type="InstantConferencingBillingCode" minOccurs="0"/>
-          <xs:element name="leaderAccessCode" type="InstantConferencingAccessCode"/>
-          <xs:element name="participantAccessCode" type="InstantConferencingAccessCode"/>
-          <xs:element name="isCallActive" type="xs:boolean"/>
-          <xs:element name="isExpired" type="xs:boolean"/>
-          <xs:element name="isFuture" type="xs:boolean"/>
-          <xs:element name="hasPresentation" type="xs:boolean"/>
-          <xs:element name="presentationPassword" type="InstantConferencingPresentationPassword" minOccurs="0"/>
-          <xs:element name="allowOutdialInInvitation" type="xs:boolean"/>
-          <xs:element name="bridgePhoneNumber" type="DN" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
   <xs:complexType name="UserModifyRequest14">
     <xs:annotation>
       <xs:documentation>
@@ -6184,6 +6029,7 @@
           <xs:element name="sipAliasList" type="ReplacementSIPAliasList" nillable="true" minOccurs="0"/>
           <xs:element name="endpoint" nillable="true" minOccurs="0">
             <xs:complexType>
+              <xs:annotation/>
               <xs:choice>
                 <xs:element name="accessDeviceEndpoint" type="AccessDeviceEndpointModify"/>
                 <xs:element name="trunkGroupDeviceEndpoint" type="TrunkGroupDeviceEndpointModify"/>
@@ -6579,7 +6425,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -6615,7 +6461,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -6697,7 +6543,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="groupDeviceTypeFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -6733,7 +6579,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode" minOccurs="0"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -6791,7 +6637,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -6826,7 +6672,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -6882,7 +6728,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -6916,7 +6762,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -7025,7 +6871,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="deviceTypeFilesTable" type="core:OCITable"/>
         </xs:sequence>
@@ -7059,7 +6905,7 @@
           </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileFormat" type="DeviceManagementFileFormat"/>
           <xs:element name="remoteFileFormat" type="DeviceManagementFileFormat"/>

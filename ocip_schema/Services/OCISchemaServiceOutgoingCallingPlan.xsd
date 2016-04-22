@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -579,6 +579,10 @@
     
   <xs:complexType name="GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowGetListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request the Call Me Now permissions for Pinhole digit patterns for a group default and its departments.
         The response is either a GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowGetListResponse or an ErrorResponse.
@@ -596,6 +600,10 @@
     
   <xs:complexType name="GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowGetListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowGetListRequest.
       </xs:documentation>
@@ -612,6 +620,10 @@
     
   <xs:complexType name="GroupOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyListRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify the Call Me Now permissions for Pinhole digit patterns for a group default and its departments.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -652,6 +664,10 @@
     
   <xs:complexType name="GroupOutgoingCallingPlanPinholeDigitPlanOriginatingGetListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to GroupOutgoingCallingPlanPinholeDigitPlanOriginatingGetListRequest.
       </xs:documentation>
@@ -712,6 +728,10 @@
     
   <xs:complexType name="GroupOutgoingCallingPlanPinholeDigitPlanRedirectingGetListResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to GroupOutgoingCallingPlanPinholeDigitPlanRedirectingGetListRequest.
       </xs:documentation>
@@ -1413,6 +1433,10 @@
     
   <xs:complexType name="UserOutgoingCallingPlanPinholeDigitPlanCallMeNowGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request the Call Me Now permissions for Pinhole digit patterns for a user.
         The response is either a UserOutgoingCallingPlanPinholeDigitPlanCallMeNowgGetResponse or an ErrorResponse.
@@ -1429,6 +1453,10 @@
     
   <xs:complexType name="UserOutgoingCallingPlanPinholeDigitPlanCallMeNowGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to UserOutgoingCallingPlanPinholeDigitPlanCallMeNowGetRequest.
       </xs:documentation>
@@ -1445,6 +1473,10 @@
     
   <xs:complexType name="UserOutgoingCallingPlanPinholeDigitPlanCallMeNowModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify the Call Me Now permissions for Pinhole digit patterns for a user.
         The response is either a SuccessResponse or an ErrorResponse.
@@ -1483,6 +1515,10 @@
     
   <xs:complexType name="UserOutgoingCallingPlanPinholeDigitPlanOriginatingGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to UserOutgoingCallingPlanPinholeDigitPlanOriginatingGetRequest.
       </xs:documentation>
@@ -1541,6 +1577,10 @@
     
   <xs:complexType name="UserOutgoingCallingPlanPinholeDigitPlanRedirectingGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to UserOutgoingCallingPlanPinholeDigitPlanRedirectingGetRequest.
       </xs:documentation>

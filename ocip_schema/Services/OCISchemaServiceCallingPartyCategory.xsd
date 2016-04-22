@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -106,7 +106,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="callingPartyCategoryTable" type="core:OCITable"/>
         </xs:sequence>

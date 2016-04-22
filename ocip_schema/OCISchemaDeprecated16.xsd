@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  D E P R E C A T E D  16                -->
 <!--                                                                        -->
@@ -67,6 +67,7 @@
     GroupCustomContactDirectoryGetRequest    
     GroupCustomContactDirectoryModifyRequest    
     GroupCallProcessingGetPolicyRequest16    
+    GroupCallProcessingGetPolicyRequest16sp2    
     GroupHolidayScheduleAddRequest    
     GroupHolidayScheduleDeleteRequest    
     GroupHolidayScheduleGetRequest    
@@ -114,6 +115,7 @@
     SystemOCICallControlApplicationAddRequest14sp9    
     SystemPolicyGetDefaultRequest14sp4    
     SystemPolicyGetDefaultRequest16sp1    
+    SystemPolicyGetDefaultRequest16sp2    
     SystemShInterfaceParametersGetRequest    
     SystemShInterfaceParametersModifyRequest    
     ServiceProviderAdminGetPolicyRequest14    
@@ -123,12 +125,15 @@
     GroupExtensionLengthGetRequest    
     GroupExtensionLengthModifyRequest    
     ServiceProviderAdminGetPolicyRequest16sp1    
+    ServiceProviderAdminGetPolicyRequest16sp2    
     GroupAdminGetPolicyRequest16sp1    
+    GroupAdminGetPolicyRequest16sp2    
     GroupHuntGroupGetInstanceRequest14    
-    GroupInstantConferencingGetInstanceRequest15sp2    
     GroupInstantGroupCallGetInstanceRequest14    
     ServiceProviderCallProcessingGetPolicyRequest16    
+    ServiceProviderCallProcessingGetPolicyRequest16sp2    
     SystemCallProcessingGetPolicyRequest16    
+    SystemCallProcessingGetPolicyRequest16sp2    
     SystemHolidayScheduleAddRequest    
     SystemHolidayScheduleDeleteRequest    
     SystemHolidayScheduleGetRequest    
@@ -146,6 +151,7 @@
     UserAlternateNumbersGetRequest    
     UserBroadWorksAnywhereGetRequest    
     UserCallProcessingGetPolicyRequest16    
+    UserCallProcessingGetPolicyRequest16sp2    
     UserFaxMessagingGetRequest    
     UserGetRequest15sp2    
     UserCallCenterGetRequest16    
@@ -216,7 +222,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileRepositoryUserName" type="FileRepositoryUserName"/>
           <xs:element name="fileRepositoryPassword" type="FileRepositoryUserPassword"/>
@@ -1117,6 +1123,89 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="GroupCallProcessingGetPolicyRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+          Request the group level data associated with Call Processing Policy.
+          The response is either a GroupCallProcessingGetPolicyResponse16sp2 or an
+          ErrorResponse.
+
+          The useGroupCLIDSetting attribute controls the CLID settings 
+          (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName)
+
+          The useGroupMediaSetting attribute controls the Media settings 
+          (medisPolicySelection, supportedMediaSetName)
+
+         The useGroupCallLimitsSetting attribute controls the Call Limits settings 
+         (useMaxSimultaneousCalls, maxSimultaneousCalls, 
+         useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
+
+         The useGroupTranslationRoutingSetting attribute controls the routing and translation settings 
+         (networkUsageSelection, enforceGroupCallingLineIdentityRestriction, 
+         allowEnterpriseGroupCallTypingForPrivateDialingPlan, allowEnterpriseGroupCallTypingForPublicDialingPlan, overrideCLIDRestrictionForExternalCallsViaPrivateDialingPlan, enableEnterpriseExtensionDialing)
+
+         The useGroupDCLIDSetting controls the Dialable Caller ID settings (enableDialableCallerID)
+
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+          <xs:element name="groupId" type="GroupId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupCallProcessingGetPolicyResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+          Response to GroupCallProcessingGetPolicyRequest16sp2.
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useGroupCLIDSetting" type="xs:boolean"/>
+          <xs:element name="useGroupMediaSetting" type="xs:boolean"/>
+          <xs:element name="useGroupCallLimitsSetting" type="xs:boolean"/>
+          <xs:element name="useGroupTranslationRoutingSetting" type="xs:boolean"/>
+          <xs:element name="useGroupDCLIDSetting" type="xs:boolean"/>
+          <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
+          <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
+          <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
+          <xs:element name="networkUsageSelection" type="NetworkUsageSelection"/>
+          <xs:element name="enforceGroupCallingLineIdentityRestriction" type="xs:boolean"/>
+          <xs:element name="allowEnterpriseGroupCallTypingForPrivateDialingPlan" type="xs:boolean"/>
+          <xs:element name="allowEnterpriseGroupCallTypingForPublicDialingPlan" type="xs:boolean"/>
+          <xs:element name="overrideCLIDRestrictionForPrivateCallCategory" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="useEnterpriseCLIDForPrivateCallCategory" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enableEnterpriseExtensionDialing" type="xs:boolean"/>
+          <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="clidPolicy" type="GroupCLIDPolicy"/>
+          <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy"/>
+          <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="useGroupName" type="xs:boolean"/>
+          <xs:element name="enableDialableCallerID" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="GroupHolidayScheduleAddRequest">
     <xs:annotation>
       <xs:documentation>
@@ -1303,7 +1392,7 @@
     <xs:annotation>
       <xs:documentation>
         Requests the Group's policy settings.
-        The response is either GroupPolicyGetResponse14sp1 or ErrorResponse.
+        The response is either GroupPolicyGetResponse14sp4 or ErrorResponse.
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1772,7 +1861,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -1809,7 +1898,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode" minOccurs="0"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -1885,7 +1974,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -2011,7 +2100,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="fileSource" type="AccessDeviceEnhancedConfigurationMode"/>
           <xs:element name="configurationFileName" type="AccessDeviceEnhancedConfigurationFileName" minOccurs="0"/>
@@ -2381,11 +2470,11 @@
   <xs:complexType name="SystemSIPDeviceTypeFileGetResponse14sp8">
     <xs:annotation>
       <xs:documentation>
-          Response to SystemSIPDeviceTypeFileGetRequest.
+          Response to SystemSIPDeviceTypeFileGetRequest14sp8.
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="remoteFileFormat" type="DeviceManagementFileFormat"/>
           <xs:element name="fileCategory" type="DeviceManagementFileCategory"/>
@@ -2428,7 +2517,7 @@
         </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -2490,7 +2579,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="isObsolete" type="xs:boolean"/>
           <xs:element name="numberOfPorts" type="UnboundedPositiveInt"/>
@@ -2992,6 +3081,78 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="SystemPolicyGetDefaultRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Requests the system's default policy settings.
+        The response is either SystemPolicyGetDefaultResponse16sp2 or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemPolicyGetDefaultResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Response to SystemPolicyGetDefaultRequest16sp2.
+        Contains the default policy settings for the system.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="groupCallingPlanAccess" type="GroupCallingPlanAccess"/>
+          <xs:element name="groupExtensionAccess" type="GroupExtensionAccess"/>
+          <xs:element name="groupLDAPIntegrationAccess" type="GroupLDAPIntegrationAccess"/>
+          <xs:element name="groupVoiceMessagingAccess" type="GroupVoiceMessagingAccess"/>
+          <xs:element name="groupDepartmentAdminUserAccess" type="GroupDepartmentAdminUserAccess"/>
+          <xs:element name="groupDepartmentAdminTrunkGroupAccess" type="GroupDepartmentAdminTrunkGroupAccess"/>
+          <xs:element name="groupDepartmentAdminPhoneNumberExtensionAccess" type="GroupDepartmentAdminPhoneNumberExtensionAccess"/>
+          <xs:element name="groupDepartmentAdminCallingLineIdNumberAccess" type="GroupDepartmentAdminCallingLineIdNumberAccess"/>
+          <xs:element name="groupUserAuthenticationAccess" type="GroupUserAuthenticationAccess"/>
+          <xs:element name="groupUserGroupDirectoryAccess" type="GroupUserGroupDirectoryAccess"/>
+          <xs:element name="groupUserProfileAccess" type="GroupUserProfileAccess"/>
+          <xs:element name="groupUserEnhancedCallLogsAccess" type="GroupUserCallLogAccess"/>
+          <xs:element name="groupAdminProfileAccess" type="GroupAdminProfileAccess"/>
+          <xs:element name="groupAdminUserAccess" type="GroupAdminUserAccess"/>
+          <xs:element name="groupAdminAdminAccess" type="GroupAdminAdminAccess"/>
+          <xs:element name="groupAdminDepartmentAccess" type="GroupAdminDepartmentAccess"/>
+          <xs:element name="groupAdminAccessDeviceAccess" type="GroupAdminAccessDeviceAccess"/>
+          <xs:element name="groupAdminEnhancedServiceInstanceAccess" type="GroupAdminEnhancedServiceInstanceAccess"/>
+          <xs:element name="groupAdminFeatureAccessCodeAccess" type="GroupAdminFeatureAccessCodeAccess"/>
+          <xs:element name="groupAdminPhoneNumberExtensionAccess" type="GroupAdminPhoneNumberExtensionAccess"/>
+          <xs:element name="groupAdminCallingLineIdNumberAccess" type="GroupAdminCallingLineIdNumberAccess"/>
+          <xs:element name="groupAdminServiceAccess" type="GroupAdminServiceAccess"/>
+          <xs:element name="groupAdminTrunkGroupAccess" type="GroupAdminTrunkGroupAccess"/>
+          <xs:element name="groupAdminSessionAdmissionControlAccess" type="GroupAdminSessionAdmissionControlAccess"/>
+          <xs:element name="groupAdminDialableCallerIDAccess" type="GroupAdminDialableCallerIDAccess"/>
+          <xs:element name="groupAdminOfficeZoneAccess" type="GroupAdminOfficeZoneAccess"/>
+          <xs:element name="groupAdminNumberActivationAccess" type="GroupAdminNumberActivationAccess"/>
+          <xs:element name="serviceProviderAdminProfileAccess" type="ServiceProviderAdminProfileAccess"/>
+          <xs:element name="serviceProviderAdminGroupAccess" type="ServiceProviderAdminGroupAccess"/>
+          <xs:element name="serviceProviderAdminUserAccess" type="ServiceProviderAdminUserAccess"/>
+          <xs:element name="serviceProviderAdminAdminAccess" type="ServiceProviderAdminAdminAccess"/>
+          <xs:element name="serviceProviderAdminDepartmentAccess" type="ServiceProviderAdminDepartmentAccess"/>
+          <xs:element name="serviceProviderAdminAccessDeviceAccess" type="ServiceProviderAdminAccessDeviceAccess"/>
+          <xs:element name="serviceProviderAdminPhoneNumberExtensionAccess" type="ServiceProviderAdminPhoneNumberExtensionAccess"/>
+          <xs:element name="serviceProviderAdminCallingLineIdNumberAccess" type="ServiceProviderAdminCallingLineIdNumberAccess"/>
+          <xs:element name="serviceProviderAdminServiceAccess" type="ServiceProviderAdminServiceAccess"/>
+          <xs:element name="serviceProviderAdminServicePackAccess" type="ServiceProviderAdminServicePackAccess"/>
+          <xs:element name="serviceProviderAdminSessionAdmissionControlAccess" type="ServiceProviderAdminSessionAdmissionControlAccess"/>
+          <xs:element name="serviceProviderAdminWebBrandingAccess" type="ServiceProviderAdminWebBrandingAccess"/>
+          <xs:element name="serviceProviderAdminOfficeZoneAccess" type="ServiceProviderAdminOfficeZoneAccess"/>
+          <xs:element name="enterpriseAdminNetworkPolicyAccess" type="EnterpriseAdminNetworkPolicyAccess"/>
+          <xs:element name="serviceProviderAdminDialableCallerIDAccess" type="ServiceProviderAdminDialableCallerIDAccess"/>
+          <xs:element name="enterpriseAdminNumberActivationAccess" type="EnterpriseAdminNumberActivationAccess"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="SystemShInterfaceParametersGetRequest">
     <xs:annotation>
       <xs:documentation>
@@ -3066,7 +3227,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="profileAccess" type="ServiceProviderAdminProfileAccess"/>
           <xs:element name="groupAccess" type="ServiceProviderAdminGroupAccess"/>
@@ -3286,7 +3447,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="profileAccess" type="ServiceProviderAdminProfileAccess"/>
           <xs:element name="groupAccess" type="ServiceProviderAdminGroupAccess"/>
@@ -3300,6 +3461,52 @@
           <xs:element name="sessionAdmissionControlAccess" type="ServiceProviderAdminSessionAdmissionControlAccess"/>
           <xs:element name="webBrandingAccess" type="ServiceProviderAdminWebBrandingAccess"/>
           <xs:element name="networkPolicyAccess" type="EnterpriseAdminNetworkPolicyAccess" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderAdminGetPolicyRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Requests the service provider administrator's policy settings.
+        The response is either ServiceProviderAdminGetPolicyResponse16sp2 or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderAdminGetPolicyResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Response to ServiceProviderAdminGetPolicyRequest16sp1.
+        Response to ServiceProviderAdminGetPolicyRequest16sp2.
+        Contains the policy settings for the service provider administrator.
+        The networkPolicyAccess is returned only for the enterprise administrator.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="profileAccess" type="ServiceProviderAdminProfileAccess"/>
+          <xs:element name="groupAccess" type="ServiceProviderAdminGroupAccess"/>
+          <xs:element name="userAccess" type="ServiceProviderAdminUserAccess"/>
+          <xs:element name="adminAccess" type="ServiceProviderAdminAdminAccess"/>
+          <xs:element name="departmentAccess" type="ServiceProviderAdminDepartmentAccess"/>
+          <xs:element name="accessDeviceAccess" type="ServiceProviderAdminAccessDeviceAccess"/>
+          <xs:element name="phoneNumberExtensionAccess" type="ServiceProviderAdminPhoneNumberExtensionAccess"/>
+          <xs:element name="serviceAccess" type="ServiceProviderAdminServiceAccess"/>
+          <xs:element name="servicePackAccess" type="ServiceProviderAdminServicePackAccess"/>
+          <xs:element name="sessionAdmissionControlAccess" type="ServiceProviderAdminSessionAdmissionControlAccess"/>
+          <xs:element name="webBrandingAccess" type="ServiceProviderAdminWebBrandingAccess"/>
+          <xs:element name="networkPolicyAccess" type="EnterpriseAdminNetworkPolicyAccess" minOccurs="0"/>
+          <xs:element name="dialableCallerIDAccess" type="ServiceProviderAdminDialableCallerIDAccess"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -3349,6 +3556,50 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="GroupAdminGetPolicyRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Requests the Group administrator's policy settings.
+        The response is either GroupAdminGetPolicyResponse16sp2 or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="GroupAdminGetPolicyResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Response to GroupAdminGetPolicyRequest16sp2.
+        Contains the policy settings for the group administrator.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="profileAccess" type="GroupAdminProfileAccess"/>
+          <xs:element name="userAccess" type="GroupAdminUserAccess"/>
+          <xs:element name="adminAccess" type="GroupAdminAdminAccess"/>
+          <xs:element name="departmentAccess" type="GroupAdminDepartmentAccess"/>
+          <xs:element name="accessDeviceAccess" type="GroupAdminAccessDeviceAccess"/>
+          <xs:element name="enhancedServiceInstanceAccess" type="GroupAdminEnhancedServiceInstanceAccess"/>
+          <xs:element name="featureAccessCodeAccess" type="GroupAdminFeatureAccessCodeAccess"/>
+          <xs:element name="phoneNumberExtensionAccess" type="GroupAdminPhoneNumberExtensionAccess"/>
+          <xs:element name="callingLineIdNumberAccess" type="GroupAdminCallingLineIdNumberAccess"/>
+          <xs:element name="serviceAccess" type="GroupAdminServiceAccess"/>
+          <xs:element name="trunkGroupAccess" type="GroupAdminTrunkGroupAccess"/>
+          <xs:element name="sessionAdmissionControlAccess" type="GroupAdminSessionAdmissionControlAccess"/>
+          <xs:element name="dialableCallerIDAccess" type="GroupAdminDialableCallerIDAccess"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="GroupHuntGroupGetInstanceRequest14">
     <xs:annotation>
       <xs:documentation>
@@ -3386,46 +3637,6 @@
           <xs:element name="forwardToPhoneNumber" type="OutgoingDN" minOccurs="0"/>
           <xs:element name="agentUserTable" type="core:OCITable"/>
           <xs:element name="allowCallWaitingForAgents" type="xs:boolean"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="GroupInstantConferencingGetInstanceRequest15sp2">
-    <xs:annotation>
-      <xs:documentation>
-        Request to get all the information of an Instant Conferencing instance.
-        The response is either GroupInstantConferencingGetInstanceResponse15sp2 or ErrorResponse.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIRequest">
-        <xs:sequence>
-          <xs:element name="serviceUserId" type="UserId"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>    
-    
-  <xs:complexType name="GroupInstantConferencingGetInstanceResponse15sp2">
-    <xs:annotation>
-      <xs:documentation>
-        Response to GroupInstantConferencingGetInstanceRequest15sp2.        Contains the service profile information and a table of assigned users.
-        The table has column headings: "User Id", "Last Name", "First Name",
-        "Hiragana Last Name", "Hiragana First Name".
-      </xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="core:OCIDataResponse">
-        <xs:sequence>
-          <xs:element name="serviceInstanceProfile" type="ServiceInstanceReadProfile"/>
-          <xs:element name="conferenceBridgeLinePort" type="AccessDeviceEndpointLinePort"/>
-          <xs:element name="allocatedPorts" type="InstantConferencingAllocatedPorts"/>
-          <xs:element name="serviceProfileAppliedOnOutcall" type="InstantConferencingOutcallProfile"/>
-          <xs:element name="allowOutdialInInvitation" type="xs:boolean"/>
-          <xs:element name="allowDocumentDownload" type="xs:boolean"/>
-          <xs:element name="bridgeAdministratorUserTable" type="core:OCITable"/>
-          <xs:element name="networkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -3527,6 +3738,69 @@
     </xs:complexContent>
   </xs:complexType>    
     
+  <xs:complexType name="ServiceProviderCallProcessingGetPolicyRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Request the service provider level data associated with Call Processing
+        Policy. The response is either a
+        ServiceProviderCallProcessingGetPolicyResponse16sp2 or an ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="serviceProviderId" type="ServiceProviderId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="ServiceProviderCallProcessingGetPolicyResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Response to ServiceProviderCallProcessingGetPolicyRequest16sp2.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useServiceProviderDCLIDSetting" type="xs:boolean"/>
+          <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
+          <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
+          <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
+          <xs:element name="networkUsageSelection" type="NetworkUsageSelection"/>
+          <xs:element name="enforceGroupCallingLineIdentityRestriction" type="xs:boolean"/>
+          <xs:element name="allowEnterpriseGroupCallTypingForPrivateDialingPlan" type="xs:boolean"/>
+          <xs:element name="allowEnterpriseGroupCallTypingForPublicDialingPlan" type="xs:boolean"/>
+          <xs:element name="overrideCLIDRestrictionForPrivateCallCategory" type="xs:boolean"/>
+          <xs:element name="useEnterpriseCLIDForPrivateCallCategory" type="xs:boolean"/>
+          <xs:element name="enableEnterpriseExtensionDialing" type="xs:boolean"/>
+          <xs:element name="enforceEnterpriseCallingLineIdentityRestriction" type="xs:boolean"/>
+          <xs:element name="useSettingLevel" type="ServiceProviderConferenceURISettingLevel"/>
+          <xs:element name="conferenceURI" type="SIPURI" minOccurs="0"/>
+          <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="clidPolicy" type="CLIDPolicy"/>
+          <xs:element name="emergencyClidPolicy" type="CLIDPolicy"/>
+          <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="enableDialableCallerID" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
   <xs:complexType name="SystemCallProcessingGetPolicyRequest16">
     <xs:annotation>
       <xs:documentation>
@@ -3581,6 +3855,66 @@
           <xs:element name="clidPolicy" type="CLIDPolicy"/>
           <xs:element name="emergencyClidPolicy" type="CLIDPolicy"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemCallProcessingGetPolicyRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Request the system level data associated with Call Processing Policy.
+        The response is either a SystemCallProcessingGetPolicyResponse16sp2 or an
+        ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemCallProcessingGetPolicyResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+        Response to SystemCallProcessingGetPolicyRequest16sp2.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
+          <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
+          <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
+          <xs:element name="networkUsageSelection" type="NetworkUsageSelection"/>
+          <xs:element name="enforceGroupCallingLineIdentityRestriction" type="xs:boolean"/>
+          <xs:element name="enforceEnterpriseCallingLineIdentityRestriction" type="xs:boolean"/>
+          <xs:element name="allowEnterpriseGroupCallTypingForPrivateDialingPlan" type="xs:boolean"/>
+          <xs:element name="allowEnterpriseGroupCallTypingForPublicDialingPlan" type="xs:boolean"/>
+          <xs:element name="overrideCLIDRestrictionForPrivateCallCategory" type="xs:boolean"/>
+          <xs:element name="useEnterpriseCLIDForPrivateCallCategory" type="xs:boolean"/>
+          <xs:element name="enableEnterpriseExtensionDialing" type="xs:boolean"/>
+          <xs:element name="conferenceURI" type="SIPURI" minOccurs="0"/>
+          <xs:element name="maxConferenceParties" type="CallProcessingMaxConferenceParties"/>
+          <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="clidPolicy" type="CLIDPolicy"/>
+          <xs:element name="emergencyClidPolicy" type="CLIDPolicy"/>
+          <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="enableDialableCallerID" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -4128,6 +4462,77 @@
           <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy"/>
           <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
           <xs:element name="useGroupName" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserCallProcessingGetPolicyRequest16sp2">
+    <xs:annotation>
+      <xs:documentation>
+          Request the user level data associated with Call Processing Policy.
+          The response is either a UserCallProcessingGetPolicyResponse16 or an
+          ErrorResponse.
+          
+          Replaced by: UserCallProcessingGetPolicyRequest17sp4          
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="userId" type="UserId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="UserCallProcessingGetPolicyResponse16sp2">
+    <xs:annotation>
+      <xs:documentation>
+          Response to UserCallProcessingGetPolicyRequest16sp2.
+	        The useUserCLIDSetting attribute controls the CLID settings 
+	        (clidPolicy, emergencyClidPolicy, allowAlternateNumbersForRedirectingIdentity, useGroupName)
+	      
+          The useUserMediaSetting attribute controls the Media settings 
+          (medisPolicySelection, supportedMediaSetName)
+          
+          The useUserCallLimitsSetting attribute controls the Call Limits setting 
+          (useMaxSimultaneousCalls, maxSimultaneousCalls, useMaxSimultaneousVideoCalls, maxSimultaneousVideoCalls, useMaxCallTimeForAnsweredCalls, maxCallTimeForAnsweredCallsMinutes, useMaxCallTimeForUnansweredCalls, maxCallTimeForUnansweredCallsMinutes, useMaxConcurrentRedirectedCalls, useMaxFindMeFollowMeDepth, maxRedirectionDepth, useMaxConcurrentFindMeFollowMeInvocations, maxConcurrentFindMeFollowMeInvocations)
+
+          The useUserDCLIDSetting controls the Dialable Caller ID settings (enableDialableCallerID)
+
+          Replaced by: UserCallProcessingGetPolicyResponse17sp4
+        </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="useUserCLIDSetting" type="xs:boolean"/>
+          <xs:element name="useUserMediaSetting" type="xs:boolean"/>
+          <xs:element name="useUserCallLimitsSetting" type="xs:boolean"/>
+          <xs:element name="useUserDCLIDSetting" type="xs:boolean"/>
+          <xs:element name="useMaxSimultaneousCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxSimultaneousVideoCalls" type="xs:boolean"/>
+          <xs:element name="maxSimultaneousVideoCalls" type="CallProcessingMaxSimultaneousCalls"/>
+          <xs:element name="useMaxCallTimeForAnsweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForAnsweredCallsMinutes" type="CallProcessingMaxCallTimeForAnsweredCallsMinutes16"/>
+          <xs:element name="useMaxCallTimeForUnansweredCalls" type="xs:boolean"/>
+          <xs:element name="maxCallTimeForUnansweredCallsMinutes" type="CallProcessingMaxCallTimeForUnansweredCallsMinutes"/>
+          <xs:element name="mediaPolicySelection" type="MediaPolicySelection"/>
+          <xs:element name="supportedMediaSetName" type="MediaSetName" minOccurs="0"/>
+          <xs:element name="useMaxConcurrentRedirectedCalls" type="xs:boolean"/>
+          <xs:element name="maxConcurrentRedirectedCalls" type="CallProcessingMaxConcurrentRedirectedCalls"/>
+          <xs:element name="useMaxFindMeFollowMeDepth" type="xs:boolean"/>
+          <xs:element name="maxFindMeFollowMeDepth" type="CallProcessingMaxFindMeFollowMeDepth"/>
+          <xs:element name="maxRedirectionDepth" type="CallProcessingMaxRedirectionDepth"/>
+          <xs:element name="useMaxConcurrentFindMeFollowMeInvocations" type="xs:boolean"/>
+          <xs:element name="maxConcurrentFindMeFollowMeInvocations" type="CallProcessingMaxConcurrentFindMeFollowMeInvocations"/>
+          <xs:element name="clidPolicy" type="GroupCLIDPolicy"/>
+          <xs:element name="emergencyClidPolicy" type="GroupCLIDPolicy"/>
+          <xs:element name="allowAlternateNumbersForRedirectingIdentity" type="xs:boolean"/>
+          <xs:element name="useGroupName" type="xs:boolean"/>
+          <xs:element name="enableDialableCallerID" type="xs:boolean"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

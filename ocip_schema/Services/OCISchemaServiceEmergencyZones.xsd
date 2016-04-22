@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -162,6 +162,7 @@
           <xs:element name="groupId" type="GroupId"/>
           <xs:element name="homeZoneIpAddressList" minOccurs="0" maxOccurs="unbounded">
             <xs:complexType>
+              <xs:annotation/>
               <xs:sequence>
                 <xs:element name="homeZoneIpAddress" type="IPAddress"/>
                 <xs:element name="newHomeZoneIpAddress" type="IPAddress"/>
@@ -170,6 +171,7 @@
           </xs:element>
           <xs:element name="homeZoneIpAddressRangeList" minOccurs="0" maxOccurs="unbounded">
             <xs:complexType>
+              <xs:annotation/>
               <xs:sequence>
                 <xs:element name="homeZoneIpAddressRange" type="IPAddressRange"/>
                 <xs:element name="newHomeZoneIpAddressRange" type="IPAddressRange"/>
@@ -204,6 +206,10 @@
     
   <xs:complexType name="SystemEmergencyZonesGetRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Request the system level data associated with Emergency Zones.
         The response is either a SystemEmergencyZonesGetResponse or an
@@ -219,6 +225,10 @@
     
   <xs:complexType name="SystemEmergencyZonesGetResponse">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to SystemEmergencyZonesGetRequest.
       </xs:documentation>
@@ -234,6 +244,10 @@
     
   <xs:complexType name="SystemEmergencyZonesModifyRequest">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Modify the system level data associated with Emergency Zones.
         The response is either a SuccessResponse or an ErrorResponse.

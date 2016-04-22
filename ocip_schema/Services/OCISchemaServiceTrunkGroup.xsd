@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- ********************************************************************** -->
-<!-- Copyright (c) 2004-2005 Broadsoft, Inc.  All rights reserved.          -->
+<!-- Copyright (c) 2000-2012 BroadSoft, Inc.  All rights reserved.          -->
 <!-- ********************************************************************** -->
 <!-- O C I   X M L   S C H E M A  :  S E R V I C E  P A R T                 -->
 <!--                                                                        -->
@@ -52,14 +52,14 @@
     GroupEnterpriseTrunkGetRequest    
     GroupEnterpriseTrunkGetUserListRequest    
     GroupEnterpriseTrunkModifyRequest    
-    GroupTrunkGroupAddInstanceRequest17sp4    
+    GroupTrunkGroupAddInstanceRequest20sp1    
     GroupTrunkGroupDeleteInstanceRequest14sp4    
     GroupTrunkGroupGetInstanceListRequest14sp4    
-    GroupTrunkGroupGetInstanceRequest17sp4    
+    GroupTrunkGroupGetInstanceRequest20sp1    
     GroupTrunkGroupGetAvailableHostedUserListRequest    
     GroupTrunkGroupGetInstanceUserListRequest14sp4    
     GroupTrunkGroupGetRequest14sp9    
-    GroupTrunkGroupModifyInstanceRequest15    
+    GroupTrunkGroupModifyInstanceRequest20sp1    
     GroupTrunkGroupModifyRequest14sp9    
     GroupTrunkGroupUserCreationTaskAddRequest14sp4    
     GroupTrunkGroupUserCreationTaskDeleteRequest14sp4    
@@ -68,6 +68,8 @@
     ServiceProviderTrunkGroupGetRequest14sp1    
     ServiceProviderTrunkGroupModifyRequest    
     SystemTrunkGroupUserCreationTaskGetListRequest14sp4    
+    SystemTrunkGroupGetRequest19sp1    
+    SystemTrunkGroupModifyRequest    
     
   --> 
   
@@ -89,6 +91,7 @@
           <xs:choice>
             <xs:element name="orderedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="trunkGroup" type="EnterpriseTrunkTrunkGroupKey" minOccurs="0" maxOccurs="10"/>
                   <xs:element name="orderingAlgorithm" type="EnterpriseTrunkOrderingAlgorithm"/>
@@ -97,6 +100,7 @@
             </xs:element>
             <xs:element name="priorityWeightedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="maximumRerouteAttemptsWithinPriority" type="EnterpriseTrunkMaximumRerouteAttempts"/>
                   <xs:element name="priorityWeightedTrunkGroup" type="EnterpriseEnterpriseTrunkPriorityWeightedTrunkGroup" minOccurs="0" maxOccurs="100"/>
@@ -188,7 +192,7 @@
         Response to EnterpriseEnterpriseTrunkGetAvailableTrunkGroupListRequest.                </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="trunkGroup" type="EnterpriseTrunkTrunkGroupKey" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -216,6 +220,8 @@
           <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaGroupId" type="SearchCriteriaGroupId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaAlternateTrunkIdentity" type="SearchCriteriaAlternateTrunkIdentity" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -225,7 +231,8 @@
     <xs:annotation>
       <xs:documentation>
         Response to EnterpriseEnterpriseTrunkGetAvailableUserListRequest.
-        The column headings for the enterpriseTrunkUserTable are: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name".
+        The column headings for the enterpriseTrunkUserTable are: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -262,7 +269,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="enterpriseTrunkTable" type="core:OCITable"/>
         </xs:sequence>
@@ -302,6 +309,7 @@
           <xs:choice>
             <xs:element name="orderedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="trunkGroup" type="EnterpriseTrunkTrunkGroupKey" minOccurs="0" maxOccurs="10"/>
                   <xs:element name="orderingAlgorithm" type="EnterpriseTrunkOrderingAlgorithm"/>
@@ -310,6 +318,7 @@
             </xs:element>
             <xs:element name="priorityWeightedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="maximumRerouteAttemptsWithinPriority" type="EnterpriseTrunkMaximumRerouteAttempts"/>
                   <xs:element name="priorityWeightedTrunkGroup" type="EnterpriseEnterpriseTrunkPriorityWeightedTrunkGroup" minOccurs="0" maxOccurs="100"/>
@@ -343,6 +352,8 @@
           <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaGroupId" type="SearchCriteriaGroupId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaAlternateTrunkIdentity" type="SearchCriteriaAlternateTrunkIdentity" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -352,7 +363,8 @@
     <xs:annotation>
       <xs:documentation>
         Response to EnterpriseEnterpriseTrunkGetUserListRequest.
-        The column headings for the enterpriseTrunkUserTable are: "Group Id", "User Id", "Last Name", "First Name", "Phone Number", "Alternate Trunk Identity", "Hiragana Last Name", "Hiragana First Name".
+        The column headings for the enterpriseTrunkUserTable are: "Group Id", "User Id", "Last Name", "First Name", "Phone Number", "Alternate Trunk Identity", "Hiragana Last Name", "Hiragana First Name",
+         "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -383,6 +395,7 @@
           <xs:choice minOccurs="0">
             <xs:element name="orderedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="trunkGroupList" type="ReplacementEnterpriseEnterpriseTrunkTrunkGroupKeyList" minOccurs="0" nillable="true"/>
                   <xs:element name="orderingAlgorithm" type="EnterpriseTrunkOrderingAlgorithm" minOccurs="0"/>
@@ -391,6 +404,7 @@
             </xs:element>
             <xs:element name="priorityWeightedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="maximumRerouteAttemptsWithinPriority" type="EnterpriseTrunkMaximumRerouteAttempts" minOccurs="0"/>
                   <xs:element name="priorityWeightedTrunkGroupList" type="ReplacementEnterpriseEnterpriseTrunkPriorityWeightedTrunkGroupList" minOccurs="0" nillable="true"/>
@@ -422,6 +436,7 @@
           <xs:choice>
             <xs:element name="orderedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="trunkGroup" type="TrunkGroupName" minOccurs="0" maxOccurs="10"/>
                   <xs:element name="orderingAlgorithm" type="EnterpriseTrunkOrderingAlgorithm"/>
@@ -430,6 +445,7 @@
             </xs:element>
             <xs:element name="priorityWeightedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="maximumRerouteAttemptsWithinPriority" type="EnterpriseTrunkMaximumRerouteAttempts"/>
                   <xs:element name="priorityWeightedTrunkGroup" type="GroupEnterpriseTrunkPriorityWeightedTrunkGroup" minOccurs="0" maxOccurs="100"/>
@@ -526,7 +542,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="trunkGroupName" type="TrunkGroupName" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -554,6 +570,8 @@
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaAlternateTrunkIdentity" type="SearchCriteriaAlternateTrunkIdentity" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -563,7 +581,8 @@
     <xs:annotation>
       <xs:documentation>
         Response to GroupEnterpriseTrunkGetAvailableUserListRequest.
-        The column headings for the enterpriseTrunkUserTable are: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name".
+        The column headings for the enterpriseTrunkUserTable are: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -601,7 +620,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="core:OCIResponse">
+      <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="enterpriseTrunkTable" type="core:OCITable"/>
         </xs:sequence>
@@ -642,6 +661,7 @@
           <xs:choice>
             <xs:element name="orderedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="trunkGroup" type="EnterpriseTrunkTrunkGroupKey" minOccurs="0" maxOccurs="10"/>
                   <xs:element name="orderingAlgorithm" type="EnterpriseTrunkOrderingAlgorithm"/>
@@ -650,6 +670,7 @@
             </xs:element>
             <xs:element name="priorityWeightedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="priorityWeightedTrunkGroup" type="GroupEnterpriseTrunkPriorityWeightedTrunkGroup" minOccurs="0" maxOccurs="100"/>
                   <xs:element name="maximumRerouteAttemptsWithinPriority" type="EnterpriseTrunkMaximumRerouteAttempts"/>
@@ -684,6 +705,8 @@
           <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaGroupId" type="SearchCriteriaGroupId" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaAlternateTrunkIdentity" type="SearchCriteriaAlternateTrunkIdentity" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -693,7 +716,8 @@
     <xs:annotation>
       <xs:documentation>
         Response to GroupEnterpriseTrunkGetUserListRequest.
-        The column headings for the enterpriseTrunkUserTable are: "User Id", "Last Name", "First Name", "Phone Number", "Alternate Trunk Identity", "Hiragana Last Name", "Hiragana First Name".
+        The column headings for the enterpriseTrunkUserTable are: "User Id", "Last Name", "First Name", "Phone Number", "Alternate Trunk Identity", "Hiragana Last Name", "Hiragana First Name",
+        "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -725,6 +749,7 @@
           <xs:choice minOccurs="0">
             <xs:element name="orderedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="trunkGroupList" type="ReplacementGroupEnterpriseTrunkTrunkGroupList" minOccurs="0" nillable="true"/>
                   <xs:element name="orderingAlgorithm" type="EnterpriseTrunkOrderingAlgorithm" minOccurs="0"/>
@@ -733,6 +758,7 @@
             </xs:element>
             <xs:element name="priorityWeightedRouting">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="maximumRerouteAttemptsWithinPriority" type="EnterpriseTrunkMaximumRerouteAttempts" minOccurs="0"/>
                   <xs:element name="priorityWeightedTrunkGroupList" type="ReplacementGroupEnterpriseTrunkPriorityWeightedTrunkGroupList" minOccurs="0" nillable="true"/>
@@ -745,10 +771,16 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupTrunkGroupAddInstanceRequest17sp4">
+  <xs:complexType name="GroupTrunkGroupAddInstanceRequest20sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Add a Trunk Group instance to a group.
+        The command will fail if enableNetworkAddressIdentity is set to 
+        true and administrator is not System/Provisioning level administrator.  
         The response is either a SuccessResponse or an ErrorResponse.
       </xs:documentation>
     </xs:annotation>
@@ -762,8 +794,8 @@
           <xs:element name="department" type="DepartmentKey" minOccurs="0"/>
           <xs:element name="accessDevice" type="AccessDevice" minOccurs="0"/>
           <xs:element name="maxActiveCalls" type="MaxActiveCalls"/>
-          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls" minOccurs="0"/>
-          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls" minOccurs="0"/>
+          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls20sp1" minOccurs="0"/>
+          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls20sp1" minOccurs="0"/>
           <xs:element name="enableBursting" type="xs:boolean"/>
           <xs:element name="burstingMaxActiveCalls" type="BurstingMaxActiveCalls" minOccurs="0"/>
           <xs:element name="burstingMaxIncomingCalls" type="BurstingMaxIncomingCalls" minOccurs="0"/>
@@ -792,7 +824,7 @@
           <xs:element name="enableNetworkAddressIdentity" type="xs:boolean"/>
           <xs:element name="allowUnscreenedCalls" type="xs:boolean"/>
           <xs:element name="allowUnscreenedEmergencyCalls" type="xs:boolean"/>
-          <xs:element name="pilotUserCallingLineIdentityPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+          <xs:element name="pilotUserCallingLineIdentityForExternalCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
           <xs:element name="pilotUserChargeNumberPolicy" type="TrunkGroupPilotUserChargeNumberUsagePolicy"/>
           <xs:element name="callForwardingAlwaysAction" type="TrunkGroupCallForwardingAlwaysAction" minOccurs="0"/>
           <xs:element name="callForwardingAlwaysForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
@@ -811,6 +843,13 @@
           <xs:element name="inviteFailureThresholdWindowSeconds" type="TrunkGroupFailureThresholdWindowSeconds"/>
           <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy"/>
           <xs:element name="useSystemCallingLineAssertedIdentityPolicy" type="xs:boolean"/>
+          <xs:element name="pilotUserCallOptimizationPolicy" type="TrunkGroupPilotUserCallOptimizationPolicy"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy"/>
+          <xs:element name="useSystemCLIDSourceForScreenedCallsPolicy" type="xs:boolean"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy"/>
+          <xs:element name="useSystemUserLookupPolicy" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineIdentityForEmergencyCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+          <xs:element name="pilotUserNetworkClassOfService" type="NetworkClassOfServiceName" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -873,13 +912,18 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupTrunkGroupGetInstanceRequest17sp4">
+  <xs:complexType name="GroupTrunkGroupGetInstanceRequest20sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get a Trunk Group Instance's profile.
-        The response is either a GroupTrunkGroupGetInstanceResponse17sp4 or an ErrorResponse.
+        The response is either a GroupTrunkGroupGetInstanceResponse20sp1 or an ErrorResponse.
         The response contains a hosted user table with column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name", "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name", "Phone Number", "Extension", 
+        "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -891,13 +935,18 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupTrunkGroupGetInstanceResponse17sp4">
+  <xs:complexType name="GroupTrunkGroupGetInstanceResponse20sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Response to GroupTrunkGroupGetInstanceRequest17sp4.
+        Response to GroupTrunkGroupGetInstanceRequest20sp1.
         Returns the profile information for the Trunk Group.
         Contains a hosted user table with column headings: "User Id", "Last Name",
-        "First Name", "Hiragana Last Name", "Hiragana First Name".
+        "First Name", "Hiragana Last Name", "Hiragana First Name", "Phone Number", 
+        "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -907,8 +956,8 @@
           <xs:element name="department" type="DepartmentKey" minOccurs="0"/>
           <xs:element name="accessDevice" type="AccessDevice" minOccurs="0"/>
           <xs:element name="maxActiveCalls" type="MaxActiveCalls"/>
-          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls" minOccurs="0"/>
-          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls" minOccurs="0"/>
+          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls20sp1" minOccurs="0"/>
+          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls20sp1" minOccurs="0"/>
           <xs:element name="enableBursting" type="xs:boolean"/>
           <xs:element name="burstingMaxActiveCalls" type="BurstingMaxActiveCalls" minOccurs="0"/>
           <xs:element name="burstingMaxIncomingCalls" type="BurstingMaxIncomingCalls" minOccurs="0"/>
@@ -936,7 +985,7 @@
           <xs:element name="enableNetworkAddressIdentity" type="xs:boolean"/>
           <xs:element name="allowUnscreenedCalls" type="xs:boolean"/>
           <xs:element name="allowUnscreenedEmergencyCalls" type="xs:boolean"/>
-          <xs:element name="pilotUserCallingLineIdentityPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
+          <xs:element name="pilotUserCallingLineIdentityForExternalCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
           <xs:element name="pilotUserChargeNumberPolicy" type="TrunkGroupPilotUserChargeNumberUsagePolicy"/>
           <xs:element name="callForwardingAlwaysAction" type="TrunkGroupCallForwardingAlwaysAction" minOccurs="0"/>
           <xs:element name="callForwardingAlwaysForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0"/>
@@ -956,6 +1005,14 @@
           <xs:element name="trunkGroupState" type="TrunkGroupState"/>
           <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy"/>
           <xs:element name="useSystemCallingLineAssertedIdentityPolicy" type="xs:boolean"/>
+          <xs:element name="totalActiveIncomingCalls" type="xs:int"/>
+          <xs:element name="totalActiveOutgoingCalls" type="xs:int"/>
+          <xs:element name="pilotUserCallOptimizationPolicy" type="TrunkGroupPilotUserCallOptimizationPolicy"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy"/>
+          <xs:element name="useSystemCLIDSourceForScreenedCallsPolicy" type="xs:boolean"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy"/>
+          <xs:element name="useSystemUserLookupPolicy" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineIdentityForEmergencyCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -976,6 +1033,9 @@
           <xs:element name="searchCriteriaUserLastName" type="SearchCriteriaUserLastName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -985,7 +1045,8 @@
     <xs:annotation>
       <xs:documentation>
         Response to the GroupTrunkGroupGetAvailableHostedUserListRequest.
-        Contains a table with column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name".
+        Contains a table with column headings: "User Id", "Last Name", "First Name", "Hiragana Last Name", "Hiragana First Name",
+        "Phone Number", "Extension", "Department", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1013,6 +1074,8 @@
           <xs:element name="searchCriteriaUserFirstName" type="SearchCriteriaUserFirstName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaDn" type="SearchCriteriaDn" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="searchCriteriaExactUserDepartment" type="SearchCriteriaExactUserDepartment" minOccurs="0"/>
+          <xs:element name="searchCriteriaUserId" type="SearchCriteriaUserId" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="searchCriteriaExtension" type="SearchCriteriaExtension" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1022,8 +1085,9 @@
     <xs:annotation>
       <xs:documentation>
         Response to GroupTrunkGroupGetInstanceUserListRequest14sp4.
-        The response contains a 7 column table with column headings "User Id", "Last Name",
-        "First Name", "Department", "Phone Number", "Hiragana Last Name", "Hiragana First Name".
+        The response contains a 9 column table with column headings "User Id", "Last Name",
+        "First Name", "Department", "Phone Number", "Hiragana Last Name", "Hiragana First Name",
+        "Extension", "Email Address".
       </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
@@ -1055,7 +1119,7 @@
   <xs:complexType name="GroupTrunkGroupGetResponse14sp9">
     <xs:annotation>
       <xs:documentation>
-        Response to the GroupTrunkGroupGetRequest14sp1.
+        Response to the GroupTrunkGroupGetRequest14sp9.
         The response contains the maximum and bursting maximum permissible active trunk group calls for the group.
       </xs:documentation>
     </xs:annotation>
@@ -1071,13 +1135,19 @@
     </xs:complexContent>
   </xs:complexType>    
     
-  <xs:complexType name="GroupTrunkGroupModifyInstanceRequest15">
+  <xs:complexType name="GroupTrunkGroupModifyInstanceRequest20sp1">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
-        Modify a Trunk Group Instance in a group.
-        The access device cannot be modified or cleared if there are any users assigned to the Trunk Group.
-        The response is either a SuccessResponse or an ErrorResponse.
-      </xs:documentation>
+      Modify a Trunk Group Instance in a group.
+      The access device cannot be modified or cleared if there are any users assigned to the Trunk Group.
+      The command will fail if enableNetworkAddressIdentity is set and 
+      administrator is not System/Provisioning level administrator.
+      The response is either a SuccessResponse or an ErrorResponse.
+     </xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="core:OCIRequest">
@@ -1088,8 +1158,8 @@
           <xs:element name="department" type="DepartmentKey" nillable="true" minOccurs="0"/>
           <xs:element name="accessDevice" type="AccessDevice" nillable="true" minOccurs="0"/>
           <xs:element name="maxActiveCalls" type="MaxActiveCalls" minOccurs="0"/>
-          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls" nillable="true" minOccurs="0"/>
-          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls" nillable="true" minOccurs="0"/>
+          <xs:element name="maxIncomingCalls" type="MaxIncomingCalls20sp1" nillable="true" minOccurs="0"/>
+          <xs:element name="maxOutgoingCalls" type="MaxOutgoingCalls20sp1" nillable="true" minOccurs="0"/>
           <xs:element name="enableBursting" type="xs:boolean" minOccurs="0"/>
           <xs:element name="burstingMaxActiveCalls" type="BurstingMaxActiveCalls" nillable="true" minOccurs="0"/>
           <xs:element name="burstingMaxIncomingCalls" type="BurstingMaxIncomingCalls" nillable="true" minOccurs="0"/>
@@ -1118,7 +1188,7 @@
           <xs:element name="enableNetworkAddressIdentity" type="xs:boolean" minOccurs="0"/>
           <xs:element name="allowUnscreenedCalls" type="xs:boolean" minOccurs="0"/>
           <xs:element name="allowUnscreenedEmergencyCalls" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="pilotUserCallingLineIdentityPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy" minOccurs="0"/>
+          <xs:element name="pilotUserCallingLineIdentityForExternalCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy" minOccurs="0"/>
           <xs:element name="pilotUserChargeNumberPolicy" type="TrunkGroupPilotUserChargeNumberUsagePolicy" minOccurs="0"/>
           <xs:element name="callForwardingAlwaysAction" type="TrunkGroupCallForwardingAlwaysAction" minOccurs="0" nillable="true"/>
           <xs:element name="callForwardingAlwaysForwardAddress" type="OutgoingDNorSIPURI" minOccurs="0" nillable="true"/>
@@ -1137,6 +1207,12 @@
           <xs:element name="inviteFailureThresholdWindowSeconds" type="TrunkGroupFailureThresholdWindowSeconds" minOccurs="0"/>
           <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy" minOccurs="0"/>
           <xs:element name="useSystemCallingLineAssertedIdentityPolicy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="pilotUserCallOptimizationPolicy" type="TrunkGroupPilotUserCallOptimizationPolicy" minOccurs="0"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy" minOccurs="0"/>
+          <xs:element name="useSystemCLIDSourceForScreenedCallsPolicy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy" minOccurs="0"/>
+          <xs:element name="useSystemUserLookupPolicy" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="pilotUserCallingLineIdentityForEmergencyCallsPolicy" type="TrunkGroupPilotUserCallingLineIdentityUsagePolicy" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1184,6 +1260,7 @@
           <xs:choice>
             <xs:element name="userPhoneNumbers">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="phoneNumber" type="DN" minOccurs="0" maxOccurs="unbounded"/>
                   <xs:element name="dnRange" type="DNRange" minOccurs="0" maxOccurs="unbounded"/>
@@ -1192,6 +1269,7 @@
             </xs:element>
             <xs:element name="userExtensions">
               <xs:complexType>
+                <xs:annotation/>
                 <xs:sequence>
                   <xs:element name="extension" type="Extension17" minOccurs="0" maxOccurs="unbounded"/>
                   <xs:element name="extensionRange" type="ExtensionRange17" minOccurs="0" maxOccurs="unbounded"/>
@@ -1357,6 +1435,10 @@
     
   <xs:complexType name="SystemTrunkGroupUserCreationTaskGetListRequest14sp4">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Get the list of user creation tasks in the system.
         The response is either SystemTrunkGroupUserCreationTaskGetListResponse14sp4 or ErrorResponse.
@@ -1371,6 +1453,10 @@
     
   <xs:complexType name="SystemTrunkGroupUserCreationTaskGetListResponse14sp4">
     <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
       <xs:documentation>
         Response to SystemTrunkGroupUserCreationTaskGetListRequest14sp4.
         Contains a table with a row for each user creation task and column headings :
@@ -1384,6 +1470,81 @@
       <xs:extension base="core:OCIDataResponse">
         <xs:sequence>
           <xs:element name="taskTable" type="core:OCITable"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemTrunkGroupGetRequest19sp1">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Request the system level data associated with the Trunk Group service. 
+        The response is either SystemTrunkGroupGetResponse19sp1 or ErrorResponse.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemTrunkGroupGetResponse19sp1">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Response to SystemTrunkGroupGetRequest19sp1.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIDataResponse">
+        <xs:sequence>
+          <xs:element name="enforceCLIDServiceAssignmentForPilotUser" type="xs:boolean"/>
+          <xs:element name="terminateUnreachableTriggerDetectionOnReceiptOf18x" type="xs:boolean"/>
+          <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy"/>
+          <xs:element name="enforceOutOfDialogPBXRedirectionPolicies" type="xs:boolean"/>
+          <xs:element name="unscreenedRedirectionHandling" type="TrunkGroupUnscreenedRedirectionHandling"/>
+          <xs:element name="enableHoldoverOfHighwaterCallCounts" type="xs:boolean"/>
+          <xs:element name="holdoverPeriod" type="TrunkGroupHighwaterCallCountHoldoverPeriodMinutes"/>
+          <xs:element name="timeZoneOffsetMinutes" type="TrunkGroupTimeZoneOffsetMinutes"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>    
+    
+  <xs:complexType name="SystemTrunkGroupModifyRequest">
+    <xs:annotation>
+      <xs:appinfo>
+        <asDataModeSupported>true</asDataModeSupported>
+        <hssDataModeSupported>false</hssDataModeSupported>
+      </xs:appinfo>
+      <xs:documentation>
+        Modify the system level data associated with the Trunk Group
+  Service. The response is either a SuccessResponse or an ErrorResponse. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="core:OCIRequest">
+        <xs:sequence>
+          <xs:element name="enforceCLIDServiceAssignmentForPilotUser" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="terminateUnreachableTriggerDetectionOnReceiptOf18x" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="pilotUserCallingLineAssertedIdentityPolicy" type="TrunkGroupPilotUserCallingLineAssertedIdentityUsagePolicy" minOccurs="0"/>
+          <xs:element name="enforceOutOfDialogPBXRedirectionPolicies" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="unscreenedRedirectionHandling" type="TrunkGroupUnscreenedRedirectionHandling" minOccurs="0"/>
+          <xs:element name="enableHoldoverOfHighwaterCallCounts" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="holdoverPeriod" type="TrunkGroupHighwaterCallCountHoldoverPeriodMinutes" minOccurs="0"/>
+          <xs:element name="timeZoneOffsetMinutes" type="TrunkGroupTimeZoneOffsetMinutes" minOccurs="0"/>
+          <xs:element name="clidSourceForScreenedCallsPolicy" type="TrunkGroupCLIDSourceForScreenedCallsPolicy" minOccurs="0"/>
+          <xs:element name="userLookupPolicy" type="TrunkGroupUserLookupPolicy" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1772,6 +1933,63 @@
       <xs:enumeration value="All Originating Calls"/>
       <xs:enumeration value="Unscreened Originating Calls"/>
       <xs:enumeration value="No Calls"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="TrunkGroupPilotUserCallOptimizationPolicy">
+    <xs:annotation>
+      <xs:documentation>
+        Trunk Group Pilot User Call Optimization Policy
+     </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Optimize For User Services"/>
+      <xs:enumeration value="Optimize For High Call Volume"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="TrunkGroupUnscreenedRedirectionHandling">
+    <xs:annotation>
+      <xs:documentation>
+        Options to handle the trunk group INVITEs with an unscreened redirecting identity.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Reject"/>
+      <xs:enumeration value="Ignore"/>
+      <xs:enumeration value="Ignore If Unscreened Calls Disallowed"/>
+      <xs:enumeration value="Reject If Unscreened Calls Disallowed"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="TrunkGroupCLIDSourceForScreenedCallsPolicy">
+    <xs:annotation>
+      <xs:documentation>
+        Trunk Group CLID Source for Screened Trunk Calls Policy.  
+        "Profile Name Profile Number" indicates CLID uses name and number from screened user profile. 
+        "Received Name Profile Number" indicates CLID uses name in FROM header and number from screened user profile. 
+        "Received Name Received Number" indicates CLID uses name and number in FROM header. 
+     </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Profile Name Profile Number"/>
+      <xs:enumeration value="Received Name Profile Number"/>
+      <xs:enumeration value="Received Name Received Number"/>
+    </xs:restriction>
+  </xs:simpleType>    
+    
+  <xs:simpleType name="TrunkGroupUserLookupPolicy">
+    <xs:annotation>
+      <xs:documentation>
+        Trunk Group User Lookup Policy in performing the trunk group user screening process for a trunk call. 
+        "Basic" indicates the lookup is performed using FROM header only. 
+        "Extended" indicates the lookup is performed in the precedence order of P-Preferred-Identity header, 
+        P-Asserted-Identity header, Remote-Party-ID header, and FROM header. 
+     </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Basic"/>
+      <xs:enumeration value="Extended"/>
     </xs:restriction>
   </xs:simpleType>    
     
