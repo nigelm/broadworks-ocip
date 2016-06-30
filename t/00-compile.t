@@ -6,14 +6,15 @@ use warnings;
 
 use Test::More;
 
-plan tests => 5 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+plan tests => 6 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 my @module_files = (
     'Broadworks/OCIP.pm',
     'Broadworks/OCIP/Deprecated.pm',
     'Broadworks/OCIP/Methods.pm',
     'Broadworks/OCIP/Response.pm',
-    'Broadworks/OCIP/Throwable.pm'
+    'Broadworks/OCIP/Throwable.pm',
+    'Redcentric/Roles/OCIP.pm'
 );
 
 

@@ -22,6 +22,7 @@ my @files = (
     'lib/Broadworks/OCIP/Methods.pod',
     'lib/Broadworks/OCIP/Response.pm',
     'lib/Broadworks/OCIP/Throwable.pm',
+    'lib/Redcentric/Roles/OCIP.pm',
     't/00-compile.t',
     't/000-report-versions.t'
 );

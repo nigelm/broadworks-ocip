@@ -1,3 +1,7 @@
+0.07      2016-06-30 10:46:21+01:00 Europe/London
+    - Add role to be consumed by users
+    - Ensured that data is decoded on receive
+
 0.06      2016-04-22 14:45:38+01:00 Europe/London
     - Updated to Broadworks Release 20 SP1
 
