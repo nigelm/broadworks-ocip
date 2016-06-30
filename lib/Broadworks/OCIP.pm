@@ -439,7 +439,7 @@ method send ($string) {
 # ----------------------------------------------------------------------
 method receive ($expected,$die_on_error) {
 
-    my $str = '';
+    my $bytes = '';
     {    # delimit section where we override character handling
         use bytes;
         my $select = $self->select;
@@ -452,19 +452,22 @@ method receive ($expected,$die_on_error) {
 
             # read - bail out if EOF
             my $eofs = 0;
-            unless ( sysread $fh, $str, 65536, length($str) ) {
+            unless ( sysread $fh, $bytes, 65536, length($bytes) ) {
                 last if ( $eofs++ );
                 next;
             }
-            last if ( $str =~ /<\/BroadsoftDocument>/ );
+            last if ( $bytes =~ /<\/BroadsoftDocument>/ );
         }
 
         Broadworks::OCIP::Throwable->throw(
-            message         => "No Data on receive - $!\n($str)\n",
+            message         => "No Data on receive - $!\n($bytes)\n",
             execution_phase => 'receive',
             error_code      => 'no_data'
-        ) unless ( length($str) );
+        ) unless ( length($bytes) );
     }
+
+    # convert string from cruddy encoding to utf8
+    my $str = $self->encoder->decode($bytes);
     warn( '<<< ', $str, "\n" ) if ( $self->trace );
 
     # we rely on the XML decoder handling any character set issues correctly!
