@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-our $VERSION = '0.07'; # VERSION
+our $VERSION = '0.08'; # VERSION
 our $AUTHORITY = 'cpan:NIGELM'; # AUTHORITY
 
 use Method::Signatures;
@@ -99,12 +99,7 @@ __END__
 
 =pod
 
-=for test_synopsis 1;
-__END__
-
-=for stopwords NIGELM Broadworks OCI authhash programmes
-
-=for Pod::Coverage mvp_multivalue_args
+=encoding UTF-8
 
 =head1 NAME
 
@@ -112,7 +107,14 @@ Redcentric::Roles::OCIP - OCI-P access role for Broadworks CLI programs
 
 =head1 VERSION
 
-version 0.07
+version 0.08
+
+=for test_synopsis 1;
+__END__
+
+=for stopwords NIGELM Broadworks OCI authhash programmes
+
+=for Pod::Coverage mvp_multivalue_args
 
 # ------------------------------------------------------------------------
 
@@ -146,30 +148,13 @@ An authentication hash to use for authenticating the username.  Alternatively
 the oci_password attribute can be set and this is transformed into an
 appropriate authhash (and the oci_password deleted).
 
-=head1 INSTALLATION
-
-See perlmodinstall for information and options on installing Perl modules.
-
-=head1 BUGS AND LIMITATIONS
-
-You can make new bug reports, and view existing ones, through the
-web interface at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Broadworks-OCIP>.
-
-=head1 AVAILABILITY
-
-The project homepage is L<https://metacpan.org/release/Broadworks-OCIP>.
-
-The latest version of this module is available from the Comprehensive Perl
-Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
-site near you, or see L<https://metacpan.org/module/Broadworks::OCIP/>.
-
 =head1 AUTHOR
 
 Nigel Metheringham <nigelm@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Nigel Metheringham.
+This software is copyright (c) 2018 by Nigel Metheringham.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
