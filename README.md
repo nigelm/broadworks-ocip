@@ -4,7 +4,7 @@ Broadworks::OCIP - API for communication with Broadworks OCI-P Interface
 
 # VERSION
 
-version 0.001
+version 0.08
 
 # SYNOPSIS
 
