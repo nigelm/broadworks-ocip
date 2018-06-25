@@ -1,11 +1,6 @@
 =pod
 
-=for test_synopsis 1;
-__END__
-
-=for stopwords NIGELM
-
-=for Pod::Coverage mvp_multivalue_args
+=encoding UTF-8
 
 =head1 NAME
 
@@ -13,7 +8,14 @@ Broadworks::OCIP - API for communication with Broadworks OCI-P Interface
 
 =head1 VERSION
 
-version 0.07
+version 0.08
+
+=for test_synopsis 1;
+__END__
+
+=for stopwords NIGELM
+
+=for Pod::Coverage mvp_multivalue_args
 
 =head1 SYNOPSIS
 
@@ -155,22 +157,24 @@ Nigel Metheringham <Nigel.Metheringham@redcentricplc.com>
 
 Copyright 2014 Recentric Solutions Limited. All rights reserved.
 
-=head1 INSTALLATION
+=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
 
-See perlmodinstall for information and options on installing Perl modules.
+=head1 SUPPORT
 
-=head1 BUGS AND LIMITATIONS
+=head2 Bugs / Feature Requests
 
-You can make new bug reports, and view existing ones, through the
-web interface at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Broadworks-OCIP>.
+Please report any bugs or feature requests through the issue tracker
+at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Broadworks-OCIP>.
+You will be notified automatically of any progress on your issue.
 
-=head1 AVAILABILITY
+=head2 Source Code
 
-The project homepage is L<https://metacpan.org/release/Broadworks-OCIP>.
+This is open source software.  The code repository is available for
+public review and contribution under the terms of the license.
 
-The latest version of this module is available from the Comprehensive Perl
-Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
-site near you, or see L<https://metacpan.org/module/Broadworks::OCIP/>.
+L<https://gitlab.dev.localnet/broadworks-api/broadworks-ocip>
+
+  git clone https://gitlab.dev.localnet/broadworks-api/broadworks-ocip.git
 
 =head1 AUTHOR
 
