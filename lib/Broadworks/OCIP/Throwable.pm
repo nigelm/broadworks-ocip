@@ -96,6 +96,6 @@ Nigel Metheringham <Nigel.Metheringham@redcentricplc.com>
 
 =head1 COPYRIGHT
 
-Copyright 2014 Recentric Solutions Limited. All rights reserved.
+Copyright 2014-2020 Recentric Solutions Limited. All rights reserved.
 
 =cut

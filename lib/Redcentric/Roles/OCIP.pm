@@ -142,4 +142,14 @@ method _build_oci () {
 
 # ------------------------------------------------------------------------
 
+=head1 AUTHOR
+
+Nigel Metheringham <Nigel.Metheringham@redcentricplc.com>
+
+=head1 COPYRIGHT
+
+Copyright 2014-2020 Recentric Solutions Limited. All rights reserved.
+
+=cut
+
 1;
