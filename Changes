@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.09      2020-07-20 19:31:31+01:00 Europe/London
     - Updated packaging and distribution info
     - Added travis CI config
     - Switch Method::Signatures for Function::Parameters
