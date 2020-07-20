@@ -1,4 +1,6 @@
 {{$NEXT}}
+    - Updated packaging and distribution info
+    - Added travis CI config
 
 0.08      2018-06-25 17:03:25+01:00 Europe/London
     - Updated for more recent dependancies
