@@ -12,7 +12,7 @@ use feature 'unicode_strings';
 
 use Broadworks::OCIP::Throwable;
 use Moose;
-use Method::Signatures;
+use Function::Parameters;
 use MooseX::StrictConstructor;
 use Try::Tiny;
 use XML::Fast;
@@ -227,6 +227,13 @@ Returns the content of a single named table, as a list
 method table ($table_name) { return ( @{ $self->tables->{$table_name} || [] } ); }
 
 # ------------------------------------------------------------------------
+
+=head3 BUILD
+
+Build the object - throw an error if this is an unexpected type.
+
+=cut
+
 method BUILD ($args) {
 
     # check this object is valid and the right type
@@ -239,6 +246,13 @@ method BUILD ($args) {
 }
 
 # ------------------------------------------------------------------------
+
+=head3 list
+
+Return a result from the payload as a list (empty if not defined).
+
+=cut
+
 method list ($key) {
     my $val = $self->payload->{$key};
     return () unless ( defined($val) );

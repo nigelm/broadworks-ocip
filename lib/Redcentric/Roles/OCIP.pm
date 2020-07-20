@@ -9,7 +9,7 @@ use namespace::autoclean;
 # VERSION
 # AUTHORITY
 
-use Method::Signatures;
+use Function::Parameters;
 use Moose::Role;    # optional
 use MooseX::App::Role;
 use Digest::SHA1 qw( sha1_hex );
@@ -115,7 +115,7 @@ option oci_authhash => (
 
 method _build_oci_authhash () {
     my $oci_password = $self->oci_password || die "No oci_password was set";
-    my $authhash = lc( sha1_hex($oci_password) );
+    my $authhash     = lc( sha1_hex($oci_password) );
     $self->clear_oci_password;
     return $authhash;
 }

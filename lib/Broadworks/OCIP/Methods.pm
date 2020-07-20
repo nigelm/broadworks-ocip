@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use utf8;
 use namespace::autoclean;
-use Method::Signatures;
+use Function::Parameters;
 use Moose;
 
 # VERSION

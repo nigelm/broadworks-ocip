@@ -21,7 +21,7 @@ use Encode;
 use IO::Select;
 use IO::Socket::INET;
 use Moose;
-use Method::Signatures;
+use Function::Parameters;
 use MooseX::StrictConstructor;
 use XML::Writer;
 
@@ -380,7 +380,7 @@ around 'BUILDARGS' => sub {
         if ( not( ref( $_[0] ) ) ) {
 
             # single non reference argument - we treat this as a config filename
-            my $fn = shift;
+            my $fn      = shift;
             my $confset = Config::Any->load_files( { files => [$fn], use_ext => 1 } );
             unless ($confset) {
                 Broadworks::OCIP::Throwable->throw(
@@ -437,6 +437,14 @@ method send ($string) {
 }
 
 # ----------------------------------------------------------------------
+
+=head3 receive
+
+Receive an XML response from the Broadworks remote over the socket. Decode the
+received string and pass to the L<Broadworks::OCIP::Response> constructor.
+
+=cut
+
 method receive ($expected,$die_on_error) {
 
     my $bytes = '';
